@@ -316,6 +316,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c947b42c6f732f4b9c565e0ee3763fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkingSpeed: 2
+  movingRange: 8
+  changePosTime: 3
+  distanceAproach: 0.5
+  destinationPosition: {x: 0, y: 0, z: 0}
+  travelVector: {x: 0, y: 0, z: 0}
 --- !u!54 &504658883
 Rigidbody:
   m_ObjectHideFlags: 0
