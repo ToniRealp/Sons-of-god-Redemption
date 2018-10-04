@@ -6,14 +6,15 @@ public class PlayerController : MonoBehaviour {
 
     Rigidbody rb;
     InputManager inputManager;
-    public int velocity;
+    public int walkVelocity, runVelocity, force;
     Vector3 direction;
-    public float xAxis;
-    public float yAxis;
+    public float xAxis, yAxis;
+    public bool dash;
     enum States { Idle, Walking, Running, MAX};
     Animator animator;
     [SerializeField]
     States states;
+    const float velChange = 0.5f;
     
 
 
@@ -39,11 +40,13 @@ public class PlayerController : MonoBehaviour {
 
                 //play idle animation
                 //check if we got input
-                
+
                 if (yAxis != 0 || xAxis != 0)
                 {
-                    states = States.Walking;
-                    animator.SetBool("isWalking", true);
+                   
+                        states = States.Walking;
+                        animator.SetBool("isWalking", true);
+                    
                 }
                     break;
 
@@ -52,15 +55,19 @@ public class PlayerController : MonoBehaviour {
                 //Play walking animation
                 //If input > 0.7 switch states to running
                 //If input==0 return to idle
-                //rb.velocity = new Vector3(velocity,0,velocity); 
-                Rotation();
+            
+                Movement();
+
+                if (dash)
+                    Dash();
+
                 if (yAxis == 0 && xAxis == 0)
                 {
                     states = States.Idle;
                     animator.SetBool("isWalking", false);
                 }
 
-                if (yAxis > 0.7 || yAxis < -0.7 || xAxis > 0.7 || xAxis < -0.7)
+                if (yAxis > velChange || yAxis < -velChange || xAxis > velChange || xAxis < -velChange)
                 {
                     states = States.Running;
                     animator.SetBool("isRunning", true);
@@ -69,21 +76,17 @@ public class PlayerController : MonoBehaviour {
                 break;
 
             case (States.Running):
+
                 //Play runnig animation
                 //If input >0.7 switch state to walking
-                //rb.velocity = new Vector3(velocity + 2, 0, velocity+2);
-                Rotation();
-                if (yAxis < 0.7 || yAxis > -0.7 || xAxis < 0.7 || xAxis > -0.7)
+             
+                Movement();
+
+                if (yAxis < velChange && yAxis > -velChange && xAxis < velChange && xAxis > -velChange)
                 {
                     states = States.Walking;
                     animator.SetBool("isRunning", false);
                     animator.SetBool("isWalking", true);
-                }
-
-                if (yAxis == 0 && xAxis == 0)
-                {
-                    states = States.Idle;
-                    animator.SetBool("isWalking", false);
                 }
 
                 break;
@@ -98,12 +101,23 @@ public class PlayerController : MonoBehaviour {
     {
        xAxis = inputManager.xAxis;
        yAxis = inputManager.yAxis;
+       dash = inputManager.dashButton;
         
     }
-    void Rotation()
+
+    void Movement()
     {
-        rb.velocity = new Vector3(xAxis * velocity, 0, velocity * yAxis);
         direction.Set(xAxis, 0, yAxis);
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 0.15F);
+        rb.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 0.15F);
+        if (yAxis !=0 || xAxis != 0)
+            rb.velocity = transform.forward * walkVelocity;
+        if (yAxis > velChange || yAxis < -velChange || xAxis > velChange || xAxis < -velChange)
+            rb.velocity = transform.forward * runVelocity;
+    }
+
+    void Dash()
+    {
+        rb.velocity += transform.forward * force;
+
     }
 }
