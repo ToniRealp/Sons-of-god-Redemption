@@ -8,9 +8,9 @@ public class PlayerController : MonoBehaviour {
     InputManager inputManager;
     public int walkVelocity, runVelocity, force;
     Vector3 direction;
-    public float xAxis, yAxis;
-    public bool dash;
-    enum States { Idle, Walking, Running, MAX};
+    public float xAxis, yAxis, dashCounter, upTime;
+    public bool dash, dashed;
+    enum States { Idle, Walking, Running, Dashing, MAX};
     Animator animator;
     [SerializeField]
     States states;
@@ -24,15 +24,14 @@ public class PlayerController : MonoBehaviour {
         inputManager = GetComponent<InputManager>();
         animator = GetComponent<Animator>();
         states = States.Idle;
+        dashed = false;
+        dashCounter = upTime;
     }
 	
 	// Update is called once per frame
 	void Update () {
 
         GetInput();
-        
-        //angle = Vector3.Angle(new Vector3(0, 0, 1), new Vector3(xAxis, 0, yAxis));
-        
 
         switch (states) {
 
@@ -40,6 +39,7 @@ public class PlayerController : MonoBehaviour {
 
                 //play idle animation
                 //check if we got input
+                //Dash();
 
                 if (yAxis != 0 || xAxis != 0)
                 {
@@ -55,11 +55,10 @@ public class PlayerController : MonoBehaviour {
                 //Play walking animation
                 //If input > 0.7 switch states to running
                 //If input==0 return to idle
-            
-                Movement();
+                //Dash();
 
                 if (dash)
-                    Dash();
+                    states = States.Dashing;
 
                 if (yAxis == 0 && xAxis == 0)
                 {
@@ -73,14 +72,19 @@ public class PlayerController : MonoBehaviour {
                     animator.SetBool("isRunning", true);
                 }
 
+                Rotation();
+                rb.velocity = transform.forward * walkVelocity;
+
                 break;
 
             case (States.Running):
 
                 //Play runnig animation
                 //If input >0.7 switch state to walking
-             
-                Movement();
+                //Dash();
+
+                if (dash)
+                    states = States.Dashing;
 
                 if (yAxis < velChange && yAxis > -velChange && xAxis < velChange && xAxis > -velChange)
                 {
@@ -88,6 +92,16 @@ public class PlayerController : MonoBehaviour {
                     animator.SetBool("isRunning", false);
                     animator.SetBool("isWalking", true);
                 }
+
+                Rotation();
+                rb.velocity = transform.forward * runVelocity;
+
+                break;
+
+            case (States.Dashing):
+
+                Dash();
+                
 
                 break;
 
@@ -105,19 +119,32 @@ public class PlayerController : MonoBehaviour {
         
     }
 
-    void Movement()
+    void Rotation()
     {
         direction.Set(xAxis, 0, yAxis);
         rb.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 0.15F);
-        if (yAxis !=0 || xAxis != 0)
-            rb.velocity = transform.forward * walkVelocity;
-        if (yAxis > velChange || yAxis < -velChange || xAxis > velChange || xAxis < -velChange)
-            rb.velocity = transform.forward * runVelocity;
     }
 
     void Dash()
     {
-        rb.velocity += transform.forward * force;
+        //Time.time;
+        if (!dashed)
+        {
+            rb.velocity += transform.forward * force;
+            dashed = true;
+        }
+        
 
+        if (dashed)
+        {
+            dashCounter -= Time.deltaTime;
+   
+            if (dashCounter <= 0f)
+            {
+                dashed = false;
+                dashCounter = upTime;
+
+            }
+        }
     }
 }
