@@ -6,17 +6,17 @@ public class PlayerController : MonoBehaviour {
 
     Rigidbody rb;
     InputManager inputManager;
-    public int walkVelocity, runVelocity, force;
-    Vector3 direction;
-    public float xAxis, yAxis, dashCounter, upTime;
+    public int walkVelocity, runVelocity, dashDistance;
+    public Vector3 direction;
+    public float dashCounter, upTime, dashDuration, currentDashTime;
+    private float xAxis, yAxis;
     public bool dash, dashed;
     enum States { Idle, Walking, Running, Dashing, MAX};
     Animator animator;
     [SerializeField]
     States states;
     const float velChange = 0.5f;
-    
-
+   
 
     // Use this for initialization
     void Start () {
@@ -26,12 +26,29 @@ public class PlayerController : MonoBehaviour {
         states = States.Idle;
         dashed = false;
         dashCounter = upTime;
+        currentDashTime = dashDuration;
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
         GetInput();
+
+        if (yAxis == 0 && xAxis == 0)
+        {
+            states = States.Idle;
+        }
+        else if (Mathf.Abs(yAxis) < velChange && Mathf.Abs(xAxis) < velChange)
+        {
+            states = States.Walking;
+        }
+        else
+        {
+            if (dash)
+                states = States.Dashing;
+            else
+                states = States.Running;
+        }
 
         switch (states) {
 
@@ -40,15 +57,10 @@ public class PlayerController : MonoBehaviour {
                 //play idle animation
                 //check if we got input
                 //Dash();
+                animator.SetBool("isWalking", false);
+                animator.SetBool("isRunning", false);
 
-                if (yAxis != 0 || xAxis != 0)
-                {
-                   
-                        states = States.Walking;
-                        animator.SetBool("isWalking", true);
-                    
-                }
-                    break;
+                break;
 
             case (States.Walking):
 
@@ -56,59 +68,49 @@ public class PlayerController : MonoBehaviour {
                 //If input > 0.7 switch states to running
                 //If input==0 return to idle
                 //Dash();
-
-                if (dash)
-                    states = States.Dashing;
-
-                if (yAxis == 0 && xAxis == 0)
-                {
-                    states = States.Idle;
-                    animator.SetBool("isWalking", false);
-                }
-
-                if (yAxis > velChange || yAxis < -velChange || xAxis > velChange || xAxis < -velChange)
-                {
-                    states = States.Running;
-                    animator.SetBool("isRunning", true);
-                }
-
                 Rotation();
-                rb.velocity = transform.forward * walkVelocity;
+                animator.SetBool("isWalking", true);
+                animator.SetBool("isRunning", false);
+
+                transform.Translate (transform.forward * walkVelocity*Time.deltaTime,Space.World);
 
                 break;
 
             case (States.Running):
 
                 //Play runnig animation
-                //If input >0.7 switch state to walking
+                //If input <0.7 switch state to walking
+                //If input==0 return to idle
                 //Dash();
-
-                if (dash)
-                    states = States.Dashing;
-
-                if (yAxis < velChange && yAxis > -velChange && xAxis < velChange && xAxis > -velChange)
-                {
-                    states = States.Walking;
-                    animator.SetBool("isRunning", false);
-                    animator.SetBool("isWalking", true);
-                }
-
                 Rotation();
-                rb.velocity = transform.forward * runVelocity;
+                animator.SetBool("isRunning", true);
+                animator.SetBool("isWalking", false);
+
+                transform.Translate(transform.forward * runVelocity * Time.deltaTime, Space.World);
 
                 break;
 
             case (States.Dashing):
 
                 Dash();
+                currentDashTime -= Time.deltaTime;
+                if (currentDashTime <= 0f) {
+                    states = States.Running;
+                    currentDashTime = dashDuration;
+                }
                 
-
                 break;
 
             default:
                 break;
             
         }
+        
+
+        
+        //dash cooldown
+        DashCooldown();
+        
     }
 
     void GetInput()
@@ -121,8 +123,8 @@ public class PlayerController : MonoBehaviour {
 
     void Rotation()
     {
-        direction.Set(xAxis, 0, yAxis);
-        rb.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 0.15F);
+        direction = new Vector3(xAxis,0,yAxis);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction,Vector3.up), 0.15F);
     }
 
     void Dash()
@@ -130,15 +132,19 @@ public class PlayerController : MonoBehaviour {
         //Time.time;
         if (!dashed)
         {
-            rb.velocity += transform.forward * force;
+            Vector3.Lerp(transform.position, transform.forward * dashDistance, 0.15f);
             dashed = true;
+
         }
         
+    }
 
+    void DashCooldown()
+    {
         if (dashed)
         {
             dashCounter -= Time.deltaTime;
-   
+
             if (dashCounter <= 0f)
             {
                 dashed = false;
