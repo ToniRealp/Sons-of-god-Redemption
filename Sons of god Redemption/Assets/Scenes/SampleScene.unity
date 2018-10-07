@@ -245,10 +245,11 @@ MonoBehaviour:
   runVelocity: 5
   dashDistance: 10
   direction: {x: 0, y: 0, z: 0}
-  dashCounter: 0
-  upTime: 1
-  dashDuration: 0.5
-  currentDashTime: 0
+  dashCooldownCounter: 0
+  dashCooldownTime: 5
+  dashDuration: 1
+  dashTimeFraction: 0
+  actualDashTime: 0
   dash: 0
   dashed: 0
   states: 0
