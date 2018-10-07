@@ -26,8 +26,7 @@ public class PlayerController : MonoBehaviour {
         states = States.Idle;
         dashed = false;
         dashCooldownCounter = dashCooldownTime;
-        dashTimeFraction = dashDuration/(dashDuration / Time.fixedDeltaTime);
-        actualDashTime = 0;
+        actualDashTime = dashDuration;
     }
 	
 	// Update is called once per frame
@@ -89,16 +88,26 @@ public class PlayerController : MonoBehaviour {
                     animator.SetBool("isWalking", true);
                     animator.SetBool("isRunning", false);
                 }
+                if (dash)
+                    states = States.Dashing;
 
                 break;
 
             case (States.Dashing):
 
-                Dash();
-              
-                states = States.Running;
-              
-                
+                actualDashTime -= Time.fixedDeltaTime;
+                if (actualDashTime >= 0)
+                {
+                    Dash();
+                }
+                else
+                {
+                    dashed = true;
+                    states = States.Running;
+                    actualDashTime = dashDuration;
+                }
+               
+                 
                 break;
 
             default:
@@ -120,18 +129,18 @@ public class PlayerController : MonoBehaviour {
     void Rotation()
     {
         direction.Set(xAxis,0,yAxis);
+        if(direction.magnitude!=0)
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction,Vector3.up), 0.15F);
     }
 
     void Dash()
     {
-        do
-        {
-            Vector3.Lerp(transform.position, transform.position + transform.forward * dashDistance, actualDashTime);
-            actualDashTime += dashTimeFraction;
-        } while (actualDashTime <= 1);
 
-        actualDashTime = 0;
+        //Vector3.Lerp(transform.position, transform.position + transform.forward * dashDistance, actualDashTime);
+        //actualDashTime += dashTimeFraction;
+        if (!dashed) {
+            transform.position += transform.forward * Time.fixedDeltaTime * (dashDistance/dashDuration);
+        }
     }
 
     void DashCooldown()

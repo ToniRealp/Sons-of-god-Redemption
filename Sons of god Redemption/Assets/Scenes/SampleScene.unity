@@ -243,11 +243,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkVelocity: 3
   runVelocity: 5
-  dashDistance: 10
+  dashDistance: 15
   direction: {x: 0, y: 0, z: 0}
   dashCooldownCounter: 0
-  dashCooldownTime: 5
-  dashDuration: 1
+  dashCooldownTime: 2
+  dashDuration: 0.5
   dashTimeFraction: 0
   actualDashTime: 0
   dash: 0
