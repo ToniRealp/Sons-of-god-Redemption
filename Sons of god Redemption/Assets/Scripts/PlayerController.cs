@@ -88,13 +88,15 @@ public class PlayerController : MonoBehaviour {
                     animator.SetBool("isWalking", true);
                     animator.SetBool("isRunning", false);
                 }
-                if (dash)
+                if (dash && !dashed)
+                {
                     states = States.Dashing;
-
+                    animator.SetTrigger("isDashing");
+                }
                 break;
 
             case (States.Dashing):
-
+                
                 actualDashTime -= Time.fixedDeltaTime;
                 if (actualDashTime >= 0)
                 {
@@ -135,9 +137,6 @@ public class PlayerController : MonoBehaviour {
 
     void Dash()
     {
-
-        //Vector3.Lerp(transform.position, transform.position + transform.forward * dashDistance, actualDashTime);
-        //actualDashTime += dashTimeFraction;
         if (!dashed) {
             transform.position += transform.forward * Time.fixedDeltaTime * (dashDistance/dashDuration);
         }
