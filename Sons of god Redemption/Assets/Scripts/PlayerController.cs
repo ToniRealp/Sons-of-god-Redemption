@@ -4,19 +4,25 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+    enum States { Idle, Walking, Running, Dashing, Attacking, MAX };
+    enum Attacks { LightAttack1, LightAttack2, LightAttack3, NotAtt };
+    enum ButtonInputs { Dash, LightAttack, MAX };
+
     Rigidbody rb;
     InputManager inputManager;
-    public int walkVelocity, runVelocity, dashDistance;
-    public Vector3 direction;
-    public float dashCooldownCounter,dashCooldownTime, dashDuration, dashTimeFraction, actualDashTime;
-    private float xAxis, yAxis;
-    public bool dash, dashed;
-    enum States { Idle, Walking, Running, Dashing, MAX};
     Animator animator;
-    [SerializeField]
-    States states;
+
+    bool[] inputs = new bool[(int)ButtonInputs.MAX];
+    private float xAxis, yAxis;
+
+    public Vector3 direction;
+    public int walkVelocity, runVelocity, dashDistance;    
+    public float dashCooldownCounter,dashCooldownTime, dashDuration, actualDashTime, animLength;
+    public bool dashed, attacked;
     const float velChange = 0.5f;
-   
+  
+    [SerializeField] States states;
+    [SerializeField] Attacks attacks;
 
     // Use this for initialization
     void Start () {
@@ -24,7 +30,8 @@ public class PlayerController : MonoBehaviour {
         inputManager = GetComponent<InputManager>();
         animator = GetComponent<Animator>();
         states = States.Idle;
-        dashed = false;
+        attacks = Attacks.NotAtt;
+        dashed = attacked = false;
         dashCooldownCounter = dashCooldownTime;
         actualDashTime = dashDuration;
     }
@@ -40,11 +47,15 @@ public class PlayerController : MonoBehaviour {
 
                 //play idle animation
                 //check if we got input
-                //Dash();
                 if (yAxis != 0 || xAxis != 0)
                 {
                     states = States.Walking;
                     animator.SetBool("isWalking", true);
+                }
+                if (inputs[(int)ButtonInputs.LightAttack])
+                {
+                    states = States.Attacking;
+                    attacks = Attacks.LightAttack1;
                 }
 
                 break;
@@ -54,22 +65,26 @@ public class PlayerController : MonoBehaviour {
                 //Play walking animation
                 //If input > 0.7 switch states to running
                 //If input==0 return to idle
-                //Dash();
                 Rotation();           
                 transform.Translate (transform.forward * walkVelocity*Time.deltaTime,Space.World);
 
-                if (Mathf.Abs(xAxis) > velChange || Mathf.Abs(yAxis) > velChange)
+                if (inputs[(int)ButtonInputs.LightAttack])
+                {
+                    states = States.Attacking;
+                    attacks = Attacks.LightAttack1;
+                }
+                else if (Mathf.Abs(xAxis) > velChange || Mathf.Abs(yAxis) > velChange)
                 {
                     states = States.Running;
                     animator.SetBool("isRunning", true);
                     //animator.SetBool("isWalking", false);
                 }
-                if (yAxis == 0 && xAxis == 0)
+                else if (yAxis == 0 && xAxis == 0)
                 {
                     states = States.Idle;
                     animator.SetBool("isWalking", false);
                 }
-
+               
 
                 break;
 
@@ -78,21 +93,27 @@ public class PlayerController : MonoBehaviour {
                 //Play runnig animation
                 //If input <0.7 switch state to walking
                 //If input==0 return to idle
-                //Dash();
                 Rotation();                       
                 transform.Translate(transform.forward * runVelocity * Time.deltaTime, Space.World);
 
-                if (Mathf.Abs(yAxis) < velChange && Mathf.Abs(xAxis) < velChange)
+                if (inputs[(int)ButtonInputs.LightAttack])
+                {
+                    states = States.Attacking;
+                    attacks = Attacks.LightAttack1;
+                }
+                else if(inputs[(int)ButtonInputs.Dash] && !dashed)
+                {
+                    states = States.Dashing;
+                    animator.SetTrigger("isDashing");
+                }
+                else if (Mathf.Abs(yAxis) < velChange && Mathf.Abs(xAxis) < velChange)
                 {
                     states = States.Walking;
                     animator.SetBool("isWalking", true);
                     animator.SetBool("isRunning", false);
                 }
-                if (dash && !dashed)
-                {
-                    states = States.Dashing;
-                    animator.SetTrigger("isDashing");
-                }
+                
+               
                 break;
 
             case (States.Dashing):
@@ -100,7 +121,8 @@ public class PlayerController : MonoBehaviour {
                 actualDashTime -= Time.fixedDeltaTime;
                 if (actualDashTime >= 0)
                 {
-                    Dash();
+                    if (!dashed)
+                        Dash();
                 }
                 else
                 {
@@ -108,8 +130,46 @@ public class PlayerController : MonoBehaviour {
                     states = States.Running;
                     actualDashTime = dashDuration;
                 }
-               
                  
+                break;
+            case (States.Attacking):
+
+                switch (attacks) {
+
+                    case (Attacks.LightAttack1):
+                        
+                        if (!attacked)
+                        {
+                            animator.SetTrigger("lightAttack1");
+                            AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
+                            
+                            for(int i = 0; i < clips.Length; i++)
+                            {
+                                if (clips[i].name == "Standing Melee Attack Horizontal")
+                                    animLength = clips[i].length;
+                            }
+
+                            attacked = true;
+                        }
+                        animLength -= Time.fixedDeltaTime;
+                        if (animLength <= 0)
+                        {
+                            animator.SetBool("isWalking", false);
+                            animator.SetBool("isRunning", false);
+                            attacks =Attacks.NotAtt;
+                            states = States.Idle;
+                            attacked = false;
+                        }
+
+                        break;
+
+                    default:
+
+                        break;
+
+                }
+
+
                 break;
 
             default:
@@ -124,7 +184,8 @@ public class PlayerController : MonoBehaviour {
     {
        xAxis = inputManager.xAxis;
        yAxis = inputManager.yAxis;
-       dash = inputManager.dashButton;
+       inputs[(int)ButtonInputs.Dash] = inputManager.dashButton;
+       inputs[(int)ButtonInputs.LightAttack] = inputManager.attackButton;
         
     }
 
@@ -137,9 +198,7 @@ public class PlayerController : MonoBehaviour {
 
     void Dash()
     {
-        if (!dashed) {
             transform.position += transform.forward * Time.fixedDeltaTime * (dashDistance/dashDuration);
-        }
     }
 
     void DashCooldown()
