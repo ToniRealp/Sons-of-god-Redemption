@@ -18,17 +18,17 @@ public class InputManager : MonoBehaviour {
 
         if (Input.GetButtonDown("Attack"))
             attackButton = true;
-        else if (Input.GetButtonUp("Attack"))
+        else
             attackButton = false;
 
         if (Input.GetButtonDown("StrongAttack"))
             strongAttackButton = true;
-        else if (Input.GetButtonUp("StrongAttack"))
+        else
             strongAttackButton = false;
 
         if (Input.GetButtonDown("Dash"))
             dashButton = true;
-        else if (Input.GetButtonUp("Dash"))
+        else 
             dashButton = false;
 
         padXAxis = Input.GetAxis("PadXaxis");

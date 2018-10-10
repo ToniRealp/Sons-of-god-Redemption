@@ -17,11 +17,11 @@ public class PlayerController : MonoBehaviour {
 
     public Vector3 direction;
     public int walkVelocity, runVelocity, dashDistance;    
-    public float dashCooldownCounter,dashCooldownTime, dashDuration, actualDashTime, animLength;
-    public bool dashed, attacked;
+    public float dashCooldownCounter,dashCooldownTime, dashDuration, actualDashTime, animLength, animDuration;
+    public bool dashed, attacked, transition;
     const float velChange = 0.5f;
   
-    [SerializeField] States states;
+    [SerializeField] States states, lastState;
     [SerializeField] Attacks attacks;
 
     // Use this for initialization
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour {
         animator = GetComponent<Animator>();
         states = States.Idle;
         attacks = Attacks.NotAtt;
-        dashed = attacked = false;
+        dashed = attacked = transition = false;
         dashCooldownCounter = dashCooldownTime;
         actualDashTime = dashDuration;
     }
@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour {
                 {
                     states = States.Attacking;
                     attacks = Attacks.LightAttack1;
+                    lastState = States.Idle;
                 }
 
                 break;
@@ -72,6 +73,12 @@ public class PlayerController : MonoBehaviour {
                 {
                     states = States.Attacking;
                     attacks = Attacks.LightAttack1;
+                    lastState = States.Walking;
+                }
+                else if (inputs[(int)ButtonInputs.Dash] && !dashed)
+                {
+                    states = States.Dashing;
+                    animator.SetTrigger("isDashing");
                 }
                 else if (Mathf.Abs(xAxis) > velChange || Mathf.Abs(yAxis) > velChange)
                 {
@@ -100,6 +107,7 @@ public class PlayerController : MonoBehaviour {
                 {
                     states = States.Attacking;
                     attacks = Attacks.LightAttack1;
+                    lastState = States.Running;
                 }
                 else if(inputs[(int)ButtonInputs.Dash] && !dashed)
                 {
@@ -141,23 +149,74 @@ public class PlayerController : MonoBehaviour {
                         if (!attacked)
                         {
                             animator.SetTrigger("lightAttack1");
-                            AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
-                            
-                            for(int i = 0; i < clips.Length; i++)
-                            {
-                                if (clips[i].name == "Standing Melee Attack Horizontal")
-                                    animLength = clips[i].length;
-                            }
+                            animLength = AnimationLength("light attack", animator);
+                            attacked = true;
+                        }
+                        if (inputs[(int)ButtonInputs.LightAttack])
+                        {
+                            attacks = Attacks.LightAttack2;
+                            attacked = false;
+                        }
+                        animLength -= Time.fixedDeltaTime;
+                        if (animLength <= 0)
+                        {
+                            //animator.SetBool("isWalking", false);
+                            //animator.SetBool("isRunning", false);
+                            attacks =Attacks.NotAtt;
+                            states = lastState;
+                            attacked = false;
+                        }
 
+                        break;
+
+                    case (Attacks.LightAttack2):
+
+                        if (!attacked)
+                        {
+                            animator.SetTrigger("lightAttack2");
+                            animLength = animDuration = AnimationLength("light attack 2", animator);
+                            attacked = true;
+                        }
+                        if (inputs[(int)ButtonInputs.LightAttack])
+                        {
+                            transition = true;
+                        }
+
+                        if(transition && animDuration < 0.8)
+                        {
+                            attacks = Attacks.LightAttack3;
+                            attacked = false;
+                            transition = false;
+                        }
+
+                        animLength -= Time.fixedDeltaTime;
+                        animDuration -= Time.fixedDeltaTime;
+
+                        if (animLength <= 0)
+                        {
+                            //animator.SetBool("isWalking", false);
+                            //animator.SetBool("isRunning", false);
+                            attacks = Attacks.NotAtt;
+                            states = lastState;
+                            attacked = false;
+                        }
+
+                        break;
+                    case (Attacks.LightAttack3):
+
+                        if (!attacked)
+                        {
+                            animator.SetTrigger("lightAttack3");
+                            animLength = AnimationLength("light attack 3", animator);
                             attacked = true;
                         }
                         animLength -= Time.fixedDeltaTime;
                         if (animLength <= 0)
                         {
-                            animator.SetBool("isWalking", false);
-                            animator.SetBool("isRunning", false);
-                            attacks =Attacks.NotAtt;
-                            states = States.Idle;
+                            //animator.SetBool("isWalking", false);
+                            //animator.SetBool("isRunning", false);
+                            attacks = Attacks.NotAtt;
+                            states = lastState;
                             attacked = false;
                         }
 
@@ -214,5 +273,17 @@ public class PlayerController : MonoBehaviour {
 
             }
         }
+    }
+
+    float AnimationLength(string animName, Animator animator)
+    {
+        AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
+
+        for (int i = 0; i < clips.Length; i++)
+        {
+            if (clips[i].name == animName)
+                return (clips[i].length);
+        }
+        return -1f;
     }
 }
