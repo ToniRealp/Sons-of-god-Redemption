@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 
         GetInput();
 
@@ -81,6 +81,12 @@ public class PlayerController : MonoBehaviour {
                     attacks = Attacks.LightAttack1;
                     lastState = States.Walking;
                 }
+                if (inputs[(int)ButtonInputs.StrongAttack])
+                {
+                    states = States.Attacking;
+                    attacks = Attacks.StrongAttack1;
+                    lastState = States.Walking;
+                }
                 else if (inputs[(int)ButtonInputs.Dash] && !dashed)
                 {
                     states = States.Dashing;
@@ -115,6 +121,12 @@ public class PlayerController : MonoBehaviour {
                     attacks = Attacks.LightAttack1;
                     lastState = States.Running;
                 }
+                if (inputs[(int)ButtonInputs.StrongAttack])
+                {
+                    states = States.Attacking;
+                    attacks = Attacks.StrongAttack1;
+                    lastState = States.Running;
+                }
                 else if(inputs[(int)ButtonInputs.Dash] && !dashed)
                 {
                     states = States.Dashing;
@@ -132,7 +144,7 @@ public class PlayerController : MonoBehaviour {
 
             case (States.Dashing):
                 
-                actualDashTime -= Time.fixedDeltaTime;
+                actualDashTime -= Time.deltaTime;
                 if (actualDashTime >= 0)
                 {
                     if (!dashed)
@@ -155,23 +167,26 @@ public class PlayerController : MonoBehaviour {
                         if (!attacked)
                         {
                             animator.SetTrigger("lightAttack1");
-                            animLength = AnimationLength("light attack", animator);
+                            animLength = animDuration = AnimationLength("light attack", animator);
                             attacked = true;
                         }
                         if (inputs[(int)ButtonInputs.LightAttack])
                         {
+                            transition = true;
+                        }
+                        if (transition && animLength < animDuration * 0.2)
+                        {
                             attacks = Attacks.LightAttack2;
                             attacked = false;
+                            transition = false;
                         }
-                        animLength -= Time.fixedDeltaTime;
-                        if (animLength <= 0)
+                        else if (animLength <= 0)
                         {
-                            //animator.SetBool("isWalking", false);
-                            //animator.SetBool("isRunning", false);
                             attacks =Attacks.NotAtt;
                             states = lastState;
                             attacked = false;
                         }
+                        animLength -= Time.deltaTime;
 
                         break;
 
@@ -187,25 +202,19 @@ public class PlayerController : MonoBehaviour {
                         {
                             transition = true;
                         }
-
-                        if(transition && animDuration < 0.8)
+                        if(transition && animLength < animDuration*0.4)
                         {
                             attacks = Attacks.LightAttack3;
                             attacked = false;
                             transition = false;
                         }
-
-                        animLength -= Time.fixedDeltaTime;
-                        animDuration -= Time.fixedDeltaTime;
-
-                        if (animLength <= 0)
+                        else if (animLength <= 0)
                         {
-                            //animator.SetBool("isWalking", false);
-                            //animator.SetBool("isRunning", false);
                             attacks = Attacks.NotAtt;
                             states = lastState;
                             attacked = false;
                         }
+                        animLength -= Time.deltaTime;
 
                         break;
                     case (Attacks.LightAttack3):
@@ -216,11 +225,9 @@ public class PlayerController : MonoBehaviour {
                             animLength = AnimationLength("light attack 3", animator);
                             attacked = true;
                         }
-                        animLength -= Time.fixedDeltaTime;
+                        animLength -= Time.deltaTime;
                         if (animLength <= 0)
                         {
-                            //animator.SetBool("isWalking", false);
-                            //animator.SetBool("isRunning", false);
                             attacks = Attacks.NotAtt;
                             states = lastState;
                             attacked = false;
@@ -232,28 +239,26 @@ public class PlayerController : MonoBehaviour {
                         if (!attacked)
                         {
                             animator.SetTrigger("strongAttack1");
-                            animLength = AnimationLength("strong attack", animator);
+                            animLength = animDuration = AnimationLength("strong attack", animator);
                             attacked = true;
                         }
                         if (inputs[(int)ButtonInputs.StrongAttack])
                         {
                             transition = true;
                         }
-                        if (transition && animDuration < 0.8)
+                        if (transition && animLength < animDuration*0.2)
                         {
                             attacks = Attacks.StrongAttack2;
                             attacked = false;
                             transition = false;
                         }
-                        animLength -= Time.fixedDeltaTime;
-                        if (animLength <= 0)
-                        {
-                            //animator.SetBool("isWalking", false);
-                            //animator.SetBool("isRunning", false);
+                        else if (animLength <= 0)
+                        {                       
                             attacks = Attacks.NotAtt;
                             states = lastState;
                             attacked = false;
                         }
+                        animLength -= Time.deltaTime;
 
                         break;
 
@@ -266,11 +271,9 @@ public class PlayerController : MonoBehaviour {
                             attacked = true;
                         }
 
-                        animLength -= Time.fixedDeltaTime;
+                        animLength -= Time.deltaTime;
                         if (animLength <= 0)
                         {
-                            //animator.SetBool("isWalking", false);
-                            //animator.SetBool("isRunning", false);
                             attacks = Attacks.NotAtt;
                             states = lastState;
                             attacked = false;
@@ -314,7 +317,7 @@ public class PlayerController : MonoBehaviour {
 
     void Dash()
     {
-            transform.position += transform.forward * Time.fixedDeltaTime * (dashDistance/dashDuration);
+            transform.position += transform.forward * Time.deltaTime * (dashDistance/dashDuration);
     }
 
     void DashCooldown()

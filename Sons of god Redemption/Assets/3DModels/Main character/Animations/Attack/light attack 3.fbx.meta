@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b5846f4ad37830146be05ce4516230fd
+guid: b49b303410ffbdc4ea649e01fe5e80e5
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -139,8 +139,7 @@ ModelImporter:
     400130: Spine
     400132: Spine1
     400134: Spine2
-    7400000: mixamo.com
-    7400002: light attack 3
+    7400000: light attack 3
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -174,7 +173,7 @@ ModelImporter:
       name: light attack 3
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 141
+      lastFrame: 78
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

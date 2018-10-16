@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 56f9a61ff7df89b4d997665a37df43a2
+guid: d2e12b0790d97b940adca19d7520c83e
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -173,7 +173,7 @@ ModelImporter:
       name: light attack 2
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 91
+      lastFrame: 34
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
