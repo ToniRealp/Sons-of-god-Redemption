@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     enum States { Idle, Walking, Running, Dashing, Attacking, MAX };
-    enum Attacks { LightAttack1, LightAttack2, LightAttack3, NotAtt };
-    enum ButtonInputs { Dash, LightAttack, MAX };
+    enum Attacks { LightAttack1, LightAttack2, LightAttack3, StrongAttack1, StrongAttack2, StrongAttack3, NotAtt };
+    enum ButtonInputs { Dash, LightAttack, StrongAttack, MAX };
 
     Rigidbody rb;
     InputManager inputManager;
@@ -56,6 +56,12 @@ public class PlayerController : MonoBehaviour {
                 {
                     states = States.Attacking;
                     attacks = Attacks.LightAttack1;
+                    lastState = States.Idle;
+                }
+                if (inputs[(int)ButtonInputs.StrongAttack])
+                {
+                    states = States.Attacking;
+                    attacks = Attacks.StrongAttack1;
                     lastState = States.Idle;
                 }
 
@@ -221,6 +227,56 @@ public class PlayerController : MonoBehaviour {
                         }
 
                         break;
+                    case (Attacks.StrongAttack1):
+
+                        if (!attacked)
+                        {
+                            animator.SetTrigger("strongAttack1");
+                            animLength = AnimationLength("strong attack", animator);
+                            attacked = true;
+                        }
+                        if (inputs[(int)ButtonInputs.StrongAttack])
+                        {
+                            transition = true;
+                        }
+                        if (transition && animDuration < 0.8)
+                        {
+                            attacks = Attacks.StrongAttack2;
+                            attacked = false;
+                            transition = false;
+                        }
+                        animLength -= Time.fixedDeltaTime;
+                        if (animLength <= 0)
+                        {
+                            //animator.SetBool("isWalking", false);
+                            //animator.SetBool("isRunning", false);
+                            attacks = Attacks.NotAtt;
+                            states = lastState;
+                            attacked = false;
+                        }
+
+                        break;
+
+                    case (Attacks.StrongAttack2):
+
+                        if (!attacked)
+                        {
+                            animator.SetTrigger("strongAttack2");
+                            animLength = AnimationLength("strong attack 2", animator);
+                            attacked = true;
+                        }
+
+                        animLength -= Time.fixedDeltaTime;
+                        if (animLength <= 0)
+                        {
+                            //animator.SetBool("isWalking", false);
+                            //animator.SetBool("isRunning", false);
+                            attacks = Attacks.NotAtt;
+                            states = lastState;
+                            attacked = false;
+                        }
+
+                        break;
 
                     default:
 
@@ -245,6 +301,7 @@ public class PlayerController : MonoBehaviour {
        yAxis = inputManager.yAxis;
        inputs[(int)ButtonInputs.Dash] = inputManager.dashButton;
        inputs[(int)ButtonInputs.LightAttack] = inputManager.attackButton;
+       inputs[(int)ButtonInputs.StrongAttack] = inputManager.strongAttackButton;
         
     }
 
