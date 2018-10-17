@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: aae96b66288ae034bae169c3db4bfe87
+guid: 27ab3924e0b07294fba49c7f60cecac2
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -174,7 +174,7 @@ ModelImporter:
       name: strong attack 2
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 190
+      lastFrame: 84
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: aae96b66288ae034bae169c3db4bfe87
+guid: f45f4a397224363439b8e4b69422f8a2
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -140,7 +140,7 @@ ModelImporter:
     400132: Spine1
     400134: Spine2
     7400000: mixamo.com
-    7400002: strong attack 2
+    7400002: strong attack
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -171,10 +171,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: strong attack 2
+      name: strong attack
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 190
+      lastFrame: 68
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
