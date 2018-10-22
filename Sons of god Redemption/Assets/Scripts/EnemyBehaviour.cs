@@ -7,12 +7,15 @@ public class EnemyBehaviour : MonoBehaviour {
 
     public float movingRange = 5;
     public float changePosTime = 5;
+    public float attackDistance = 2;
+    public float attackAnimationTime = 2;
     public NavMeshAgent NavAgent;
 
     private Vector3 initialPosition;
-    private Vector3 destinationPosition;
+    public Vector3 destinationPosition;
     private float xMin, xMax, zMin, zMax;
-    private float initTime;
+    private float initTime, initAttackTime;
+    public bool playerDetected = false;
 
     enum State { SEARCHING, SEEKING, ATTAKING };
     State state = State.SEARCHING;
@@ -36,40 +39,74 @@ public class EnemyBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        // Go to destination
+        NavAgent.SetDestination(destinationPosition);
+
         switch (state)
         {
             case State.SEARCHING:
+                //Debug.Log("SEARCHING");
+                if (!playerDetected)
+                {
+                    // Reset destiny location
+                    if (Time.time - initTime >= changePosTime)
+                    {
+                        destinationPosition.x = Random.Range(xMin, xMax);
+                        destinationPosition.z = Random.Range(zMin, zMax);
 
-                // Reset destiny location
-                if (Time.time - initTime >= changePosTime) {
-                    destinationPosition.x = Random.Range(xMin, xMax);
-                    destinationPosition.z = Random.Range(zMin, zMax);
-                    
-                    initTime = Time.time;
+                        initTime = Time.time;
+                    }
+                }
+                else
+                {
+                    state = State.SEEKING;
                 }
 
-                // Go to destination
-                NavAgent.SetDestination(destinationPosition);
 
                 break;
             case State.SEEKING:
-
-
-
-                // Go to destination
-                NavAgent.SetDestination(destinationPosition);
-
+                if (NavAgent.remainingDistance <= attackDistance) {
+                    initAttackTime = Time.time;
+                    NavAgent.isStopped = true;
+                    state = State.ATTAKING;
+                }
 
                 break;
             case State.ATTAKING:
-                break;
+                if (Time.time - initAttackTime >= attackAnimationTime) {
+                    NavAgent.isStopped = false;
+                    state = State.SEEKING;
+                }
+                    break;
             default:
                 break;
         }
 
 
-
-
-
 	}
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerDetected = true;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        Debug.Log(other.tag);
+        if (other.CompareTag("Player"))
+        {
+            destinationPosition = other.GetComponent<Transform>().position;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerDetected = false;
+            state = State.SEARCHING;
+        }
+    }
 }
