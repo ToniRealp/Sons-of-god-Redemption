@@ -8,14 +8,22 @@ public class EnemyBehaviour : MonoBehaviour {
     public float movingRange = 5;
     public float changePosTime = 5;
     public float attackDistance = 2;
+    public float attackCooldown = 0.5f;
     public float attackAnimationTime = 2;
+    public Rigidbody rb;
     public NavMeshAgent NavAgent;
+    public Animator animator;
+    public GameObject player;
+    public int status;
 
+    private Vector3 playerPosition;
     private Vector3 initialPosition;
+    private float initSpeed;
     public Vector3 destinationPosition;
     private float xMin, xMax, zMin, zMax;
     private float initTime, initAttackTime;
     public bool playerDetected = false;
+    private bool attackOnCooldown = false;
 
     enum State { SEARCHING, SEEKING, ATTAKING };
     State state = State.SEARCHING;
@@ -32,6 +40,7 @@ public class EnemyBehaviour : MonoBehaviour {
 	void Start () {
         initialPosition = this.GetComponent<Transform>().position;
         SetMovementRange(initialPosition.x, initialPosition.z);
+        initSpeed = NavAgent.speed;
         destinationPosition = new Vector3(Random.Range(xMin, xMax), 5 , Random.Range(zMin, zMax));
         initTime = Time.time;
 	}
@@ -40,14 +49,32 @@ public class EnemyBehaviour : MonoBehaviour {
 	void Update () {
 
         // Go to destination
-        NavAgent.SetDestination(destinationPosition);
+        
+
+        // Set animation speed
+        if (NavAgent.velocity.magnitude>0.1f)
+        {
+            animator.SetBool("IsIdle", false);
+            animator.SetBool("IsRunning", true);
+        }
+        else
+        {
+            animator.SetBool("IsRunning", false);
+            animator.SetBool("IsIdle", true);
+        }
+
+        // PlayerPosition
+        playerPosition = player.GetComponent<Transform>().position;
+
+        // Debug Status
+        status = (int)state;
 
         switch (state)
         {
             case State.SEARCHING:
-                //Debug.Log("SEARCHING");
-                if (!playerDetected)
-                {
+                NavAgent.SetDestination(destinationPosition);
+                if (!playerDetected) { 
+
                     // Reset destiny location
                     if (Time.time - initTime >= changePosTime)
                     {
@@ -62,51 +89,69 @@ public class EnemyBehaviour : MonoBehaviour {
                     state = State.SEEKING;
                 }
 
-
                 break;
             case State.SEEKING:
-                if (NavAgent.remainingDistance <= attackDistance) {
-                    initAttackTime = Time.time;
-                    NavAgent.isStopped = true;
-                    state = State.ATTAKING;
+                //destinationPosition = playerPosition;
+                NavAgent.SetDestination(playerPosition);
+                if (playerDetected)
+                {
+                    if (Vector3.Distance(gameObject.transform.position,player.transform.position) <= attackDistance)
+                    {
+                        initAttackTime = Time.time;
+                        NavAgent.speed = 0;
+                        animator.SetBool("Attack", true);
+                        state = State.ATTAKING;
+                    }
+                }
+                else
+                {
+                    state = State.SEARCHING;
                 }
 
                 break;
             case State.ATTAKING:
-                if (Time.time - initAttackTime >= attackAnimationTime) {
-                    NavAgent.isStopped = false;
-                    state = State.SEEKING;
+                //destinationPosition = playerPosition;
+                NavAgent.SetDestination(playerPosition);
+                if (playerDetected)
+                {
+                    if (Time.time - initAttackTime >= attackAnimationTime/2)
+                        animator.SetBool("Attack", false);
+                    if (Time.time - initAttackTime >= attackAnimationTime) 
+                        NavAgent.speed = initSpeed/2;
+                    if (Time.time - initAttackTime >= attackAnimationTime+attackCooldown) {
+                        initAttackTime = Time.time;
+                        NavAgent.speed = initSpeed;
+                        state = State.SEEKING;
+                    }
                 }
-                    break;
+                else
+                {
+                    animator.SetBool("Attack", false);
+                    NavAgent.speed = initSpeed;
+                    state = State.SEARCHING;
+                }
+                break;
             default:
                 break;
         }
 
 
-	}
+
+
+    }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.tag == "Player")
         {
             playerDetected = true;
         }
     }
 
-    private void OnTriggerStay(Collider other)
+     private void OnTriggerExit(Collider other)
     {
-        Debug.Log(other.tag);
-        if (other.CompareTag("Player"))
-        {
-            destinationPosition = other.GetComponent<Transform>().position;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        if (other.tag == "Player")
         {
             playerDetected = false;
-            state = State.SEARCHING;
         }
     }
 }
