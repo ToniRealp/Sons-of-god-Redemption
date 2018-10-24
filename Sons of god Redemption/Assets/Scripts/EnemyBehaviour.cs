@@ -9,7 +9,8 @@ public class EnemyBehaviour : MonoBehaviour {
     public float changePosTime = 5;
     public float attackDistance = 2;
     public float attackCooldown = 0.5f;
-    public float attackAnimationTime = 2;
+    public float attackAnimationTime = 2.617f;
+    public float damagedAnimationTime = 2.167f;
     public Rigidbody rb;
     public NavMeshAgent NavAgent;
     public Animator animator;
@@ -21,11 +22,12 @@ public class EnemyBehaviour : MonoBehaviour {
     private float initSpeed;
     public Vector3 destinationPosition;
     private float xMin, xMax, zMin, zMax;
-    private float initTime, initAttackTime;
+    private float initTime, initAttackTime, initDamagedTime;
     public bool playerDetected = false;
     private bool attackOnCooldown = false;
+    public bool damaged = false;
 
-    enum State { SEARCHING, SEEKING, ATTAKING };
+    enum State { SEARCHING, CHASING, ATTAKING, DAMAGED };
     State state = State.SEARCHING;
 
     void SetMovementRange(float _x, float _z){
@@ -48,10 +50,21 @@ public class EnemyBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        // Go to destination
-        
+        if (damaged)
+        {
+            state = State.DAMAGED;
+        }
 
-        // Set animation speed
+        //if (state == State.ATTAKING)
+        //{
+        //    GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        //}
+        //else
+        //{
+        //    GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+        //}
+
+        // Set animation state depending on speed
         if (NavAgent.velocity.magnitude>0.1f)
         {
             animator.SetBool("IsIdle", false);
@@ -86,11 +99,11 @@ public class EnemyBehaviour : MonoBehaviour {
                 }
                 else
                 {
-                    state = State.SEEKING;
+                    state = State.CHASING;
                 }
 
                 break;
-            case State.SEEKING:
+            case State.CHASING:
                 destinationPosition = playerPosition;
                 NavAgent.SetDestination(playerPosition);
                 initTime = Time.time;
@@ -100,8 +113,8 @@ public class EnemyBehaviour : MonoBehaviour {
                     {
                         initAttackTime = Time.time;
                         NavAgent.speed = 0;
-                        animator.SetBool("Attack", true);
                         state = State.ATTAKING;
+                        animator.SetBool("Attack",true);
                     }
                 }
                 else
@@ -123,15 +136,28 @@ public class EnemyBehaviour : MonoBehaviour {
                     if (Time.time - initAttackTime >= attackAnimationTime+attackCooldown) {
                         initAttackTime = Time.time;
                         NavAgent.speed = initSpeed;
-                        state = State.SEEKING;
+                        state = State.CHASING;
                     }
                 }
                 else
                 {
-                    animator.SetBool("Attack", false);
                     NavAgent.speed = initSpeed;
                     state = State.SEARCHING;
                 }
+                break;
+            case State.DAMAGED:
+                animator.SetBool("Attack", false);
+                if (Time.time - initDamagedTime < damagedAnimationTime)
+                {
+                    NavAgent.speed = 0.1f;
+                }
+                if (Time.time - initDamagedTime >= damagedAnimationTime)
+                {
+                    damaged = false;
+                    NavAgent.speed = initSpeed;
+                    state = State.CHASING;
+                }
+
                 break;
             default:
                 break;
@@ -154,6 +180,23 @@ public class EnemyBehaviour : MonoBehaviour {
         if (other.tag == "Player")
         {
             playerDetected = false;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.name == "RightHandThumb1" && player.GetComponent<PlayerController>().attacked)
+        {
+            damaged = true;
+            initDamagedTime = Time.time;
+            animator.SetTrigger("Damaged");
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.name == "RightHandThumb1")
+        {
+            damaged = false;
         }
     }
 }
