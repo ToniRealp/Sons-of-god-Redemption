@@ -117,7 +117,7 @@ public class EnemyBehaviour : MonoBehaviour {
                     if (Time.time - initAttackTime >= attackAnimationTime/2)
                         animator.SetBool("Attack", false);
                     if (Time.time - initAttackTime >= attackAnimationTime) 
-                        NavAgent.speed = initSpeed/2;
+                        NavAgent.speed = 0.1f;
                     if (Time.time - initAttackTime >= attackAnimationTime+attackCooldown) {
                         initAttackTime = Time.time;
                         NavAgent.speed = initSpeed;
