@@ -200,7 +200,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 2
 --- !u!195 &9660262
 NavMeshAgent:
@@ -663,6 +663,23 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1783a01bd4bdb741a4afee289988c36, type: 3}
   m_IsPrefabAsset: 0
+--- !u!1 &1453500084 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100132, guid: d1783a01bd4bdb741a4afee289988c36,
+    type: 3}
+  m_PrefabInternal: {fileID: 1453500083}
+--- !u!65 &1453500085
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1453500084}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.552968, y: 0.21599062, z: 1.5373573}
+  m_Center: {x: 0.19437024, y: -0.054852325, z: 0.34392914}
 --- !u!1 &1958923798
 GameObject:
   m_ObjectHideFlags: 0

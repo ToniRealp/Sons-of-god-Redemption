@@ -91,8 +91,9 @@ public class EnemyBehaviour : MonoBehaviour {
 
                 break;
             case State.SEEKING:
-                //destinationPosition = playerPosition;
+                destinationPosition = playerPosition;
                 NavAgent.SetDestination(playerPosition);
+                initTime = Time.time;
                 if (playerDetected)
                 {
                     if (Vector3.Distance(gameObject.transform.position,player.transform.position) <= attackDistance)
@@ -110,8 +111,9 @@ public class EnemyBehaviour : MonoBehaviour {
 
                 break;
             case State.ATTAKING:
-                //destinationPosition = playerPosition;
+                destinationPosition = playerPosition;
                 NavAgent.SetDestination(playerPosition);
+                initTime = Time.time;
                 if (playerDetected)
                 {
                     if (Time.time - initAttackTime >= attackAnimationTime/2)
