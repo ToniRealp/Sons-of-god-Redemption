@@ -187,6 +187,12 @@ public class PlayerController : MonoBehaviour {
                             states = lastState;
                             attacked = false;
                         }
+
+                        if (animLength < animDuration * 0.3) 
+                            weapon.tag = "Untagged";
+                        else if (animLength < animDuration * 0.8)
+                            weapon.tag = "Weapon";
+                                              
                         animLength -= Time.deltaTime;
 
                         break;
@@ -198,6 +204,7 @@ public class PlayerController : MonoBehaviour {
                             animator.SetTrigger("lightAttack2");
                             animLength = animDuration = AnimationLength("light attack 2", animator);
                             attacked = true;
+                            weapon.tag = "Weapon";
                         }
                         if (inputs[(int)ButtonInputs.LightAttack])
                         {
@@ -215,6 +222,8 @@ public class PlayerController : MonoBehaviour {
                             states = lastState;
                             attacked = false;
                         }
+                        if (animLength < animDuration * 0.3)
+                            weapon.tag = "Untagged";
                         animLength -= Time.deltaTime;
 
                         break;
@@ -225,6 +234,7 @@ public class PlayerController : MonoBehaviour {
                             animator.SetTrigger("lightAttack3");
                             animLength = AnimationLength("light attack 3", animator);
                             attacked = true;
+                            weapon.tag = "Weapon";
                         }
                         animLength -= Time.deltaTime;
                         if (animLength <= 0)
@@ -233,6 +243,8 @@ public class PlayerController : MonoBehaviour {
                             states = lastState;
                             attacked = false;
                         }
+                        if (animLength < animDuration * 0.5)
+                            weapon.tag = "Untagged";
 
                         break;
                     case (Attacks.StrongAttack1):
@@ -242,6 +254,7 @@ public class PlayerController : MonoBehaviour {
                             animator.SetTrigger("strongAttack1");
                             animLength = animDuration = AnimationLength("strong attack", animator);
                             attacked = true;
+                            weapon.tag = "Weapon";
                         }
                         if (inputs[(int)ButtonInputs.StrongAttack])
                         {
@@ -259,6 +272,8 @@ public class PlayerController : MonoBehaviour {
                             states = lastState;
                             attacked = false;
                         }
+                        if (animLength < animDuration * 0.3)
+                            weapon.tag = "Untagged";
                         animLength -= Time.deltaTime;
 
                         break;
@@ -270,15 +285,19 @@ public class PlayerController : MonoBehaviour {
                             animator.SetTrigger("strongAttack2");
                             animLength = AnimationLength("strong attack 2", animator);
                             attacked = true;
-                        }
-
-                        animLength -= Time.deltaTime;
+                            weapon.tag = "Weapon";
+                        }                    
                         if (animLength <= 0)
                         {
                             attacks = Attacks.NotAtt;
                             states = lastState;
                             attacked = false;
                         }
+
+                        if (animLength < animDuration * 0.3)
+                            weapon.tag = "Untagged";
+
+                        animLength -= Time.deltaTime;
 
                         break;
 
@@ -297,14 +316,14 @@ public class PlayerController : MonoBehaviour {
         }
         
         DashCooldown();
-        if (attacked && animLength<animDuration-0.2)
-        {
-            weapon.tag = "Weapon";
-        }
-        else
-        {
-            weapon.tag = "Untagged";
-        }
+    //    if (attacked && animLength<animDuration-0.2)
+    //    {
+    //        weapon.tag = "Weapon";
+    //    }
+    //    else
+    //    {
+    //        weapon.tag = "Untagged";
+    //    }
     }
 
     void GetInput()
