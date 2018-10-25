@@ -9,26 +9,19 @@ public class EnemyBehaviour : MonoBehaviour {
     public float changePosTime = 5;
     public float attackDistance = 2;
     public float attackCooldown = 0.5f;
-    public float attackAnimationTime = 2.617f;
-    public float damagedAnimationTime = 2.167f;
-    public Rigidbody rb;
+    public float attackAnimationTime;
+    public float damagedAnimationTime;
     public NavMeshAgent NavAgent;
     public Animator animator;
     public GameObject player;
-    public int status;
 
-    private Vector3 playerPosition;
-    private Vector3 initialPosition;
-    private float initSpeed;
-    public Vector3 destinationPosition;
-    private float xMin, xMax, zMin, zMax;
-    private float initTime, initAttackTime, initDamagedTime;
-    public bool playerDetected = false;
-    private bool attackOnCooldown = false;
-    public bool damaged = false;
+    private float actualPosTime, actualAttackAnimationTime, actualDamagedAnimationTime;
+    private Vector3 playerPosition, initialPosition, destinationPosition;
+    private float initSpeed, xMin, xMax, zMin, zMax;
+    public bool playerDetected, damaged;
 
     enum State { SEARCHING, CHASING, ATTAKING, DAMAGED };
-    State state = State.SEARCHING;
+    [SerializeField] State state = State.SEARCHING;
 
     void SetMovementRange(float _x, float _z){
 
@@ -44,8 +37,11 @@ public class EnemyBehaviour : MonoBehaviour {
         SetMovementRange(initialPosition.x, initialPosition.z);
         initSpeed = NavAgent.speed;
         destinationPosition = new Vector3(Random.Range(xMin, xMax), 5 , Random.Range(zMin, zMax));
-        initTime = Time.time;
-	}
+        actualPosTime = changePosTime;
+        playerDetected = damaged = false;
+        attackAnimationTime = AnimationLength("Zombie Attack", animator);
+        damagedAnimationTime = AnimationLength("Zombie Reaction Hit", animator);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -55,14 +51,6 @@ public class EnemyBehaviour : MonoBehaviour {
             state = State.DAMAGED;
         }
 
-        //if (state == State.ATTAKING)
-        //{
-        //    GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        //}
-        //else
-        //{
-        //    GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-        //}
 
         // Set animation state depending on speed
         if (NavAgent.velocity.magnitude>0.1f)
@@ -79,9 +67,6 @@ public class EnemyBehaviour : MonoBehaviour {
         // PlayerPosition
         playerPosition = player.GetComponent<Transform>().position;
 
-        // Debug Status
-        status = (int)state;
-
         switch (state)
         {
             case State.SEARCHING:
@@ -89,12 +74,11 @@ public class EnemyBehaviour : MonoBehaviour {
                 if (!playerDetected) { 
 
                     // Reset destiny location
-                    if (Time.time - initTime >= changePosTime)
+                    if ((actualPosTime-=Time.deltaTime)<=0)
                     {
                         destinationPosition.x = Random.Range(xMin, xMax);
                         destinationPosition.z = Random.Range(zMin, zMax);
-
-                        initTime = Time.time;
+                        actualPosTime = changePosTime;
                     }
                 }
                 else
@@ -106,15 +90,13 @@ public class EnemyBehaviour : MonoBehaviour {
             case State.CHASING:
                 destinationPosition = playerPosition;
                 NavAgent.SetDestination(playerPosition);
-                initTime = Time.time;
                 if (playerDetected)
                 {
                     if (Vector3.Distance(gameObject.transform.position,player.transform.position) <= attackDistance)
                     {
-                        initAttackTime = Time.time;
                         NavAgent.speed = 0;
                         state = State.ATTAKING;
-                        animator.SetBool("Attack",true);
+                        animator.SetTrigger("Attack");
                     }
                 }
                 else
@@ -126,15 +108,13 @@ public class EnemyBehaviour : MonoBehaviour {
             case State.ATTAKING:
                 destinationPosition = playerPosition;
                 NavAgent.SetDestination(playerPosition);
-                initTime = Time.time;
                 if (playerDetected)
                 {
-                    if (Time.time - initAttackTime >= attackAnimationTime/2)
-                        animator.SetBool("Attack", false);
-                    if (Time.time - initAttackTime >= attackAnimationTime) 
+                    actualAttackAnimationTime -= Time.deltaTime;
+                    if (actualAttackAnimationTime<=0) 
                         NavAgent.speed = 0.1f;
-                    if (Time.time - initAttackTime >= attackAnimationTime+attackCooldown) {
-                        initAttackTime = Time.time;
+                    if (actualAttackAnimationTime+attackCooldown<=0) {
+                        actualAttackAnimationTime = attackAnimationTime;
                         NavAgent.speed = initSpeed;
                         state = State.CHASING;
                     }
@@ -146,57 +126,57 @@ public class EnemyBehaviour : MonoBehaviour {
                 }
                 break;
             case State.DAMAGED:
-                animator.SetBool("Attack", false);
-                if (Time.time - initDamagedTime < damagedAnimationTime)
+                actualDamagedAnimationTime -= Time.deltaTime;
+                NavAgent.speed = 0.1f;
+                if (actualDamagedAnimationTime<=0)
                 {
-                    NavAgent.speed = 0.1f;
-                }
-                if (Time.time - initDamagedTime >= damagedAnimationTime)
-                {
+                    actualDamagedAnimationTime = damagedAnimationTime;
                     damaged = false;
                     NavAgent.speed = initSpeed;
                     state = State.CHASING;
                 }
-
                 break;
             default:
                 break;
         }
-
-
-
-
     }
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
             playerDetected = true;
         }
+        if (other.tag == "Weapon" && !damaged)
+        {
+            damaged = true;
+            Debug.Log("hit");
+            animator.SetTrigger("Damaged");
+        }
     }
 
-     private void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
         {
             playerDetected = false;
         }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.name == "RightHandThumb1" && player.GetComponent<PlayerController>().attacked)
-        {
-            damaged = true;
-            initDamagedTime = Time.time;
-            animator.SetTrigger("Damaged");
-        }
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.collider.name == "RightHandThumb1")
+        if (other.tag == "Weapon")
         {
             damaged = false;
         }
+    }
+
+    float AnimationLength(string animName, Animator animator)
+    {
+        AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
+
+        for (int i = 0; i < clips.Length; i++)
+        {
+            if (clips[i].name == animName)
+                return (clips[i].length);
+        }
+        return -1f;
     }
 }

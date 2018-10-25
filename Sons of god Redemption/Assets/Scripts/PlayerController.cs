@@ -8,9 +8,9 @@ public class PlayerController : MonoBehaviour {
     enum Attacks { LightAttack1, LightAttack2, LightAttack3, StrongAttack1, StrongAttack2, StrongAttack3, NotAtt };
     enum ButtonInputs { Dash, LightAttack, StrongAttack, MAX };
 
-    Rigidbody rb;
     InputManager inputManager;
     Animator animator;
+    GameObject weapon;
 
     bool[] inputs = new bool[(int)ButtonInputs.MAX];
     private float xAxis, yAxis;
@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        rb = GetComponent<Rigidbody>();
         inputManager = GetComponent<InputManager>();
         animator = GetComponent<Animator>();
         states = States.Idle;
@@ -34,10 +33,12 @@ public class PlayerController : MonoBehaviour {
         dashed = attacked = transition = false;
         dashCooldownCounter = dashCooldownTime;
         actualDashTime = dashDuration;
+        weapon = GameObject.Find("RightHandThumb1");
     }
 	
 	// Update is called once per frame
 	void Update () {
+
 
         GetInput();
 
@@ -174,7 +175,7 @@ public class PlayerController : MonoBehaviour {
                         {
                             transition = true;
                         }
-                        if (transition && animLength < animDuration * 0.2)
+                        if (transition && animLength < animDuration * 0.3)
                         {
                             attacks = Attacks.LightAttack2;
                             attacked = false;
@@ -202,7 +203,7 @@ public class PlayerController : MonoBehaviour {
                         {
                             transition = true;
                         }
-                        if(transition && animLength < animDuration*0.4)
+                        if(transition && animLength < animDuration*0.45)
                         {
                             attacks = Attacks.LightAttack3;
                             attacked = false;
@@ -295,7 +296,15 @@ public class PlayerController : MonoBehaviour {
             
         }
         
-        DashCooldown(); 
+        DashCooldown();
+        if (attacked && animLength<animDuration-0.2)
+        {
+            weapon.tag = "Weapon";
+        }
+        else
+        {
+            weapon.tag = "Untagged";
+        }
     }
 
     void GetInput()
