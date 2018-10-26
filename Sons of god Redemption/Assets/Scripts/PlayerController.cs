@@ -17,8 +17,8 @@ public class PlayerController : MonoBehaviour {
 
     public Vector3 direction;
     public int walkVelocity, runVelocity, dashDistance;    
-    public float dashCooldownCounter,dashCooldownTime, dashDuration, actualDashTime, animLength, animDuration;
-    public bool dashed, attacked, transition;
+    public float dashCooldownCounter,dashCooldownTime, dashDuration, actualDashTime, animLength, animDuration, onHitDelay, onHitAnimDelay;
+    public bool dashed, attacked, transition, hit;
     const float velChange = 0.5f;
   
     [SerializeField] States states, lastState;
@@ -30,10 +30,11 @@ public class PlayerController : MonoBehaviour {
         animator = GetComponent<Animator>();
         states = States.Idle;
         attacks = Attacks.NotAtt;
-        dashed = attacked = transition = false;
+        dashed = attacked = transition = hit = false;
         dashCooldownCounter = dashCooldownTime;
         actualDashTime = dashDuration;
         weapon = GameObject.Find("RightHand");
+        onHitDelay = onHitAnimDelay;
     }
 	
 	// Update is called once per frame
@@ -319,14 +320,25 @@ public class PlayerController : MonoBehaviour {
         }
         
         DashCooldown();
-    //    if (attacked && animLength<animDuration-0.2)
-    //    {
-    //        weapon.tag = "Weapon";
-    //    }
-    //    else
-    //    {
-    //        weapon.tag = "Untagged";
-    //    }
+
+        if (hit)
+        {
+            onHitDelay -= Time.deltaTime;
+            if (onHitDelay <= 0)
+            {
+                animator.speed = 1f;
+                onHitDelay = onHitAnimDelay;
+                hit = false;
+            }
+        }
+        //    if (attacked && animLength<animDuration-0.2)
+        //    {
+        //        weapon.tag = "Weapon";
+        //    }
+        //    else
+        //    {
+        //        weapon.tag = "Untagged";
+        //    }
     }
 
     void GetInput()
@@ -376,5 +388,22 @@ public class PlayerController : MonoBehaviour {
                 return (clips[i].length);
         }
         return -1f;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Enemy")
+        {
+            if (weapon.tag == "Weapon")
+            {
+                animator.speed = 0f;
+                hit = true;
+            }        
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+       
     }
 }
