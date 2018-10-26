@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour {
         dashed = attacked = transition = false;
         dashCooldownCounter = dashCooldownTime;
         actualDashTime = dashDuration;
-        weapon = GameObject.Find("RightHandThumb1");
+        weapon = GameObject.Find("RightHand");
     }
 	
 	// Update is called once per frame
@@ -254,7 +254,6 @@ public class PlayerController : MonoBehaviour {
                             animator.SetTrigger("strongAttack1");
                             animLength = animDuration = AnimationLength("strong attack", animator);
                             attacked = true;
-                            weapon.tag = "Weapon";
                         }
                         if (inputs[(int)ButtonInputs.StrongAttack])
                         {
@@ -272,8 +271,12 @@ public class PlayerController : MonoBehaviour {
                             states = lastState;
                             attacked = false;
                         }
-                        if (animLength < animDuration * 0.3)
+
+                        if (animLength < animDuration * 0.4)
                             weapon.tag = "Untagged";
+                        else if (animLength < animDuration * 0.8)
+                            weapon.tag = "Weapon";
+                      
                         animLength -= Time.deltaTime;
 
                         break;
