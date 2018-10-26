@@ -8,9 +8,9 @@ public class PlayerController : MonoBehaviour {
     enum Attacks { LightAttack1, LightAttack2, LightAttack3, StrongAttack1, StrongAttack2, StrongAttack3, NotAtt };
     enum ButtonInputs { Dash, LightAttack, StrongAttack, MAX };
 
-    Rigidbody rb;
     InputManager inputManager;
     Animator animator;
+    GameObject weapon;
 
     bool[] inputs = new bool[(int)ButtonInputs.MAX];
     private float xAxis, yAxis;
@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        rb = GetComponent<Rigidbody>();
         inputManager = GetComponent<InputManager>();
         animator = GetComponent<Animator>();
         states = States.Idle;
@@ -34,10 +33,12 @@ public class PlayerController : MonoBehaviour {
         dashed = attacked = transition = false;
         dashCooldownCounter = dashCooldownTime;
         actualDashTime = dashDuration;
+        weapon = GameObject.Find("RightHand");
     }
 	
 	// Update is called once per frame
 	void Update () {
+
 
         GetInput();
 
@@ -174,7 +175,7 @@ public class PlayerController : MonoBehaviour {
                         {
                             transition = true;
                         }
-                        if (transition && animLength < animDuration * 0.2)
+                        if (transition && animLength < animDuration * 0.3)
                         {
                             attacks = Attacks.LightAttack2;
                             attacked = false;
@@ -186,6 +187,12 @@ public class PlayerController : MonoBehaviour {
                             states = lastState;
                             attacked = false;
                         }
+
+                        if (animLength < animDuration * 0.3) 
+                            weapon.tag = "Untagged";
+                        else if (animLength < animDuration * 0.8)
+                            weapon.tag = "Weapon";
+                                              
                         animLength -= Time.deltaTime;
 
                         break;
@@ -197,12 +204,13 @@ public class PlayerController : MonoBehaviour {
                             animator.SetTrigger("lightAttack2");
                             animLength = animDuration = AnimationLength("light attack 2", animator);
                             attacked = true;
+                            weapon.tag = "Weapon";
                         }
                         if (inputs[(int)ButtonInputs.LightAttack])
                         {
                             transition = true;
                         }
-                        if(transition && animLength < animDuration*0.4)
+                        if(transition && animLength < animDuration*0.45)
                         {
                             attacks = Attacks.LightAttack3;
                             attacked = false;
@@ -214,6 +222,8 @@ public class PlayerController : MonoBehaviour {
                             states = lastState;
                             attacked = false;
                         }
+                        if (animLength < animDuration * 0.3)
+                            weapon.tag = "Untagged";
                         animLength -= Time.deltaTime;
 
                         break;
@@ -224,6 +234,7 @@ public class PlayerController : MonoBehaviour {
                             animator.SetTrigger("lightAttack3");
                             animLength = AnimationLength("light attack 3", animator);
                             attacked = true;
+                            weapon.tag = "Weapon";
                         }
                         animLength -= Time.deltaTime;
                         if (animLength <= 0)
@@ -232,6 +243,8 @@ public class PlayerController : MonoBehaviour {
                             states = lastState;
                             attacked = false;
                         }
+                        if (animLength < animDuration * 0.5)
+                            weapon.tag = "Untagged";
 
                         break;
                     case (Attacks.StrongAttack1):
@@ -258,6 +271,12 @@ public class PlayerController : MonoBehaviour {
                             states = lastState;
                             attacked = false;
                         }
+
+                        if (animLength < animDuration * 0.4)
+                            weapon.tag = "Untagged";
+                        else if (animLength < animDuration * 0.8)
+                            weapon.tag = "Weapon";
+                      
                         animLength -= Time.deltaTime;
 
                         break;
@@ -269,15 +288,19 @@ public class PlayerController : MonoBehaviour {
                             animator.SetTrigger("strongAttack2");
                             animLength = AnimationLength("strong attack 2", animator);
                             attacked = true;
-                        }
-
-                        animLength -= Time.deltaTime;
+                            weapon.tag = "Weapon";
+                        }                    
                         if (animLength <= 0)
                         {
                             attacks = Attacks.NotAtt;
                             states = lastState;
                             attacked = false;
                         }
+
+                        if (animLength < animDuration * 0.3)
+                            weapon.tag = "Untagged";
+
+                        animLength -= Time.deltaTime;
 
                         break;
 
@@ -295,7 +318,15 @@ public class PlayerController : MonoBehaviour {
             
         }
         
-        DashCooldown(); 
+        DashCooldown();
+    //    if (attacked && animLength<animDuration-0.2)
+    //    {
+    //        weapon.tag = "Weapon";
+    //    }
+    //    else
+    //    {
+    //        weapon.tag = "Untagged";
+    //    }
     }
 
     void GetInput()
