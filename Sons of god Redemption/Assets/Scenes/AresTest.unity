@@ -157,7 +157,31 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1401306505}
-    m_RemovedComponents: []
+    - target: {fileID: 136183414480292810, guid: 6fdf6feb8f93d14409258eda5827849f,
+        type: 2}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 136183414480292810, guid: 6fdf6feb8f93d14409258eda5827849f,
+        type: 2}
+      propertyPath: m_Height
+      value: 1.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 136183414480292810, guid: 6fdf6feb8f93d14409258eda5827849f,
+        type: 2}
+      propertyPath: m_Center.y
+      value: 0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 4816795410276738, guid: 6fdf6feb8f93d14409258eda5827849f, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4816795410276738, guid: 6fdf6feb8f93d14409258eda5827849f, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 135392397894833868, guid: 6fdf6feb8f93d14409258eda5827849f, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 6fdf6feb8f93d14409258eda5827849f, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &145725623

@@ -11,6 +11,8 @@ public class EnemyBehaviour : MonoBehaviour {
     public float attackCooldown = 0.5f;
     public float attackAnimationTime;
     public float damagedAnimationTime;
+    public float viewDistance = 15;
+    public float hearDistance = 5;
     public NavMeshAgent NavAgent;
     public Animator animator;
     public GameObject player;
@@ -19,6 +21,9 @@ public class EnemyBehaviour : MonoBehaviour {
     private Vector3 playerPosition, initialPosition, destinationPosition;
     private float initSpeed, xMin, xMax, zMin, zMax;
     public bool playerDetected, damaged;
+    private RaycastHit hit1, hit2, hit3;
+    private Ray ray1, ray2, ray3;
+
 
     enum State { SEARCHING, CHASING, ATTAKING, DAMAGED };
     [SerializeField] State state = State.SEARCHING;
@@ -41,10 +46,49 @@ public class EnemyBehaviour : MonoBehaviour {
         playerDetected = damaged = false;
         attackAnimationTime = AnimationLength("Zombie Attack", animator);
         damagedAnimationTime = AnimationLength("Zombie Reaction Hit", animator);
+
     }
 	
 	// Update is called once per frame
 	void Update () {
+
+        ray1 = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.forward);
+        ray2 = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 20)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 20))));
+        ray3 = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 20)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 20))));
+
+        // Raycasting 
+        Debug.DrawRay(ray1.GetPoint(0), ray1.direction * viewDistance, Color.red);
+        Debug.DrawRay(ray2.GetPoint(0), ray2.direction * viewDistance, Color.cyan);
+        Debug.DrawRay(ray3.GetPoint(0), ray3.direction * viewDistance, Color.yellow);
+
+        if (Physics.Raycast(ray1, out hit1, viewDistance)){
+            if (hit1.collider.gameObject.tag == "Player")
+            {
+                playerDetected = true;
+            }
+
+
+        }
+        if (Physics.Raycast(ray2, out hit2, viewDistance))
+        {
+            if (hit2.collider.gameObject.tag == "Player")
+            {
+                playerDetected = true;
+            }
+
+        }
+        if (Physics.Raycast(ray3, out hit3, viewDistance))
+        {
+            if (hit3.collider.gameObject.tag == "Player")
+            {
+                playerDetected = true;
+            }
+
+        }
+
+
+
+
 
         if (damaged)
         {
