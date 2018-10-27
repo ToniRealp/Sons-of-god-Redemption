@@ -12,7 +12,7 @@ public class EnemyBehaviour : MonoBehaviour {
     public float attackAnimationTime;
     public float damagedAnimationTime;
     public float viewDistance = 15;
-    public float hearDistance = 5;
+    public float hearDistance = 8;
     public NavMeshAgent NavAgent;
     public Animator animator;
     public GameObject player;
@@ -21,9 +21,8 @@ public class EnemyBehaviour : MonoBehaviour {
     private Vector3 playerPosition, initialPosition, destinationPosition;
     private float initSpeed, xMin, xMax, zMin, zMax;
     public bool playerDetected, damaged;
-    private RaycastHit hit1, hit2, hit3;
-    private Ray ray1, ray2, ray3;
-
+    private RaycastHit[] hit;
+    private Ray[] ray;
 
     enum State { SEARCHING, CHASING, ATTAKING, DAMAGED };
     [SerializeField] State state = State.SEARCHING;
@@ -46,48 +45,85 @@ public class EnemyBehaviour : MonoBehaviour {
         playerDetected = damaged = false;
         attackAnimationTime = AnimationLength("Zombie Attack", animator);
         damagedAnimationTime = AnimationLength("Zombie Reaction Hit", animator);
-
+        hit = new RaycastHit[33];
+        ray = new Ray[33];
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        ray1 = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.forward);
-        ray2 = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 20)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 20))));
-        ray3 = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 20)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 20))));
-
-        // Raycasting 
-        Debug.DrawRay(ray1.GetPoint(0), ray1.direction * viewDistance, Color.red);
-        Debug.DrawRay(ray2.GetPoint(0), ray2.direction * viewDistance, Color.cyan);
-        Debug.DrawRay(ray3.GetPoint(0), ray3.direction * viewDistance, Color.yellow);
-
-        if (Physics.Raycast(ray1, out hit1, viewDistance)){
-            if (hit1.collider.gameObject.tag == "Player")
-            {
-                playerDetected = true;
-            }
-
-
-        }
-        if (Physics.Raycast(ray2, out hit2, viewDistance))
+        ray[0] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.forward);
+        for (int i = 1; i < 17; i++)
         {
-            if (hit2.collider.gameObject.tag == "Player")
-            {
-                playerDetected = true;
-            }
-
+            ray[i] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 10*i)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 10*i))));
+            ray[i+16] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 10*i)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 10*i))));
         }
-        if (Physics.Raycast(ray3, out hit3, viewDistance))
+
+        //// Vision Rays
+        //ray[0] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.forward);
+        //ray[1] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 10)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 10))));
+        //ray[2] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 10)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 10))));
+        //ray[3] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 20)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 20))));
+        //ray[4] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 20)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 20))));
+
+        //// Hear Rays
+        //ray[5] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 30)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 30))));
+        //ray[6] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 30)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 30))));
+        //ray[7] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 40)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 40))));
+        //ray[8] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 40)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 40))));
+        //ray[9] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 50)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 50))));
+        //ray[10] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 50)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 50))));
+        //ray[11] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 60)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 60))));
+        //ray[12] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 60)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 60))));
+        //ray[5] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 30)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 70))));
+        //ray[6] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 30)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 70))));
+        //ray[7] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 40)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 80))));
+        //ray[8] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 40)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 80))));
+        //ray[9] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 50)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 90))));
+        //ray[10] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 50)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 90))));
+        //ray[11] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 60)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 100))));
+        //ray[12] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 60)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 100))));
+
+
+        // Debug Raycasting 
+        for (int i = 0; i < 5; i++)
         {
-            if (hit3.collider.gameObject.tag == "Player")
-            {
-                playerDetected = true;
-            }
-
+            Debug.DrawRay(ray[i].GetPoint(0), ray[i].direction * viewDistance, Color.red);
+        }
+        for (int i = 5; i < 33; i++)
+        {
+            Debug.DrawRay(ray[i].GetPoint(0), ray[i].direction * hearDistance, Color.cyan);
         }
 
 
+        playerDetected = false;
 
+        for (int i = 0; i < 5; i++)
+        {
+            if (Physics.Raycast(ray[i], out hit[i], viewDistance))
+            {
+                if (hit[i].collider.gameObject.tag == "Player")
+                {
+                    playerDetected = true;
+                    playerPosition = hit[i].collider.gameObject.transform.position;
+                }
+
+
+            }
+        }
+        for (int i = 5; i < 33; i++)
+        {
+            if (Physics.Raycast(ray[i], out hit[i], hearDistance))
+            {
+                if (hit[i].collider.gameObject.tag == "Player")
+                {
+                    playerDetected = true;
+                    playerPosition = hit[i].collider.gameObject.transform.position;
+                }
+
+
+            }
+        }
 
 
         if (damaged)
