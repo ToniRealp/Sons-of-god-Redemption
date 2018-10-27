@@ -185,6 +185,11 @@ Prefab:
       propertyPath: hearDistance
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 114576318815342824, guid: 6fdf6feb8f93d14409258eda5827849f,
+        type: 2}
+      propertyPath: attackCooldown
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 135392397894833868, guid: 6fdf6feb8f93d14409258eda5827849f, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 6fdf6feb8f93d14409258eda5827849f, type: 2}

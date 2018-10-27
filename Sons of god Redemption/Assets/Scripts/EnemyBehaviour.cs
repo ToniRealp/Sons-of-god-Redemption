@@ -9,18 +9,17 @@ public class EnemyBehaviour : MonoBehaviour {
     public float changePosTime = 5;
     public float attackDistance = 2;
     public float attackCooldown = 0.5f;
-    public float attackAnimationTime;
-    public float damagedAnimationTime;
     public float viewDistance = 15;
     public float hearDistance = 8;
     public NavMeshAgent NavAgent;
     public Animator animator;
     public GameObject player;
 
-    private float actualPosTime, actualAttackAnimationTime, actualDamagedAnimationTime;
+    public float attackAnimationTime, damagedAnimationTime, actualPosTime, actualAttackAnimationTime, actualDamagedAnimationTime, actualAttackCooldown;
     private Vector3 playerPosition, initialPosition, destinationPosition;
     private float initSpeed, xMin, xMax, zMin, zMax;
-    public bool playerDetected, damaged;
+    public bool playerDetected, damaged, attackOnCooldown;
+    private Quaternion quaternion;
     private RaycastHit[] hit;
     private Ray[] ray;
 
@@ -37,67 +36,55 @@ public class EnemyBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        // Set initial position and movement range area
         initialPosition = this.GetComponent<Transform>().position;
         SetMovementRange(initialPosition.x, initialPosition.z);
-        initSpeed = NavAgent.speed;
+        
+        // Set random initial destination
         destinationPosition = new Vector3(Random.Range(xMin, xMax), 5 , Random.Range(zMin, zMax));
+
+        // Valors initialization
         actualPosTime = changePosTime;
+        initSpeed = NavAgent.speed;
+        actualAttackCooldown = attackCooldown;
         playerDetected = damaged = false;
-        attackAnimationTime = AnimationLength("Zombie Attack", animator);
-        damagedAnimationTime = AnimationLength("Zombie Reaction Hit", animator);
-        hit = new RaycastHit[33];
-        ray = new Ray[33];
+
+        // Animation time initialization
+        actualAttackAnimationTime = attackAnimationTime = AnimationLength("Zombie Attack", animator);
+        actualDamagedAnimationTime = damagedAnimationTime = AnimationLength("Zombie Reaction Hit", animator);
+
+        // Raycasts arrays intantiation
+        hit = new RaycastHit[37];
+        ray = new Ray[37];
+
     }
 	
 	// Update is called once per frame
 	void Update () {
 
+        // Raycast direction update
         ray[0] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.forward);
-        for (int i = 1; i < 17; i++)
+        for (int i = 1; i < 19; i++)
         {
             ray[i] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 10*i)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 10*i))));
-            ray[i+16] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 10*i)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 10*i))));
+            ray[i+18] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 10*i)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 10*i))));
         }
 
-        //// Vision Rays
-        //ray[0] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.forward);
-        //ray[1] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 10)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 10))));
-        //ray[2] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 10)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 10))));
-        //ray[3] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 20)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 20))));
-        //ray[4] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 20)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 20))));
-
-        //// Hear Rays
-        //ray[5] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 30)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 30))));
-        //ray[6] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 30)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 30))));
-        //ray[7] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 40)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 40))));
-        //ray[8] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 40)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 40))));
-        //ray[9] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 50)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 50))));
-        //ray[10] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 50)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 50))));
-        //ray[11] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 60)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 60))));
-        //ray[12] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 60)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 60))));
-        //ray[5] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 30)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 70))));
-        //ray[6] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 30)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 70))));
-        //ray[7] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 40)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 80))));
-        //ray[8] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 40)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 80))));
-        //ray[9] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 50)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 90))));
-        //ray[10] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 50)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 90))));
-        //ray[11] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 60)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 100))));
-        //ray[12] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 60)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 100))));
-
-
         // Debug Raycasting 
+            // View Raycasts
         for (int i = 0; i < 5; i++)
         {
             Debug.DrawRay(ray[i].GetPoint(0), ray[i].direction * viewDistance, Color.red);
         }
-        for (int i = 5; i < 33; i++)
+            // Hear Raycasts
+        for (int i = 5; i < 37; i++)
         {
             Debug.DrawRay(ray[i].GetPoint(0), ray[i].direction * hearDistance, Color.cyan);
         }
 
-
+        // Raycasting Logic
         playerDetected = false;
-
+            // View Raycasts
         for (int i = 0; i < 5; i++)
         {
             if (Physics.Raycast(ray[i], out hit[i], viewDistance))
@@ -111,7 +98,8 @@ public class EnemyBehaviour : MonoBehaviour {
 
             }
         }
-        for (int i = 5; i < 33; i++)
+            // Hear Raycasts
+        for (int i = 5; i < 37; i++)
         {
             if (Physics.Raycast(ray[i], out hit[i], hearDistance))
             {
@@ -125,10 +113,20 @@ public class EnemyBehaviour : MonoBehaviour {
             }
         }
 
-
+        // Getting damage has to change status
         if (damaged)
         {
             state = State.DAMAGED;
+        }
+
+        // Attack On Cooldown management
+        if (attackOnCooldown)
+        {
+            if((actualAttackCooldown -= Time.deltaTime) <= 0)
+            {
+                actualAttackCooldown = attackCooldown;
+                attackOnCooldown = false;
+            }
         }
 
 
@@ -144,13 +142,19 @@ public class EnemyBehaviour : MonoBehaviour {
             animator.SetBool("IsIdle", true);
         }
 
-        // PlayerPosition
+        // PlayerPosition update
         playerPosition = player.GetComponent<Transform>().position;
 
+
+        // State Machine
         switch (state)
         {
             case State.SEARCHING:
+                // Full speed
+                NavAgent.speed = initSpeed;
+                // Go to random destination
                 NavAgent.SetDestination(destinationPosition);
+
                 if (!playerDetected) { 
 
                     // Reset destiny location
@@ -165,55 +169,82 @@ public class EnemyBehaviour : MonoBehaviour {
                 {
                     state = State.CHASING;
                 }
-
                 break;
+
             case State.CHASING:
+                // Full speed
+                NavAgent.speed = initSpeed;
+                // Go to player Position
                 destinationPosition = playerPosition;
                 NavAgent.SetDestination(playerPosition);
+                // Look to player
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(playerPosition.x - transform.position.x, playerPosition.y - transform.position.y, playerPosition.z - transform.position.z)), 0.1f);
+
                 if (playerDetected)
                 {
-                    if (Vector3.Distance(gameObject.transform.position,player.transform.position) <= attackDistance)
+                    // If in attack conditions, go to attack
+                    if (Vector3.Distance(gameObject.transform.position,player.transform.position) <= attackDistance && !attackOnCooldown)
                     {
-                        NavAgent.speed = 0;
                         state = State.ATTAKING;
-                        animator.SetTrigger("Attack");
+                        animator.SetBool("Attack",true);
                     }
                 }
                 else
                 {
                     state = State.SEARCHING;
                 }
-
                 break;
+
             case State.ATTAKING:
+                // No movement or rotation
+                NavAgent.speed = 0;
+                // Save player last known position
                 destinationPosition = playerPosition;
                 NavAgent.SetDestination(playerPosition);
-                if (playerDetected)
+
+                // When attack time finishes
+                actualAttackAnimationTime -= Time.deltaTime;
+                if (actualAttackAnimationTime - attackAnimationTime/2 <= 0)
+                    animator.SetBool("Attack", false);
+                if (actualAttackAnimationTime <= 0)
                 {
-                    actualAttackAnimationTime -= Time.deltaTime;
-                    if (actualAttackAnimationTime<=0) 
-                        NavAgent.speed = 0.1f;
-                    if (actualAttackAnimationTime+attackCooldown<=0) {
-                        actualAttackAnimationTime = attackAnimationTime;
-                        NavAgent.speed = initSpeed;
+                    //Put it on cooldown and change status
+                    attackOnCooldown = true;
+                    actualAttackAnimationTime = attackAnimationTime;
+                
+                    if (playerDetected)
+                    {
                         state = State.CHASING;
                     }
-                }
-                else
-                {
-                    NavAgent.speed = initSpeed;
-                    state = State.SEARCHING;
+                    else
+                    {
+                        state = State.SEARCHING;
+                    }
                 }
                 break;
+
             case State.DAMAGED:
+                // Cancel attack animation if getting hit
+                animator.SetBool("Attack", false);
+                // No movement
+                NavAgent.speed = 0;
+                // But rotation
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(playerPosition.x - transform.position.x, playerPosition.y - transform.position.y, playerPosition.z - transform.position.z)), 0.1f);
+                
+                // When damage animation finishes change state
                 actualDamagedAnimationTime -= Time.deltaTime;
-                NavAgent.speed = 0.1f;
                 if (actualDamagedAnimationTime<=0)
                 {
                     actualDamagedAnimationTime = damagedAnimationTime;
                     damaged = false;
-                    NavAgent.speed = initSpeed;
-                    state = State.CHASING;
+                    if (playerDetected)
+                    {
+                        state = State.CHASING;
+                    }
+                    else
+                    {
+                        state = State.SEARCHING;
+                    }
                 }
                 break;
             default:
@@ -224,10 +255,6 @@ public class EnemyBehaviour : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
-        {
-            playerDetected = true;
-        }
         if (other.tag == "Weapon" && !damaged)
         {
             damaged = true;
@@ -238,10 +265,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
-        {
-            playerDetected = false;
-        }
+
         if (other.tag == "Weapon")
         {
             damaged = false;
