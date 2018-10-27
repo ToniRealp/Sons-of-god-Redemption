@@ -10,10 +10,9 @@ public class EnemyBehaviour : MonoBehaviour {
     public float attackDistance = 2;
     public float attackCooldown = 0.5f;
     public float viewDistance = 15;
-    public float hearDistance = 8;
+    public float hearDistance = 10;
     public NavMeshAgent NavAgent;
     public Animator animator;
-    public GameObject player;
 
     public float attackAnimationTime, damagedAnimationTime, actualPosTime, actualAttackAnimationTime, actualDamagedAnimationTime, actualAttackCooldown;
     private Vector3 playerPosition, initialPosition, destinationPosition;
@@ -54,8 +53,8 @@ public class EnemyBehaviour : MonoBehaviour {
         actualDamagedAnimationTime = damagedAnimationTime = AnimationLength("Zombie Reaction Hit", animator);
 
         // Raycasts arrays intantiation
-        hit = new RaycastHit[37];
-        ray = new Ray[37];
+        hit = new RaycastHit[73];
+        ray = new Ray[73];
 
     }
 	
@@ -64,10 +63,10 @@ public class EnemyBehaviour : MonoBehaviour {
 
         // Raycast direction update
         ray[0] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.forward);
-        for (int i = 1; i < 19; i++)
+        for (int i = 1; i < 37; i++)
         {
-            ray[i] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 10*i)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 10*i))));
-            ray[i+18] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 10*i)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 10*i))));
+            ray[i] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 5*i)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 5*i))));
+            ray[i+36] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 5*i)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 5*i))));
         }
 
         // Debug Raycasting 
@@ -76,8 +75,16 @@ public class EnemyBehaviour : MonoBehaviour {
         {
             Debug.DrawRay(ray[i].GetPoint(0), ray[i].direction * viewDistance, Color.red);
         }
-            // Hear Raycasts
+        for (int i = 37 ; i < 41; i++)
+        {
+            Debug.DrawRay(ray[i].GetPoint(0), ray[i].direction * viewDistance, Color.red);
+        }
+        // Hear Raycasts
         for (int i = 5; i < 37; i++)
+        {
+            Debug.DrawRay(ray[i].GetPoint(0), ray[i].direction * hearDistance, Color.cyan);
+        }
+        for (int i = 41; i < 73; i++)
         {
             Debug.DrawRay(ray[i].GetPoint(0), ray[i].direction * hearDistance, Color.cyan);
         }
@@ -89,13 +96,24 @@ public class EnemyBehaviour : MonoBehaviour {
         {
             if (Physics.Raycast(ray[i], out hit[i], viewDistance))
             {
+                Debug.Log(hit[i].collider.gameObject.tag);
                 if (hit[i].collider.gameObject.tag == "Player")
                 {
                     playerDetected = true;
                     playerPosition = hit[i].collider.gameObject.transform.position;
                 }
-
-
+            }
+        }
+        for (int i = 37; i < 41; i++)
+        {
+            if (Physics.Raycast(ray[i], out hit[i], viewDistance))
+            {
+                Debug.Log(hit[i].collider.gameObject.tag);
+                if (hit[i].collider.gameObject.tag == "Player")
+                {
+                    playerDetected = true;
+                    playerPosition = hit[i].collider.gameObject.transform.position;
+                }
             }
         }
             // Hear Raycasts
@@ -103,13 +121,24 @@ public class EnemyBehaviour : MonoBehaviour {
         {
             if (Physics.Raycast(ray[i], out hit[i], hearDistance))
             {
+                Debug.Log(hit[i].collider.gameObject.tag);
                 if (hit[i].collider.gameObject.tag == "Player")
                 {
                     playerDetected = true;
                     playerPosition = hit[i].collider.gameObject.transform.position;
                 }
-
-
+            }
+        }
+        for (int i = 41; i < 73; i++)
+        {
+            if (Physics.Raycast(ray[i], out hit[i], hearDistance))
+            {
+                Debug.Log(hit[i].collider.gameObject.tag);
+                if (hit[i].collider.gameObject.tag == "Player")
+                {
+                    playerDetected = true;
+                    playerPosition = hit[i].collider.gameObject.transform.position;
+                }
             }
         }
 
@@ -142,8 +171,6 @@ public class EnemyBehaviour : MonoBehaviour {
             animator.SetBool("IsIdle", true);
         }
 
-        // PlayerPosition update
-        playerPosition = player.GetComponent<Transform>().position;
 
 
         // State Machine
@@ -183,7 +210,7 @@ public class EnemyBehaviour : MonoBehaviour {
                 if (playerDetected)
                 {
                     // If in attack conditions, go to attack
-                    if (Vector3.Distance(gameObject.transform.position,player.transform.position) <= attackDistance && !attackOnCooldown)
+                    if (Vector3.Distance(gameObject.transform.position,playerPosition) <= attackDistance && !attackOnCooldown)
                     {
                         state = State.ATTAKING;
                         animator.SetBool("Attack",true);

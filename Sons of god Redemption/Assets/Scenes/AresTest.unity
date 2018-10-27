@@ -160,7 +160,7 @@ Prefab:
     - target: {fileID: 136183414480292810, guid: 6fdf6feb8f93d14409258eda5827849f,
         type: 2}
       propertyPath: m_Radius
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 136183414480292810, guid: 6fdf6feb8f93d14409258eda5827849f,
         type: 2}
@@ -183,7 +183,7 @@ Prefab:
     - target: {fileID: 114576318815342824, guid: 6fdf6feb8f93d14409258eda5827849f,
         type: 2}
       propertyPath: hearDistance
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114576318815342824, guid: 6fdf6feb8f93d14409258eda5827849f,
         type: 2}
@@ -192,6 +192,7 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 135392397894833868, guid: 6fdf6feb8f93d14409258eda5827849f, type: 2}
+    - {fileID: 65884861688002540, guid: 6fdf6feb8f93d14409258eda5827849f, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 6fdf6feb8f93d14409258eda5827849f, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &145725623
