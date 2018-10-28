@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour {
 
     enum States { Idle, Walking, Running, Dashing, Attacking, MAX };
     enum Attacks { LightAttack1, LightAttack2, LightAttack3, StrongAttack1, StrongAttack2, StrongAttack3, NotAtt };
-    enum ButtonInputs { Dash, LightAttack, StrongAttack, MAX };
+    enum ButtonInputs { Dash, LightAttack, StrongAttack, Interact, MAX };
 
     InputManager inputManager;
     Animator animator;
@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
     public Vector3 direction;
     public int walkVelocity, runVelocity, dashDistance;    
     public float dashCooldownCounter,dashCooldownTime, dashDuration, actualDashTime, animLength, animDuration, onHitDelay, onHitAnimDelay;
-    public bool dashed, attacked, transition, hit;
+    public bool dashed, attacked, transition, hit, interact;
     const float velChange = 0.5f;
   
     [SerializeField] States states, nextState;
@@ -343,6 +343,7 @@ public class PlayerController : MonoBehaviour {
        inputs[(int)ButtonInputs.Dash] = inputManager.dashButton;
        inputs[(int)ButtonInputs.LightAttack] = inputManager.attackButton;
        inputs[(int)ButtonInputs.StrongAttack] = inputManager.strongAttackButton;
+       interact = inputs[(int)ButtonInputs.Interact] = inputManager.interact;
         
     }
 

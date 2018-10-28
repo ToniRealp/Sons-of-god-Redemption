@@ -11,6 +11,7 @@ public class InputManager : MonoBehaviour {
     public bool dashButton;
     public float padXAxis;
     public float padYAxis;
+    public bool interact;
 
 	void Update () {
         yAxis = Input.GetAxis("Vertical");
@@ -30,6 +31,11 @@ public class InputManager : MonoBehaviour {
             dashButton = true;
         else 
             dashButton = false;
+
+        if (Input.GetButtonDown("Interact"))
+            interact = true;
+        else
+            interact = false;
 
         padXAxis = Input.GetAxis("PadXaxis");
         padYAxis = Input.GetAxis("PadYaxis");

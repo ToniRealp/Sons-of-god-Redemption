@@ -96,7 +96,6 @@ public class EnemyBehaviour : MonoBehaviour {
         {
             if (Physics.Raycast(ray[i], out hit[i], viewDistance))
             {
-                Debug.Log(hit[i].collider.gameObject.tag);
                 if (hit[i].collider.gameObject.tag == "Player")
                 {
                     playerDetected = true;
@@ -108,7 +107,6 @@ public class EnemyBehaviour : MonoBehaviour {
         {
             if (Physics.Raycast(ray[i], out hit[i], viewDistance))
             {
-                Debug.Log(hit[i].collider.gameObject.tag);
                 if (hit[i].collider.gameObject.tag == "Player")
                 {
                     playerDetected = true;
@@ -121,7 +119,6 @@ public class EnemyBehaviour : MonoBehaviour {
         {
             if (Physics.Raycast(ray[i], out hit[i], hearDistance))
             {
-                Debug.Log(hit[i].collider.gameObject.tag);
                 if (hit[i].collider.gameObject.tag == "Player")
                 {
                     playerDetected = true;
@@ -133,7 +130,6 @@ public class EnemyBehaviour : MonoBehaviour {
         {
             if (Physics.Raycast(ray[i], out hit[i], hearDistance))
             {
-                Debug.Log(hit[i].collider.gameObject.tag);
                 if (hit[i].collider.gameObject.tag == "Player")
                 {
                     playerDetected = true;
