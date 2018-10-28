@@ -325,7 +325,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &824681018
 Prefab:
@@ -364,7 +364,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4269031160365580, guid: b14268f5e27b8e9479e88185239c2fc2, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b14268f5e27b8e9479e88185239c2fc2, type: 2}
@@ -406,17 +406,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4816795410276738, guid: 6fdf6feb8f93d14409258eda5827849f, type: 2}
       propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114576318815342824, guid: 6fdf6feb8f93d14409258eda5827849f,
-        type: 2}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1616161810}
-    - target: {fileID: 136183414480292810, guid: 6fdf6feb8f93d14409258eda5827849f,
-        type: 2}
-      propertyPath: m_IsTrigger
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fdf6feb8f93d14409258eda5827849f, type: 2}
