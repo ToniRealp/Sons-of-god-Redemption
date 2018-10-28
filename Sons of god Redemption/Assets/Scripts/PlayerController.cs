@@ -6,9 +6,8 @@ public class PlayerController : MonoBehaviour {
 
     enum States { Idle, Walking, Running, Dashing, Attacking, MAX };
     enum Attacks { LightAttack1, LightAttack2, LightAttack3, StrongAttack1, StrongAttack2, StrongAttack3, NotAtt };
-    enum ButtonInputs { Dash, LightAttack, StrongAttack, padLeft, padRight, MAX };
+    enum ButtonInputs { Dash, LightAttack, StrongAttack, padLeft, padRight, Interact, MAX };
     enum Elements {Holy, Fire, MAX };
-    enum ButtonInputs { Dash, LightAttack, StrongAttack, Interact, MAX };
 
     InputManager inputManager;
     Animator animator;
@@ -22,7 +21,7 @@ public class PlayerController : MonoBehaviour {
     public int walkVelocity, runVelocity, dashDistance;    
     public float dashCooldownCounter,dashCooldownTime, dashDuration, actualDashTime, animLength, animDuration, onHitDelay, onHitAnimDelay;
     private bool dashed, attacked, transition, hit;
-    public bool dashed, attacked, transition, hit, interact;
+    public bool interact;
     const float velChange = 0.5f;
   
     [SerializeField] States states, nextState;
