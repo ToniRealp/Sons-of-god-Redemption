@@ -6,11 +6,13 @@ public class PlayerController : MonoBehaviour {
 
     enum States { Idle, Walking, Running, Dashing, Attacking, MAX };
     enum Attacks { LightAttack1, LightAttack2, LightAttack3, StrongAttack1, StrongAttack2, StrongAttack3, NotAtt };
-    enum ButtonInputs { Dash, LightAttack, StrongAttack, MAX };
+    enum ButtonInputs { Dash, LightAttack, StrongAttack, padLeft, padRight, MAX };
+    enum Elements {Holy, Fire, MAX };
 
     InputManager inputManager;
     Animator animator;
-    GameObject weapon;
+    [SerializeField] GameObject weapon;
+    [SerializeField] GameObject[] elements = new GameObject[(int)Elements.MAX];
 
     bool[] inputs = new bool[(int)ButtonInputs.MAX];
     private float xAxis, yAxis;
@@ -18,7 +20,7 @@ public class PlayerController : MonoBehaviour {
     public Vector3 direction;
     public int walkVelocity, runVelocity, dashDistance;    
     public float dashCooldownCounter,dashCooldownTime, dashDuration, actualDashTime, animLength, animDuration, onHitDelay, onHitAnimDelay;
-    public bool dashed, attacked, transition, hit;
+    private bool dashed, attacked, transition, hit;
     const float velChange = 0.5f;
   
     [SerializeField] States states, nextState;
@@ -35,6 +37,12 @@ public class PlayerController : MonoBehaviour {
         actualDashTime = dashDuration;
         weapon = GameObject.Find("Sword");
         onHitDelay = onHitAnimDelay;
+        elements[(int)Elements.Fire] = GameObject.Find("Fire particles");
+        elements[(int)Elements.Holy] = GameObject.Find("Light particles");
+        elements[(int)Elements.Fire].SetActive(false);
+        elements[(int)Elements.Holy].SetActive(false);
+
+
     }
 	
 	// Update is called once per frame
@@ -42,6 +50,19 @@ public class PlayerController : MonoBehaviour {
 
 
         GetInput();
+
+        if (inputs[(int)ButtonInputs.padRight])
+        {
+            elements[(int)Elements.Fire].SetActive(true);
+            elements[(int)Elements.Holy].SetActive(false);
+        }
+        if (inputs[(int)ButtonInputs.padLeft])
+        {
+            elements[(int)Elements.Fire].SetActive(false);
+            elements[(int)Elements.Holy].SetActive(true);
+        }
+
+
 
         switch (states) {
 
@@ -343,7 +364,16 @@ public class PlayerController : MonoBehaviour {
        inputs[(int)ButtonInputs.Dash] = inputManager.dashButton;
        inputs[(int)ButtonInputs.LightAttack] = inputManager.attackButton;
        inputs[(int)ButtonInputs.StrongAttack] = inputManager.strongAttackButton;
-        
+       if(inputManager.padXAxis==1)
+            inputs[(int)ButtonInputs.padRight] = true;
+       else
+            inputs[(int)ButtonInputs.padRight] = false;
+
+        if (inputManager.padXAxis == -1)
+            inputs[(int)ButtonInputs.padLeft] = true;
+        else
+            inputs[(int)ButtonInputs.padLeft] = false;
+
     }
 
     void Rotation()
