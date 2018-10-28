@@ -42,7 +42,7 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: h
+    positiveButton: j
     altNegativeButton: 
     altPositiveButton: mouse 0
     gravity: 1000
@@ -58,7 +58,7 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: j
+    positiveButton: k
     altNegativeButton: 
     altPositiveButton: mouse 1
     gravity: 1000
@@ -313,10 +313,10 @@ InputManager:
     m_Name: PadXaxis
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: l
-    positiveButton: k
-    altNegativeButton: 
-    altPositiveButton: 
+    negativeButton: u
+    positiveButton: i
+    altNegativeButton: 1
+    altPositiveButton: 2
     gravity: 1000
     dead: 0.001
     sensitivity: 1000

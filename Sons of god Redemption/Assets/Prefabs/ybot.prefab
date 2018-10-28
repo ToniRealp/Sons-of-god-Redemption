@@ -80,7 +80,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4816795410276738}
   - component: {fileID: 95654544391162436}
-  - component: {fileID: 135392397894833868}
   - component: {fileID: 136183414480292810}
   - component: {fileID: 114576318815342824}
   - component: {fileID: 195809773207414210}
@@ -354,7 +353,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4662356481859952}
-  - component: {fileID: 65884861688002540}
   m_Layer: 0
   m_Name: mixamorig:RightForeArm
   m_TagString: Untagged
@@ -1959,8 +1957,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1058969819910248}
-  m_LocalRotation: {x: -0, y: 0.998528, z: -0, w: 0.054239415}
-  m_LocalPosition: {x: -0.000000046403805, y: 0.181, z: 4.87}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.000000059604645, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4606092019769954}
@@ -1968,7 +1966,7 @@ Transform:
   - {fileID: 4114000220285400}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 173.78201, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4822430562892864
 Transform:
   m_ObjectHideFlags: 1
@@ -2081,18 +2079,6 @@ Transform:
   m_Father: {fileID: 4475545049002924}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &65884861688002540
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1417247214820930}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.50242054, y: 0.1564933, z: 0.18433616}
-  m_Center: {x: 0.2615494, y: -0.004768066, z: 0.0010327809}
 --- !u!95 &95654544391162436
 Animator:
   serializedVersion: 3
@@ -2125,7 +2111,7 @@ MonoBehaviour:
   movingRange: 10
   changePosTime: 10
   attackDistance: 1.5
-  attackCooldown: 0.5
+  attackCooldown: 1
   viewDistance: 15
   hearDistance: 10
   NavAgent: {fileID: 195809773207414210}
@@ -2140,18 +2126,6 @@ MonoBehaviour:
   damaged: 0
   attackOnCooldown: 0
   state: 0
---- !u!135 &135392397894833868
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1058969819910248}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 10
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136183414480292810
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -2161,10 +2135,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.6
-  m_Height: 2
+  m_Radius: 0.4
+  m_Height: 1.9
   m_Direction: 1
-  m_Center: {x: 0, y: 0.9, z: 0}
+  m_Center: {x: 0, y: 0.95, z: 0}
 --- !u!137 &137429216607852734
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

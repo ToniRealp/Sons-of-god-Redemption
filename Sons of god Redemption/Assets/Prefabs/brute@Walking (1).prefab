@@ -1699,7 +1699,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1673153195996658}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.67, y: 0.62, z: 0.3}
+  m_LocalPosition: {x: -0.1, y: 0.62, z: -1.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4919941562783208}
@@ -2486,6 +2486,7 @@ MonoBehaviour:
   dashButton: 0
   padXAxis: 0
   padYAxis: 0
+  interact: 0
 --- !u!114 &114516041804101342
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2504,7 +2505,7 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   walkVelocity: 3
   runVelocity: 5
-  dashDistance: 5
+  dashDistance: 3
   dashCooldownCounter: 0
   dashCooldownTime: 0.5
   dashDuration: 0.2
@@ -2513,6 +2514,7 @@ MonoBehaviour:
   animDuration: 0
   onHitDelay: 0
   onHitAnimDelay: 0.1
+  interact: 0
   states: 0
   nextState: 0
   attacks: 6
