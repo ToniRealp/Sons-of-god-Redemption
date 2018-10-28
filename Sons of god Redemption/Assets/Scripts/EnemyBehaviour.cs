@@ -9,16 +9,18 @@ public class EnemyBehaviour : MonoBehaviour {
     public float changePosTime = 5;
     public float attackDistance = 2;
     public float attackCooldown = 0.5f;
-    public float attackAnimationTime;
-    public float damagedAnimationTime;
+    public float viewDistance = 15;
+    public float hearDistance = 10;
     public NavMeshAgent NavAgent;
     public Animator animator;
-    public GameObject player;
 
-    private float actualPosTime, actualAttackAnimationTime, actualDamagedAnimationTime;
+    public float attackAnimationTime, damagedAnimationTime, actualPosTime, actualAttackAnimationTime, actualDamagedAnimationTime, actualAttackCooldown;
     private Vector3 playerPosition, initialPosition, destinationPosition;
     private float initSpeed, xMin, xMax, zMin, zMax;
-    public bool playerDetected, damaged;
+    public bool playerDetected, damaged, attackOnCooldown;
+    private Quaternion quaternion;
+    private RaycastHit[] hit;
+    private Ray[] ray;
 
     enum State { SEARCHING, CHASING, ATTAKING, DAMAGED };
     [SerializeField] State state = State.SEARCHING;
@@ -33,22 +35,127 @@ public class EnemyBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        // Set initial position and movement range area
         initialPosition = this.GetComponent<Transform>().position;
         SetMovementRange(initialPosition.x, initialPosition.z);
-        initSpeed = NavAgent.speed;
+        
+        // Set random initial destination
         destinationPosition = new Vector3(Random.Range(xMin, xMax), 5 , Random.Range(zMin, zMax));
+
+        // Valors initialization
         actualPosTime = changePosTime;
+        initSpeed = NavAgent.speed;
+        actualAttackCooldown = attackCooldown;
         playerDetected = damaged = false;
-        attackAnimationTime = AnimationLength("Zombie Attack", animator);
-        damagedAnimationTime = AnimationLength("Zombie Reaction Hit", animator);
+
+        // Animation time initialization
+        actualAttackAnimationTime = attackAnimationTime = AnimationLength("Zombie Attack", animator);
+        actualDamagedAnimationTime = damagedAnimationTime = AnimationLength("Zombie Reaction Hit", animator);
+
+        // Raycasts arrays intantiation
+        hit = new RaycastHit[73];
+        ray = new Ray[73];
+
     }
 	
 	// Update is called once per frame
 	void Update () {
 
+        // Raycast direction update
+        ray[0] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.forward);
+        for (int i = 1; i < 37; i++)
+        {
+            ray[i] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 5*i)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 5*i))));
+            ray[i+36] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 5*i)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 5*i))));
+        }
+
+        // Debug Raycasting 
+            // View Raycasts
+        for (int i = 0; i < 5; i++)
+        {
+            Debug.DrawRay(ray[i].GetPoint(0), ray[i].direction * viewDistance, Color.red);
+        }
+        for (int i = 37 ; i < 41; i++)
+        {
+            Debug.DrawRay(ray[i].GetPoint(0), ray[i].direction * viewDistance, Color.red);
+        }
+        // Hear Raycasts
+        for (int i = 5; i < 37; i++)
+        {
+            Debug.DrawRay(ray[i].GetPoint(0), ray[i].direction * hearDistance, Color.cyan);
+        }
+        for (int i = 41; i < 73; i++)
+        {
+            Debug.DrawRay(ray[i].GetPoint(0), ray[i].direction * hearDistance, Color.cyan);
+        }
+
+        // Raycasting Logic
+        playerDetected = false;
+            // View Raycasts
+        for (int i = 0; i < 5; i++)
+        {
+            if (Physics.Raycast(ray[i], out hit[i], viewDistance))
+            {
+                Debug.Log(hit[i].collider.gameObject.tag);
+                if (hit[i].collider.gameObject.tag == "Player")
+                {
+                    playerDetected = true;
+                    playerPosition = hit[i].collider.gameObject.transform.position;
+                }
+            }
+        }
+        for (int i = 37; i < 41; i++)
+        {
+            if (Physics.Raycast(ray[i], out hit[i], viewDistance))
+            {
+                Debug.Log(hit[i].collider.gameObject.tag);
+                if (hit[i].collider.gameObject.tag == "Player")
+                {
+                    playerDetected = true;
+                    playerPosition = hit[i].collider.gameObject.transform.position;
+                }
+            }
+        }
+            // Hear Raycasts
+        for (int i = 5; i < 37; i++)
+        {
+            if (Physics.Raycast(ray[i], out hit[i], hearDistance))
+            {
+                Debug.Log(hit[i].collider.gameObject.tag);
+                if (hit[i].collider.gameObject.tag == "Player")
+                {
+                    playerDetected = true;
+                    playerPosition = hit[i].collider.gameObject.transform.position;
+                }
+            }
+        }
+        for (int i = 41; i < 73; i++)
+        {
+            if (Physics.Raycast(ray[i], out hit[i], hearDistance))
+            {
+                Debug.Log(hit[i].collider.gameObject.tag);
+                if (hit[i].collider.gameObject.tag == "Player")
+                {
+                    playerDetected = true;
+                    playerPosition = hit[i].collider.gameObject.transform.position;
+                }
+            }
+        }
+
+        // Getting damage has to change status
         if (damaged)
         {
             state = State.DAMAGED;
+        }
+
+        // Attack On Cooldown management
+        if (attackOnCooldown)
+        {
+            if((actualAttackCooldown -= Time.deltaTime) <= 0)
+            {
+                actualAttackCooldown = attackCooldown;
+                attackOnCooldown = false;
+            }
         }
 
 
@@ -64,13 +171,17 @@ public class EnemyBehaviour : MonoBehaviour {
             animator.SetBool("IsIdle", true);
         }
 
-        // PlayerPosition
-        playerPosition = player.GetComponent<Transform>().position;
 
+
+        // State Machine
         switch (state)
         {
             case State.SEARCHING:
+                // Full speed
+                NavAgent.speed = initSpeed;
+                // Go to random destination
                 NavAgent.SetDestination(destinationPosition);
+
                 if (!playerDetected) { 
 
                     // Reset destiny location
@@ -85,55 +196,82 @@ public class EnemyBehaviour : MonoBehaviour {
                 {
                     state = State.CHASING;
                 }
-
                 break;
+
             case State.CHASING:
+                // Full speed
+                NavAgent.speed = initSpeed;
+                // Go to player Position
                 destinationPosition = playerPosition;
                 NavAgent.SetDestination(playerPosition);
+                // Look to player
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(playerPosition.x - transform.position.x, playerPosition.y - transform.position.y, playerPosition.z - transform.position.z)), 0.1f);
+
                 if (playerDetected)
                 {
-                    if (Vector3.Distance(gameObject.transform.position,player.transform.position) <= attackDistance)
+                    // If in attack conditions, go to attack
+                    if (Vector3.Distance(gameObject.transform.position,playerPosition) <= attackDistance && !attackOnCooldown)
                     {
-                        NavAgent.speed = 0;
                         state = State.ATTAKING;
-                        animator.SetTrigger("Attack");
+                        animator.SetBool("Attack",true);
                     }
                 }
                 else
                 {
                     state = State.SEARCHING;
                 }
-
                 break;
+
             case State.ATTAKING:
+                // No movement or rotation
+                NavAgent.speed = 0;
+                // Save player last known position
                 destinationPosition = playerPosition;
                 NavAgent.SetDestination(playerPosition);
-                if (playerDetected)
+
+                // When attack time finishes
+                actualAttackAnimationTime -= Time.deltaTime;
+                if (actualAttackAnimationTime - attackAnimationTime/2 <= 0)
+                    animator.SetBool("Attack", false);
+                if (actualAttackAnimationTime <= 0)
                 {
-                    actualAttackAnimationTime -= Time.deltaTime;
-                    if (actualAttackAnimationTime<=0) 
-                        NavAgent.speed = 0.1f;
-                    if (actualAttackAnimationTime+attackCooldown<=0) {
-                        actualAttackAnimationTime = attackAnimationTime;
-                        NavAgent.speed = initSpeed;
+                    //Put it on cooldown and change status
+                    attackOnCooldown = true;
+                    actualAttackAnimationTime = attackAnimationTime;
+                
+                    if (playerDetected)
+                    {
                         state = State.CHASING;
                     }
-                }
-                else
-                {
-                    NavAgent.speed = initSpeed;
-                    state = State.SEARCHING;
+                    else
+                    {
+                        state = State.SEARCHING;
+                    }
                 }
                 break;
+
             case State.DAMAGED:
+                // Cancel attack animation if getting hit
+                animator.SetBool("Attack", false);
+                // No movement
+                NavAgent.speed = 0;
+                // But rotation
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(playerPosition.x - transform.position.x, playerPosition.y - transform.position.y, playerPosition.z - transform.position.z)), 0.1f);
+                
+                // When damage animation finishes change state
                 actualDamagedAnimationTime -= Time.deltaTime;
-                NavAgent.speed = 0.1f;
                 if (actualDamagedAnimationTime<=0)
                 {
                     actualDamagedAnimationTime = damagedAnimationTime;
                     damaged = false;
-                    NavAgent.speed = initSpeed;
-                    state = State.CHASING;
+                    if (playerDetected)
+                    {
+                        state = State.CHASING;
+                    }
+                    else
+                    {
+                        state = State.SEARCHING;
+                    }
                 }
                 break;
             default:
@@ -144,10 +282,6 @@ public class EnemyBehaviour : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
-        {
-            playerDetected = true;
-        }
         if (other.tag == "Weapon" && !damaged)
         {
             damaged = true;
@@ -158,10 +292,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
-        {
-            playerDetected = false;
-        }
+
         if (other.tag == "Weapon")
         {
             damaged = false;
