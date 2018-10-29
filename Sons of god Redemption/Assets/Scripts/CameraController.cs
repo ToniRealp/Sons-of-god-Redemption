@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
-   public GameObject cameraTrigger,cam1,cam2;
+   public GameObject cam1,cam2;
 
     // Update is called once per frame
     private void OnTriggerEnter(Collider other)
@@ -14,7 +14,6 @@ public class CameraController : MonoBehaviour {
             cam1.SetActive(false);
             cam2.SetActive(true); 
         }
-
     }
     private void OnTriggerExit(Collider other)
     {

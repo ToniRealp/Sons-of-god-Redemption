@@ -348,14 +348,6 @@ public class PlayerController : MonoBehaviour {
                 hit = false;
             }
         }
-        //    if (attacked && animLength<animDuration-0.2)
-        //    {
-        //        weapon.tag = "Weapon";
-        //    }
-        //    else
-        //    {
-        //        weapon.tag = "Untagged";
-        //    }
     }
 
     void GetInput()
