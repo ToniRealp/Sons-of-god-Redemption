@@ -292,21 +292,11 @@ public class EnemyBehaviour : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Weapon" && !damaged)
-        {
-            damaged = true;
-            Debug.Log("hit");
-            animator.SetTrigger("Damaged");
-            health -=(int) other.GetComponentInParent<PlayerController>().damage;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-
         if (other.tag == "Weapon")
         {
-            damaged = false;
+            damaged = true;
+            animator.SetTrigger("Damaged");
+            health -=(int) other.GetComponentInParent<PlayerController>().damage;
         }
     }
 
