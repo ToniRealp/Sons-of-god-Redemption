@@ -4,31 +4,48 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+    //Player stats
+    public Stats stats;
+    public int health, movementSpeed, baseAttack, attackSpeed;
+
+    //Enums
     enum States { Idle, Walking, Running, Dashing, Attacking, MAX };
     enum Attacks { LightAttack1, LightAttack2, LightAttack3, StrongAttack1, StrongAttack2, StrongAttack3, NotAtt };
     enum ButtonInputs { Dash, LightAttack, StrongAttack, padLeft, padRight, Interact, MAX };
     enum Elements {Holy, Fire, MAX };
 
+    //External attributes
     InputManager inputManager;
     Animator animator;
     [SerializeField] GameObject weapon;
     [SerializeField] GameObject[] elements = new GameObject[(int)Elements.MAX];
 
+    //Inputs
     bool[] inputs = new bool[(int)ButtonInputs.MAX];
     private float xAxis, yAxis;
 
+    //General atributes
     public Vector3 direction;
     public int walkVelocity, runVelocity, dashDistance;    
-    public float dashCooldownCounter,dashCooldownTime, dashDuration, actualDashTime, animLength, animDuration, onHitDelay, onHitAnimDelay;
+    public float dashCooldownTime, dashDuration, onHitAnimDelay, damage;
+    private float dashCooldownCounter, actualDashTime, animLength, animDuration, onHitDelay;
     private bool dashed, attacked, transition, hit;
     public bool interact;
     const float velChange = 0.5f;
-  
+    
+    //State machine
     [SerializeField] States states, nextState;
     [SerializeField] Attacks attacks;
 
-    // Use this for initialization
     void Start () {
+
+        //initialize player stats
+        health = stats.health;
+        movementSpeed = stats.movementSpeed;
+        baseAttack = stats.baseAttack;
+        attackSpeed = stats.attackSpeed;
+
+        //initialize player atributes(not stats)
         inputManager = GetComponent<InputManager>();
         animator = GetComponent<Animator>();
         states = States.Idle;
@@ -36,22 +53,20 @@ public class PlayerController : MonoBehaviour {
         dashed = attacked = transition = hit = false;
         dashCooldownCounter = dashCooldownTime;
         actualDashTime = dashDuration;
-        weapon = GameObject.Find("Sword");
         onHitDelay = onHitAnimDelay;
+        weapon = GameObject.Find("Sword");
         elements[(int)Elements.Fire] = GameObject.Find("Fire particles");
         elements[(int)Elements.Holy] = GameObject.Find("Light particles");
         elements[(int)Elements.Fire].SetActive(false);
         elements[(int)Elements.Holy].SetActive(false);
 
-
     }
 	
-	// Update is called once per frame
 	void Update () {
-
 
         GetInput();
 
+        //Element controller
         if (inputs[(int)ButtonInputs.padRight])
         {
             elements[(int)Elements.Fire].SetActive(true);
@@ -63,14 +78,15 @@ public class PlayerController : MonoBehaviour {
             elements[(int)Elements.Holy].SetActive(true);
         }
 
-
-
+        //Player state machine
         switch (states) {
 
             case(States.Idle):
 
                 //play idle animation
                 //check if we got input
+                //if attack input switch to attack state
+                //if dash input switch to dash state
                 if (yAxis != 0 || xAxis != 0)
                 {
                     states = States.Walking;
@@ -94,6 +110,8 @@ public class PlayerController : MonoBehaviour {
                 //Play walking animation
                 //If input > 0.7 switch states to running
                 //If input==0 return to idle
+                //if attack input switch to attack state
+                //if dash input switch to dash state
                 Rotation();           
                 transform.Translate (transform.forward * walkVelocity*Time.deltaTime,Space.World);
 
@@ -116,7 +134,6 @@ public class PlayerController : MonoBehaviour {
                 {
                     states = States.Running;
                     animator.SetBool("isRunning", true);
-                    //animator.SetBool("isWalking", false);
                 }
                 else if (yAxis == 0 && xAxis == 0)
                 {
@@ -132,6 +149,8 @@ public class PlayerController : MonoBehaviour {
                 //Play runnig animation
                 //If input <0.7 switch state to walking
                 //If input==0 return to idle
+                //if attack input switch to attack state
+                //if dash input switch to dash state
                 Rotation();                       
                 transform.Translate(transform.forward * runVelocity * Time.deltaTime, Space.World);
 
@@ -181,6 +200,7 @@ public class PlayerController : MonoBehaviour {
                 switch (attacks) {
 
                     case (Attacks.LightAttack1):
+                        damage = baseAttack;
                         
                         if (!attacked)
                         {
@@ -209,8 +229,6 @@ public class PlayerController : MonoBehaviour {
                             weapon.tag = "Untagged";
                         else if (animLength < animDuration * 0.8)
                             weapon.tag = "Weapon";
-                                              
-                        animLength -= Time.deltaTime;
 
                         break;
 
@@ -241,7 +259,6 @@ public class PlayerController : MonoBehaviour {
                         }
                         if (animLength < animDuration * 0.45)
                             weapon.tag = "Untagged";
-                        animLength -= Time.deltaTime;
 
                         break;
                     case (Attacks.LightAttack3):
@@ -262,11 +279,10 @@ public class PlayerController : MonoBehaviour {
                         if (animLength < animDuration * 0.4)
                             weapon.tag = "Untagged";
 
-                        animLength -= Time.deltaTime;
 
                         break;
                     case (Attacks.StrongAttack1):
-
+                        damage = baseAttack + (baseAttack * 0.5f);
                         if (!attacked)
                         {
                             animator.SetTrigger("strongAttack1");
@@ -294,8 +310,6 @@ public class PlayerController : MonoBehaviour {
                             weapon.tag = "Untagged";
                         else if (animLength < animDuration * 0.8)
                             weapon.tag = "Weapon";
-                      
-                        animLength -= Time.deltaTime;
 
                         break;
 
@@ -318,8 +332,6 @@ public class PlayerController : MonoBehaviour {
                         if (animLength < animDuration * 0.3)
                             weapon.tag = "Untagged";
 
-                        animLength -= Time.deltaTime;
-
                         break;
 
                     default:
@@ -327,7 +339,7 @@ public class PlayerController : MonoBehaviour {
                         break;
 
                 }
-
+                animLength -= Time.deltaTime;
                 nextState = CheckState();
                 break;
 
@@ -443,5 +455,4 @@ public class PlayerController : MonoBehaviour {
             }        
         }
     }
-
 }

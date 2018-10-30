@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class EnemyBehaviour : MonoBehaviour {
 
+    public Stats stats;
+    public int health, movementSpeed, baseAttack, attackSpeed;
+
     public float movingRange = 5;
     public float changePosTime = 5;
     public float attackDistance = 2;
@@ -35,6 +38,13 @@ public class EnemyBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+        //initialize enemy stats
+        health = stats.health;
+        movementSpeed = stats.movementSpeed;
+        baseAttack = stats.baseAttack;
+        attackSpeed = stats.attackSpeed;
+
         // Set initial position and movement range area
         initialPosition = this.GetComponent<Transform>().position;
         SetMovementRange(initialPosition.x, initialPosition.z);
@@ -60,6 +70,9 @@ public class EnemyBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if(health<=0)
+            Destroy(this.gameObject);
 
         // Raycast direction update
         ray[0] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.forward);
@@ -275,6 +288,7 @@ public class EnemyBehaviour : MonoBehaviour {
         }
     }
 
+  
 
     private void OnTriggerEnter(Collider other)
     {
@@ -283,6 +297,7 @@ public class EnemyBehaviour : MonoBehaviour {
             damaged = true;
             Debug.Log("hit");
             animator.SetTrigger("Damaged");
+            health -=(int) other.GetComponentInParent<PlayerController>().damage;
         }
     }
 
