@@ -207,17 +207,20 @@ public class PlayerController : MonoBehaviour {
                             animator.SetTrigger("lightAttack1");
                             animLength = animDuration = AnimationLength("light attack", animator);
                             attacked = true;
-                            weapon.tag = "Weapon";
                         }
                         if (inputs[(int)ButtonInputs.LightAttack])
                         {
                             transition = true;
                         }
+                        if (animLength < animDuration * 0.8)
+                        {
+                            weapon.tag = "Weapon";
+                            //weapon.tag = "LightAttack1";
+                        }
                         if (transition && animLength < animDuration * 0.3)
                         {
                             attacks = Attacks.LightAttack2;
-                            attacked = false;
-                            transition = false;
+                            attacked = transition = false;
                         }
                         else if (animLength <= 0)
                         {
@@ -226,7 +229,8 @@ public class PlayerController : MonoBehaviour {
                             attacked = false;
                             weapon.tag = "Untagged";
                         }
-                     
+                       
+                                                                    
                             
 
                         break;
@@ -239,6 +243,7 @@ public class PlayerController : MonoBehaviour {
                             animLength = animDuration = AnimationLength("light attack 2", animator);
                             attacked = true;
                             weapon.tag = "Weapon";
+                            //weapon.tag = "LightAttack2";
                         }
                         if (inputs[(int)ButtonInputs.LightAttack])
                         {
@@ -247,8 +252,7 @@ public class PlayerController : MonoBehaviour {
                         if (transition && animLength < animDuration*0.45)
                         {
                             attacks = Attacks.LightAttack3;
-                            attacked = false;
-                            transition = false;
+                            attacked = transition = false;
                         }
                         else if (animLength <= 0)
                         {
@@ -256,7 +260,7 @@ public class PlayerController : MonoBehaviour {
                             states = nextState;
                             attacked = false;
                             weapon.tag = "Untagged";
-                        }     
+                        }                                            
 
                         break;
                     case (Attacks.LightAttack3):
@@ -267,6 +271,7 @@ public class PlayerController : MonoBehaviour {
                             animLength = AnimationLength("light attack 3", animator);
                             attacked = true;
                             weapon.tag = "Weapon";
+                            //weapon.tag = "LightAttack3";
                         }
                         if (animLength <= 0)
                         {
@@ -277,14 +282,14 @@ public class PlayerController : MonoBehaviour {
                         }
 
                         break;
+
                     case (Attacks.StrongAttack1):
                         damage = baseAttack + (baseAttack * 0.5f);
                         if (!attacked)
                         {
                             animator.SetTrigger("strongAttack1");
                             animLength = animDuration = AnimationLength("strong attack", animator);
-                            attacked = true;
-                            weapon.tag = "Weapon";
+                            attacked = true;                           
                         }
                         if (inputs[(int)ButtonInputs.StrongAttack])
                         {
@@ -293,8 +298,7 @@ public class PlayerController : MonoBehaviour {
                         if (transition && animLength < animDuration*0.2)
                         {
                             attacks = Attacks.StrongAttack2;
-                            attacked = false;
-                            transition = false;
+                            attacked = transition = false;
                         }
                         else if (animLength <= 0)
                         {                       
@@ -303,6 +307,12 @@ public class PlayerController : MonoBehaviour {
                             attacked = false;
                             weapon.tag = "Untagged";
                         }
+                        if (animLength < animDuration * 0.8)
+                        {
+                            //weapon.tag = "StrongAttack1";
+                            weapon.tag = "Weapon";
+                        }
+                            
 
                         break;
 
@@ -314,6 +324,7 @@ public class PlayerController : MonoBehaviour {
                             animLength = AnimationLength("strong attack 2", animator);
                             attacked = true;
                             weapon.tag = "Weapon";
+                            //weapon.tag = "StrongAttack2";
                         }
                         if (animLength <= 0)
                         {
@@ -443,8 +454,8 @@ public class PlayerController : MonoBehaviour {
             {
                 animator.speed = 0f;
                 hit = true;
-                weapon.tag = "Untagged";
-            }        
+                //weapon.tag = "untagged";
+            }
         }
     }
 }

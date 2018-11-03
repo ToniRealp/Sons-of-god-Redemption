@@ -65,7 +65,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
         // Animation time initialization
         actualAttackAnimationTime = attackAnimationTime = AnimationLength("Zombie Attack", animator);
-        actualDamagedAnimationTime = damagedAnimationTime = AnimationLength("Zombie Reaction Hit", animator);
+        actualDamagedAnimationTime = damagedAnimationTime = (AnimationLength("Zombie Reaction Hit", animator)/1.6f);
 
         // Raycasts arrays intantiation
         hit = new RaycastHit[73];
@@ -78,7 +78,7 @@ public class EnemyBehaviour : MonoBehaviour {
         healthText = healthTextGO.AddComponent<Text>();
         healthText.font = font;
         healthText.alignment = TextAnchor.MiddleCenter;
-        textPos = GameObject.Find("HealthTextPos");
+        textPos = this.gameObject.transform.GetChild(3).gameObject;
 
 
     }

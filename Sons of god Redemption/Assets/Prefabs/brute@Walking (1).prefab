@@ -2513,7 +2513,7 @@ MonoBehaviour:
   dashDistance: 3
   dashCooldownTime: 0.5
   dashDuration: 0.2
-  onHitAnimDelay: 0.1
+  onHitAnimDelay: 0.05
   damage: 0
   interact: 0
   states: 0
