@@ -338,7 +338,6 @@ public class PlayerController : MonoBehaviour {
                             attacks = Attacks.NotAtt;
                             states = nextState;
                             attacked = false;
-                            weapon.tag = "Untagged";
                         }
                         if (animLength < animDuration * 0.3)
                             weapon.tag = "Untagged";
@@ -363,12 +362,6 @@ public class PlayerController : MonoBehaviour {
 
         if (hit)
         {
-            if (!lastHitted)
-            {
-                audioSource.clip = hitSound;
-                audioSource.Stop();
-                audioSource.Play();
-            }
             onHitDelay -= Time.deltaTime;
             if (onHitDelay <= 0)
             {
@@ -385,7 +378,6 @@ public class PlayerController : MonoBehaviour {
         //    audioSource.Play();
         //}
 
-        lastHitted = hit;
         lastAttacked = attacked;
 
     }
@@ -478,6 +470,9 @@ public class PlayerController : MonoBehaviour {
         {
             if (weapon.tag != "Untagged")
             {
+                audioSource.clip = hitSound;
+                audioSource.Stop();
+                audioSource.Play();
                 animator.speed = 0f;
                 hit = true;
             }
