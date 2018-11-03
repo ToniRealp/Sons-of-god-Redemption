@@ -2087,12 +2087,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f0676efe5877fb4c954ad1fe65ee9e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireParticles: {fileID: 1854916988464838}
   animator: {fileID: 95243002218896780}
   attackDistance: 3.5
   attackMinInterval: 2
   attackMaxInterval: 4
   randomAttack: 0
-  movingSpeed: 0.05
+  movingSpeed: 0.02
   rotationSpeed: 0.05
   state: 0
   playerDistance: 0

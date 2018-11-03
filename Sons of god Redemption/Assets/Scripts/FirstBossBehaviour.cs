@@ -5,7 +5,7 @@ using UnityEngine;
 public class FirstBossBehaviour : MonoBehaviour
 {
 
-    private GameObject fireParticles;
+    public GameObject fireParticles;
     public Animator animator;
     public float attackDistance = 3.5f, attackMinInterval = 2, attackMaxInterval = 4;
     public int randomAttack;
@@ -25,14 +25,13 @@ public class FirstBossBehaviour : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        fireParticles = GameObject.Find("FlameThrower");
-        fireParticles.SetActive(false);
         actualAttackInterval = Random.Range(attackMinInterval, attackMaxInterval);
         player = GameObject.FindGameObjectWithTag("Player");
         actualPreJumpTime = preJumpAnimationTime = AnimationLength("Mutant Flexing Muscles", animator);
         actualJumpTime = jumpAnimationTime = AnimationLength("Mutant Jump Attack", animator);
         actualRoarTime = roarAnimationTime = AnimationLength("Mutant Roaring", animator);
         actualSwipeTime = swipeAnimationTime = AnimationLength("Mutant Swiping", animator);
+        fireParticles.SetActive(false);
     }
 
     // Update is called once per frame
@@ -49,7 +48,7 @@ public class FirstBossBehaviour : MonoBehaviour
             case State.IDLE:
                 animator.SetBool("isIdle", true);
                 // Look to player
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y, player.transform.position.z - transform.position.z)), rotationSpeed);
+                LookPlayer();
                 if (playerDistance <= attackDistance)
                 {
                     if ((actualAttackInterval -= Time.deltaTime) <= 0)
@@ -85,7 +84,7 @@ public class FirstBossBehaviour : MonoBehaviour
             case State.WALKING:
                 animator.SetBool("isMoving", true);
                 // Look to player
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y, player.transform.position.z - transform.position.z)), rotationSpeed);
+                LookPlayer();
                 if (playerDistance > attackDistance)
                 {
                     // Follow Player
@@ -93,9 +92,21 @@ public class FirstBossBehaviour : MonoBehaviour
                     if ((actualAttackInterval -= Time.deltaTime) <= 0)
                     {
                         actualAttackInterval = Random.Range(attackMinInterval, attackMaxInterval);
+                        randomAttack = Random.Range(0, 2);
                         animator.SetBool("isMoving", false);
-                        animator.SetTrigger("Jump");
-                        state = State.PREJUMP;
+                        switch (randomAttack)
+                        {
+                            case 0:
+                                animator.SetTrigger("Jump");
+                                state = State.PREJUMP;
+                                break;
+                            case 1:
+                                animator.SetTrigger("Roar");
+                                state = State.ROAR;
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
                 else
@@ -113,7 +124,7 @@ public class FirstBossBehaviour : MonoBehaviour
                 break;
             case State.PREJUMP:
                 // Look to player
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y, player.transform.position.z - transform.position.z)), rotationSpeed);
+                LookPlayer();
                 if ((actualPreJumpTime -= Time.deltaTime) <= 0)
                 {
                     actualPreJumpTime = preJumpAnimationTime;
@@ -155,7 +166,10 @@ public class FirstBossBehaviour : MonoBehaviour
 
     }
 
-
+    void LookPlayer()
+    {
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y, player.transform.position.z - transform.position.z)), rotationSpeed);
+    }
 
 
 
