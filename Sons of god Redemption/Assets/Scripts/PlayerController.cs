@@ -217,8 +217,8 @@ public class PlayerController : MonoBehaviour {
                         }
                         if (animLength < animDuration * 0.8)
                         {
-                            weapon.tag = "Weapon";
-                            //weapon.tag = "LightAttack1";
+                            //weapon.tag = "Weapon";
+                            weapon.tag = "LightAttack1";
                         }
                         if (transition && animLength < animDuration * 0.3)
                         {
@@ -245,8 +245,8 @@ public class PlayerController : MonoBehaviour {
                             animator.SetTrigger("lightAttack2");
                             animLength = animDuration = AnimationLength("light attack 2", animator);
                             attacked = true;
-                            weapon.tag = "Weapon";
-                            //weapon.tag = "LightAttack2";
+                            //weapon.tag = "Weapon";
+                            weapon.tag = "LightAttack2";
                         }
                         if (inputs[(int)ButtonInputs.LightAttack])
                         {
@@ -273,16 +273,17 @@ public class PlayerController : MonoBehaviour {
                             animator.SetTrigger("lightAttack3");
                             animLength = AnimationLength("light attack 3", animator);
                             attacked = true;
-                            weapon.tag = "Weapon";
-                            //weapon.tag = "LightAttack3";
+                            //weapon.tag = "Weapon";
+                            weapon.tag = "LightAttack3";
                         }
                         if (animLength <= 0)
                         {
                             attacks = Attacks.NotAtt;
                             states = nextState;
                             attacked = false;
-                            weapon.tag = "Untagged";
                         }
+                        if(animLength<animDuration*0.3)
+                            weapon.tag = "Untagged";
 
                         break;
 
@@ -312,10 +313,12 @@ public class PlayerController : MonoBehaviour {
                         }
                         if (animLength < animDuration * 0.8)
                         {
-                            //weapon.tag = "StrongAttack1";
-                            weapon.tag = "Weapon";
+                            weapon.tag = "StrongAttack1";
+                            //weapon.tag = "Weapon";
                         }
-                            
+                        if (animLength < animDuration * 0.4)
+                            weapon.tag = "Untagged";
+
 
                         break;
 
@@ -326,8 +329,8 @@ public class PlayerController : MonoBehaviour {
                             animator.SetTrigger("strongAttack2");
                             animLength = AnimationLength("strong attack 2", animator);
                             attacked = true;
-                            weapon.tag = "Weapon";
-                            //weapon.tag = "StrongAttack2";
+                            //weapon.tag = "Weapon";
+                            weapon.tag = "StrongAttack2";
                         }
                         if (animLength <= 0)
                         {
@@ -336,6 +339,8 @@ public class PlayerController : MonoBehaviour {
                             attacked = false;
                             weapon.tag = "Untagged";
                         }
+                        if (animLength < animDuration * 0.3)
+                            weapon.tag = "Untagged";
 
                         break;
 
@@ -372,12 +377,12 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        if (attacked && weapon.tag == "Weapon" && !lastAttacked)
-        {
-            audioSource.clip = swingSound;
-            audioSource.Stop();
-            audioSource.Play();
-        }
+        //if (attacked && weapon.tag != "Untagged" && !lastAttacked)
+        //{
+        //    audioSource.clip = swingSound;
+        //    audioSource.Stop();
+        //    audioSource.Play();
+        //}
 
         lastHitted = hit;
         lastAttacked = attacked;
@@ -470,11 +475,10 @@ public class PlayerController : MonoBehaviour {
     {
         if (other.tag == "Enemy")
         {
-            if (weapon.tag == "Weapon")
+            if (weapon.tag != "Untagged")
             {
                 animator.speed = 0f;
                 hit = true;
-                //weapon.tag = "untagged";
             }
         }
     }

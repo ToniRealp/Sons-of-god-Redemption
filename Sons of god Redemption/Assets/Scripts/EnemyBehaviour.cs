@@ -29,6 +29,7 @@ public class EnemyBehaviour : MonoBehaviour {
     private Quaternion quaternion;
     private RaycastHit[] hit;
     private Ray[] ray;
+    string lastTag;
 
     enum State { SEARCHING, CHASING, ATTAKING, DAMAGED };
     [SerializeField] State state = State.SEARCHING;
@@ -62,6 +63,7 @@ public class EnemyBehaviour : MonoBehaviour {
         initSpeed = NavAgent.speed;
         actualAttackCooldown = attackCooldown;
         playerDetected = damaged = false;
+        lastTag = "value";
 
         // Animation time initialization
         actualAttackAnimationTime = attackAnimationTime = AnimationLength("Zombie Attack", animator);
@@ -77,6 +79,7 @@ public class EnemyBehaviour : MonoBehaviour {
         healthTextGO.transform.SetParent(canvas.transform);
         healthText = healthTextGO.AddComponent<Text>();
         healthText.font = font;
+        healthTextGO.name = "Enemy Health";
         healthText.alignment = TextAnchor.MiddleCenter;
         textPos = this.gameObject.transform.GetChild(3).gameObject;
 
@@ -314,8 +317,9 @@ public class EnemyBehaviour : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Weapon")
+        if (other.tag != lastTag && other.tag!="Untagged")
         {
+            lastTag = other.tag;
             damaged = true;
             animator.SetTrigger("Damaged");
             health -=(int) other.GetComponentInParent<PlayerController>().damage;
