@@ -2602,8 +2602,8 @@ MonoBehaviour:
   movementSpeed: 0
   baseAttack: 0
   attackSpeed: 0
-  swingSound: {fileID: 8300000, guid: 81620c05beb82be4b9071ca122fa8434, type: 3}
-  hitSound: {fileID: 8300000, guid: 9aac85ce71081cb418800faf3e81ed7e, type: 3}
+  swingSound: {fileID: 8300000, guid: 4ab2086b82ae0344d9e47731a83f9743, type: 3}
+  hitSound: {fileID: 8300000, guid: 9d54cd11b601e1b428925b1897cd4042, type: 3}
   weapon: {fileID: 0}
   elements:
   - {fileID: 0}
@@ -2614,7 +2614,7 @@ MonoBehaviour:
   dashDistance: 3
   dashCooldownTime: 0.5
   dashDuration: 0.2
-  onHitAnimDelay: 0.05
+  onHitAnimDelay: 0.02
   damage: 0
   interact: 0
   states: 0

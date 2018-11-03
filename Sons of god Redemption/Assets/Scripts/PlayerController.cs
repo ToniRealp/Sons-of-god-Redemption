@@ -215,12 +215,8 @@ public class PlayerController : MonoBehaviour {
                         {
                             transition = true;
                         }
-                        if (animLength < animDuration * 0.8)
-                        {
-                            //weapon.tag = "Weapon";
-                            weapon.tag = "LightAttack1";
-                        }
-                        if (transition && animLength < animDuration * 0.3)
+                   
+                        if (transition && animLength < animDuration * 0.2)
                         {
                             attacks = Attacks.LightAttack2;
                             attacked = transition = false;
@@ -230,11 +226,15 @@ public class PlayerController : MonoBehaviour {
                             attacks =Attacks.NotAtt;
                             states = nextState;
                             attacked = false;
-                            weapon.tag = "Untagged";
-                        }
-                       
-                                                                    
                             
+                        }
+                        if (animLength < animDuration * 0.8)
+                        {
+                            //weapon.tag = "Weapon";
+                            weapon.tag = "LightAttack1";
+                        }
+                        if(animLength<animDuration * 0.2)
+                        weapon.tag = "Untagged";
 
                         break;
 
@@ -252,7 +252,7 @@ public class PlayerController : MonoBehaviour {
                         {
                             transition = true;
                         }
-                        if (transition && animLength < animDuration*0.45)
+                        if (transition && animLength < animDuration*0.2)
                         {
                             attacks = Attacks.LightAttack3;
                             attacked = transition = false;
@@ -271,10 +271,9 @@ public class PlayerController : MonoBehaviour {
                         if (!attacked)
                         {
                             animator.SetTrigger("lightAttack3");
-                            animLength = AnimationLength("light attack 3", animator);
+                            animLength = animDuration = AnimationLength("light attack 3", animator);
                             attacked = true;
                             //weapon.tag = "Weapon";
-                            weapon.tag = "LightAttack3";
                         }
                         if (animLength <= 0)
                         {
@@ -282,7 +281,9 @@ public class PlayerController : MonoBehaviour {
                             states = nextState;
                             attacked = false;
                         }
-                        if(animLength<animDuration*0.3)
+                        if (animLength < animDuration * 0.8)
+                            weapon.tag = "LightAttack3";
+                        if (animLength< animDuration * 0.3)
                             weapon.tag = "Untagged";
 
                         break;
