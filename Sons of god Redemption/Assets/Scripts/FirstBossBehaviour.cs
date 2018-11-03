@@ -5,6 +5,7 @@ using UnityEngine;
 public class FirstBossBehaviour : MonoBehaviour
 {
 
+    private GameObject fireParticles;
     public Animator animator;
     public float attackDistance = 3.5f, attackMinInterval = 2, attackMaxInterval = 4;
     public int randomAttack;
@@ -24,6 +25,8 @@ public class FirstBossBehaviour : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        fireParticles = GameObject.Find("FlameThrower");
+        fireParticles.SetActive(false);
         actualAttackInterval = Random.Range(attackMinInterval, attackMaxInterval);
         player = GameObject.FindGameObjectWithTag("Player");
         actualPreJumpTime = preJumpAnimationTime = AnimationLength("Mutant Flexing Muscles", animator);
@@ -53,7 +56,6 @@ public class FirstBossBehaviour : MonoBehaviour
                     {
                         actualAttackInterval = Random.Range(attackMinInterval, attackMaxInterval);
                         randomAttack = Random.Range(0, 3);
-                        Debug.Log(randomAttack);
                         animator.SetBool("isIdle", false);
                         switch (randomAttack)
                         {
@@ -126,8 +128,16 @@ public class FirstBossBehaviour : MonoBehaviour
                 }
                 break;
             case State.ROAR:
-
-                if ((actualRoarTime -= Time.deltaTime) <= 0)
+                actualRoarTime -= Time.deltaTime;
+                if ((actualRoarTime / roarAnimationTime) < 0.7f)
+                {
+                    fireParticles.SetActive(true);
+                }
+                if ((actualRoarTime / roarAnimationTime) < 0.1f)
+                {
+                    fireParticles.SetActive(false);
+                }
+                if (actualRoarTime <= 0)
                 {
                     actualRoarTime = roarAnimationTime;
                     state = State.IDLE;
