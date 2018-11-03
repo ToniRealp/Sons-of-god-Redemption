@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyBehaviour : MonoBehaviour {
 
     public Stats stats;
     public int health, movementSpeed, baseAttack, attackSpeed;
+
+    public Text healthText;
+    public GameObject healthTextGO, canvas, textPos;
+    public Font font;
 
     public float movingRange = 5;
     public float changePosTime = 5;
@@ -66,13 +71,30 @@ public class EnemyBehaviour : MonoBehaviour {
         hit = new RaycastHit[73];
         ray = new Ray[73];
 
+        //Health Text
+        canvas = GameObject.Find("Canvas");
+        healthTextGO = new GameObject();
+        healthTextGO.transform.SetParent(canvas.transform);
+        healthText = healthTextGO.AddComponent<Text>();
+        healthText.font = font;
+        healthText.alignment = TextAnchor.MiddleCenter;
+        textPos = GameObject.Find("HealthTextPos");
+
+
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        if(health<=0)
+        if (health <= 0)
+        {
             Destroy(this.gameObject);
+            Destroy(healthTextGO);
+        }
+
+        // Health text update
+        healthTextGO.GetComponent<Transform>().position = Camera.main.WorldToScreenPoint(textPos.transform.position);
+        healthText.text = health.ToString();
 
         // Raycast direction update
         ray[0] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.forward);

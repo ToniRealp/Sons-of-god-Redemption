@@ -945,6 +945,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1899771313837908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4143342709189382}
+  m_Layer: 0
+  m_Name: HealthTextPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1906412047716042
 GameObject:
   m_ObjectHideFlags: 1
@@ -1167,6 +1182,19 @@ Transform:
   - {fileID: 4385754108884322}
   m_Father: {fileID: 4816795410276738}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4143342709189382
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1899771313837908}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4816795410276738}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4147968065413436
 Transform:
@@ -1964,6 +1992,7 @@ Transform:
   - {fileID: 4606092019769954}
   - {fileID: 4916717835604082}
   - {fileID: 4114000220285400}
+  - {fileID: 4143342709189382}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2113,6 +2142,11 @@ MonoBehaviour:
   movementSpeed: 0
   baseAttack: 0
   attackSpeed: 0
+  healthText: {fileID: 0}
+  healthTextGO: {fileID: 0}
+  canvas: {fileID: 0}
+  textPos: {fileID: 0}
+  font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   movingRange: 10
   changePosTime: 10
   attackDistance: 1.5
@@ -2140,7 +2174,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.6
+  m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.95, z: 0}

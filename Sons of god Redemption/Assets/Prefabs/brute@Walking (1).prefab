@@ -2448,8 +2448,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.2549431, y: 60.97663, z: 11.239424}
-  m_Center: {x: -0.10728546, y: 71.65694, z: -2.3195639}
+  m_Size: {x: 9.906956, y: 82.19682, z: 16.925406}
+  m_Center: {x: 0.6465379, y: 61.0476, z: -1.9076513}
 --- !u!95 &95552025654443304
 Animator:
   serializedVersion: 3
@@ -2528,7 +2528,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.8
+  m_Radius: 0.6
   m_Height: 2.233375
   m_Direction: 1
   m_Center: {x: 0, y: 1.0425961, z: 0}
