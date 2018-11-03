@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour {
     //External attributes
     InputManager inputManager;
     Animator animator;
+    AudioSource audioSource;
+    public AudioClip swingSound, hitSound;
     [SerializeField] GameObject weapon;
     [SerializeField] GameObject[] elements = new GameObject[(int)Elements.MAX];
 
@@ -29,7 +31,7 @@ public class PlayerController : MonoBehaviour {
     public int walkVelocity, runVelocity, dashDistance;    
     public float dashCooldownTime, dashDuration, onHitAnimDelay, damage;
     private float dashCooldownCounter, actualDashTime, animLength, animDuration, onHitDelay;
-    private bool dashed, attacked, transition, hit;
+    private bool dashed, attacked, transition, hit, lastAttacked, lastHitted;
     public bool interact;
     const float velChange = 0.5f;
     
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour {
         //initialize player atributes(not stats)
         inputManager = GetComponent<InputManager>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         states = States.Idle;
         attacks = Attacks.NotAtt;
         dashed = attacked = transition = hit = false;
@@ -354,6 +357,12 @@ public class PlayerController : MonoBehaviour {
 
         if (hit)
         {
+            if (!lastHitted)
+            {
+                audioSource.clip = hitSound;
+                audioSource.Stop();
+                audioSource.Play();
+            }
             onHitDelay -= Time.deltaTime;
             if (onHitDelay <= 0)
             {
@@ -362,6 +371,17 @@ public class PlayerController : MonoBehaviour {
                 hit = false;
             }
         }
+
+        if (attacked && weapon.tag == "Weapon" && !lastAttacked)
+        {
+            audioSource.clip = swingSound;
+            audioSource.Stop();
+            audioSource.Play();
+        }
+
+        lastHitted = hit;
+        lastAttacked = attacked;
+
     }
 
     void GetInput()
