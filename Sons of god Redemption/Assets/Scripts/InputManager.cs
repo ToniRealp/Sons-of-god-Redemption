@@ -12,6 +12,9 @@ public class InputManager : MonoBehaviour {
     public float padXAxis;
     public float padYAxis;
     public bool interact;
+    public bool addEnemy;
+    public bool addBoss;
+    public bool clearEnemies;
 
 	void Update () {
         yAxis = Input.GetAxis("Vertical");
@@ -36,6 +39,22 @@ public class InputManager : MonoBehaviour {
             interact = true;
         else
             interact = false;
+
+        if (Input.GetButtonDown("AddEnemy"))
+            addEnemy = true;
+        else
+            addEnemy = false;
+
+        if (Input.GetButtonDown("AddBoss"))
+            addBoss = true;
+        else
+            addBoss = false;
+
+
+        if (Input.GetButtonDown("ClearEnemies"))
+            clearEnemies = true;
+        else
+            clearEnemies = false;
 
         padXAxis = Input.GetAxis("PadXaxis");
         padYAxis = Input.GetAxis("PadYaxis");
