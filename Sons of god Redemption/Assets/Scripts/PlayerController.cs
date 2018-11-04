@@ -79,6 +79,8 @@ public class PlayerController : MonoBehaviour {
         {
             elements[(int)Elements.Fire].SetActive(true);
             elements[(int)Elements.Holy].SetActive(false);
+            health = stats.health;
+            healthBar.value = health;
         }
         if (inputs[(int)ButtonInputs.padLeft])
         {
