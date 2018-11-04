@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
     //Player stats
     public Stats stats;
     public int health, movementSpeed, baseAttack, attackSpeed;
+    public Slider healthBar;
 
     //Enums
     enum States { Idle, Walking, Running, Dashing, Attacking, MAX };
@@ -46,6 +48,8 @@ public class PlayerController : MonoBehaviour {
         movementSpeed = stats.movementSpeed;
         baseAttack = stats.baseAttack;
         attackSpeed = stats.attackSpeed;
+        healthBar.maxValue = health;
+        healthBar.value = health;
 
         //initialize player atributes(not stats)
         inputManager = GetComponent<InputManager>();
@@ -476,6 +480,11 @@ public class PlayerController : MonoBehaviour {
                 animator.speed = 0f;
                 hit = true;
             }
+        }
+        if(other.tag == "EnemyWeapon")
+        {
+            health -= (int)other.GetComponentInParent<EnemyBehaviour>().baseAttack;
+            healthBar.value = health;
         }
     }
 }

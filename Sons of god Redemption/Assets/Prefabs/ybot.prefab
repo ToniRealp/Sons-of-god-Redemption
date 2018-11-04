@@ -353,6 +353,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4662356481859952}
+  - component: {fileID: 65954694060822600}
   m_Layer: 0
   m_Name: mixamorig:RightForeArm
   m_TagString: Untagged
@@ -1986,7 +1987,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1058969819910248}
   m_LocalRotation: {x: -0, y: 0.998528, z: -0, w: 0.054239415}
-  m_LocalPosition: {x: -0.057064474, y: 0, z: 5.25}
+  m_LocalPosition: {x: -0.9, y: 0.23, z: 1.745}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4606092019769954}
@@ -2108,6 +2109,18 @@ Transform:
   m_Father: {fileID: 4475545049002924}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &65954694060822600
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1417247214820930}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.55815315, y: 0.15212536, z: 0.19720306}
+  m_Center: {x: 0.22061476, y: -0.01165916, z: 0.013375372}
 --- !u!95 &95654544391162436
 Animator:
   serializedVersion: 3
@@ -2146,6 +2159,7 @@ MonoBehaviour:
   healthTextGO: {fileID: 0}
   canvas: {fileID: 0}
   textPos: {fileID: 0}
+  weapon: {fileID: 1417247214820930}
   font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   movingRange: 10
   changePosTime: 10
