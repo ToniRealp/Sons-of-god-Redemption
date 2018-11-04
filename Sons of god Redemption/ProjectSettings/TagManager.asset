@@ -12,6 +12,7 @@ TagManager:
   - StrongAttack1
   - StrongAttack2
   - EnemyWeapon
+  - BossWeapon
   layers:
   - Default
   - TransparentFX

@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour {
     Animator animator;
     AudioSource audioSource;
     public AudioClip swingSound, hitSound;
+    public GameObject boss;
     [SerializeField] GameObject weapon;
     [SerializeField] GameObject[] elements = new GameObject[(int)Elements.MAX];
 
@@ -34,7 +35,7 @@ public class PlayerController : MonoBehaviour {
     public float dashCooldownTime, dashDuration, onHitAnimDelay, damage;
     private float dashCooldownCounter, actualDashTime, animLength, animDuration, onHitDelay;
     private bool dashed, attacked, transition, hit, lastAttacked, lastHitted;
-    public bool interact;
+    public bool interact, fireHit;
     const float velChange = 0.5f;
     
     //State machine
@@ -57,7 +58,7 @@ public class PlayerController : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
         states = States.Idle;
         attacks = Attacks.NotAtt;
-        dashed = attacked = transition = hit = false;
+        dashed = attacked = transition = hit = fireHit = false;
         dashCooldownCounter = dashCooldownTime;
         actualDashTime = dashDuration;
         onHitDelay = onHitAnimDelay;
@@ -381,6 +382,13 @@ public class PlayerController : MonoBehaviour {
         //    audioSource.Stop();
         //    audioSource.Play();
         //}
+        if (fireHit)
+        {
+            health -= (int)boss.GetComponentInParent<FirstBossBehaviour>().damage;
+            healthBar.value = health;
+        }
+
+        fireHit = false;
 
         lastAttacked = attacked;
 
@@ -486,5 +494,12 @@ public class PlayerController : MonoBehaviour {
             health -= (int)other.GetComponentInParent<EnemyBehaviour>().baseAttack;
             healthBar.value = health;
         }
+        if (other.tag == "BossWeapon")
+        {
+            health -= (int)other.GetComponentInParent<FirstBossBehaviour>().damage;
+            healthBar.value = health;
+        }
     }
+
+    
 }

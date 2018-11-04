@@ -20,7 +20,7 @@ public class FirstBossBehaviour : MonoBehaviour
     enum State { IDLE, WALKING, SWIPEATTACK, PREJUMP, JUMP, ROAR, DAMAGED };
     [SerializeField] State state = State.IDLE;
 
-    public float playerDistance, health = 500;
+    public float playerDistance, health = 500, damage, swipeDmg=15, jumpDmg=25, roarDmg=2;
     string lastTag;
     public Text healthText;
     public GameObject healthTextGO, canvas, textPos, weapon;
@@ -85,14 +85,18 @@ public class FirstBossBehaviour : MonoBehaviour
                         {
                             case 0:
                                 animator.SetTrigger("SwipeAttack");
+                                weapon.tag = "BossWeapon";
+                                damage = swipeDmg;
                                 state = State.SWIPEATTACK;
                                 break;
                             case 1:
                                 animator.SetTrigger("Jump");
+                                damage = jumpDmg;
                                 state = State.PREJUMP;
                                 break;
                             case 2:
                                 animator.SetTrigger("Roar");
+                                damage = roarDmg;
                                 state = State.ROAR;
                                 break;
                             default:
@@ -123,10 +127,12 @@ public class FirstBossBehaviour : MonoBehaviour
                         {
                             case 0:
                                 animator.SetTrigger("Jump");
+                                damage = jumpDmg;
                                 state = State.PREJUMP;
                                 break;
                             case 1:
                                 animator.SetTrigger("Roar");
+                                damage = roarDmg;
                                 state = State.ROAR;
                                 break;
                             default:
@@ -144,6 +150,7 @@ public class FirstBossBehaviour : MonoBehaviour
                 if ((actualSwipeTime -= Time.deltaTime) <= 0)
                 {
                     actualSwipeTime = swipeAnimationTime;
+                    weapon.tag = "Untagged";
                     state = State.IDLE;
                 }
                 break;
@@ -157,8 +164,10 @@ public class FirstBossBehaviour : MonoBehaviour
                 }
                 break;
             case State.JUMP:
+                tag = "BossWeapon";
                 if ((actualJumpTime -= Time.deltaTime) <= 0)
                 {
+                    tag = "Enemy";
                     actualJumpTime = jumpAnimationTime;
                     state = State.IDLE;
                 }
@@ -213,7 +222,6 @@ public class FirstBossBehaviour : MonoBehaviour
         if (other.tag != lastTag && other.tag != "Untagged")
         {
             lastTag = other.tag;
-            animator.SetTrigger("Damaged");
             health -= (int)other.GetComponentInParent<PlayerController>().damage;
         }
     }
