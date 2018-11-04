@@ -62,6 +62,11 @@ public class TutorialController : MonoBehaviour {
             DoSpawnBoss();
         }
 
+        if (spawnFirstBoss && enemyCounter == 0)
+        {
+            GetComponent<BoxCollider>().isTrigger = true;
+        }
+
 
 
         // Manual Spawner

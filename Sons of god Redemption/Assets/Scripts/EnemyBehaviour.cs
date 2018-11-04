@@ -248,7 +248,6 @@ public class EnemyBehaviour : MonoBehaviour {
                     {
                         state = State.ATTAKING;
                         animator.SetBool("Attack",true);
-                        weapon.tag = "EnemyWeapon";
                     }
                 }
                 else
@@ -266,10 +265,14 @@ public class EnemyBehaviour : MonoBehaviour {
 
                 // When attack time finishes
                 actualAttackAnimationTime -= Time.deltaTime;
+                if (actualAttackAnimationTime - attackAnimationTime * 0.7 <= 0)
+                    weapon.tag = "EnemyWeapon";
+                if (actualAttackAnimationTime - attackAnimationTime * 0.3 <= 0)
+                    weapon.tag = "Untagged";
                 if (actualAttackAnimationTime - attackAnimationTime / 2 <= 0)
                 {
                     animator.SetBool("Attack", false);
-                    weapon.tag = "Untagged";
+
                 }
                 if (actualAttackAnimationTime <= 0)
                 {
@@ -292,6 +295,7 @@ public class EnemyBehaviour : MonoBehaviour {
                 // Cancel attack animation if getting hit
                 animator.SetBool("Attack", false);
                 weapon.tag = "Untagged";
+                actualAttackAnimationTime = attackAnimationTime;
                 // No movement
                 NavAgent.speed = 0;
                 // But rotation
