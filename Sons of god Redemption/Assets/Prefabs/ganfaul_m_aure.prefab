@@ -706,6 +706,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1646559062704324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4736896977582318}
+  m_Layer: 0
+  m_Name: HealthTextPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1659041619599330
 GameObject:
   m_ObjectHideFlags: 1
@@ -714,6 +729,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4677739370008686}
+  - component: {fileID: 65202164245483152}
   m_Layer: 0
   m_Name: LeftForeArm
   m_TagString: Untagged
@@ -1792,6 +1808,7 @@ Transform:
   m_Children:
   - {fileID: 4350685370301466}
   - {fileID: 4056150932635076}
+  - {fileID: 4736896977582318}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1808,6 +1825,19 @@ Transform:
   - {fileID: 4502365317564052}
   m_Father: {fileID: 4474516420468342}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4736896977582318
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1646559062704324}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4730178943165130}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4752584904569382
 Transform:
@@ -2058,6 +2088,18 @@ Transform:
   m_Father: {fileID: 4443015779191914}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &65202164245483152
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1659041619599330}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.53296286, y: 0.18788072, z: 0.25013575}
+  m_Center: {x: -0.2335186, y: -0.032238346, z: -0.016481778}
 --- !u!95 &95243002218896780
 Animator:
   serializedVersion: 3
@@ -2097,6 +2139,13 @@ MonoBehaviour:
   rotationSpeed: 0.05
   state: 0
   playerDistance: 0
+  health: 500
+  healthText: {fileID: 0}
+  healthTextGO: {fileID: 0}
+  canvas: {fileID: 0}
+  textPos: {fileID: 0}
+  weapon: {fileID: 1659041619599330}
+  font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!136 &136624659489309946
 CapsuleCollider:
   m_ObjectHideFlags: 1

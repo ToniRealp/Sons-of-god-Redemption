@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FirstBossBehaviour : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class FirstBossBehaviour : MonoBehaviour
     public int randomAttack;
     public float movingSpeed = 0.05f, rotationSpeed = 0.05f;
 
+
     private GameObject player;
     private float preJumpAnimationTime, jumpAnimationTime, roarAnimationTime, swipeAnimationTime;
     private float actualAttackInterval, actualPreJumpTime, actualJumpTime, actualRoarTime, actualSwipeTime;
@@ -18,8 +20,11 @@ public class FirstBossBehaviour : MonoBehaviour
     enum State { IDLE, WALKING, SWIPEATTACK, PREJUMP, JUMP, ROAR, DAMAGED };
     [SerializeField] State state = State.IDLE;
 
-    public float playerDistance;
-
+    public float playerDistance, health = 500;
+    string lastTag;
+    public Text healthText;
+    public GameObject healthTextGO, canvas, textPos, weapon;
+    public Font font;
 
 
     // Use this for initialization
@@ -32,6 +37,18 @@ public class FirstBossBehaviour : MonoBehaviour
         actualRoarTime = roarAnimationTime = AnimationLength("Mutant Roaring", animator);
         actualSwipeTime = swipeAnimationTime = AnimationLength("Mutant Swiping", animator);
         fireParticles.SetActive(false);
+        lastTag = "value";
+
+        //Health Text
+        canvas = GameObject.Find("Canvas");
+        healthTextGO = new GameObject();
+        healthTextGO.transform.SetParent(canvas.transform);
+        healthText = healthTextGO.AddComponent<Text>();
+        healthText.font = font;
+        healthTextGO.name = "Enemy Health";
+        healthText.alignment = TextAnchor.MiddleCenter;
+        textPos = this.gameObject.transform.GetChild(2).gameObject;
+
     }
 
     // Update is called once per frame
@@ -40,7 +57,15 @@ public class FirstBossBehaviour : MonoBehaviour
 
         playerDistance = Vector3.Distance(transform.position, player.transform.position);
 
+        if (health <= 0)
+        {
+            Destroy(this.gameObject);
+            Destroy(healthTextGO);
+        }
 
+        // Health text update
+        healthTextGO.GetComponent<Transform>().position = Camera.main.WorldToScreenPoint(textPos.transform.position);
+        healthText.text = health.ToString();
 
 
         switch (state)
@@ -162,8 +187,6 @@ public class FirstBossBehaviour : MonoBehaviour
 
 
 
-
-
     }
 
     void LookPlayer()
@@ -184,4 +207,16 @@ public class FirstBossBehaviour : MonoBehaviour
         }
         return -1f;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag != lastTag && other.tag != "Untagged")
+        {
+            lastTag = other.tag;
+            animator.SetTrigger("Damaged");
+            health -= (int)other.GetComponentInParent<PlayerController>().damage;
+        }
+    }
+
+
 }
