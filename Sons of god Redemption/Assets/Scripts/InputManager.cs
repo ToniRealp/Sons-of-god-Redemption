@@ -15,6 +15,7 @@ public class InputManager : MonoBehaviour {
     public bool addEnemy;
     public bool addBoss;
     public bool clearEnemies;
+    public bool escape;
 
 	void Update () {
         yAxis = Input.GetAxis("Vertical");
@@ -50,11 +51,15 @@ public class InputManager : MonoBehaviour {
         else
             addBoss = false;
 
-
         if (Input.GetButtonDown("ClearEnemies"))
             clearEnemies = true;
         else
             clearEnemies = false;
+
+        if (Input.GetButtonDown("Cancel"))
+            escape = true;
+        else
+            escape = false;
 
         padXAxis = Input.GetAxis("PadXaxis");
         padYAxis = Input.GetAxis("PadYaxis");

@@ -28,6 +28,11 @@ public class TutorialController : MonoBehaviour {
 
         GetInput();
 
+        if(inputManager.escape)
+        {
+            GetComponent<SceneController>().changeScene("MainMenu");
+        }
+
         //Spawn First Enemy
         if ((firstEnemySpawnTime-=Time.deltaTime)<=0 && !spawnFirstEnemy)
         {
