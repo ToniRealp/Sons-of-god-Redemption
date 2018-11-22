@@ -164,10 +164,13 @@ public class FirstBossBehaviour : MonoBehaviour
                 }
                 break;
             case State.JUMP:
-                tag = "BossWeapon";
-                if ((actualJumpTime -= Time.deltaTime) <= 0)
-                {
+                actualJumpTime -= Time.deltaTime;
+                if (actualJumpTime <= jumpAnimationTime * 0.8)
+                    tag = "BossWeapon";
+                if (actualJumpTime <= jumpAnimationTime * 0.3)
                     tag = "Enemy";
+                if (actualJumpTime <= 0)
+                {
                     actualJumpTime = jumpAnimationTime;
                     state = State.IDLE;
                 }
