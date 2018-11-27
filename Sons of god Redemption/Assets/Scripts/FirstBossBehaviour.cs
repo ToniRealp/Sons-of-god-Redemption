@@ -79,7 +79,7 @@ public class FirstBossBehaviour : MonoBehaviour
                     if ((actualAttackInterval -= Time.deltaTime) <= 0)
                     {
                         actualAttackInterval = Random.Range(attackMinInterval, attackMaxInterval);
-                        randomAttack = Random.Range(0, 3);
+                        randomAttack = Random.Range(0, 2);
                         animator.SetBool("isIdle", false);
                         switch (randomAttack)
                         {
@@ -90,11 +90,6 @@ public class FirstBossBehaviour : MonoBehaviour
                                 state = State.SWIPEATTACK;
                                 break;
                             case 1:
-                                animator.SetTrigger("Jump");
-                                damage = jumpDmg;
-                                state = State.PREJUMP;
-                                break;
-                            case 2:
                                 animator.SetTrigger("Roar");
                                 damage = roarDmg;
                                 state = State.ROAR;
@@ -121,7 +116,7 @@ public class FirstBossBehaviour : MonoBehaviour
                     if ((actualAttackInterval -= Time.deltaTime) <= 0)
                     {
                         actualAttackInterval = Random.Range(attackMinInterval, attackMaxInterval);
-                        randomAttack = Random.Range(0, 2);
+                        randomAttack = Random.Range(0, 1);
                         animator.SetBool("isMoving", false);
                         switch (randomAttack)
                         {

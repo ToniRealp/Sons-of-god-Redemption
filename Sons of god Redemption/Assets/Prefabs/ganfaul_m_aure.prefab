@@ -2133,8 +2133,8 @@ MonoBehaviour:
   fireParticles: {fileID: 1854916988464838}
   animator: {fileID: 95243002218896780}
   attackDistance: 3.5
-  attackMinInterval: 2
-  attackMaxInterval: 4
+  attackMinInterval: 0
+  attackMaxInterval: 1
   randomAttack: 0
   movingSpeed: 0.02
   rotationSpeed: 0.05

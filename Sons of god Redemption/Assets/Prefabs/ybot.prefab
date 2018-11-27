@@ -2164,7 +2164,7 @@ MonoBehaviour:
   movingRange: 10
   changePosTime: 10
   attackDistance: 1.5
-  attackCooldown: 1
+  attackCooldown: 0
   viewDistance: 15
   hearDistance: 10
   NavAgent: {fileID: 195809773207414210}
@@ -2174,7 +2174,7 @@ MonoBehaviour:
   actualPosTime: 0
   actualAttackAnimationTime: 0
   actualDamagedAnimationTime: 0
-  actualAttackCooldown: 0
+  actualAttackCooldown: 0.3
   playerDetected: 0
   damaged: 0
   attackOnCooldown: 0
