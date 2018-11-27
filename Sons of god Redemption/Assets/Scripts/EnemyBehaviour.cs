@@ -91,8 +91,8 @@ public class EnemyBehaviour : MonoBehaviour {
 
         if (health <= 0)
         {
-            Destroy(this.gameObject);
             Destroy(healthTextGO);
+            Destroy(this.gameObject);
         }
 
         // Health text update
