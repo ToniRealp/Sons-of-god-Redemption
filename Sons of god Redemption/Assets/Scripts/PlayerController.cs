@@ -37,7 +37,9 @@ public class PlayerController : MonoBehaviour {
     private bool dashed, attacked, transition, hit, lastAttacked, lastHitted;
     public bool interact, fireHit;
     const float velChange = 0.5f;
-    
+
+    public static bool damaged;
+
     //State machine
     [SerializeField] States states, nextState;
     [SerializeField] Attacks attacks;
@@ -58,7 +60,7 @@ public class PlayerController : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
         states = States.Idle;
         attacks = Attacks.NotAtt;
-        dashed = attacked = transition = hit = fireHit = false;
+        dashed = attacked = transition = hit = fireHit = damaged= false;
         dashCooldownCounter = dashCooldownTime;
         actualDashTime = dashDuration;
         onHitDelay = onHitAnimDelay;
@@ -391,7 +393,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         fireHit = false;
-
+        damaged = false;
         lastAttacked = attacked;
 
     }
@@ -495,13 +497,13 @@ public class PlayerController : MonoBehaviour {
         {
             health -= (int)other.GetComponentInParent<EnemyBehaviour>().baseAttack;
             healthBar.value = health;
+            damaged = true;
         }
         if (other.tag == "BossWeapon")
         {
             health -= (int)other.GetComponentInParent<FirstBossBehaviour>().damage;
             healthBar.value = health;
+            damaged = true;
         }
     }
-
-    
 }

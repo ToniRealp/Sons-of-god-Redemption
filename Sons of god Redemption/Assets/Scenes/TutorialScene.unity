@@ -149,8 +149,10 @@ MonoBehaviour:
   enemiesTillBoss: 6
   enemy: {fileID: 1058969819910248, guid: 6fdf6feb8f93d14409258eda5827849f, type: 2}
   boss: {fileID: 1349270251722732, guid: 0ba87fd9c1d320945b19becf36337d55, type: 2}
+  lastEnemyCounter: 0
   enemyCounter: 0
   enemiesDefeated: 0
+  enemiesSpawned: 0
   spawnEnemy: 0
   lastEnemyState: 0
   spawnBoss: 0
@@ -763,7 +765,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 373122190}
-  m_LocalRotation: {x: 0.36991432, y: 0.0000018204723, z: -0.0000032348232, w: 0.9290659}
+  m_LocalRotation: {x: 0.36991417, y: 0.0000018204786, z: -0.0000032348191, w: 0.92906594}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -782,6 +784,7 @@ GameObject:
   - component: {fileID: 402608758}
   - component: {fileID: 402608757}
   - component: {fileID: 402608756}
+  - component: {fileID: 402608759}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -856,6 +859,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &402608759
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 402608754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 68b0627ea3d796448b29ab0938f2c240, type: 2}
+  m_AmplitudeGain: 1
+  m_FrequencyGain: 1
 --- !u!1 &437279727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,6 +1490,10 @@ Prefab:
       propertyPath: m_Name
       value: Main character
       objectReference: {fileID: 0}
+    - target: {fileID: 1673153195996658, guid: b14268f5e27b8e9479e88185239c2fc2, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b14268f5e27b8e9479e88185239c2fc2, type: 2}
   m_IsPrefabAsset: 0
@@ -1528,7 +1549,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 857420529}
-  m_LocalRotation: {x: 0.39565173, y: -0.000058972662, z: 0.000025876625, w: 0.91840065}
+  m_LocalRotation: {x: 0.39565137, y: -0.00005556061, z: 0.000024406703, w: 0.91840076}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1588,7 +1609,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 882895817}
-  m_LocalRotation: {x: 0.41787264, y: -0.000042081076, z: 0.000019610376, w: 0.90850556}
+  m_LocalRotation: {x: 0.4178948, y: -0.000042080475, z: 0.000019611434, w: 0.9084955}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2341,6 +2362,7 @@ GameObject:
   - component: {fileID: 1667810605}
   - component: {fileID: 1667810604}
   - component: {fileID: 1667810606}
+  - component: {fileID: 1667810607}
   m_Layer: 0
   m_Name: Camera 1
   m_TagString: Untagged
@@ -2410,6 +2432,21 @@ MonoBehaviour:
   m_MaximumEffort: 4
   m_Damping: 0
   m_OptimalTargetDistance: 0
+--- !u!114 &1667810607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1667810603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 905c678d28fff154087c4a79f72d88e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShakeDuration: 0.3
+  ShakeAmplitude: 0.1
+  ShakeFrequency: 2
+  VirtualCamera: {fileID: 0}
 --- !u!1 &1868813883
 GameObject:
   m_ObjectHideFlags: 0
