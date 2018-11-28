@@ -2167,6 +2167,8 @@ MonoBehaviour:
   attackCooldown: 0
   viewDistance: 15
   hearDistance: 10
+  actualDamagedCooldown: 0
+  damagedCooldown: 3
   NavAgent: {fileID: 195809773207414210}
   animator: {fileID: 95654544391162436}
   attackAnimationTime: 2.617

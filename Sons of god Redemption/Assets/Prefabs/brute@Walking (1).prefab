@@ -376,7 +376,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1323176761339710
 GameObject:
   m_ObjectHideFlags: 1
@@ -831,7 +831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1661819600338698
 GameObject:
   m_ObjectHideFlags: 1
@@ -2588,6 +2588,7 @@ MonoBehaviour:
   addEnemy: 0
   addBoss: 0
   clearEnemies: 0
+  escape: 0
 --- !u!114 &114516041804101342
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2607,6 +2608,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   swingSound: {fileID: 8300000, guid: 4ab2086b82ae0344d9e47731a83f9743, type: 3}
   hitSound: {fileID: 8300000, guid: 9d54cd11b601e1b428925b1897cd4042, type: 3}
+  boss: {fileID: 0}
   weapon: {fileID: 1471518303589712}
   elements:
   - {fileID: 1322368834297274}
@@ -2614,12 +2616,13 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   walkVelocity: 3
   runVelocity: 5
-  dashDistance: 3
+  dashDistance: 2
   dashCooldownTime: 0.5
   dashDuration: 0.2
-  onHitAnimDelay: 0.02
+  onHitAnimDelay: 0.05
   damage: 0
   interact: 0
+  fireHit: 0
   states: 0
   nextState: 0
   attacks: 6

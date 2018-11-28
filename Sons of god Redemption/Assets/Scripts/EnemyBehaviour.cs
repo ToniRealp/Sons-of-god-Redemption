@@ -19,6 +19,7 @@ public class EnemyBehaviour : MonoBehaviour {
     public float attackCooldown = 0.5f;
     public float viewDistance = 15;
     public float hearDistance = 10;
+    public float actualDamagedCooldown, damagedCooldown=3f;
     public NavMeshAgent NavAgent;
     public Animator animator;
 
@@ -320,6 +321,10 @@ public class EnemyBehaviour : MonoBehaviour {
             default:
                 break;
         }
+
+        if (actualDamagedCooldown > 0f)
+            actualDamagedCooldown -= Time.deltaTime;
+
     }
 
   
@@ -329,8 +334,12 @@ public class EnemyBehaviour : MonoBehaviour {
         if (other.tag != lastTag && other.tag!="Untagged")
         {
             lastTag = other.tag;
-            damaged = true;
-            animator.SetTrigger("Damaged");
+            if (actualDamagedCooldown <= 0f)
+            {
+                damaged = true;
+                actualDamagedCooldown = damagedCooldown;
+                animator.SetTrigger("Damaged");
+            }
             health -=(int) other.GetComponentInParent<PlayerController>().damage;
         }
     }

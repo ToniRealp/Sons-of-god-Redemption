@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour {
 
+    public Stats stats;
+    public int health, movementSpeed, baseAttack, attackSpeed;
+
     public Animator animator;
     public NavMeshAgent NavAgent;
     public Vector3 destinationPosition, randomPosition, playerPosition;
@@ -20,8 +23,13 @@ public class Enemy : MonoBehaviour {
 
 
 
-    private void Start()
+    Enemy()
     {
+        //Stats
+        health = stats.health;
+        movementSpeed = stats.movementSpeed;
+        baseAttack = stats.baseAttack;
+        attackSpeed = stats.attackSpeed;
         //Raycasts
         hit = new RaycastHit[73];
         ray = new Ray[73];
