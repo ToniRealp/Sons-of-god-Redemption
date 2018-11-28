@@ -9,7 +9,7 @@ public class FirstBossBehaviour : MonoBehaviour
     public GameObject fireParticles;
     public Animator animator;
     public float attackDistance = 3.5f, attackMinInterval = 2, attackMaxInterval = 4;
-    public int randomAttack;
+    public int randomAttack, randomAttack2;
     public float movingSpeed = 0.05f, rotationSpeed = 0.05f;
 
 
@@ -49,6 +49,7 @@ public class FirstBossBehaviour : MonoBehaviour
         healthText.alignment = TextAnchor.MiddleCenter;
         textPos = this.gameObject.transform.GetChild(2).gameObject;
 
+        randomAttack2 = randomAttack = 0;
     }
 
     // Update is called once per frame
@@ -79,7 +80,6 @@ public class FirstBossBehaviour : MonoBehaviour
                     if ((actualAttackInterval -= Time.deltaTime) <= 0)
                     {
                         actualAttackInterval = Random.Range(attackMinInterval, attackMaxInterval);
-                        randomAttack = Random.Range(0, 2);
                         animator.SetBool("isIdle", false);
                         switch (randomAttack)
                         {
@@ -87,11 +87,27 @@ public class FirstBossBehaviour : MonoBehaviour
                                 animator.SetTrigger("SwipeAttack");
                                 weapon.tag = "BossWeapon";
                                 damage = swipeDmg;
+                                randomAttack++;
                                 state = State.SWIPEATTACK;
                                 break;
                             case 1:
+                                animator.SetTrigger("SwipeAttack");
+                                weapon.tag = "BossWeapon";
+                                damage = swipeDmg;
+                                randomAttack++;
+                                state = State.SWIPEATTACK;
+                                break;
+                            case 2:
+                                animator.SetTrigger("SwipeAttack");
+                                weapon.tag = "BossWeapon";
+                                damage = swipeDmg;
+                                randomAttack++;
+                                state = State.SWIPEATTACK;
+                                break;
+                            case 3:
                                 animator.SetTrigger("Roar");
                                 damage = roarDmg;
+                                randomAttack=0;
                                 state = State.ROAR;
                                 break;
                             default:
@@ -116,18 +132,19 @@ public class FirstBossBehaviour : MonoBehaviour
                     if ((actualAttackInterval -= Time.deltaTime) <= 0)
                     {
                         actualAttackInterval = Random.Range(attackMinInterval, attackMaxInterval);
-                        randomAttack = Random.Range(0, 1);
                         animator.SetBool("isMoving", false);
-                        switch (randomAttack)
+                        switch (randomAttack2)
                         {
                             case 0:
                                 animator.SetTrigger("Jump");
                                 damage = jumpDmg;
+                                randomAttack2++;
                                 state = State.PREJUMP;
                                 break;
                             case 1:
                                 animator.SetTrigger("Roar");
                                 damage = roarDmg;
+                                randomAttack2=0;
                                 state = State.ROAR;
                                 break;
                             default:
@@ -162,7 +179,7 @@ public class FirstBossBehaviour : MonoBehaviour
                 actualJumpTime -= Time.deltaTime;
                 if (actualJumpTime <= jumpAnimationTime * 0.8)
                     tag = "BossWeapon";
-                if (actualJumpTime <= jumpAnimationTime * 0.3)
+                if (actualJumpTime <= jumpAnimationTime * 0.5)
                     tag = "Enemy";
                 if (actualJumpTime <= 0)
                 {
