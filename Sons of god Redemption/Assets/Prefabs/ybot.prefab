@@ -886,6 +886,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1808152229011226
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4315662686491712}
+  m_Layer: 0
+  m_Name: BloodPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1812044054282376
 GameObject:
   m_ObjectHideFlags: 1
@@ -1401,6 +1416,19 @@ Transform:
   m_Father: {fileID: 4662356481859952}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4315662686491712
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1808152229011226}
+  m_LocalRotation: {x: 0.000002931613, y: -1.1513811e-10, z: 0.0000000039280668, w: 1}
+  m_LocalPosition: {x: -0.09124455, y: 0.23364463, z: 0.0005546672}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4535377603688312}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4317841214990572
 Transform:
   m_ObjectHideFlags: 1
@@ -1702,6 +1730,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4510333159946900}
+  - {fileID: 4315662686491712}
   m_Father: {fileID: 4114000220285400}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1987,7 +2016,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1058969819910248}
   m_LocalRotation: {x: -0, y: 0.998528, z: -0, w: 0.054239415}
-  m_LocalPosition: {x: -0.9, y: 0.23, z: 1.745}
+  m_LocalPosition: {x: -6.647042, y: 0.80222, z: -0.9981451}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4606092019769954}
@@ -2171,6 +2200,8 @@ MonoBehaviour:
   damagedCooldown: 3
   NavAgent: {fileID: 195809773207414210}
   animator: {fileID: 95654544391162436}
+  blood: {fileID: 1540188549263062, guid: 9241f871267c8a6478b40eebaffd61f6, type: 2}
+  bloodPosition: {fileID: 4315662686491712}
   attackAnimationTime: 2.617
   damagedAnimationTime: 2.167
   actualPosTime: 0

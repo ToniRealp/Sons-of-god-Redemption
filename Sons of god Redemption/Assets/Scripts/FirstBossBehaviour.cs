@@ -26,6 +26,8 @@ public class FirstBossBehaviour : MonoBehaviour
     public GameObject healthTextGO, canvas, textPos, weapon;
     public Font font;
 
+    public GameObject blood;
+    public Transform bloodPosition;
 
     // Use this for initialization
     void Start()
@@ -85,21 +87,18 @@ public class FirstBossBehaviour : MonoBehaviour
                         {
                             case 0:
                                 animator.SetTrigger("SwipeAttack");
-                                weapon.tag = "BossWeapon";
                                 damage = swipeDmg;
                                 randomAttack++;
                                 state = State.SWIPEATTACK;
                                 break;
                             case 1:
                                 animator.SetTrigger("SwipeAttack");
-                                weapon.tag = "BossWeapon";
                                 damage = swipeDmg;
                                 randomAttack++;
                                 state = State.SWIPEATTACK;
                                 break;
                             case 2:
                                 animator.SetTrigger("SwipeAttack");
-                                weapon.tag = "BossWeapon";
                                 damage = swipeDmg;
                                 randomAttack++;
                                 state = State.SWIPEATTACK;
@@ -159,10 +158,14 @@ public class FirstBossBehaviour : MonoBehaviour
                 }
                 break;
             case State.SWIPEATTACK:
-                if ((actualSwipeTime -= Time.deltaTime) <= 0)
+                actualSwipeTime -= Time.deltaTime;
+                if (actualSwipeTime <= swipeAnimationTime * 0.8)
+                    weapon.tag = "BossWeapon";
+                if (actualSwipeTime <= swipeAnimationTime * 0.2)
+                    weapon.tag = "Untagged";
+                if (actualSwipeTime <= 0)
                 {
                     actualSwipeTime = swipeAnimationTime;
-                    weapon.tag = "Untagged";
                     state = State.IDLE;
                 }
                 break;
@@ -237,6 +240,7 @@ public class FirstBossBehaviour : MonoBehaviour
         if (other.tag != lastTag && other.tag != "Untagged")
         {
             lastTag = other.tag;
+            Instantiate(blood, bloodPosition.position, bloodPosition.rotation, transform);
             health -= (int)other.GetComponentInParent<PlayerController>().damage;
         }
     }

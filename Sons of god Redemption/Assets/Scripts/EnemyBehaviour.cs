@@ -22,12 +22,13 @@ public class EnemyBehaviour : MonoBehaviour {
     public float actualDamagedCooldown, damagedCooldown=3f;
     public NavMeshAgent NavAgent;
     public Animator animator;
+    public GameObject blood;
+    public Transform bloodPosition;
 
     public float attackAnimationTime, damagedAnimationTime, actualPosTime, actualAttackAnimationTime, actualDamagedAnimationTime, actualAttackCooldown;
     private Vector3 playerPosition, initialPosition, destinationPosition;
     private float initSpeed, xMin, xMax, zMin, zMax;
     public bool playerDetected, damaged, attackOnCooldown;
-    private Quaternion quaternion;
     private RaycastHit[] hit;
     private Ray[] ray;
     string lastTag;
@@ -340,6 +341,7 @@ public class EnemyBehaviour : MonoBehaviour {
                 actualDamagedCooldown = damagedCooldown;
                 animator.SetTrigger("Damaged");
             }
+            Instantiate(blood,bloodPosition.position,bloodPosition.rotation,transform);
             health -=(int) other.GetComponentInParent<PlayerController>().damage;
         }
     }

@@ -12,7 +12,7 @@ public class TutorialController : MonoBehaviour {
     public GameObject enemy;
     public GameObject boss;
     private InputManager inputManager;
-    public int enemyCounter, enemiesDefeated;
+    public int lastEnemyCounter, enemyCounter, enemiesDefeated, enemiesSpawned;
 
     public bool spawnEnemy, lastEnemyState, spawnBoss, lastBossState, clearAll, lastClearState, spawnFirstEnemy, enemyIncrease, spawnFirstBoss;
 
@@ -20,7 +20,7 @@ public class TutorialController : MonoBehaviour {
 	void Start () {
         inputManager = GetComponent<InputManager>();
         spawnFirstBoss = enemyIncrease = spawnFirstEnemy = false;
-        enemiesDefeated = enemyCounter = 0;
+        lastEnemyCounter = enemiesSpawned = enemiesDefeated = enemyCounter = 0;
     }
 	
 	// Update is called once per frame
@@ -38,6 +38,7 @@ public class TutorialController : MonoBehaviour {
         {
             spawnFirstEnemy = true;
             DoSpawnEnemy();
+            enemiesSpawned++;
         }
 
 
@@ -47,17 +48,24 @@ public class TutorialController : MonoBehaviour {
         {
             enemyCounter++;
         }
-        if (spawnFirstEnemy && enemyCounter < numberOfSimultaneousEnemies && !spawnFirstBoss)
+        if (spawnFirstEnemy && enemyCounter < numberOfSimultaneousEnemies  && !spawnFirstBoss)
         {
-            enemiesDefeated++;
-            if(enemiesDefeated < enemiesTillBoss)
+            if (lastEnemyCounter - enemyCounter > 0)
+            {
+                enemiesDefeated += lastEnemyCounter - enemyCounter;
+            }
+            if (enemiesSpawned <= enemiesTillBoss)
+            {
                 DoSpawnEnemy();
+                enemiesSpawned++;
+            }
         }
 
         // Aumentar el numero de enemigos simultaneos
         if (enemiesDefeated == enemiesTillNextIncrease && !enemyIncrease)
         {
             enemyIncrease = true;
+            enemiesDefeated--;
             numberOfSimultaneousEnemies++;
         }
 
@@ -91,6 +99,7 @@ public class TutorialController : MonoBehaviour {
             DoClearAll();
         }
 
+        lastEnemyCounter = enemyCounter;
         lastEnemyState = spawnEnemy;
         lastBossState = spawnBoss;
         lastClearState = clearAll;
