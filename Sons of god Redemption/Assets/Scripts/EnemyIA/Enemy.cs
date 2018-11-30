@@ -6,24 +6,31 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour {
 
+    //Stats
     public Stats stats;
-    public int health, movementSpeed, baseAttack, attackSpeed;
+    protected int health, movementSpeed, baseAttack, attackSpeed;
+    public float movingRange, rotationSpeed;
 
-    public Animator animator;
+    //Animations
+    protected Animator animator;
+    protected Dictionary<string, float> animTimes;
+
     public NavMeshAgent NavAgent;
-    public Vector3 destinationPosition, randomPosition, playerPosition;
-    public float xMin, xMax, zMin, zMax, viewDistance, hearDistance;
-
+    protected Vector3 destination, randomPosition, playerPosition, target, initialPosition;
+    protected float xMin, xMax, zMin, zMax, viewDistance, hearDistance;
+    protected bool playerDetected;
+    
     public RaycastHit[] hit;
     public Ray[] ray;
 
-    public Text healthText;
-    public GameObject healthTextGO, canvas, textPos;
+    protected Text healthText;
+    protected GameObject healthTextGO, canvas, textPos, weapon;
     public Font font;
 
+    enum State { SEARCHING, CHASING, ATTAKING, DAMAGED };
+    [SerializeField] State state;
 
-
-    Enemy()
+    protected void Start()
     {
         //Stats
         health = stats.health;
@@ -42,50 +49,57 @@ public class Enemy : MonoBehaviour {
         healthTextGO.name = "Enemy Health";
         healthText.alignment = TextAnchor.MiddleCenter;
         textPos = this.gameObject.transform.GetChild(3).gameObject;
+        //Other
+        playerDetected = false;
+        initialPosition = transform.position;
+        //Animator
+        animator = GetComponent<Animator>();
+        animTimes = new Dictionary<string, float>();
+        GetAnimations();
     }
 
-
-    void SetSearchingRange(Vector3 _initialPosition, float _movingRange)
+    #region ClassFunctionalities
+    protected void SetSearchingRange()
     {
-        xMin = _initialPosition.x - _movingRange;
-        xMax = _initialPosition.x + _movingRange;
-        zMin = _initialPosition.z - _movingRange;
-        zMax = _initialPosition.z + _movingRange;
+        xMin = initialPosition.x - movingRange;
+        xMax = initialPosition.x + movingRange;
+        zMin = initialPosition.z - movingRange;
+        zMax = initialPosition.z + movingRange;
     }
 
-    void SetRandomDestination()
+    protected void SetRandomDestination()
     {
         randomPosition.x = Random.Range(xMin, xMax);
         randomPosition.y = 1;
         randomPosition.z = Random.Range(zMin, zMax);
     }
 
-    void MoveTo(Vector3 _destination)
+    protected void MoveToDestination()
     {
-        NavAgent.SetDestination(_destination);
+        NavAgent.SetDestination(destination);
     }
 
-    void ChangeSpeed(float _speed)
+    protected void ChangeSpeed(float _speed)
     {
         NavAgent.speed = _speed;
     }
 
-    void LookTo(Vector3 _target, float _rotationSpeed)
+    protected void LookToTarget()
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(_target.x - transform.position.x, _target.y - transform.position.y, _target.z - transform.position.z)), _rotationSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(target.x - transform.position.x, target.y - transform.position.y, target.z - transform.position.z)), rotationSpeed);
     }
 
-    bool IsMoving()
+    protected bool IsMoving()
     {
         return NavAgent.velocity.magnitude > 0.1f;
     }
 
-    float DistanceTo(Vector3 _target)
+    protected float DistanceToTarget()
     {
-        return Vector3.Distance(gameObject.transform.position, _target);
+        return Vector3.Distance(gameObject.transform.position, target);
     }
 
-    void UpdateRaycasts()
+    protected void UpdateRaycasts()
     {
         // Raycast direction update
         ray[0] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.forward);
@@ -96,7 +110,7 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    void DebugRaycasts()
+    protected void DebugRaycasts()
     {
         // Debug Raycasting 
         // View Raycasts
@@ -119,7 +133,7 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    bool DetectPlayer()
+    protected bool DetectPlayer()
     {
         // Raycasting Logic
         bool playerDetected = false;
@@ -172,27 +186,35 @@ public class Enemy : MonoBehaviour {
         return playerDetected;
     }
 
-    bool UseFullDetectionSystem()
+    protected bool UseFullDetectionSystem()
     {
         UpdateRaycasts();
         DebugRaycasts();
         return DetectPlayer();
     }
 
-    void UpdateHealthText(float _health)
+    protected void UpdateHealthText()
     {
         // Health text update
         healthTextGO.GetComponent<Transform>().position = Camera.main.WorldToScreenPoint(textPos.transform.position);
-        healthText.text = _health.ToString();
+        healthText.text = health.ToString();
     }
 
-    void Die()
+    protected void Die()
     {
         Destroy(healthTextGO);
         Destroy(this.gameObject);
     }
 
-    float AnimationLength(string animName, Animator animator)
+    protected void GetAnimations()
+    {
+        AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
+        foreach (var clip in clips) {
+            animTimes[clip.name] = clip.length;
+        }
+    }
+
+    protected float AnimationLength(string animName, Animator animator)
     {
         AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
 
@@ -203,4 +225,5 @@ public class Enemy : MonoBehaviour {
         }
         return -1f;
     }
+    #endregion
 }

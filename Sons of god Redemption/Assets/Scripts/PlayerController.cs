@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour {
     public int walkVelocity, runVelocity, dashDistance;    
     public float dashCooldownTime, dashDuration, onHitAnimDelay, damage;
     private float dashCooldownCounter, actualDashTime, animLength, animDuration, onHitDelay;
-    private bool dashed, attacked, transition, hit, lastAttacked, lastHitted;
+    private bool dashed, attacked, lastAttacked, transition, hit, lastHitted;
     public bool interact, fireHit;
     const float velChange = 0.5f;
 
