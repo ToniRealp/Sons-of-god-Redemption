@@ -495,7 +495,7 @@ public class PlayerController : MonoBehaviour {
         }
         if(other.tag == "EnemyWeapon")
         {
-            health -= (int)other.GetComponentInParent<EnemyBehaviour>().baseAttack;
+            health -= (int)other.GetComponentInParent<BasicEnemy>().baseAttack;
             healthBar.value = health;
             damaged = true;
         }

@@ -81,8 +81,8 @@ GameObject:
   - component: {fileID: 4816795410276738}
   - component: {fileID: 95654544391162436}
   - component: {fileID: 136183414480292810}
-  - component: {fileID: 114576318815342824}
   - component: {fileID: 195809773207414210}
+  - component: {fileID: 114349839593481864}
   m_Layer: 0
   m_Name: ybot
   m_TagString: Enemy
@@ -2016,7 +2016,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1058969819910248}
   m_LocalRotation: {x: -0, y: 0.998528, z: -0, w: 0.054239415}
-  m_LocalPosition: {x: -6.647042, y: 0.80222, z: -0.9981451}
+  m_LocalPosition: {x: 0.37, y: 1.57, z: 4.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4606092019769954}
@@ -2168,7 +2168,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114576318815342824
+--- !u!114 &114349839593481864
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2176,7 +2176,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1058969819910248}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c947b42c6f732f4b9c565e0ee3763fa, type: 3}
+  m_Script: {fileID: 11500000, guid: fbcbf331d079ebf4d8b7de46402ddce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: e8ca8f18908824349814124f3dee459f, type: 2}
@@ -2184,34 +2184,18 @@ MonoBehaviour:
   movementSpeed: 0
   baseAttack: 0
   attackSpeed: 0
-  healthText: {fileID: 0}
-  healthTextGO: {fileID: 0}
-  canvas: {fileID: 0}
-  textPos: {fileID: 0}
-  weapon: {fileID: 1417247214820930}
-  font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-  movingRange: 10
-  changePosTime: 10
-  attackDistance: 1.5
-  attackCooldown: 0
-  viewDistance: 15
-  hearDistance: 10
-  actualDamagedCooldown: 0
-  damagedCooldown: 3
-  NavAgent: {fileID: 195809773207414210}
-  animator: {fileID: 95654544391162436}
-  blood: {fileID: 1540188549263062, guid: 9241f871267c8a6478b40eebaffd61f6, type: 2}
-  bloodPosition: {fileID: 4315662686491712}
-  attackAnimationTime: 2.617
-  damagedAnimationTime: 2.167
-  actualPosTime: 0
-  actualAttackAnimationTime: 0
-  actualDamagedAnimationTime: 0
-  actualAttackCooldown: 0.3
+  NavAgent: {fileID: 0}
+  destination: {x: 0, y: 0, z: 0}
+  playerPosition: {x: 0, y: 0, z: 0}
+  initialPosition: {x: 0, y: 0, z: 0}
   playerDetected: 0
   damaged: 0
   attackOnCooldown: 0
+  weapon: {fileID: 1417247214820930}
+  font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   state: 0
+  blood: {fileID: 1540188549263062, guid: 9241f871267c8a6478b40eebaffd61f6, type: 2}
+  bloodPosition: {fileID: 4315662686491712}
 --- !u!136 &136183414480292810
 CapsuleCollider:
   m_ObjectHideFlags: 1
