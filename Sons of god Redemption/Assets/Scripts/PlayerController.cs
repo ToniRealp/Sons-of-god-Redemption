@@ -388,7 +388,7 @@ public class PlayerController : MonoBehaviour {
         //}
         if (fireHit)
         {
-            health -= (int)boss.GetComponentInParent<FirstBossBehaviour>().damage;
+            health -= (int)boss.GetComponentInParent<ProtoBossBehaviour>().damage;
             healthBar.value = health;
         }
 
@@ -501,7 +501,7 @@ public class PlayerController : MonoBehaviour {
         }
         if (other.tag == "BossWeapon")
         {
-            health -= (int)other.GetComponentInParent<FirstBossBehaviour>().damage;
+            health -= (int)other.GetComponentInParent<ProtoBossBehaviour>().damage;
             healthBar.value = health;
             damaged = true;
         }

@@ -8,19 +8,19 @@ public class FirstBossBehaviour : MonoBehaviour
 
     public GameObject fireParticles;
     public Animator animator;
-    public float attackDistance = 3.5f, attackMinInterval = 2, attackMaxInterval = 4;
+    public float attackDistance = 3.5f, attackMinInterval = 0, attackMaxInterval = 1;
     public int randomAttack, randomAttack2;
     public float movingSpeed = 0.05f, rotationSpeed = 0.05f;
 
 
     private GameObject player;
-    private float preJumpAnimationTime, jumpAnimationTime, roarAnimationTime, swipeAnimationTime;
-    private float actualAttackInterval, actualPreJumpTime, actualJumpTime, actualRoarTime, actualSwipeTime;
+    private float chargeAnimationTime, explosionAnimationTime, roarAnimationTime, swipeAnimationTime, rainAnimationTime;
+    private float actualAttackInterval, actualChargeTime, actualExplosionTime, actualRoarTime, actualSwipeTime, actualRainTime;
 
-    enum State { IDLE, WALKING, SWIPEATTACK, PREJUMP, JUMP, ROAR, DAMAGED };
+    enum State { IDLE, WALKING, SWIPEATTACK, CHARGE, EXPLOSION, ROAR, RAIN, DAMAGED };
     [SerializeField] State state = State.IDLE;
 
-    public float playerDistance, health = 500, damage, swipeDmg=15, jumpDmg=25, roarDmg=2;
+    public float playerDistance, health = 1800, damage, swipeDmg = 15, explosionDmg = 55, roarDmg = 25, rainDmg=15;
     string lastTag;
     public Text healthText;
     public GameObject healthTextGO, canvas, textPos, weapon;
@@ -34,10 +34,11 @@ public class FirstBossBehaviour : MonoBehaviour
     {
         actualAttackInterval = Random.Range(attackMinInterval, attackMaxInterval);
         player = GameObject.FindGameObjectWithTag("Player");
-        actualPreJumpTime = preJumpAnimationTime = AnimationLength("Mutant Flexing Muscles", animator);
-        actualJumpTime = jumpAnimationTime = AnimationLength("Mutant Jump Attack", animator);
+        actualChargeTime = chargeAnimationTime = AnimationLength("Mutant Flexing Muscles", animator);
+        actualExplosionTime = explosionAnimationTime = AnimationLength("Mutant Jumping", animator);
         actualRoarTime = roarAnimationTime = AnimationLength("Mutant Roaring", animator);
         actualSwipeTime = swipeAnimationTime = AnimationLength("Mutant Swiping", animator);
+        actualRainTime = rainAnimationTime = AnimationLength("Wide Arm Spell Casting", animator);
         fireParticles.SetActive(false);
         lastTag = "value";
 
@@ -92,22 +93,22 @@ public class FirstBossBehaviour : MonoBehaviour
                                 state = State.SWIPEATTACK;
                                 break;
                             case 1:
-                                animator.SetTrigger("SwipeAttack");
-                                damage = swipeDmg;
+                                animator.SetTrigger("Rain");
+                                damage = rainDmg;
                                 randomAttack++;
-                                state = State.SWIPEATTACK;
+                                state = State.RAIN;
                                 break;
                             case 2:
-                                animator.SetTrigger("SwipeAttack");
-                                damage = swipeDmg;
-                                randomAttack++;
-                                state = State.SWIPEATTACK;
-                                break;
-                            case 3:
                                 animator.SetTrigger("Roar");
                                 damage = roarDmg;
-                                randomAttack=0;
+                                randomAttack++;
                                 state = State.ROAR;
+                                break;
+                            case 3:
+                                animator.SetTrigger("Explosion");
+                                damage = explosionDmg;
+                                randomAttack = 0;
+                                state = State.CHARGE;
                                 break;
                             default:
                                 break;
@@ -135,15 +136,15 @@ public class FirstBossBehaviour : MonoBehaviour
                         switch (randomAttack2)
                         {
                             case 0:
-                                animator.SetTrigger("Jump");
-                                damage = jumpDmg;
+                                animator.SetTrigger("Explosion");
+                                damage = explosionDmg;
                                 randomAttack2++;
-                                state = State.PREJUMP;
+                                state = State.CHARGE;
                                 break;
                             case 1:
                                 animator.SetTrigger("Roar");
                                 damage = roarDmg;
-                                randomAttack2=0;
+                                randomAttack2 = 0;
                                 state = State.ROAR;
                                 break;
                             default:
@@ -169,24 +170,24 @@ public class FirstBossBehaviour : MonoBehaviour
                     state = State.IDLE;
                 }
                 break;
-            case State.PREJUMP:
+            case State.CHARGE:
                 // Look to player
                 LookPlayer();
-                if ((actualPreJumpTime -= Time.deltaTime) <= 0)
+                if ((actualChargeTime -= Time.deltaTime) <= 0)
                 {
-                    actualPreJumpTime = preJumpAnimationTime;
-                    state = State.JUMP;
+                    actualChargeTime = chargeAnimationTime;
+                    state = State.EXPLOSION;
                 }
                 break;
-            case State.JUMP:
-                actualJumpTime -= Time.deltaTime;
-                if (actualJumpTime <= jumpAnimationTime * 0.8)
+            case State.EXPLOSION:
+                actualExplosionTime -= Time.deltaTime;
+                if (actualExplosionTime <= explosionAnimationTime * 0.8)
                     tag = "BossWeapon";
-                if (actualJumpTime <= jumpAnimationTime * 0.5)
+                if (actualExplosionTime <= explosionAnimationTime * 0.5)
                     tag = "Enemy";
-                if (actualJumpTime <= 0)
+                if (actualExplosionTime <= 0)
                 {
-                    actualJumpTime = jumpAnimationTime;
+                    actualExplosionTime = explosionAnimationTime;
                     state = State.IDLE;
                 }
                 break;
@@ -203,6 +204,13 @@ public class FirstBossBehaviour : MonoBehaviour
                 if (actualRoarTime <= 0)
                 {
                     actualRoarTime = roarAnimationTime;
+                    state = State.IDLE;
+                }
+                break;
+            case State.RAIN:
+                if ((actualRainTime -= Time.deltaTime) <= 0)
+                {
+                    actualRainTime = rainAnimationTime;
                     state = State.IDLE;
                 }
                 break;
@@ -247,3 +255,4 @@ public class FirstBossBehaviour : MonoBehaviour
 
 
 }
+
