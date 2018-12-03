@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class FirstBossBehaviour : MonoBehaviour
 {
 
-    public GameObject fireParticles;
+    public GameObject fireParticles, explosionParticles;
     public Animator animator;
     public float attackDistance = 3.5f, attackMinInterval = 0, attackMaxInterval = 1;
     public int randomAttack, randomAttack2;
@@ -40,6 +40,7 @@ public class FirstBossBehaviour : MonoBehaviour
         actualSwipeTime = swipeAnimationTime = AnimationLength("Mutant Swiping", animator);
         actualRainTime = rainAnimationTime = AnimationLength("Wide Arm Spell Casting", animator);
         fireParticles.SetActive(false);
+        explosionParticles.SetActive(false);
         lastTag = "value";
 
         //Health Text
@@ -181,12 +182,11 @@ public class FirstBossBehaviour : MonoBehaviour
                 break;
             case State.EXPLOSION:
                 actualExplosionTime -= Time.deltaTime;
-                if (actualExplosionTime <= explosionAnimationTime * 0.8)
-                    tag = "BossWeapon";
                 if (actualExplosionTime <= explosionAnimationTime * 0.5)
-                    tag = "Enemy";
+                    explosionParticles.SetActive(true);
                 if (actualExplosionTime <= 0)
                 {
+                    explosionParticles.SetActive(false);
                     actualExplosionTime = explosionAnimationTime;
                     state = State.IDLE;
                 }

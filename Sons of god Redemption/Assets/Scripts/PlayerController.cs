@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour {
     public float dashCooldownTime, dashDuration, onHitAnimDelay, damage;
     private float dashCooldownCounter, actualDashTime, animLength, animDuration, onHitDelay;
     private bool dashed, attacked, lastAttacked, transition, hit, lastHitted;
-    public bool interact, fireHit;
+    public bool interact, fireHit, explosionHit;
     const float velChange = 0.5f;
 
     public static bool damaged;
@@ -388,7 +388,7 @@ public class PlayerController : MonoBehaviour {
         //}
         if (fireHit)
         {
-            health -= (int)boss.GetComponentInParent<ProtoBossBehaviour>().damage;
+            health -= (int)boss.GetComponentInParent<FirstBossBehaviour>().damage;
             healthBar.value = health;
         }
 
@@ -502,6 +502,12 @@ public class PlayerController : MonoBehaviour {
         if (other.tag == "BossWeapon")
         {
             health -= (int)other.GetComponentInParent<ProtoBossBehaviour>().damage;
+            healthBar.value = health;
+            damaged = true;
+        }
+        if (other.tag == "FirstBossWeapon")
+        {
+            health -= (int)other.GetComponentInParent<FirstBossBehaviour>().damage;
             healthBar.value = health;
             damaged = true;
         }
