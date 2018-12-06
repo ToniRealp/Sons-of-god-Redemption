@@ -6,16 +6,18 @@ using UnityEngine.UI;
 public class FirstBossBehaviour : MonoBehaviour
 {
 
-    public GameObject fireParticles, explosionParticles;
+    public GameObject fireParticles, explosionParticles, meteor;
     public Animator animator;
-    public float attackDistance = 3.5f, attackMinInterval = 0, attackMaxInterval = 1, explosionRange=10;
-    public int randomAttack, randomAttack2;
-    public float movingSpeed = 0.05f, rotationSpeed = 0.05f;
+    public float attackDistance = 3.5f, attackMinInterval = 0, attackMaxInterval = 1, explosionRange = 10, movingSpeed = 0.05f, rotationSpeed = 0.05f, meteorInterval = 0.3f, meteorRange = 5;
+    public int meteorNum = 5, randomAttack, randomAttack2;
+    public Vector3[] meteorPosition;
 
 
     private GameObject player;
-    private float chargeAnimationTime, explosionAnimationTime, roarAnimationTime, swipeAnimationTime, rainAnimationTime;
+    private float chargeAnimationTime, explosionAnimationTime, roarAnimationTime, swipeAnimationTime, rainAnimationTime, initMeteorTime;
     private float actualAttackInterval, actualChargeTime, actualExplosionTime, actualRoarTime, actualSwipeTime, actualRainTime;
+    private int meteorCounter;
+    private bool explosionChecked;
 
     enum State { IDLE, WALKING, SWIPEATTACK, CHARGE, EXPLOSION, ROAR, RAIN, DAMAGED };
     [SerializeField] State state = State.IDLE;
@@ -53,7 +55,9 @@ public class FirstBossBehaviour : MonoBehaviour
         healthText.alignment = TextAnchor.MiddleCenter;
         textPos = this.gameObject.transform.GetChild(2).gameObject;
 
-        randomAttack2 = randomAttack = 0;
+        meteorCounter = randomAttack2 = randomAttack = 0;
+        meteorPosition = new Vector3[meteorNum];
+        explosionChecked = false;
     }
 
     // Update is called once per frame
@@ -97,6 +101,12 @@ public class FirstBossBehaviour : MonoBehaviour
                                 animator.SetTrigger("Rain");
                                 damage = rainDmg;
                                 randomAttack++;
+                                initMeteorTime = Time.time;
+                                meteorCounter = 0;
+                                for (int i = 0; i < meteorNum; i++)
+                                {
+                                    meteorPosition[i] = new Vector3(Random.Range(transform.position.x - meteorRange, transform.position.x + meteorRange), 20, Random.Range(transform.position.z - meteorRange, transform.position.z + meteorRange));
+                                }
                                 state = State.RAIN;
                                 break;
                             case 2:
@@ -109,6 +119,7 @@ public class FirstBossBehaviour : MonoBehaviour
                                 animator.SetTrigger("Explosion");
                                 damage = explosionDmg;
                                 randomAttack = 0;
+                                explosionChecked = false;
                                 state = State.CHARGE;
                                 break;
                             default:
@@ -140,6 +151,7 @@ public class FirstBossBehaviour : MonoBehaviour
                                 animator.SetTrigger("Explosion");
                                 damage = explosionDmg;
                                 randomAttack2++;
+                                explosionChecked = false;
                                 state = State.CHARGE;
                                 break;
                             case 1:
@@ -162,7 +174,7 @@ public class FirstBossBehaviour : MonoBehaviour
             case State.SWIPEATTACK:
                 actualSwipeTime -= Time.deltaTime;
                 if (actualSwipeTime <= swipeAnimationTime * 0.8)
-                    weapon.tag = "BossWeapon";
+                    weapon.tag = "FirstBossWeapon";
                 if (actualSwipeTime <= swipeAnimationTime * 0.2)
                     weapon.tag = "Untagged";
                 if (actualSwipeTime <= 0)
@@ -185,10 +197,15 @@ public class FirstBossBehaviour : MonoBehaviour
                 if (actualExplosionTime <= explosionAnimationTime * 0.5)
                 {
                     explosionParticles.SetActive(true);
-                    if (playerDistance<explosionRange)
+                    if (!explosionChecked)
                     {
-                        player.GetComponent<PlayerController>().explosionHit = true;
+                        if (playerDistance < explosionRange)
+                        {
+                            player.GetComponent<PlayerController>().explosionHit = true;
+                        }
+                        explosionChecked = true;
                     }
+
                 }
 
                     
@@ -216,7 +233,13 @@ public class FirstBossBehaviour : MonoBehaviour
                 }
                 break;
             case State.RAIN:
-                if ((actualRainTime -= Time.deltaTime) <= 0)
+                if (Time.time - initMeteorTime >= meteorInterval && meteorCounter < meteorNum)
+                {
+                    Instantiate(meteor, meteorPosition[meteorCounter], new Quaternion(0, 0, 0, 0));
+                    meteorCounter++;
+                    initMeteorTime = Time.time;
+                }
+                if ((actualRainTime -= Time.deltaTime) <= 0 && meteorCounter>=meteorNum)
                 {
                     actualRainTime = rainAnimationTime;
                     state = State.IDLE;
