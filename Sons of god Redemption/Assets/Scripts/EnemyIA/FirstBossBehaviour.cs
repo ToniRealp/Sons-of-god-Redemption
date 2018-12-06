@@ -8,8 +8,8 @@ public class FirstBossBehaviour : MonoBehaviour
 
     public GameObject fireParticles, explosionParticles, meteor;
     public Animator animator;
-    public float attackDistance = 3.5f, attackMinInterval = 0, attackMaxInterval = 1, explosionRange = 10, movingSpeed = 0.05f, rotationSpeed = 0.05f, meteorInterval = 0.3f, meteorRange = 5;
-    public int meteorNum = 5, randomAttack, randomAttack2;
+    public float attackDistance = 5f, explosionRange = 10, movingSpeed = 0.05f, rotationSpeed = 0.05f, meteorInterval = 0.3f, meteorRange = 5;
+    public int meteorNum = 5, actualAttack, actualAttack2, patron;
     public Vector3[] meteorPosition;
 
 
@@ -17,12 +17,12 @@ public class FirstBossBehaviour : MonoBehaviour
     private float chargeAnimationTime, explosionAnimationTime, roarAnimationTime, swipeAnimationTime, rainAnimationTime, initMeteorTime;
     private float actualAttackInterval, actualChargeTime, actualExplosionTime, actualRoarTime, actualSwipeTime, actualRainTime;
     private int meteorCounter;
-    private bool explosionChecked;
+    private bool explosionChecked, patron1switched, patron2switched, patron3switched;
 
     enum State { IDLE, WALKING, SWIPEATTACK, CHARGE, EXPLOSION, ROAR, RAIN, DAMAGED };
     [SerializeField] State state = State.IDLE;
 
-    public float playerDistance, health = 1800, damage, swipeDmg = 15, explosionDmg = 55, roarDmg = 25, rainDmg=15;
+    public float playerDistance, maxHealth = 1800, health, damage, swipeDmg = 15, explosionDmg = 55, roarDmg = 25, rainDmg=15;
     string lastTag;
     public Text healthText;
     public GameObject healthTextGO, canvas, textPos, weapon;
@@ -34,7 +34,8 @@ public class FirstBossBehaviour : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        actualAttackInterval = Random.Range(attackMinInterval, attackMaxInterval);
+        health = maxHealth;
+        actualAttackInterval = 1;
         player = GameObject.FindGameObjectWithTag("Player");
         actualChargeTime = chargeAnimationTime = AnimationLength("Mutant Flexing Muscles", animator);
         actualExplosionTime = explosionAnimationTime = AnimationLength("Mutant Jumping", animator);
@@ -55,7 +56,9 @@ public class FirstBossBehaviour : MonoBehaviour
         healthText.alignment = TextAnchor.MiddleCenter;
         textPos = this.gameObject.transform.GetChild(2).gameObject;
 
-        meteorCounter = randomAttack2 = randomAttack = 0;
+        patron = 1;
+        patron1switched = patron2switched = patron3switched = false;
+        actualAttack2 = actualAttack = meteorCounter = 0;
         meteorPosition = new Vector3[meteorNum];
         explosionChecked = false;
     }
@@ -76,6 +79,27 @@ public class FirstBossBehaviour : MonoBehaviour
         healthTextGO.GetComponent<Transform>().position = Camera.main.WorldToScreenPoint(textPos.transform.position);
         healthText.text = health.ToString();
 
+        if (health<maxHealth * 0.75 && !patron1switched)
+        {
+            patron = 2;
+            actualAttack = 0;
+            actualAttack2 = 0;
+            patron1switched = true;
+        }
+        if (health < maxHealth * 0.5 && !patron2switched)
+        {
+            patron = 3;
+            actualAttack = 0;
+            actualAttack2 = 0;
+            patron2switched = true;
+        }
+        if (health < maxHealth * 0.25 && !patron3switched)
+        {
+            patron = 4;
+            actualAttack = 0;
+            actualAttack2 = 0;
+            patron3switched = true;
+        }
 
         switch (state)
         {
@@ -87,42 +111,176 @@ public class FirstBossBehaviour : MonoBehaviour
                 {
                     if ((actualAttackInterval -= Time.deltaTime) <= 0)
                     {
-                        actualAttackInterval = Random.Range(attackMinInterval, attackMaxInterval);
                         animator.SetBool("isIdle", false);
-                        switch (randomAttack)
+                        switch (patron)
                         {
-                            case 0:
-                                animator.SetTrigger("SwipeAttack");
-                                damage = swipeDmg;
-                                randomAttack++;
-                                state = State.SWIPEATTACK;
-                                break;
                             case 1:
-                                animator.SetTrigger("Rain");
-                                damage = rainDmg;
-                                randomAttack++;
-                                initMeteorTime = Time.time;
-                                meteorCounter = 0;
-                                for (int i = 0; i < meteorNum; i++)
+                                switch (actualAttack)
                                 {
-                                    meteorPosition[i] = new Vector3(Random.Range(transform.position.x - meteorRange, transform.position.x + meteorRange), 20, Random.Range(transform.position.z - meteorRange, transform.position.z + meteorRange));
+                                    case 0:
+                                        Swipe();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 1:
+                                        Swipe();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 2:
+                                        Rain();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 3:
+                                        Swipe();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 4:
+                                        Swipe();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 5:
+                                        Roar();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 6:
+                                        Explosion();
+                                        actualAttack = 0;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    default:
+                                        break;
                                 }
-                                state = State.RAIN;
                                 break;
                             case 2:
-                                animator.SetTrigger("Roar");
-                                damage = roarDmg;
-                                randomAttack++;
-                                state = State.ROAR;
+                                switch (actualAttack)
+                                {
+                                    case 0:
+                                        Swipe();
+                                        actualAttack++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 1:
+                                        Swipe();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 2:
+                                        Explosion();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 3:
+                                        Swipe();
+                                        actualAttack++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 4:
+                                        Swipe();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 5:
+                                        Roar();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 6:
+                                        Swipe();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 7:
+                                        Rain();
+                                        actualAttack=0;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
                                 break;
                             case 3:
-                                animator.SetTrigger("Explosion");
-                                damage = explosionDmg;
-                                randomAttack = 0;
-                                explosionChecked = false;
-                                state = State.CHARGE;
+                                switch (actualAttack)
+                                {
+                                    case 0:
+                                        Explosion();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 1:
+                                        Roar();
+                                        actualAttack++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 2:
+                                        Swipe();
+                                        actualAttack++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 3:
+                                        Swipe();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 4:
+                                        Rain();
+                                        actualAttack++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 5:
+                                        Roar();
+                                        actualAttack=0;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
                                 break;
-                            default:
+                            case 4:
+                                switch (actualAttack)
+                                {
+                                    case 0:
+                                        Roar();
+                                        actualAttack++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 1:
+                                        Explosion();
+                                        actualAttack++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 2:
+                                        Rain();
+                                        actualAttack++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 3:
+                                        Swipe();
+                                        actualAttack++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 4:
+                                        Swipe();
+                                        actualAttack++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 5:
+                                        Swipe();
+                                        actualAttack++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 6:
+                                        Roar();
+                                        actualAttack=0;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    default:
+                                        break;
+                                }
                                 break;
                         }
                     }
@@ -143,24 +301,126 @@ public class FirstBossBehaviour : MonoBehaviour
                     transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z), movingSpeed);
                     if ((actualAttackInterval -= Time.deltaTime) <= 0)
                     {
-                        actualAttackInterval = Random.Range(attackMinInterval, attackMaxInterval);
                         animator.SetBool("isMoving", false);
-                        switch (randomAttack2)
+                        switch (patron)
                         {
-                            case 0:
-                                animator.SetTrigger("Explosion");
-                                damage = explosionDmg;
-                                randomAttack2++;
-                                explosionChecked = false;
-                                state = State.CHARGE;
-                                break;
                             case 1:
-                                animator.SetTrigger("Roar");
-                                damage = roarDmg;
-                                randomAttack2 = 0;
-                                state = State.ROAR;
+                                switch (actualAttack2)
+                                {
+                                    case 0:
+                                        Rain();
+                                        actualAttack2++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 1:
+                                        Roar();
+                                        actualAttack2++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 2:
+                                        Explosion();
+                                        actualAttack2++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 3:
+                                        Roar();
+                                        actualAttack2=0;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
                                 break;
-                            default:
+                            case 2:
+                                switch (actualAttack2)
+                                {
+                                    case 0:
+                                        Rain();
+                                        actualAttack2++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 1:
+                                        Explosion();
+                                        actualAttack2++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 2:
+                                        Roar();
+                                        actualAttack2++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 3:
+                                        Roar();
+                                        actualAttack2=0;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            case 3:
+                                switch (actualAttack2)
+                                {
+                                    case 0:
+                                        Explosion();
+                                        actualAttack2++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 1:
+                                        Roar();
+                                        actualAttack2++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 2:
+                                        Rain();
+                                        actualAttack2++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 3:
+                                        Roar();
+                                        actualAttack2=0;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            case 4:
+                                switch (actualAttack2)
+                                {
+                                    case 0:
+                                        Rain();
+                                        actualAttack2++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 1:
+                                        Explosion();
+                                        actualAttack2++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 2:
+                                        Rain();
+                                        actualAttack2++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 3:
+                                        Roar();
+                                        actualAttack2++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 4:
+                                        Explosion();
+                                        actualAttack2++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 5:
+                                        Roar();
+                                        actualAttack2=0;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    default:
+                                        break;
+                                }
                                 break;
                         }
                     }
@@ -172,7 +432,10 @@ public class FirstBossBehaviour : MonoBehaviour
                 }
                 break;
             case State.SWIPEATTACK:
+
                 actualSwipeTime -= Time.deltaTime;
+                if (actualSwipeTime > swipeAnimationTime * 0.6)
+                    LookPlayer();
                 if (actualSwipeTime <= swipeAnimationTime * 0.8)
                     weapon.tag = "FirstBossWeapon";
                 if (actualSwipeTime <= swipeAnimationTime * 0.2)
@@ -260,7 +523,40 @@ public class FirstBossBehaviour : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(player.transform.position.x - transform.position.x, transform.position.y, player.transform.position.z - transform.position.z)), rotationSpeed);
     }
 
+    void Swipe()
+    {
+        animator.SetTrigger("SwipeAttack");
+        damage = swipeDmg;
+        state = State.SWIPEATTACK;
+    }
 
+    void Rain()
+    {
+        animator.SetTrigger("Rain");
+        damage = rainDmg;
+        initMeteorTime = Time.time;
+        meteorCounter = 0;
+        for (int i = 0; i < meteorNum; i++)
+        {
+            meteorPosition[i] = new Vector3(Random.Range(player.transform.position.x - meteorRange, player.transform.position.x + meteorRange), 20, Random.Range(player.transform.position.z - meteorRange, player.transform.position.z + meteorRange));
+        }
+        state = State.RAIN;
+    }
+
+    void Roar()
+    {
+        animator.SetTrigger("Roar");
+        damage = roarDmg;
+        state = State.ROAR;
+    }
+
+    void Explosion()
+    {
+        animator.SetTrigger("Explosion");
+        damage = explosionDmg;
+        explosionChecked = false;
+        state = State.CHARGE;
+    }
 
     float AnimationLength(string animName, Animator animator)
     {
