@@ -8,7 +8,7 @@ public class FirstBossBehaviour : MonoBehaviour
 
     public GameObject fireParticles, explosionParticles;
     public Animator animator;
-    public float attackDistance = 3.5f, attackMinInterval = 0, attackMaxInterval = 1;
+    public float attackDistance = 3.5f, attackMinInterval = 0, attackMaxInterval = 1, explosionRange=10;
     public int randomAttack, randomAttack2;
     public float movingSpeed = 0.05f, rotationSpeed = 0.05f;
 
@@ -183,7 +183,15 @@ public class FirstBossBehaviour : MonoBehaviour
             case State.EXPLOSION:
                 actualExplosionTime -= Time.deltaTime;
                 if (actualExplosionTime <= explosionAnimationTime * 0.5)
+                {
                     explosionParticles.SetActive(true);
+                    if (playerDistance<explosionRange)
+                    {
+                        player.GetComponent<PlayerController>().explosionHit = true;
+                    }
+                }
+
+                    
                 if (actualExplosionTime <= 0)
                 {
                     explosionParticles.SetActive(false);

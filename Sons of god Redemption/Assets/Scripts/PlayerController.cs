@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour {
     public float dashCooldownTime, dashDuration, onHitAnimDelay, damage;
     private float dashCooldownCounter, actualDashTime, animLength, animDuration, onHitDelay;
     private bool dashed, attacked, lastAttacked, transition, hit, lastHitted;
-    public bool interact, fireHit, explosionHit;
+    public bool interact, fireHit, explosionHit, meteorHit;
     const float velChange = 0.5f;
 
     public static bool damaged;
@@ -388,9 +388,24 @@ public class PlayerController : MonoBehaviour {
         //}
         if (fireHit)
         {
-            health -= (int)boss.GetComponentInParent<FirstBossBehaviour>().damage;
+            health -= (int)boss.GetComponentInParent<FirstBossBehaviour>().roarDmg;
             healthBar.value = health;
         }
+
+        if (explosionHit)
+        {
+            health -= (int)boss.GetComponentInParent<FirstBossBehaviour>().explosionDmg;
+            healthBar.value = health;
+            explosionHit = false;
+        }
+
+        if (meteorHit)
+        {
+            health -= (int)boss.GetComponentInParent<FirstBossBehaviour>().rainDmg;
+            healthBar.value = health;
+            meteorHit = false;
+        }
+
 
         fireHit = false;
         damaged = false;

@@ -937,7 +937,6 @@ GameObject:
   - component: {fileID: 4757553552834516}
   - component: {fileID: 198868540469502508}
   - component: {fileID: 199337863953759812}
-  - component: {fileID: 114658429270784214}
   m_Layer: 0
   m_Name: DustExplosion
   m_TagString: Untagged
@@ -1941,7 +1940,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1758306954624812}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.17, y: -0.55, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4226115362827750}
@@ -2332,6 +2331,7 @@ MonoBehaviour:
   attackDistance: 3.5
   attackMinInterval: 0
   attackMaxInterval: 1
+  explosionRange: 10
   randomAttack: 0
   randomAttack2: 0
   movingSpeed: 0.02
@@ -2341,7 +2341,7 @@ MonoBehaviour:
   health: 1800
   damage: 0
   swipeDmg: 15
-  explosionDmg: 55
+  explosionDmg: 45
   roarDmg: 25
   rainDmg: 15
   healthText: {fileID: 0}
@@ -2352,17 +2352,6 @@ MonoBehaviour:
   font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   blood: {fileID: 1766210467136178, guid: 3dbe7a26933ab80478c3cef9187f27f1, type: 2}
   bloodPosition: {fileID: 4967374045783266}
---- !u!114 &114658429270784214
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1758306954624812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3f14ae6aea490243beb72612fb41efe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &136566827087189704
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -12064,7 +12053,7 @@ ParticleSystem:
     serializedVersion: 5
     enabled: 1
     type: 4
-    angle: 0.87384474
+    angle: 32.6
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -12213,7 +12202,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 30
+      scalar: 115.1
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -37697,7 +37686,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 3
     type: 1
     collisionMode: 0
