@@ -6,6 +6,7 @@ public class BasicEnemy : Enemy {
 
     new void Start () {
         base.Start();
+        reactsToDamage = true;
 	}
 
     override protected void Attack()

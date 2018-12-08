@@ -28,7 +28,7 @@ public abstract class Enemy : MonoBehaviour {
     public NavMeshAgent NavAgent;
     public Vector3 destination, playerPosition, initialPosition;
     protected float xMin, xMax, zMin, zMax;
-    public bool playerDetected, damaged, attackOnCooldown;
+    public bool playerDetected, damaged, attackOnCooldown, reactsToDamage;
     protected float attackCooldown, actualAttackCooldown, damagedCooldown, actualDamagedCooldown, moveCooldown, timeToMove=5f;
 
     public RaycastHit[] hit;
@@ -71,7 +71,7 @@ public abstract class Enemy : MonoBehaviour {
         healthText.font = font;
         healthTextGO.name = "Enemy Health";
         healthText.alignment = TextAnchor.MiddleCenter;
-        textPos = this.gameObject.transform.GetChild(3).gameObject;
+        textPos = this.gameObject.transform.Find("HealthTextPos").gameObject;
         //Other
         playerDetected = false;
         initialPosition = transform.position;
@@ -102,6 +102,7 @@ public abstract class Enemy : MonoBehaviour {
             {
                 damaged = true;
                 actualDamagedCooldown = damagedCooldown;
+                if(reactsToDamage)
                 animator.SetTrigger("Damaged");
             }
             Instantiate(blood, bloodPosition.position, bloodPosition.rotation, transform);
@@ -117,10 +118,15 @@ public abstract class Enemy : MonoBehaviour {
         UpdateHealthText();
         UseFullDetectionSystem();
         LookToDestination();
-
-        if (damaged)
+        if (reactsToDamage)
         {
-            state = State.DAMAGED;
+            if (damaged)
+            {
+                state = State.DAMAGED;
+            }
+
+            if (animTimes["Reaction Hit"].cooldown > 0f)
+                animTimes["Reaction Hit"].cooldown -= Time.deltaTime;
         }
 
         if (attackOnCooldown)
@@ -132,8 +138,7 @@ public abstract class Enemy : MonoBehaviour {
             }
         }
 
-        if (animTimes["Reaction Hit"].cooldown > 0f)
-            animTimes["Reaction Hit"].cooldown -= Time.deltaTime;
+        
 
         if (actualDamagedCooldown > 0f)
             actualDamagedCooldown -= Time.deltaTime;
