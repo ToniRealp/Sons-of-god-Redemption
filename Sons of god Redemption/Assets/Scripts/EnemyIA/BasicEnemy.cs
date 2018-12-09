@@ -28,9 +28,9 @@ public class BasicEnemy : Enemy {
 
         if (attackOnCooldown)
         {
-            if ((actualAttackCooldown -= Time.deltaTime) <= 0)
+            if ((attackCooldown -= Time.deltaTime) <= 0)
             {
-                actualAttackCooldown = attackCooldown;
+                attackCooldown=attackSpeed;
                 attackOnCooldown = false;
             }
         }
@@ -92,7 +92,7 @@ public class BasicEnemy : Enemy {
                     if (DistanceToDestination() <= attackDistance && !attackOnCooldown)
                     {
                         state = State.ATTAKING;
-                        animator.SetBool("Attack", true);
+                        animator.SetTrigger("Attack");
                     }
                 }
                 else
@@ -110,18 +110,16 @@ public class BasicEnemy : Enemy {
 
                 // When attack time finishes
                 animTimes["Attack"].cooldown -= Time.deltaTime;
+
                 if (animTimes["Attack"].cooldown <= animTimes["Attack"].start)
                     weapon.tag = "EnemyWeapon";
+
                 if (animTimes["Attack"].cooldown <= animTimes["Attack"].end)
                     weapon.tag = "Untagged";
+
                 if (animTimes["Attack"].cooldown >= animTimes["Attack"].duration* 0.75f)
-                {
                     LookToDestination();
-                }
-                if (animTimes["Attack"].cooldown - animTimes["Attack"].duration / 2 <= 0)
-                {
-                    animator.SetBool("Attack", false);
-                }
+             
                 if (animTimes["Attack"].cooldown <= 0)
                 {
                     //Put it on cooldown and change status

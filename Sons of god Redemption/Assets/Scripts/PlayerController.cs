@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
 
     //Player stats
     public Stats stats;
-    public int health, movementSpeed, baseAttack, attackSpeed;
+    public int health, movementSpeed, baseAttack;
     public Slider healthBar;
 
     //Enums
@@ -50,7 +50,6 @@ public class PlayerController : MonoBehaviour {
         health = stats.health;
         movementSpeed = stats.movementSpeed;
         baseAttack = stats.baseAttack;
-        attackSpeed = stats.attackSpeed;
         healthBar.maxValue = health;
         healthBar.value = health;
 

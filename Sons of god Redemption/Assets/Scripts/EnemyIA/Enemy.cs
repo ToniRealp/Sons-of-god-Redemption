@@ -18,8 +18,8 @@ public abstract class Enemy : MonoBehaviour {
 
     //Stats
     public Stats stats;
-    public int health, movementSpeed, baseAttack, attackSpeed;
-    protected float movingRange, rotationSpeed, viewDistance, hearDistance, attackDistance;
+    public int health, movementSpeed, baseAttack;
+    protected float movingRange, rotationSpeed, viewDistance, hearDistance, attackDistance, attackSpeed;
 
     //Animations
     protected Animator animator;
@@ -29,8 +29,8 @@ public abstract class Enemy : MonoBehaviour {
     public Vector3 destination, playerPosition, initialPosition;
     protected float xMin, xMax, zMin, zMax;
     public bool playerDetected, damaged, attackOnCooldown, reactsToDamage;
-    protected float attackCooldown, actualAttackCooldown, damagedCooldown, actualDamagedCooldown, moveCooldown, timeToMove=5f;
-
+    protected float damagedCooldown, actualDamagedCooldown, moveCooldown, timeToMove=5f;
+    public float attackCooldown;
     public RaycastHit[] hit;
     public Ray[] ray;
 
@@ -80,6 +80,7 @@ public abstract class Enemy : MonoBehaviour {
         moveCooldown = timeToMove;
         actualDamagedCooldown = 0;
         damagedCooldown = 3f;
+        attackCooldown = attackSpeed;
         //Animator
         animator = GetComponent<Animator>();
         animTimes = new Dictionary<string, AnimInfo>();
@@ -120,6 +121,11 @@ public abstract class Enemy : MonoBehaviour {
     protected void LookToDestination()
     {
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(destination.x - transform.position.x, destination.y - transform.position.y, destination.z - transform.position.z)), rotationSpeed);
+    }
+
+    protected void LookToPlayer()
+    {
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(playerPosition.x - transform.position.x, playerPosition.y - transform.position.y, playerPosition.z - transform.position.z)), rotationSpeed);
     }
 
     protected bool IsMoving()

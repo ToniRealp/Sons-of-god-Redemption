@@ -28,9 +28,9 @@ public class TankEnemy : Enemy {
 
         if (attackOnCooldown)
         {
-            if ((actualAttackCooldown -= Time.deltaTime) <= 0)
+            if ((attackCooldown -= Time.deltaTime) <= 0)
             {
-                actualAttackCooldown = attackCooldown;
+                attackCooldown = attackSpeed;
                 attackOnCooldown = false;
             }
         }        

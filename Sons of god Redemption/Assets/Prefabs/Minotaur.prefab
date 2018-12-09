@@ -2037,7 +2037,6 @@ MonoBehaviour:
   health: 0
   movementSpeed: 0
   baseAttack: 0
-  attackSpeed: 0
   NavAgent: {fileID: 195283176031540746}
   destination: {x: 0, y: 0, z: 0}
   playerPosition: {x: 0, y: 0, z: 0}
@@ -2046,6 +2045,7 @@ MonoBehaviour:
   damaged: 0
   attackOnCooldown: 0
   reactsToDamage: 0
+  attackCooldown: 0
   healthTextGO: {fileID: 0}
   weapon: {fileID: 1542817743023028}
   font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}

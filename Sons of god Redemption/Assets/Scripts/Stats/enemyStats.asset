@@ -14,9 +14,9 @@ MonoBehaviour:
   health: 80
   movementSpeed: 2
   baseAttack: 10
-  attackSpeed: 2
   movingRange: 10
   rotationSpeed: 0.15
   ViewDistance: 15
   hearDistance: 10
   attackDistance: 1.5
+  attackSpeed: 1
