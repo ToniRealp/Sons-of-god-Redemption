@@ -176,6 +176,7 @@ public abstract class Enemy : MonoBehaviour {
     {
         // Raycasting Logic
         // View Raycasts
+        playerDetected = false;
         for (int i = 0; i < 5; i++)
         {
             if (Physics.Raycast(ray[i], out hit[i], viewDistance))

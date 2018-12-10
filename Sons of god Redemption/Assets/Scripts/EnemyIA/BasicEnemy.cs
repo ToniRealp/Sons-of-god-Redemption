@@ -89,7 +89,7 @@ public class BasicEnemy : Enemy {
                 if (playerDetected)
                 {
                     // If in attack conditions, go to attack
-                    if (DistanceToDestination() <= attackDistance && !attackOnCooldown)
+                    if (DistanceToDestination(destination) <= attackDistance && !attackOnCooldown)
                     {
                         state = State.ATTAKING;
                         animator.SetTrigger("Attack");

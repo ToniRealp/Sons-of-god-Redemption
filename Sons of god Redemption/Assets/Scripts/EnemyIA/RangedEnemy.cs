@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RangedEnemy : Enemy {
 
@@ -14,7 +15,7 @@ public class RangedEnemy : Enemy {
     {
         base.Start();
         shoot = true;
-        optimalPosOffset = 3f;
+        optimalPosOffset = 2f;
         optimalPos = attackDistance - optimalPosOffset;
     }
 
@@ -90,18 +91,22 @@ public class RangedEnemy : Enemy {
                 // Full speed
                 ChangeSpeed(movementSpeed);
                 // Go to player Position
-                if ((moveCooldown -= Time.deltaTime) <= 0)
+                if (DistanceToDestination(playerPosition) - optimalPos > optimalPosOffset)
                 {
-                    SetRandomDestination();
-                    moveCooldown = timeToMove;
+                    OptimalDestination(false);
                 }
+                else if(DistanceToDestination(playerPosition) - optimalPos < -optimalPosOffset)
+                {
+                    OptimalDestination(true);
+                }
+
 
                 MoveToDestination();
 
                 if (playerDetected)
                 {
                     // If in attack conditions, go to attack
-                    if (DistanceToDestination() <= attackDistance && !attackOnCooldown)
+                    if (DistanceToDestination(destination) <= attackDistance && !attackOnCooldown)
                     {
                         state = State.ATTAKING;
                         animator.SetTrigger("Shoot");
@@ -202,10 +207,33 @@ public class RangedEnemy : Enemy {
         Destroy(bullet, 2.0f);
     }
 
-    void OptimalDestination()
+    void OptimalDestination(bool isCloser)
     {
-        float angle = Random.Range(0, 360);
-        destination =new Vector3(Mathf.Sin(Mathf.Deg2Rad * (angle)), 0, Mathf.Cos(Mathf.Deg2Rad * (angle)))*(optimalPos+Random.Range(-optimalPosOffset,optimalPosOffset));
-    }
+        float angle = Vector3.SignedAngle(Vector3.forward,transform.position - playerPosition,Vector3.up); //Random.Range(0, 360);
+        float distance;
 
+        if (isCloser)
+            distance = optimalPos + Random.Range(0, optimalPosOffset);
+        else
+            distance = optimalPos - Random.Range(0, optimalPosOffset);
+
+        Vector3 position = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (angle)), 0, Mathf.Cos(Mathf.Deg2Rad * (angle))) * distance;
+        destination = playerPosition + position;
+
+        //do
+        //{
+        //    Vector3 position = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (angle)), 0, Mathf.Cos(Mathf.Deg2Rad * (angle))) * distance;
+        //    NavMeshHit hit;
+        //    if (NavMesh.Raycast(gameObject.transform.position, position, out hit, NavMesh.AllAreas))
+        //    {
+        //        destination = playerPosition + position;
+        //        break;
+        //    }
+        //    else
+        //    {
+        //        angle += 30;
+        //    }
+        //} while (true);
+
+    }
 }

@@ -65,7 +65,7 @@ public class TankEnemy : Enemy {
                 }
                 else
                 {
-                    if (DistanceToDestination() <= attackDistance && !attackOnCooldown)
+                    if (DistanceToDestination(destination) <= attackDistance && !attackOnCooldown)
                     {
                         state = State.ATTAKING;
                         animator.SetTrigger("Attack1");
@@ -124,7 +124,7 @@ public class TankEnemy : Enemy {
                             if (playerDetected)
                             {
                                 destination = playerPosition;
-                                if (DistanceToDestination() <= attackDistance && !attackOnCooldown)
+                                if (DistanceToDestination(destination) <= attackDistance && !attackOnCooldown)
                                 {
                                     state = State.ATTAKING;
                                     animator.SetTrigger("Attack1");
@@ -153,7 +153,7 @@ public class TankEnemy : Enemy {
                 {
                     if (playerDetected)
                     {
-                        if(DistanceToDestination() <= attackDistance && !attackOnCooldown)
+                        if(DistanceToDestination(destination) <= attackDistance && !attackOnCooldown)
                         {
                             state = State.ATTAKING;
                             animator.SetTrigger("Attack1");
