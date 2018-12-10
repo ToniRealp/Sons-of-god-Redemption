@@ -7,12 +7,15 @@ public class RangedEnemy : Enemy {
     public GameObject arrow;
     public Transform spawnPos;
     public float bulletSpeed;
+    private float optimalPos, optimalPosOffset;
     private bool shoot;
 
     new private void Start()
     {
         base.Start();
         shoot = true;
+        optimalPosOffset = 3f;
+        optimalPos = attackDistance - optimalPosOffset;
     }
 
     private void Update()
@@ -63,7 +66,6 @@ public class RangedEnemy : Enemy {
             case State.SEARCHING:
                 // Full speed
                 ChangeSpeed(movementSpeed);
-                LookToDestination();
 
                 if (!playerDetected)
                 {
@@ -95,7 +97,6 @@ public class RangedEnemy : Enemy {
                 }
 
                 MoveToDestination();
-                LookToPlayer();
 
                 if (playerDetected)
                 {
@@ -115,7 +116,7 @@ public class RangedEnemy : Enemy {
             case State.ATTAKING:
                 // No movement or rotation
                 ChangeSpeed(0);
-
+                LookToPlayer();
                 animTimes["Shoot"].cooldown -= Time.deltaTime;
 
                 // When attack time finishes
@@ -200,4 +201,11 @@ public class RangedEnemy : Enemy {
         // Destroy the bullet after 2 seconds
         Destroy(bullet, 2.0f);
     }
+
+    void OptimalDestination()
+    {
+        float angle = Random.Range(0, 360);
+        destination =new Vector3(Mathf.Sin(Mathf.Deg2Rad * (angle)), 0, Mathf.Cos(Mathf.Deg2Rad * (angle)))*(optimalPos+Random.Range(-optimalPosOffset,optimalPosOffset));
+    }
+
 }

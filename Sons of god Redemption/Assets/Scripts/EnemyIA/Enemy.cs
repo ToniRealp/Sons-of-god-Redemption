@@ -133,9 +133,9 @@ public abstract class Enemy : MonoBehaviour {
         return NavAgent.velocity.magnitude > 0.1f;
     }
 
-    protected float DistanceToDestination()
+    protected float DistanceToDestination(Vector3 _destination)
     {
-        return Vector3.Distance(gameObject.transform.position, destination);
+        return Vector3.Distance(gameObject.transform.position, _destination);
     }
 
     protected void UpdateRaycasts()
