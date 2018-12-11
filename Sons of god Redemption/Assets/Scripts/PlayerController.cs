@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour {
     public int walkVelocity, runVelocity, dashDistance;    
     public float dashCooldownTime, dashDuration, onHitAnimDelay, damage;
     private float dashCooldownCounter, actualDashTime, animLength, animDuration, onHitDelay;
-    private bool dashed, attacked, lastAttacked, transition, hit, lastHitted;
+    private bool dashed, attacked, transition, hit, lastHitted;
     public bool interact, fireHit;
     const float velChange = 0.5f;
 
@@ -379,12 +379,7 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        //if (attacked && weapon.tag != "Untagged" && !lastAttacked)
-        //{
-        //    audioSource.clip = swingSound;
-        //    audioSource.Stop();
-        //    audioSource.Play();
-        //}
+        
         if (fireHit)
         {
             health -= (int)boss.GetComponentInParent<FirstBossBehaviour>().damage;
@@ -393,8 +388,6 @@ public class PlayerController : MonoBehaviour {
 
         fireHit = false;
         damaged = false;
-        lastAttacked = attacked;
-
     }
 
     void GetInput()
