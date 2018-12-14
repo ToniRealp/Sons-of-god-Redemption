@@ -4,31 +4,49 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour {
+public abstract class Enemy : MonoBehaviour {
+
+    protected class AnimInfo{
+        public float duration, cooldown;
+        public float start, end;
+        public AnimInfo(float _duration, float _start = 0, float _end = 0) {
+            duration = cooldown = _duration;
+            start = _start;
+            end = _end;
+        }
+    }
 
     //Stats
     public Stats stats;
-    protected int health, movementSpeed, baseAttack, attackSpeed;
-    public float movingRange, rotationSpeed;
+    public int health, movementSpeed, baseAttack;
+    protected float movingRange, rotationSpeed, viewDistance, hearDistance, attackDistance, attackSpeed;
 
     //Animations
     protected Animator animator;
-    protected Dictionary<string, float> animTimes;
+    protected Dictionary<string, AnimInfo> animTimes;
 
     public NavMeshAgent NavAgent;
-    protected Vector3 destination, randomPosition, playerPosition, target, initialPosition;
-    protected float xMin, xMax, zMin, zMax, viewDistance, hearDistance;
-    protected bool playerDetected;
-    
+    public Vector3 destination, playerPosition, initialPosition;
+    protected float xMin, xMax, zMin, zMax;
+    public bool playerDetected, damaged, attackOnCooldown, reactsToDamage;
+    protected float damagedCooldown, actualDamagedCooldown, moveCooldown, timeToMove=5f;
+    public float attackCooldown;
     public RaycastHit[] hit;
     public Ray[] ray;
 
     protected Text healthText;
-    protected GameObject healthTextGO, canvas, textPos, weapon;
+    protected GameObject canvas, textPos;
+    public GameObject healthTextGO, weapon;
     public Font font;
 
-    enum State { SEARCHING, CHASING, ATTAKING, DAMAGED };
-    [SerializeField] State state;
+    protected enum State { SEARCHING, CHASING, ATTAKING, DAMAGED };
+    [SerializeField] protected State state;
+
+    protected string lastTag;
+
+    //blood particles
+    public GameObject blood;
+    public Transform bloodPosition;
 
     protected void Start()
     {
@@ -37,6 +55,11 @@ public class Enemy : MonoBehaviour {
         movementSpeed = stats.movementSpeed;
         baseAttack = stats.baseAttack;
         attackSpeed = stats.attackSpeed;
+        movingRange = stats.movingRange;
+        rotationSpeed = stats.rotationSpeed;
+        viewDistance = stats.ViewDistance;
+        hearDistance = stats.hearDistance;
+        attackDistance = stats.attackDistance;
         //Raycasts
         hit = new RaycastHit[73];
         ray = new Ray[73];
@@ -48,17 +71,28 @@ public class Enemy : MonoBehaviour {
         healthText.font = font;
         healthTextGO.name = "Enemy Health";
         healthText.alignment = TextAnchor.MiddleCenter;
-        textPos = this.gameObject.transform.GetChild(3).gameObject;
+        textPos = this.gameObject.transform.Find("HealthTextPos").gameObject;
         //Other
         playerDetected = false;
         initialPosition = transform.position;
+        NavAgent = GetComponent<NavMeshAgent>();
+        damaged = false;
+        moveCooldown = timeToMove;
+        actualDamagedCooldown = 0;
+        damagedCooldown = 3f;
+        attackCooldown = attackSpeed;
         //Animator
         animator = GetComponent<Animator>();
-        animTimes = new Dictionary<string, float>();
+        animTimes = new Dictionary<string, AnimInfo>();
         GetAnimations();
+        SetSearchingRange();
+        SetRandomDestination();
     }
 
-    #region ClassFunctionalities
+   
+
+
+    #region BasicEnemyFunctionalities
     protected void SetSearchingRange()
     {
         xMin = initialPosition.x - movingRange;
@@ -69,9 +103,9 @@ public class Enemy : MonoBehaviour {
 
     protected void SetRandomDestination()
     {
-        randomPosition.x = Random.Range(xMin, xMax);
-        randomPosition.y = 1;
-        randomPosition.z = Random.Range(zMin, zMax);
+        destination.x = Random.Range(xMin, xMax);
+        destination.y = 1;
+        destination.z = Random.Range(zMin, zMax);
     }
 
     protected void MoveToDestination()
@@ -79,14 +113,19 @@ public class Enemy : MonoBehaviour {
         NavAgent.SetDestination(destination);
     }
 
-    protected void ChangeSpeed(float _speed)
+    protected void ChangeSpeed(float _speed=0)
     {
         NavAgent.speed = _speed;
     }
 
-    protected void LookToTarget()
+    protected void LookToDestination()
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(target.x - transform.position.x, target.y - transform.position.y, target.z - transform.position.z)), rotationSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(destination.x - transform.position.x, destination.y - transform.position.y, destination.z - transform.position.z)), rotationSpeed);
+    }
+
+    protected void LookToPlayer()
+    {
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(playerPosition.x - transform.position.x, playerPosition.y - transform.position.y, playerPosition.z - transform.position.z)), rotationSpeed);
     }
 
     protected bool IsMoving()
@@ -94,9 +133,9 @@ public class Enemy : MonoBehaviour {
         return NavAgent.velocity.magnitude > 0.1f;
     }
 
-    protected float DistanceToTarget()
+    protected float DistanceToDestination(Vector3 _destination)
     {
-        return Vector3.Distance(gameObject.transform.position, target);
+        return Vector3.Distance(gameObject.transform.position, _destination);
     }
 
     protected void UpdateRaycasts()
@@ -133,11 +172,11 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    protected bool DetectPlayer()
+    protected void DetectPlayer()
     {
         // Raycasting Logic
-        bool playerDetected = false;
         // View Raycasts
+        playerDetected = false;
         for (int i = 0; i < 5; i++)
         {
             if (Physics.Raycast(ray[i], out hit[i], viewDistance))
@@ -183,14 +222,13 @@ public class Enemy : MonoBehaviour {
                 }
             }
         }
-        return playerDetected;
     }
 
-    protected bool UseFullDetectionSystem()
+    protected void UseFullDetectionSystem()
     {
         UpdateRaycasts();
         DebugRaycasts();
-        return DetectPlayer();
+        DetectPlayer();
     }
 
     protected void UpdateHealthText()
@@ -202,15 +240,15 @@ public class Enemy : MonoBehaviour {
 
     protected void Die()
     {
-        Destroy(healthTextGO);
-        Destroy(this.gameObject);
+            Destroy(healthTextGO);
+            Destroy(this.gameObject);
     }
 
     protected void GetAnimations()
     {
         AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
         foreach (var clip in clips) {
-            animTimes[clip.name] = clip.length;
+            animTimes[clip.name] = new AnimInfo(clip.length,clip.length*0.7f,clip.length*0.3f);
         }
     }
 
@@ -224,6 +262,11 @@ public class Enemy : MonoBehaviour {
                 return (clips[i].length);
         }
         return -1f;
+    }
+
+    protected float CurrentAnimLength()
+    {
+        return (animator.GetCurrentAnimatorStateInfo(0).length * animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
     }
     #endregion
 }

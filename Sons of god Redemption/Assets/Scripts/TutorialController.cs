@@ -150,9 +150,9 @@ public class TutorialController : MonoBehaviour {
     {
         foreach (var GameObject in GameObject.FindGameObjectsWithTag("Enemy"))
         {
-            if (GameObject.GetComponent<EnemyBehaviour>()!=null)
+            if (GameObject.GetComponent<BasicEnemy>()!=null)
             {
-                Destroy(GameObject.GetComponent<EnemyBehaviour>().healthTextGO);
+                Destroy(GameObject.GetComponent<BasicEnemy>().healthTextGO);
             }
             if (GameObject.GetComponent<ProtoBossBehaviour>()!=null)
             {

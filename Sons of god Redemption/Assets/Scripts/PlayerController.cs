@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
 
     //Player stats
     public Stats stats;
-    public int health, movementSpeed, baseAttack, attackSpeed;
+    public int health, movementSpeed, baseAttack;
     public Slider healthBar;
 
     //Enums
@@ -34,8 +34,8 @@ public class PlayerController : MonoBehaviour {
     public int walkVelocity, runVelocity, dashDistance;    
     public float dashCooldownTime, dashDuration, onHitAnimDelay, damage;
     private float dashCooldownCounter, actualDashTime, animLength, animDuration, onHitDelay;
-    private bool dashed, attacked, lastAttacked, transition, hit, lastHitted;
     public bool interact, fireHit, explosionHit, meteorHit;
+    private bool dashed, attacked, transition, hit, lastHitted;
     const float velChange = 0.5f;
 
     public static bool damaged;
@@ -50,7 +50,6 @@ public class PlayerController : MonoBehaviour {
         health = stats.health;
         movementSpeed = stats.movementSpeed;
         baseAttack = stats.baseAttack;
-        attackSpeed = stats.attackSpeed;
         healthBar.maxValue = health;
         healthBar.value = health;
 
@@ -380,12 +379,7 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        //if (attacked && weapon.tag != "Untagged" && !lastAttacked)
-        //{
-        //    audioSource.clip = swingSound;
-        //    audioSource.Stop();
-        //    audioSource.Play();
-        //}
+        
         if (fireHit)
         {
             health -= (int)boss.GetComponentInParent<FirstBossBehaviour>().roarDmg;
@@ -409,8 +403,6 @@ public class PlayerController : MonoBehaviour {
 
         fireHit = false;
         damaged = false;
-        lastAttacked = attacked;
-
     }
 
     void GetInput()
@@ -510,7 +502,7 @@ public class PlayerController : MonoBehaviour {
         }
         if(other.tag == "EnemyWeapon")
         {
-            health -= (int)other.GetComponentInParent<EnemyBehaviour>().baseAttack;
+            health -= (int)other.GetComponentInParent<Enemy>().baseAttack;
             healthBar.value = health;
             damaged = true;
         }
