@@ -154,9 +154,9 @@ public class TutorialController : MonoBehaviour {
             {
                 Destroy(GameObject.GetComponent<EnemyBehaviour>().healthTextGO);
             }
-            if (GameObject.GetComponent<FirstBossBehaviour>()!=null)
+            if (GameObject.GetComponent<ProtoBossBehaviour>()!=null)
             {
-                Destroy(GameObject.GetComponent<FirstBossBehaviour>().healthTextGO);
+                Destroy(GameObject.GetComponent<ProtoBossBehaviour>().healthTextGO);
             }
             Destroy(GameObject);
         }
