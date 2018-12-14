@@ -54,7 +54,7 @@ public class FirstBossBehaviour : MonoBehaviour
         healthText.font = font;
         healthTextGO.name = "Enemy Health";
         healthText.alignment = TextAnchor.MiddleCenter;
-        textPos = this.gameObject.transform.GetChild(2).gameObject;
+        textPos = this.gameObject.transform.Find("HealthTextPos").gameObject;
 
         patron = 1;
         patron1switched = patron2switched = patron3switched = false;

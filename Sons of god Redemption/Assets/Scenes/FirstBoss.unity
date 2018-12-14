@@ -197,6 +197,11 @@ RectTransform:
   m_AnchoredPosition: {x: 56.9, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &266280904 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1673153195996658, guid: b14268f5e27b8e9479e88185239c2fc2,
+    type: 2}
+  m_PrefabInternal: {fileID: 1471125258}
 --- !u!1 &304634892
 GameObject:
   m_ObjectHideFlags: 3
@@ -376,28 +381,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 670086376}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Script: {fileID: 11500000, guid: e6355559f10db2e489893f76c62be7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShowDebugText: 0
-  m_ShowCameraFrustum: 1
-  m_IgnoreTimeScale: 0
-  m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
-  m_DefaultBlend:
-    m_Style: 1
-    m_Time: 2
-  m_CustomBlends: {fileID: 11400000, guid: 93f36619fddcecc4592d97df40e776e9, type: 2}
-  m_CameraCutEvent:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: Cinemachine.CinemachineBrain+BrainEvent, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_CameraActivatedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: Cinemachine.CinemachineBrain+VcamEvent, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+  player: {fileID: 266280904}
+  offset: {x: 0, y: 12.5, z: -12.5}
 --- !u!82 &670086379
 AudioSource:
   m_ObjectHideFlags: 0
@@ -506,13 +494,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 670086376}
-  m_LocalRotation: {x: 0.451814, y: -0.0044727176, z: 0.0022652599, w: 0.8920981}
-  m_LocalPosition: {x: 0, y: 14.19, z: -11.59}
+  m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
 --- !u!1 &722595283
 GameObject:
   m_ObjectHideFlags: 3
@@ -677,7 +665,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 887068326}
-  m_LocalRotation: {x: 0.36991423, y: 0.0000018248033, z: -0.000003231936, w: 0.92906594}
+  m_LocalRotation: {x: 0.36991438, y: 0.0000018248039, z: -0.0000032319356, w: 0.9290659}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1275,7 +1263,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1519030857}
-  m_LocalRotation: {x: 0.41784284, y: 0.00002659069, z: -0.000011975289, w: 0.9085194}
+  m_LocalRotation: {x: 0.41784737, y: 0.000025812886, z: -0.0000116177125, w: 0.9085173}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1753,7 +1741,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2063858832}
-  m_LocalRotation: {x: 0.39565155, y: 0.00002024987, z: -0.000008262761, w: 0.9184007}
+  m_LocalRotation: {x: 0.3956517, y: 0.000021822296, z: -0.000008940187, w: 0.91840065}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
