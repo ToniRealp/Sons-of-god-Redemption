@@ -1160,15 +1160,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4269031160365580, guid: b14268f5e27b8e9479e88185239c2fc2, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4269031160365580, guid: b14268f5e27b8e9479e88185239c2fc2, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.62
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4269031160365580, guid: b14268f5e27b8e9479e88185239c2fc2, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -1.63
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 4269031160365580, guid: b14268f5e27b8e9479e88185239c2fc2, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1195,19 +1195,15 @@ Prefab:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 36944963}
-    - target: {fileID: 1673153195996658, guid: b14268f5e27b8e9479e88185239c2fc2, type: 2}
-      propertyPath: m_Name
-      value: Main character
-      objectReference: {fileID: 0}
-    - target: {fileID: 1673153195996658, guid: b14268f5e27b8e9479e88185239c2fc2, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 114516041804101342, guid: b14268f5e27b8e9479e88185239c2fc2,
         type: 2}
       propertyPath: boss
       value: 
       objectReference: {fileID: 846065935}
+    - target: {fileID: 1673153195996658, guid: b14268f5e27b8e9479e88185239c2fc2, type: 2}
+      propertyPath: m_Name
+      value: Main character
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b14268f5e27b8e9479e88185239c2fc2, type: 2}
   m_IsPrefabAsset: 0

@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour {
     Animator animator;
     AudioSource audioSource;
     public AudioClip swingSound, hitSound;
-    public GameObject boss;
+    public GameObject boss, flameCone;
     [SerializeField] GameObject weapon;
     [SerializeField] GameObject[] elements = new GameObject[(int)Elements.MAX];
 
@@ -64,11 +64,12 @@ public class PlayerController : MonoBehaviour {
         actualDashTime = dashDuration;
         onHitDelay = onHitAnimDelay;
         weapon = GameObject.Find("Sword");
+        flameCone = GameObject.Find("FlameCone");
         elements[(int)Elements.Fire] = GameObject.Find("Fire particles");
         elements[(int)Elements.Holy] = GameObject.Find("Light particles");
         elements[(int)Elements.Fire].SetActive(false);
         elements[(int)Elements.Holy].SetActive(false);
-
+        flameCone.SetActive(false);
     }
 	
 	void Update () {
@@ -289,10 +290,31 @@ public class PlayerController : MonoBehaviour {
                             states = nextState;
                             attacked = false;
                         }
-                        if (animLength < animDuration * 0.8)
+                        if (animLength < animDuration * 0.7)
+                        {
                             weapon.tag = "LightAttack3";
+                            if (elements[(int)Elements.Fire].activeSelf)
+                            {
+                                flameCone.SetActive(true);
+                            }
+                            else if (elements[(int)Elements.Holy].activeSelf)
+                            {
+
+                            }
+                        }
                         if (animLength< animDuration * 0.3)
+                        {
                             weapon.tag = "Untagged";
+                            if (elements[(int)Elements.Fire].activeSelf)
+                            {
+                                flameCone.SetActive(false);
+                            }
+                            else if (elements[(int)Elements.Holy].activeSelf)
+                            {
+
+                            }
+                        }
+
 
                         break;
 
