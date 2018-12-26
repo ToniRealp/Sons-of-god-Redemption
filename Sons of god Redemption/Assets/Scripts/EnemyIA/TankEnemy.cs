@@ -5,15 +5,17 @@ using UnityEngine;
 public class TankEnemy : Enemy {
     enum Attacks { Charge, Basic };
     Attacks attacks;
-    bool collided, roar, swipe;
-    float baseAttackDuration, baseAttackCooldown;
+    bool collided, roar, swipe, rushOnCooldown;
+    public float baseAttackDuration, baseAttackCooldown, rushCooldown, rushDistance;
     public float x, accelerationTime;
+
 
     new void Start()
     {
         base.Start();
-        collided = roar = swipe = false;
+        collided = roar = swipe = rushOnCooldown = false;
         baseAttackDuration = baseAttackCooldown = animTimes["Attack1"].duration + animTimes["Attack2"].duration;
+        rushDistance = attackDistance * 8;
         
     }
 
@@ -33,7 +35,16 @@ public class TankEnemy : Enemy {
                 attackCooldown = attackSpeed;
                 attackOnCooldown = false;
             }
-        }        
+        }
+
+        if (rushOnCooldown)
+        {
+            if ((rushCooldown -= Time.deltaTime) <= 0)
+            {
+                rushCooldown = attackSpeed * 2;
+                rushOnCooldown = false;
+            }
+        }
 
         switch (state)
         {
@@ -65,16 +76,7 @@ public class TankEnemy : Enemy {
                 }
                 else
                 {
-                    if (DistanceToDestination(destination) <= attackDistance && !attackOnCooldown)
-                    {
-                        state = State.ATTAKING;
-                        animator.SetTrigger("Attack1");
-                    }
-                    else
-                    {
-                        state = State.CHASING;
-                        animator.SetTrigger("Roar");
-                    }
+                       state = State.CHASING;                  
                 }  
 
                 // Go to random destination
@@ -83,95 +85,121 @@ public class TankEnemy : Enemy {
                 break;
 
             case State.CHASING:
-                // Full speed
-                ChangeSpeed(0);
+                ChangeSpeed(movementSpeed);
                 // Go to player Position
+                destination = playerPosition;
+                LookToDestination();
+                MoveToDestination();
 
-                if (!roar)
+                if (NavAgent.velocity.magnitude > 0.1f)
                 {
-                    destination = playerPosition;
-                    LookToDestination();
-                    animTimes["Roar"].cooldown -= Time.deltaTime;
-                    if (animTimes["Roar"].cooldown < 0)
+                    animator.SetBool("IsIdle", false);
+                    animator.SetBool("IsRunning", true);
+                }
+                else
+                {
+                    animator.SetBool("IsRunning", false);
+                    animator.SetBool("IsIdle", true);
+                }
+
+                if (playerDetected)
+                {
+                    // If in attack conditions, go to attack
+                    if (DistanceToDestination(destination) <= attackDistance && !attackOnCooldown)
                     {
-                        roar = true;
-                        animTimes["Roar"].cooldown = animTimes["Roar"].duration;
+                        state = State.ATTAKING;
+                        attacks = Attacks.Basic;
+                        animator.SetTrigger("Attack1");
+                    }
+                    else if(DistanceToDestination(destination)<= rushDistance && !rushOnCooldown && !attackOnCooldown)
+                    {
+                        state = State.ATTAKING;
+                        attacks = Attacks.Charge;
+                        animator.SetTrigger("Roar");
                     }
                 }
                 else
                 {
-                    ChangeSpeed(movementSpeed * 17.5f);
-                    NavAgent.acceleration = 1000;
-                    MoveToDestination();
-                    accelerationTime += Time.deltaTime;
-                    if (collided || NavAgent.velocity.magnitude < 0.5 && accelerationTime > 0.2)
-                    {
-                        ChangeSpeed(0);
-                        animTimes["Swipe"].duration -= Time.deltaTime;
-                        if (!swipe)
-                        {
-                            animator.SetTrigger("Swipe");
-                            swipe = true;
-                        }
-
-                        if (animTimes["Swipe"].duration < 0)
-                        {
-                            roar = false;
-                            collided = false;
-                            swipe = false;
-                            animTimes["Swipe"].duration = animTimes["Swipe"].cooldown;
-                            accelerationTime = 0;
-                            if (playerDetected)
-                            {
-                                destination = playerPosition;
-                                if (DistanceToDestination(destination) <= attackDistance && !attackOnCooldown)
-                                {
-                                    state = State.ATTAKING;
-                                    animator.SetTrigger("Attack1");
-                                }
-                                else
-                                {
-                                    state = State.CHASING;
-                                    animator.SetTrigger("Roar");
-                                }
-                            }
-                            else
-                                state = State.SEARCHING;
-                        }
-                    }
+                    state = State.SEARCHING;
                 }
+
                 break;
 
             case State.ATTAKING:
                 // Save player last known position
-                ChangeSpeed(0);
-                destination = playerPosition;
-                LookToDestination();
-
-                baseAttackCooldown -= Time.deltaTime;
-                if (baseAttackCooldown < 0)
+                switch (attacks)
                 {
-                    if (playerDetected)
-                    {
-                        if(DistanceToDestination(destination) <= attackDistance && !attackOnCooldown)
+                    case Attacks.Basic:
+
+                        ChangeSpeed(0);
+                        destination = playerPosition;
+                        LookToDestination();
+
+                        baseAttackCooldown -= Time.deltaTime;
+                        if (baseAttackCooldown < 0)
                         {
-                            state = State.ATTAKING;
-                            animator.SetTrigger("Attack1");
+                            attackOnCooldown = true;
+                            if (playerDetected)
+                            {
+                                state = State.CHASING;
+                            }
+                            else
+                            {
+                                state = State.SEARCHING;
+                            }
+                            baseAttackCooldown = baseAttackDuration;
+                        }
+
+                        break;
+
+                    case Attacks.Charge:
+                        if (!roar)
+                        {
+                            ChangeSpeed(0);
+                            destination = playerPosition;
+                            LookToDestination();
+                            animTimes["Roar"].cooldown -= Time.deltaTime;
+                            if (animTimes["Roar"].cooldown < 0)
+                            {
+                                roar = true;
+                                animTimes["Roar"].cooldown = animTimes["Roar"].duration;
+                            }
                         }
                         else
                         {
-                            state = State.CHASING;
-                            animator.SetTrigger("Roar");
-                        }
-                        
-                    }
-                    else
-                    {
-                        state = State.SEARCHING;
-                    }
-                    baseAttackCooldown = baseAttackDuration;
-                }
+                            ChangeSpeed(movementSpeed * 17.5f);
+                            NavAgent.acceleration = 1000;
+                            MoveToDestination();
+                            accelerationTime += Time.deltaTime;
+                            if (collided || NavAgent.velocity.magnitude < 0.5 && accelerationTime > 0.2)
+                            {
+                                ChangeSpeed(0);
+                                animTimes["Swipe"].duration -= Time.deltaTime;
+                                if (!swipe)
+                                {
+                                    animator.SetTrigger("Swipe");
+                                    swipe = true;
+                                }
 
+                                if (animTimes["Swipe"].duration < 0)
+                                {
+                                    roar = false;
+                                    collided = false;
+                                    swipe = false;
+                                    rushOnCooldown = true;
+                                    animTimes["Swipe"].duration = animTimes["Swipe"].cooldown;
+                                    accelerationTime = 0;
+                                    if (playerDetected)
+                                    {
+                                        state = State.CHASING;
+                                    }
+                                    else
+                                        state = State.SEARCHING;
+                                }
+                            }
+                        }
+                        break;
+                }
                 break;
 
             default:
