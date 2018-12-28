@@ -2640,6 +2640,7 @@ MonoBehaviour:
   hitSound: {fileID: 8300000, guid: 9d54cd11b601e1b428925b1897cd4042, type: 3}
   boss: {fileID: 0}
   flameCone: {fileID: 1150920752197268}
+  lightHit: {fileID: 1008891602714680, guid: 58d1e5b52a3ad734db07b18f829c70ed, type: 2}
   weapon: {fileID: 1471518303589712}
   elements:
   - {fileID: 1322368834297274}
@@ -2652,6 +2653,7 @@ MonoBehaviour:
   dashDuration: 0.2
   onHitAnimDelay: 0.05
   damage: 20
+  lightCooldown: 0
   interact: 0
   fireHit: 0
   explosionHit: 0
