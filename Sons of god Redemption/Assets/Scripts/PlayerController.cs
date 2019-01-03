@@ -296,6 +296,7 @@ public class PlayerController : MonoBehaviour {
                             weapon.tag = "LightAttack3";
                             if (elements[(int)Elements.Fire].activeSelf)
                             {
+                                damage = baseAttack + fireDmg;
                                 flameCone.SetActive(true);
                             }
                             else if (elements[(int)Elements.Holy].activeSelf)
