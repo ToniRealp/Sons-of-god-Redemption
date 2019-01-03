@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
 
     //Player stats
     public Stats stats;
-    public int health, movementSpeed, baseAttack;
+    public int health, movementSpeed, baseAttack, fireDmg, lightDmg;
     public Slider healthBar;
 
     //Enums
@@ -539,6 +539,14 @@ public class PlayerController : MonoBehaviour {
             {
                 Instantiate(lightHit, other.transform);
                 lightOnCD = true;
+                if (other.gameObject.name == "FirstBoss")
+                {
+                    other.GetComponentInParent<FirstBossBehaviour>().health -= lightDmg;
+                }
+                else
+                {
+                    other.GetComponentInParent<Enemy>().health -= lightDmg;
+                }
             }
         }
         if(other.tag == "EnemyWeapon")

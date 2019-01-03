@@ -1204,6 +1204,16 @@ Prefab:
       propertyPath: m_Name
       value: Main character
       objectReference: {fileID: 0}
+    - target: {fileID: 114516041804101342, guid: b14268f5e27b8e9479e88185239c2fc2,
+        type: 2}
+      propertyPath: fireDmg
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114516041804101342, guid: b14268f5e27b8e9479e88185239c2fc2,
+        type: 2}
+      propertyPath: lightDmg
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b14268f5e27b8e9479e88185239c2fc2, type: 2}
   m_IsPrefabAsset: 0
