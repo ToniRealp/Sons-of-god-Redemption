@@ -9,6 +9,7 @@ public class RangedEnemy : Enemy {
     public Transform spawnPos;
     public float bulletSpeed;
     private float optimalPos, optimalPosOffset;
+    public float timeToRun, runCooldown;
     private bool shoot;
 
     new private void Start()
@@ -17,6 +18,7 @@ public class RangedEnemy : Enemy {
         shoot = true;
         optimalPosOffset = 2f;
         optimalPos = attackDistance - optimalPosOffset;
+       runCooldown = timeToRun = 5;
     }
 
     private void Update()
@@ -47,6 +49,9 @@ public class RangedEnemy : Enemy {
 
         if (actualDamagedCooldown > 0f)
             actualDamagedCooldown -= Time.deltaTime;
+
+        if (runCooldown > 0)
+            runCooldown -= Time.deltaTime;
 
         damaged = false;
 
@@ -90,16 +95,19 @@ public class RangedEnemy : Enemy {
             case State.CHASING:
                 // Full speed
                 ChangeSpeed(movementSpeed);
-                // Go to player Position
-                if (DistanceToDestination(playerPosition) - optimalPos > optimalPosOffset)
+                if (runCooldown <= 0)
                 {
-                    OptimalDestination(false);
+                    runCooldown = timeToRun;
+                    // Go to player Position
+                    if (DistanceToDestination(playerPosition) - optimalPos > optimalPosOffset)
+                    {
+                        OptimalDestination(false);
+                    }
+                    else if (DistanceToDestination(playerPosition) - optimalPos < -optimalPosOffset)
+                    {
+                        OptimalDestination(true);
+                    }
                 }
-                else if(DistanceToDestination(playerPosition) - optimalPos < -optimalPosOffset)
-                {
-                    OptimalDestination(true);
-                }
-
 
                 MoveToDestination();
 
@@ -209,31 +217,44 @@ public class RangedEnemy : Enemy {
 
     void OptimalDestination(bool isCloser)
     {
-        float angle = Vector3.SignedAngle(Vector3.forward,transform.position - playerPosition,Vector3.up); //Random.Range(0, 360);
+        float angle = Vector3.SignedAngle(Vector3.forward,transform.position - playerPosition,Vector3.up); //Random.Range(0, 360)
         float distance;
-
+   
         if (isCloser)
             distance = optimalPos + Random.Range(0, optimalPosOffset);
         else
             distance = optimalPos - Random.Range(0, optimalPosOffset);
 
-        Vector3 position = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (angle)), 0, Mathf.Cos(Mathf.Deg2Rad * (angle))) * distance;
-        destination = playerPosition + position;
-
-        //do
-        //{
-        //    Vector3 position = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (angle)), 0, Mathf.Cos(Mathf.Deg2Rad * (angle))) * distance;
-        //    NavMeshHit hit;
-        //    if (NavMesh.Raycast(gameObject.transform.position, position, out hit, NavMesh.AllAreas))
-        //    {
-        //        destination = playerPosition + position;
-        //        break;
-        //    }
-        //    else
-        //    {
-        //        angle += 30;
-        //    }
-        //} while (true);
-
+        bool angleFound = false;
+        float angleOffset=0;
+        do
+        {
+            Vector3 position = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (angle)), 0, Mathf.Cos(Mathf.Deg2Rad * (angle))) * distance;
+            destination = playerPosition + position;
+            NavMeshHit hit;
+            if (NavMesh.Raycast(gameObject.transform.position, destination, out hit, NavMesh.AllAreas))
+            {
+                if (!angleFound)
+                {
+                    if (Mathf.Abs(((new Vector3(Mathf.Sin(Mathf.Deg2Rad * (angle + 30)), 0, Mathf.Cos(Mathf.Deg2Rad * angle + 30)) * distance) - playerPosition).magnitude) >
+                   Mathf.Abs(((new Vector3(Mathf.Sin(Mathf.Deg2Rad * (angle - 30)), 0, Mathf.Cos(Mathf.Deg2Rad * angle - 30)) * distance) - playerPosition).magnitude))
+                    {
+                        angleOffset = +30;
+                    }
+                    else
+                    {
+                        angleOffset = -30;
+                    }
+                    angleFound = true;
+                }
+                angle += angleOffset;
+            }
+            else
+            {
+                angleFound = false;
+                break;
+            }
+               
+        } while (true);
     }
 }

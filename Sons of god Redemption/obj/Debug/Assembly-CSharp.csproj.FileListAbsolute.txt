@@ -675,3 +675,8 @@ C:\Users\ares.fernandez\Documents\repos\Sons-of-god-Redemption\Sons of god Redem
 C:\Users\ares.fernandez\Documents\repos\Sons-of-god-Redemption\Sons of god Redemption\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\ares.fernandez\Documents\repos\Sons-of-god-Redemption\Sons of god Redemption\obj\Debug\Assembly-CSharp.dll
 C:\Users\ares.fernandez\Documents\repos\Sons-of-god-Redemption\Sons of god Redemption\obj\Debug\Assembly-CSharp.pdb
+C:\Users\Toni\Documents\Unity Projects\Sons-of-god-Redemption\Sons of god Redemption\Temp\bin\Debug\KdTreeLib.dll
+C:\Users\Toni\Documents\Unity Projects\Sons-of-god-Redemption\Sons of god Redemption\Temp\bin\Debug\pb_Stl.dll
+C:\Users\Toni\Documents\Unity Projects\Sons-of-god-Redemption\Sons of god Redemption\Temp\bin\Debug\Poly2Tri.dll
+C:\Users\Toni\Documents\Unity Projects\Sons-of-god-Redemption\Sons of god Redemption\Temp\bin\Debug\ProBuilderCore-Unity5.dll
+C:\Users\Toni\Documents\Unity Projects\Sons-of-god-Redemption\Sons of god Redemption\Temp\bin\Debug\ProBuilderMeshOps-Unity5.dll
