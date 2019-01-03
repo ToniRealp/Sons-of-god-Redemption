@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
 
     //Player stats
     public Stats stats;
-    public int health, movementSpeed, baseAttack;
+    public int health, movementSpeed, baseAttack, fireDmg, lightDmg;
     public Slider healthBar;
 
     //Enums
@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour {
     Animator animator;
     AudioSource audioSource;
     public AudioClip swingSound, hitSound;
-    public GameObject boss;
+    public GameObject boss, flameCone, lightHit;
     [SerializeField] GameObject weapon;
     [SerializeField] GameObject[] elements = new GameObject[(int)Elements.MAX];
 
@@ -32,10 +32,10 @@ public class PlayerController : MonoBehaviour {
     //General atributes
     public Vector3 direction;
     public int walkVelocity, runVelocity, dashDistance;    
-    public float dashCooldownTime, dashDuration, onHitAnimDelay, damage;
-    private float dashCooldownCounter, actualDashTime, animLength, animDuration, onHitDelay;
+    public float dashCooldownTime, dashDuration, onHitAnimDelay, damage, lightCooldown;
+    private float dashCooldownCounter, actualDashTime, animLength, animDuration, onHitDelay, actualLightCooldown;
     public bool interact, fireHit, explosionHit, meteorHit;
-    private bool dashed, attacked, transition, hit, lastHitted;
+    private bool dashed, attacked, transition, hit, lastHitted, isLightHit, lightOnCD;
     const float velChange = 0.5f;
 
     public static bool damaged;
@@ -59,16 +59,18 @@ public class PlayerController : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
         states = States.Idle;
         attacks = Attacks.NotAtt;
-        dashed = attacked = transition = hit = fireHit = damaged= false;
+        lightOnCD = isLightHit = dashed = attacked = transition = hit = fireHit = damaged= false;
         dashCooldownCounter = dashCooldownTime;
         actualDashTime = dashDuration;
+        actualLightCooldown = lightCooldown;
         onHitDelay = onHitAnimDelay;
         weapon = GameObject.Find("Sword");
+        flameCone = GameObject.Find("FlameCone");
         elements[(int)Elements.Fire] = GameObject.Find("Fire particles");
         elements[(int)Elements.Holy] = GameObject.Find("Light particles");
         elements[(int)Elements.Fire].SetActive(false);
         elements[(int)Elements.Holy].SetActive(false);
-
+        flameCone.SetActive(false);
     }
 	
 	void Update () {
@@ -289,10 +291,32 @@ public class PlayerController : MonoBehaviour {
                             states = nextState;
                             attacked = false;
                         }
-                        if (animLength < animDuration * 0.8)
+                        if (animLength < animDuration * 0.7)
+                        {
                             weapon.tag = "LightAttack3";
+                            if (elements[(int)Elements.Fire].activeSelf)
+                            {
+                                damage = baseAttack + fireDmg;
+                                flameCone.SetActive(true);
+                            }
+                            else if (elements[(int)Elements.Holy].activeSelf)
+                            {
+                                isLightHit = true;
+                            }
+                        }
                         if (animLength< animDuration * 0.3)
+                        {
                             weapon.tag = "Untagged";
+                            if (elements[(int)Elements.Fire].activeSelf)
+                            {
+                                flameCone.SetActive(false);
+                            }
+                            else if (elements[(int)Elements.Holy].activeSelf)
+                            {
+                                isLightHit = false;
+                            }
+                        }
+
 
                         break;
 
@@ -367,6 +391,7 @@ public class PlayerController : MonoBehaviour {
         }
         
         DashCooldown();
+        LightCooldown();
 
         if (hit)
         {
@@ -453,6 +478,18 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    void LightCooldown()
+    {
+        if (lightOnCD)
+        {
+            actualLightCooldown -= Time.deltaTime;
+            if (actualLightCooldown<=0f)
+            {
+                lightOnCD = false;
+            }
+        }
+    }
+
     float AnimationLength(string animName, Animator animator)
     {
         AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
@@ -498,6 +535,19 @@ public class PlayerController : MonoBehaviour {
                 audioSource.Play();
                 animator.speed = 0f;
                 hit = true;
+            }
+            if (isLightHit && !lightOnCD)
+            {
+                Instantiate(lightHit, other.transform);
+                lightOnCD = true;
+                if (other.gameObject.name == "FirstBoss")
+                {
+                    other.GetComponentInParent<FirstBossBehaviour>().health -= lightDmg;
+                }
+                else
+                {
+                    other.GetComponentInParent<Enemy>().health -= lightDmg;
+                }
             }
         }
         if(other.tag == "EnemyWeapon")
