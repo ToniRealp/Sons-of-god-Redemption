@@ -415,9 +415,9 @@ public class PlayerController : MonoBehaviour {
                 }
                 if (actualDeadTime<=0)
                 {
+                    ResetAll();
                     health = stats.health;
                     healthBar.value = health;
-                    dead = false;
                     spawnMe = true;
                     states = States.Idle;
                     actualDeadTime = deadDuration;
@@ -467,6 +467,18 @@ public class PlayerController : MonoBehaviour {
 
         fireHit = false;
         damaged = false;
+    }
+
+    private void ResetAll()
+    {
+        weapon.tag = "Untagged";
+        states = States.Idle;
+        attacks = Attacks.NotAtt;
+        dead = lightOnCD = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
+        dashCooldownCounter = dashCooldownTime;
+        actualDashTime = dashDuration;
+        actualLightCooldown = lightCooldown;
+        onHitDelay = onHitAnimDelay;
     }
 
     void GetInput()

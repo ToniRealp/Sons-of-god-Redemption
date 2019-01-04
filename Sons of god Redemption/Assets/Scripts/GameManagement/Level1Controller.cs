@@ -5,6 +5,7 @@ using UnityEngine;
 public class Level1Controller : MonoBehaviour {
 
     public GameObject player;
+    public GameObject boss;
     public bool[] trigger;
     [SerializeField] Transform[] spawns = new Transform[1];
 
@@ -97,6 +98,11 @@ public class Level1Controller : MonoBehaviour {
                 break;
         }
 
+        //SpawnBoss
+        if (trigger[15])
+        {
+            boss.SetActive(true);
+        }
 
 
     }
