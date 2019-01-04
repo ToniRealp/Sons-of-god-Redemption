@@ -572,14 +572,11 @@ public class FirstBossBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != lastTag && other.tag != "Untagged")
+        if (other.tag != "Untagged")
         {
-            lastTag = other.tag;
             Instantiate(blood, bloodPosition.position, bloodPosition.rotation, transform);
             health -= (int)other.GetComponentInParent<PlayerController>().damage;
         }
     }
-
-
 }
 

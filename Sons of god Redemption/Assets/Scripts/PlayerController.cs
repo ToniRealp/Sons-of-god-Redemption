@@ -569,12 +569,6 @@ public class PlayerController : MonoBehaviour {
             healthBar.value = health;
             damaged = true;
         }
-        if (other.tag == "BossWeapon")
-        {
-            health -= (int)other.GetComponentInParent<ProtoBossBehaviour>().damage;
-            healthBar.value = health;
-            damaged = true;
-        }
         if (other.tag == "FirstBossWeapon")
         {
             health -= (int)other.GetComponentInParent<FirstBossBehaviour>().damage;
