@@ -8,6 +8,7 @@ public class TankEnemy : Enemy {
     bool collided, roar, swipe, rushOnCooldown;
     public float baseAttackDuration, baseAttackCooldown, rushCooldown, rushDistance;
     public float x, accelerationTime;
+    public GameObject weapon2;
 
 
     new void Start()
@@ -136,8 +137,22 @@ public class TankEnemy : Enemy {
                         LookToDestination();
 
                         baseAttackCooldown -= Time.deltaTime;
+
+                        if (baseAttackCooldown <baseAttackDuration * 0.95)
+                             weapon2.tag = "EnemyWeapon";
+
+                        if (baseAttackCooldown< baseAttackDuration * 0.75)
+                            weapon2.tag = "Untagged";
+
+                        if (baseAttackCooldown < baseAttackDuration * 0.45)
+                            weapon.tag = "EnemyWeapon";
+
+                        if (baseAttackCooldown < baseAttackDuration * 0.3)
+                            weapon.tag = "Untagged";
+
                         if (baseAttackCooldown < 0)
                         {
+                            
                             attackOnCooldown = true;
                             if (playerDetected)
                             {
@@ -179,10 +194,15 @@ public class TankEnemy : Enemy {
                                 {
                                     animator.SetTrigger("Swipe");
                                     swipe = true;
+                                    weapon2.tag = "EnemyWeapon";
                                 }
+
+                                if (animTimes["Swipe"].duration < animTimes["Swipe"].cooldown * 0.5f)
+                                    weapon2.tag = "Untagged";
 
                                 if (animTimes["Swipe"].duration < 0)
                                 {
+                                    
                                     roar = false;
                                     collided = false;
                                     swipe = false;

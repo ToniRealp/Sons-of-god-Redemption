@@ -124,6 +124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4381097374169264}
+  - component: {fileID: 65181874402753786}
   m_Layer: 0
   m_Name: mixamorig:RightForeArm
   m_TagString: Untagged
@@ -385,7 +386,7 @@ GameObject:
   - component: {fileID: 114371522082310800}
   m_Layer: 0
   m_Name: MinotaurFinal
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -398,6 +399,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4342811896916846}
+  - component: {fileID: 65317261171394314}
   m_Layer: 0
   m_Name: mixamorig:LeftForeArm
   m_TagString: Untagged
@@ -1117,7 +1119,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1530909588547274}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.868, y: 0.309, z: 4.26}
+  m_LocalPosition: {x: 0.31209108, y: 0.16867499, z: -1.060054}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4735731431467290}
@@ -1525,6 +1527,30 @@ Transform:
   m_Father: {fileID: 4381097374169264}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &65181874402753786
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1168460162503004}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1974328, y: 0.80935913, z: 0.21498077}
+  m_Center: {x: -0.0010575929, y: 0.2664498, z: 0.019442203}
+--- !u!65 &65317261171394314
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1546200564397014}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.29907995, y: 0.8192259, z: 0.2358229}
+  m_Center: {x: 0.020084262, y: 0.2323828, z: -0.0065460913}
 --- !u!95 &95494919845271138
 Animator:
   serializedVersion: 3
@@ -1579,6 +1605,7 @@ MonoBehaviour:
   rushDistance: 0
   x: 0
   accelerationTime: 0
+  weapon2: {fileID: 1546200564397014}
 --- !u!136 &136502904017892888
 CapsuleCollider:
   m_ObjectHideFlags: 1

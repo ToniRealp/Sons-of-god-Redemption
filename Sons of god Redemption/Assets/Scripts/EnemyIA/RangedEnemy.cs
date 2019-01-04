@@ -18,7 +18,7 @@ public class RangedEnemy : Enemy {
         shoot = true;
         optimalPosOffset = 2f;
         optimalPos = attackDistance - optimalPosOffset;
-       runCooldown = timeToRun = 5;
+        runCooldown = timeToRun = 4;
     }
 
     private void Update()
@@ -163,7 +163,6 @@ public class RangedEnemy : Enemy {
             case State.DAMAGED:
                 // Cancel Attack animation if getting hit
                 animator.SetBool("Shoot", false);
-                weapon.tag = "Untagged";
                 animTimes["Shoot"].cooldown = animTimes["Shoot"].duration;
                 // No movement
                 ChangeSpeed(0);
@@ -190,25 +189,12 @@ public class RangedEnemy : Enemy {
                 break;
         }
     }
-    protected void OnTriggerEnter(Collider other)
-    {
-        if (other.tag != lastTag && other.tag != "Untagged")
-        {
-            lastTag = other.tag;
-            if (actualDamagedCooldown <= 0f)
-            {
-                damaged = true;
-                actualDamagedCooldown = damagedCooldown;
-                animator.SetTrigger("Damaged");
-            }
-            Instantiate(blood, bloodPosition.position, bloodPosition.rotation, transform);
-            health -= (int)other.GetComponentInParent<PlayerController>().damage;
-        }
-    }
+
     void Shoot()
     {
         // Create the Bullet from the Bullet Prefab
         var bullet = (GameObject)Instantiate(arrow, spawnPos.position, spawnPos.rotation);
+        bullet.transform.parent = this.gameObject.transform;
         // Add velocity to the bullet
         bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
         // Destroy the bullet after 2 seconds
