@@ -26,6 +26,13 @@ public class Level1Controller : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if (player.GetComponent<PlayerController>().spawnMe == true)
+        {
+            Debug.Log("Spawn Me");
+            player.transform.position = actualSpawn.position;
+            player.GetComponent<PlayerController>().spawnMe = false;
+        }
+
         // SpawnPoint Change
         switch (roomsExplored)
         {
