@@ -16,7 +16,7 @@ MonoBehaviour:
   baseAttack: 10
   movingRange: 10
   rotationSpeed: 0.5
-  ViewDistance: 15
-  hearDistance: 10
+  ViewDistance: 20
+  hearDistance: 15
   attackDistance: 8
   attackSpeed: 2
