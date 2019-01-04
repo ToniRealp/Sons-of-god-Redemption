@@ -148,7 +148,7 @@ MonoBehaviour:
   enemiesTillNextIncrease: 2
   enemiesTillBoss: 6
   enemy: {fileID: 1058969819910248, guid: 6fdf6feb8f93d14409258eda5827849f, type: 2}
-  boss: {fileID: 1349270251722732, guid: 0ba87fd9c1d320945b19becf36337d55, type: 2}
+  boss: {fileID: 1008205161994760, guid: 85929e598004db14d9c17b1da9207d1c, type: 2}
   lastEnemyCounter: 0
   enemyCounter: 0
   enemiesDefeated: 0
@@ -1165,8 +1165,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0.4186477, y: 0.003939996, z: -0.0018163054, w: 0.9081384}
-  m_LocalPosition: {x: 144.62, y: 16.1, z: -36.75}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 144.85693, y: 4.4188886, z: -21.8338}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1172499468}

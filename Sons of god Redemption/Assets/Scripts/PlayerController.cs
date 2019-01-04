@@ -21,9 +21,10 @@ public class PlayerController : MonoBehaviour {
     Animator animator;
     AudioSource audioSource;
     public AudioClip swingSound, hitSound;
-    public GameObject boss, flameCone, lightHit;
+    public GameObject flameCone, lightHit;
     [SerializeField] GameObject weapon;
     [SerializeField] GameObject[] elements = new GameObject[(int)Elements.MAX];
+    public float bossDmg;
 
     //Inputs
     bool[] inputs = new bool[(int)ButtonInputs.MAX];
@@ -420,20 +421,20 @@ public class PlayerController : MonoBehaviour {
         
         if (fireHit)
         {
-            health -= (int)boss.GetComponentInParent<FirstBossBehaviour>().roarDmg;
+            health -= (int)bossDmg;
             healthBar.value = health;
         }
 
         if (explosionHit)
         {
-            health -= (int)boss.GetComponentInParent<FirstBossBehaviour>().explosionDmg;
+            health -= (int)bossDmg;
             healthBar.value = health;
             explosionHit = false;
         }
 
         if (meteorHit)
         {
-            health -= (int)boss.GetComponentInParent<FirstBossBehaviour>().rainDmg;
+            health -= (int)bossDmg;
             healthBar.value = health;
             meteorHit = false;
         }

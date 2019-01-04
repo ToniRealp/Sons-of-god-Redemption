@@ -464,6 +464,7 @@ public class FirstBossBehaviour : MonoBehaviour
                     {
                         if (playerDistance < explosionRange)
                         {
+                            player.GetComponent<PlayerController>().bossDmg = explosionDmg;
                             player.GetComponent<PlayerController>().explosionHit = true;
                         }
                         explosionChecked = true;
