@@ -2330,24 +2330,24 @@ MonoBehaviour:
   meteor: {fileID: 1414881985881858, guid: b9b86af16bda5664b9d2132b676de4bf, type: 2}
   animator: {fileID: 95427984883688468}
   attackDistance: 5
-  attackMinInterval: 0
-  attackMaxInterval: 1
   explosionRange: 10
   movingSpeed: 0.02
   rotationSpeed: 0.05
   meteorInterval: 0.3
   meteorRange: 5
   meteorNum: 5
-  randomAttack: 0
-  randomAttack2: 0
+  actualAttack: 0
+  actualAttack2: 0
+  patron: 0
   meteorPosition: []
   state: 0
   playerDistance: 0
+  maxHealth: 1800
   health: 1800
   damage: 0
   swipeDmg: 15
   explosionDmg: 55
-  roarDmg: 25
+  roarDmg: 5
   rainDmg: 40
   healthText: {fileID: 0}
   healthTextGO: {fileID: 0}

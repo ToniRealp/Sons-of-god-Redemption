@@ -17,6 +17,7 @@ public class MeteorBehaviour : MonoBehaviour {
     {
         if (collision.gameObject.tag=="Player")
         {
+            collision.gameObject.GetComponent<PlayerController>().bossDmg = GameObject.Find("FirstBoss").GetComponent<FirstBossBehaviour>().rainDmg;
             collision.gameObject.GetComponent<PlayerController>().meteorHit = true;
         }
         Destroy(this.gameObject);

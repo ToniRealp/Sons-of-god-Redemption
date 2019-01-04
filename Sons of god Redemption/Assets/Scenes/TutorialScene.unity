@@ -148,7 +148,7 @@ MonoBehaviour:
   enemiesTillNextIncrease: 2
   enemiesTillBoss: 6
   enemy: {fileID: 1058969819910248, guid: 6fdf6feb8f93d14409258eda5827849f, type: 2}
-  boss: {fileID: 1349270251722732, guid: 0ba87fd9c1d320945b19becf36337d55, type: 2}
+  boss: {fileID: 1008205161994760, guid: 85929e598004db14d9c17b1da9207d1c, type: 2}
   lastEnemyCounter: 0
   enemyCounter: 0
   enemiesDefeated: 0

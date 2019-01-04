@@ -18,7 +18,7 @@ public class ParticleScript : MonoBehaviour {
     {
         if (other.tag=="Player")
         {
-            other.GetComponent<PlayerController>().boss = gameObject;
+            other.GetComponent<PlayerController>().bossDmg = GameObject.Find("FirstBoss").GetComponent<FirstBossBehaviour>().roarDmg;
             other.GetComponent<PlayerController>().fireHit = true;
         }
     }

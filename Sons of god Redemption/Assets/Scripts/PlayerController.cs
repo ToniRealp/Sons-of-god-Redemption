@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour {
     public Slider healthBar;
 
     //Enums
-    enum States { Idle, Walking, Running, Dashing, Attacking, MAX };
+    enum States { Idle, Walking, Running, Dashing, Attacking, Dead, MAX };
     enum Attacks { LightAttack1, LightAttack2, LightAttack3, StrongAttack1, StrongAttack2, StrongAttack3, NotAtt };
     enum ButtonInputs { Dash, LightAttack, StrongAttack, padLeft, padRight, Interact, MAX };
     enum Elements {Holy, Fire, MAX };
@@ -21,9 +21,10 @@ public class PlayerController : MonoBehaviour {
     Animator animator;
     AudioSource audioSource;
     public AudioClip swingSound, hitSound;
-    public GameObject boss, flameCone, lightHit;
+    public GameObject flameCone, lightHit;
     [SerializeField] GameObject weapon;
     [SerializeField] GameObject[] elements = new GameObject[(int)Elements.MAX];
+    public float bossDmg;
 
     //Inputs
     bool[] inputs = new bool[(int)ButtonInputs.MAX];
@@ -32,10 +33,10 @@ public class PlayerController : MonoBehaviour {
     //General atributes
     public Vector3 direction;
     public int walkVelocity, runVelocity, dashDistance;    
-    public float dashCooldownTime, dashDuration, onHitAnimDelay, damage, lightCooldown;
-    private float dashCooldownCounter, actualDashTime, animLength, animDuration, onHitDelay, actualLightCooldown;
-    public bool interact, fireHit, explosionHit, meteorHit;
-    private bool dashed, attacked, transition, hit, lastHitted, isLightHit, lightOnCD;
+    public float dashCooldownTime, dashDuration, deadDuration, onHitAnimDelay, damage, lightCooldown;
+    private float dashCooldownCounter, actualDashTime, actualDeadTime, animLength, animDuration, onHitDelay, actualLightCooldown;
+    public bool interact, fireHit, explosionHit, meteorHit, spawnMe;
+    private bool dashed, attacked, transition, hit, lastHitted, isLightHit, lightOnCD, dead;
     const float velChange = 0.5f;
 
     public static bool damaged;
@@ -61,9 +62,10 @@ public class PlayerController : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
         states = States.Idle;
         attacks = Attacks.NotAtt;
-        lightOnCD = isLightHit = dashed = attacked = transition = hit = fireHit = damaged= false;
+        spawnMe = dead = lightOnCD = isLightHit = dashed = attacked = transition = hit = fireHit = damaged= false;
         dashCooldownCounter = dashCooldownTime;
         actualDashTime = dashDuration;
+        actualDeadTime = deadDuration = AnimationLength("Dying",animator);
         actualLightCooldown = lightCooldown;
         onHitDelay = onHitAnimDelay;
         weapon = GameObject.Find("Sword");
@@ -92,6 +94,12 @@ public class PlayerController : MonoBehaviour {
             elements[(int)Elements.Fire].SetActive(false);
             elements[(int)Elements.Holy].SetActive(true);
         }
+
+        if (health<=0)
+        {
+            states = States.Dead;
+        }
+
 
         //Player state machine
         switch (states) {
@@ -398,6 +406,24 @@ public class PlayerController : MonoBehaviour {
                 nextState = CheckState();
                 break;
 
+            case (States.Dead):
+                actualDeadTime -= Time.deltaTime;
+                if (!dead)
+                {
+                    animator.SetTrigger("Dead");
+                    dead = true;
+                }
+                if (actualDeadTime<=0)
+                {
+                    health = stats.health;
+                    healthBar.value = health;
+                    dead = false;
+                    spawnMe = true;
+                    states = States.Idle;
+                    actualDeadTime = deadDuration;
+                }
+                    break;
+
             default:
                 break;
             
@@ -420,20 +446,20 @@ public class PlayerController : MonoBehaviour {
         
         if (fireHit)
         {
-            health -= (int)boss.GetComponentInParent<FirstBossBehaviour>().roarDmg;
+            health -= (int)bossDmg;
             healthBar.value = health;
         }
 
         if (explosionHit)
         {
-            health -= (int)boss.GetComponentInParent<FirstBossBehaviour>().explosionDmg;
+            health -= (int)bossDmg;
             healthBar.value = health;
             explosionHit = false;
         }
 
         if (meteorHit)
         {
-            health -= (int)boss.GetComponentInParent<FirstBossBehaviour>().rainDmg;
+            health -= (int)bossDmg;
             healthBar.value = health;
             meteorHit = false;
         }

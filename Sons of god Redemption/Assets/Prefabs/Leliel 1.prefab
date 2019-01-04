@@ -1718,7 +1718,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1251156097650688}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.15, y: 0.06, z: -4.99}
+  m_LocalPosition: {x: -0.6717645, y: -3.797367e-18, z: 1.710182}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4247679926732336}
@@ -2316,19 +2316,20 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   swingSound: {fileID: 8300000, guid: 4ab2086b82ae0344d9e47731a83f9743, type: 3}
   hitSound: {fileID: 8300000, guid: 9d54cd11b601e1b428925b1897cd4042, type: 3}
-  boss: {fileID: 1008205161994760, guid: 85929e598004db14d9c17b1da9207d1c, type: 2}
   flameCone: {fileID: 1533153879405776}
   lightHit: {fileID: 1008891602714680, guid: 58d1e5b52a3ad734db07b18f829c70ed, type: 2}
   weapon: {fileID: 0}
   elements:
   - {fileID: 1864428458612180}
   - {fileID: 1727931824325610}
+  bossDmg: 0
   direction: {x: 0.20072979, y: 0, z: -0.5954735}
   walkVelocity: 3
   runVelocity: 5
   dashDistance: 2
   dashCooldownTime: 0.5
   dashDuration: 0.2
+  deadDuration: 0
   onHitAnimDelay: 0.05
   damage: 20
   lightCooldown: 0
@@ -2336,6 +2337,7 @@ MonoBehaviour:
   fireHit: 0
   explosionHit: 0
   meteorHit: 0
+  spawnMe: 0
   states: 0
   nextState: 0
   attacks: 6

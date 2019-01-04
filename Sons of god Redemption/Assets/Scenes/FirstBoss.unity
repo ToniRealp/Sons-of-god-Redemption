@@ -961,11 +961,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114929350971313750, guid: cab3e5f640c6ce94ea72fe6d9710210f,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 114156593225936308, guid: cab3e5f640c6ce94ea72fe6d9710210f,
         type: 2}
       propertyPath: healthBar
