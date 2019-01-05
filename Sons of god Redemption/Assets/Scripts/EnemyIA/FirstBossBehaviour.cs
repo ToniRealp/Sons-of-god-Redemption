@@ -40,7 +40,7 @@ public class FirstBossBehaviour : MonoBehaviour
         actualChargeTime = chargeAnimationTime = AnimationLength("Mutant Flexing Muscles", animator);
         actualExplosionTime = explosionAnimationTime = AnimationLength("Mutant Jumping", animator);
         actualRoarTime = roarAnimationTime = AnimationLength("Mutant Roaring", animator);
-        actualSwipeTime = swipeAnimationTime = AnimationLength("Mutant Swiping", animator);
+        actualSwipeTime = swipeAnimationTime = AnimationLength("Stable Sword Outward Slash", animator);
         actualRainTime = rainAnimationTime = AnimationLength("Wide Arm Spell Casting", animator);
         fireParticles.SetActive(false);
         explosionParticles.SetActive(false);
@@ -437,9 +437,9 @@ public class FirstBossBehaviour : MonoBehaviour
                 actualSwipeTime -= Time.deltaTime;
                 if (actualSwipeTime > swipeAnimationTime * 0.6)
                     LookPlayer();
-                if (actualSwipeTime <= swipeAnimationTime * 0.8)
+                if (actualSwipeTime <= swipeAnimationTime * 0.95)
                     weapon.tag = "FirstBossWeapon";
-                if (actualSwipeTime <= swipeAnimationTime * 0.2)
+                if (actualSwipeTime <= swipeAnimationTime * 0.1)
                     weapon.tag = "Untagged";
                 if (actualSwipeTime <= 0)
                 {
