@@ -7,11 +7,15 @@ public class Level1Controller : MonoBehaviour {
     public GameObject player;
     public GameObject bossHandler;
     public SceneController sceneController;
+    public GameObject camera;
+    public AudioClip audioClip;
     public bool[] trigger;
     [SerializeField] Transform[] spawns = new Transform[1];
 
     public Transform actualSpawn;
     public int roomsExplored;
+
+    private bool bossSpawn, volumeSet;
 
 	// Use this for initialization
 	void Start () {
@@ -22,7 +26,7 @@ public class Level1Controller : MonoBehaviour {
         }
         roomsExplored = 0;
         actualSpawn = spawns[0];
-
+        volumeSet = bossSpawn = false;
 	}
 	
 	// Update is called once per frame
@@ -102,8 +106,25 @@ public class Level1Controller : MonoBehaviour {
         //SpawnBoss
         if (trigger[15])
         {
-            bossHandler.SetActive(false);
+            if (!bossSpawn)
+            {
+                bossHandler.SetActive(false);
+                camera.GetComponent<AudioSource>().clip = audioClip;
+                camera.GetComponent<AudioSource>().volume = 0;
+                camera.GetComponent<AudioSource>().Play();
+                bossSpawn = true;
+            }
         }
+
+        if (bossSpawn && !volumeSet)
+        {
+            camera.GetComponent<AudioSource>().volume += 0.001f;
+            if (camera.GetComponent<AudioSource>().volume == 1f)
+            {
+                volumeSet = true;
+            }
+        }
+
 
     }
 
@@ -111,5 +132,6 @@ public class Level1Controller : MonoBehaviour {
     {
         sceneController.changeScene("Win");
     }
+
 
 }
