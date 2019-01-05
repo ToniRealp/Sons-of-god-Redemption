@@ -71,6 +71,7 @@ public class FirstBossBehaviour : MonoBehaviour
 
         if (health <= 0)
         {
+            GameObject.Find("Level1Controller").GetComponent<Level1Controller>().BossDead();
             Destroy(this.gameObject);
             Destroy(healthTextGO);
         }

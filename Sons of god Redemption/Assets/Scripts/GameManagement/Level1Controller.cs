@@ -6,6 +6,7 @@ public class Level1Controller : MonoBehaviour {
 
     public GameObject player;
     public GameObject bossHandler;
+    public SceneController sceneController;
     public bool[] trigger;
     [SerializeField] Transform[] spawns = new Transform[1];
 
@@ -104,6 +105,11 @@ public class Level1Controller : MonoBehaviour {
             bossHandler.SetActive(false);
         }
 
-
     }
+
+    public void BossDead()
+    {
+        sceneController.changeScene("Win");
+    }
+
 }
