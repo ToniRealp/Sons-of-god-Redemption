@@ -535,6 +535,7 @@ GameObject:
   - component: {fileID: 23377585}
   - component: {fileID: 23377584}
   - component: {fileID: 23377583}
+  - component: {fileID: 23377586}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -553,7 +554,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 135c92c4760e4e74d95a88245612cd9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PausePanel: {fileID: 0}
+  PausePanel: {fileID: 1914554481}
+  inputManager: {fileID: 23377586}
 --- !u!114 &23377584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,6 +580,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &23377586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 23377582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37fd3a42000e64340ad9ba6b049d3886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yAxis: 0
+  xAxis: 0
+  attackButton: 0
+  strongAttackButton: 0
+  dashButton: 0
+  padXAxis: 0
+  padYAxis: 0
+  interact: 0
+  addEnemy: 0
+  addBoss: 0
+  clearEnemies: 0
+  escape: 0
 --- !u!1001 &25175135
 Prefab:
   m_ObjectHideFlags: 0
@@ -30522,7 +30547,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1696300853}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 23377583}
+        m_MethodName: exitPauseMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1696300853
