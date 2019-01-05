@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8649dec85b5cef1469ef5f4721a2ebea
+guid: 0f068ec05291ede4b985f4912f92701b
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: "Beb\xE9 LOW2500-3612"
-    100002: //RootNode
+    100000: //RootNode
+    100002: "Beb\xE9 LOW2500-3612"
     100004: mixamorig:Head
     100006: mixamorig:HeadTop_End
     100008: mixamorig:Hips
@@ -38,8 +38,8 @@ ModelImporter:
     100064: mixamorig:Spine
     100066: mixamorig:Spine1
     100068: mixamorig:Spine2
-    400000: "Beb\xE9 LOW2500-3612"
-    400002: //RootNode
+    400000: //RootNode
+    400002: "Beb\xE9 LOW2500-3612"
     400004: mixamorig:Head
     400006: mixamorig:HeadTop_End
     400008: mixamorig:Hips
@@ -75,8 +75,7 @@ ModelImporter:
     400068: mixamorig:Spine2
     2100000: default
     4300000: "Beb\xE9 LOW2500-3612"
-    7400000: Take 001
-    7400002: mixamo.com
+    7400000: mixamo.com
     9500000: //RootNode
     13700000: "Beb\xE9 LOW2500-3612"
   externalObjects:
