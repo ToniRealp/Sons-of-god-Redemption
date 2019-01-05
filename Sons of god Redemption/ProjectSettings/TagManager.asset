@@ -15,6 +15,7 @@ TagManager:
   - BossWeapon
   - FirstBossWeapon
   - Trigger
+  - Arrow
   layers:
   - Default
   - TransparentFX
