@@ -224,7 +224,8 @@ public class PlayerController : MonoBehaviour {
 
                     case (Attacks.LightAttack1):
                         damage = baseAttack;
-                        
+                        isLightHit = false;
+
                         if (!attacked)
                         {
                             animator.SetBool("isIdle", true);
@@ -327,10 +328,7 @@ public class PlayerController : MonoBehaviour {
                             {
                                 flameCone.SetActive(false);
                             }
-                            else if (elements[(int)Elements.Holy].activeSelf)
-                            {
                                 isLightHit = false;
-                            }
                         }
 
 
@@ -338,6 +336,7 @@ public class PlayerController : MonoBehaviour {
 
                     case (Attacks.StrongAttack1):
                         damage = baseAttack + (baseAttack * 0.5f);
+                        isLightHit = false;
                         if (!attacked)
                         {
                             animator.SetBool("isIdle", true);
