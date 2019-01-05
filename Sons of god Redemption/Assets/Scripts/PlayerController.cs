@@ -482,7 +482,7 @@ public class PlayerController : MonoBehaviour {
 
 
         fireHit = false;
-        damaged = false;
+        //damaged = false;
     }
 
     private void ResetAll()

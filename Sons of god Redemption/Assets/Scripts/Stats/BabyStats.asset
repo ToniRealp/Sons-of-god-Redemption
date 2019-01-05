@@ -18,5 +18,5 @@ MonoBehaviour:
   rotationSpeed: 0.15
   ViewDistance: 15
   hearDistance: 10
-  attackDistance: 1.6
+  attackDistance: 2.1
   attackSpeed: 1

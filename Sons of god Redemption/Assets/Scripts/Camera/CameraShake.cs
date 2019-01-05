@@ -12,6 +12,7 @@ public class CameraShake : MonoBehaviour
     public float ShakeFrequency = 2.0f;         // Cinemachine Noise Profile Parameter
 
     private float ShakeElapsedTime = 0f;
+    public bool damaged;
 
     // Cinemachine Shake
     public CinemachineVirtualCamera VirtualCamera;
@@ -28,10 +29,10 @@ public class CameraShake : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (PlayerController.damaged)
         {
             ShakeElapsedTime = ShakeDuration;
+            PlayerController.damaged = false; 
         }
 
         // If the Cinemachine componet is not set, avoid update
