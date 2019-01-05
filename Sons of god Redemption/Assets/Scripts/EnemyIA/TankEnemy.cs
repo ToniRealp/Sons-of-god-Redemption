@@ -141,13 +141,13 @@ public class TankEnemy : Enemy {
                         if (baseAttackCooldown <baseAttackDuration * 0.90)
                              weapon2.tag = "EnemyWeapon";
 
-                        if (baseAttackCooldown< baseAttackDuration * 0.75)
+                        if (baseAttackCooldown< baseAttackDuration * 0.76)
                             weapon2.tag = "Untagged";
 
                         if (baseAttackCooldown < baseAttackDuration * 0.45)
                             weapon.tag = "EnemyWeapon";
 
-                        if (baseAttackCooldown < baseAttackDuration * 0.35)
+                        if (baseAttackCooldown < baseAttackDuration * 0.25)
                             weapon.tag = "Untagged";
 
                         if (baseAttackCooldown < 0)
@@ -181,7 +181,7 @@ public class TankEnemy : Enemy {
                         }
                         else
                         {
-                            ChangeSpeed(movementSpeed * 17.5f);
+                            ChangeSpeed(movementSpeed * 15f);
                             NavAgent.acceleration = 1000;
                             MoveToDestination();
                             accelerationTime += Time.deltaTime;
@@ -196,7 +196,7 @@ public class TankEnemy : Enemy {
                                     weapon2.tag = "EnemyWeapon";
                                 }
 
-                                if (animTimes["Swipe"].duration < animTimes["Swipe"].cooldown * 0.5f)
+                                if (animTimes["Swipe"].duration < animTimes["Swipe"].cooldown * 0.7f)
                                     weapon2.tag = "Untagged";
 
                                 if (animTimes["Swipe"].duration < 0)

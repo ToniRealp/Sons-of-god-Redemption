@@ -114,7 +114,7 @@ public class BasicEnemy : Enemy {
                 if (animTimes["Attack"].cooldown <= animTimes["Attack"].start)
                     weapon.tag = "EnemyWeapon";
 
-                if (animTimes["Attack"].cooldown <= animTimes["Attack"].end)
+                if (animTimes["Attack"].cooldown <= animTimes["Attack"].duration * 0.6f)
                     weapon.tag = "Untagged";
 
                 if (animTimes["Attack"].cooldown >= animTimes["Attack"].duration* 0.75f)
