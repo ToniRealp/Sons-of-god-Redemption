@@ -194,7 +194,7 @@ public class RangedEnemy : Enemy {
     {
         // Create the Bullet from the Bullet Prefab
         var bullet = (GameObject)Instantiate(arrow, spawnPos.position, spawnPos.rotation);
-        bullet.transform.parent = this.gameObject.transform;
+        //bullet.transform.parent = this.gameObject.transform;
         // Add velocity to the bullet
         bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
         // Destroy the bullet after 2 seconds

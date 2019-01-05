@@ -138,7 +138,7 @@ public class TankEnemy : Enemy {
 
                         baseAttackCooldown -= Time.deltaTime;
 
-                        if (baseAttackCooldown <baseAttackDuration * 0.95)
+                        if (baseAttackCooldown <baseAttackDuration * 0.90)
                              weapon2.tag = "EnemyWeapon";
 
                         if (baseAttackCooldown< baseAttackDuration * 0.75)
@@ -147,12 +147,11 @@ public class TankEnemy : Enemy {
                         if (baseAttackCooldown < baseAttackDuration * 0.45)
                             weapon.tag = "EnemyWeapon";
 
-                        if (baseAttackCooldown < baseAttackDuration * 0.3)
+                        if (baseAttackCooldown < baseAttackDuration * 0.35)
                             weapon.tag = "Untagged";
 
                         if (baseAttackCooldown < 0)
                         {
-                            
                             attackOnCooldown = true;
                             if (playerDetected)
                             {

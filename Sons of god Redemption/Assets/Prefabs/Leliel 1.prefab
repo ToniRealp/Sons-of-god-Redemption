@@ -1594,7 +1594,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1864428458612180}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 18.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4412019980916520}
@@ -1718,7 +1718,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1251156097650688}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.7534401, y: 0.24901183, z: 1.2483562}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4247679926732336}
@@ -2027,7 +2027,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1727931824325610}
   m_LocalRotation: {x: -0, y: -0.000000029802315, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0000066576767, y: -0.0000015177061, z: -0.000000035700154}
+  m_LocalPosition: {x: 0, y: 19.7, z: -0}
   m_LocalScale: {x: 1.0000018, y: 1.0000004, z: 1.0000013}
   m_Children: []
   m_Father: {fileID: 4412019980916520}
@@ -2328,7 +2328,7 @@ MonoBehaviour:
   direction: {x: 0.20072979, y: 0, z: -0.5954735}
   walkVelocity: 3
   runVelocity: 5
-  dashDistance: 2
+  dashDistance: 4
   dashCooldownTime: 0.5
   dashDuration: 0.2
   deadDuration: 0
@@ -7665,7 +7665,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.42260242
+      value: 0.77540547
       mode: 0
       spread: 0
       speed:
@@ -12198,7 +12198,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.42260242
+      value: 0.8327435
       mode: 0
       spread: 0
       speed:
