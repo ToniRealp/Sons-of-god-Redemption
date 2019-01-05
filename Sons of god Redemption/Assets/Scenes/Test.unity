@@ -660,23 +660,6 @@ RectTransform:
   m_AnchoredPosition: {x: -7.5, y: 0}
   m_SizeDelta: {x: -15, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1818379412 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1129495871336886, guid: 5382e3fbd00a8e64a81c42b76276af2a,
-    type: 2}
-  m_PrefabInternal: {fileID: 1045664802}
---- !u!65 &1818379414
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1818379412}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.20435943, y: 0.52838475, z: 0.18192305}
-  m_Center: {x: 0.0062405975, y: 0.08150188, z: -0.015259127}
 --- !u!1 &1855400554
 GameObject:
   m_ObjectHideFlags: 0

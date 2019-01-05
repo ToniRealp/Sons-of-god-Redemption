@@ -8,7 +8,11 @@ public class PlayerController : MonoBehaviour {
     //Player stats
     public Stats stats;
     public int health, movementSpeed, baseAttack, fireDmg, lightDmg;
+
+    //Canvas
     public Slider healthBar;
+    public GameObject fireUI;
+    public GameObject lightUI;
 
     //Enums
     enum States { Idle, Walking, Running, Dashing, Attacking, Dead, MAX };
@@ -86,6 +90,8 @@ public class PlayerController : MonoBehaviour {
         {
             elements[(int)Elements.Fire].SetActive(true);
             elements[(int)Elements.Holy].SetActive(false);
+            fireUI.SetActive(true);
+            lightUI.SetActive(false);
             health = stats.health;
             healthBar.value = health;
         }
@@ -93,6 +99,8 @@ public class PlayerController : MonoBehaviour {
         {
             elements[(int)Elements.Fire].SetActive(false);
             elements[(int)Elements.Holy].SetActive(true);
+            fireUI.SetActive(false);
+            lightUI.SetActive(true);
         }
 
         if (health<=0)
@@ -474,7 +482,7 @@ public class PlayerController : MonoBehaviour {
 
 
         fireHit = false;
-        damaged = false;
+        //damaged = false;
     }
 
     private void ResetAll()
