@@ -237,6 +237,11 @@ public class PlayerController : MonoBehaviour {
                             transition = true;
                             animator.SetBool("isIdle", false);
                         }
+                        if (animLength < animDuration * 0.7)
+                        {
+                            //weapon.tag = "Weapon";
+                            weapon.tag = "LightAttack1";
+                        }
                         if (animLength <= 0)
                         {
                             if (transition)
@@ -249,15 +254,9 @@ public class PlayerController : MonoBehaviour {
                                 attacks = Attacks.NotAtt;
                                 states = nextState;
                                 attacked = false;
+                                weapon.tag = "Untagged";
                             }
                         }
-                        if (animLength < animDuration * 0.7)
-                        {
-                            //weapon.tag = "Weapon";
-                            weapon.tag = "LightAttack1";
-                        }
-                        if(animLength<animDuration * 0.2)
-                        weapon.tag = "Untagged";
 
                         break;
 
@@ -301,7 +300,7 @@ public class PlayerController : MonoBehaviour {
                             animator.SetTrigger("lightAttack3");
                             animLength = animDuration = AnimationLength("light attack 3", animator);
                             attacked = true;
-                            //weapon.tag = "Weapon";
+                            weapon.tag = "LightAttack3";
                         }
                         if (animLength <= 0)
                         {
@@ -310,8 +309,7 @@ public class PlayerController : MonoBehaviour {
                             attacked = false;
                         }
                         if (animLength < animDuration * 0.7)
-                        {
-                            weapon.tag = "LightAttack3";
+                        {                           
                             if (elements[(int)Elements.Fire].activeSelf)
                             {
                                 damage = baseAttack + fireDmg;
@@ -352,6 +350,11 @@ public class PlayerController : MonoBehaviour {
                             transition = true;
                             animator.SetBool("isIdle", false);
                         }
+                        if (animLength < animDuration * 0.8)
+                        {
+                            weapon.tag = "StrongAttack1";
+                            //weapon.tag = "Weapon";                          
+                        }
                         if (animLength <= 0)
                         {
                             if (transition)
@@ -364,17 +367,9 @@ public class PlayerController : MonoBehaviour {
                                 attacks = Attacks.NotAtt;
                                 states = nextState;
                                 attacked = false;
+                                weapon.tag = "Untagged";
                             }                          
                         }
-                        if (animLength < animDuration * 0.8)
-                        {
-                            weapon.tag = "StrongAttack1";
-                            //weapon.tag = "Weapon";
-                            
-                        }
-                        if (animLength < animDuration * 0.2)
-                            weapon.tag = "Untagged";
-
 
                         break;
 
@@ -400,17 +395,14 @@ public class PlayerController : MonoBehaviour {
                                 isLightHit = true;
                             }
                         }
-                        if (animLength < animDuration * 0.3)
-                        {
-                            weapon.tag = "Untagged";
-                            isLightHit = false;
-                        }
                         if (animLength <= 0)
                         {
                             flameCone.SetActive(false);
                             attacks = Attacks.NotAtt;
                             states = nextState;
                             attacked = false;
+                            weapon.tag = "Untagged";
+                            isLightHit = false;
                         } 
 
                         break;
@@ -460,7 +452,6 @@ public class PlayerController : MonoBehaviour {
                 hit = false;
             }
         }
-
         
         if (fireHit)
         {
