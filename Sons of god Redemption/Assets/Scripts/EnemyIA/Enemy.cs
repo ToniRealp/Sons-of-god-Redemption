@@ -94,12 +94,13 @@ public abstract class Enemy : MonoBehaviour {
         if (other.tag != "Untagged")
         {
             lastTag = other.tag;
-            if (actualDamagedCooldown <= 0f)
+
+            if(other.tag != "LightAttack2" && !damaged)
             {
                 damaged = true;
-                actualDamagedCooldown = damagedCooldown;
                 animator.SetTrigger("Damaged");
             }
+            
             Instantiate(blood, bloodPosition.position, bloodPosition.rotation, transform);
             health -= (int)other.GetComponentInParent<PlayerController>().damage;
         }

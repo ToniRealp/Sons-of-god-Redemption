@@ -147,7 +147,7 @@ public class TankEnemy : Enemy {
                         if (baseAttackCooldown < baseAttackDuration * 0.45)
                             weapon.tag = "EnemyWeapon";
 
-                        if (baseAttackCooldown < baseAttackDuration * 0.25)
+                        if (baseAttackCooldown < baseAttackDuration * 0.30)
                             weapon.tag = "Untagged";
 
                         if (baseAttackCooldown < 0)
@@ -220,6 +220,24 @@ public class TankEnemy : Enemy {
                         break;
                 }
                 break;
+            case State.DAMAGED:
+                weapon.tag = weapon2.tag = "Untagged";
+                animTimes["Reaction Hit"].cooldown -= Time.deltaTime;
+                if (animTimes["Reaction Hit"].cooldown <= 0)
+                {
+                    animTimes["Reaction Hit"].cooldown = animTimes["Reaction Hit"].duration;
+                    damaged = false;
+                    
+                    if (playerDetected)
+                    {
+                        state = State.CHASING;
+                    }
+                    else
+                    {
+                        state = State.SEARCHING;
+                    }
+                }
+                break;
 
             default:
                 break;
@@ -232,6 +250,15 @@ public class TankEnemy : Enemy {
         {
             collided = true;
             
+        }
+    }
+    new private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "StrongAttack2"&&!damaged)
+        {
+            animator.SetTrigger("Damaged");
+            state = State.DAMAGED;
+            damaged = true;
         }
     }
 }

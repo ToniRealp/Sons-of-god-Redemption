@@ -22,10 +22,6 @@ public class BasicEnemy : Enemy {
             state = State.DAMAGED;
         }
 
-        if (animTimes["Reaction Hit"].cooldown > 0f)
-            animTimes["Reaction Hit"].cooldown -= Time.deltaTime;
-        
-
         if (attackOnCooldown)
         {
             if ((attackCooldown -= Time.deltaTime) <= 0)
@@ -34,11 +30,6 @@ public class BasicEnemy : Enemy {
                 attackOnCooldown = false;
             }
         }
-
-        if (actualDamagedCooldown > 0f)
-            actualDamagedCooldown -= Time.deltaTime;
-
-        damaged = false;
 
         // Set animation state depending on speed
         if (NavAgent.velocity.magnitude > 0.1f)

@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 195541036450054504}
   m_Layer: 0
   m_Name: Minotaur
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1299,7 +1299,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1345666069583242}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5.250117, y: -1.1738244e-17, z: 0.5286435}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4128696469392626}
@@ -1551,8 +1551,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.1974328, y: 0.90844643, z: 0.21498077}
-  m_Center: {x: -0.0010575956, y: 0.2169079, z: 0.01944219}
+  m_Size: {x: 0.2595356, y: 0.9756806, z: 0.25785783}
+  m_Center: {x: -0.0010645093, y: 0.18329197, z: -0.0019963314}
 --- !u!95 &95247406983624460
 Animator:
   serializedVersion: 3

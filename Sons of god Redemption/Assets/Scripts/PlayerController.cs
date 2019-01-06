@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour {
     public float dashCooldownTime, dashDuration, deadDuration, onHitAnimDelay, damage, lightCooldown;
     private float dashCooldownCounter, actualDashTime, actualDeadTime, animLength, animDuration, onHitDelay, actualLightCooldown;
     public bool interact, fireHit, explosionHit, meteorHit, spawnMe;
-    private bool dashed, attacked, transition, hit, lastHitted, isLightHit, lightOnCD, dead;
+    private bool dashed, attacked, transition, hit, isLightHit, lightOnCD, dead;
     const float velChange = 0.5f;
 
     public static bool damaged;
@@ -232,7 +232,6 @@ public class PlayerController : MonoBehaviour {
 
                     case (Attacks.LightAttack1):
                         damage = baseAttack;
-                        isLightHit = false;
 
                         if (!attacked)
                         {
@@ -311,14 +310,8 @@ public class PlayerController : MonoBehaviour {
                             attacked = true;
                             weapon.tag = "LightAttack3";
                         }
-                        if (animLength <= 0)
-                        {
-                            attacks = Attacks.NotAtt;
-                            states = nextState;
-                            attacked = false;
-                        }
                         if (animLength < animDuration * 0.7)
-                        {                           
+                        {
                             if (elements[(int)Elements.Fire].activeSelf)
                             {
                                 damage = baseAttack + fireDmg;
@@ -329,22 +322,23 @@ public class PlayerController : MonoBehaviour {
                                 isLightHit = true;
                             }
                         }
-                        if (animLength< animDuration * 0.3)
+                        if (animLength < animDuration * 0.3)
                         {
                             weapon.tag = "Untagged";
-                            if (elements[(int)Elements.Fire].activeSelf)
-                            {
-                                flameCone.SetActive(false);
-                            }
-                                isLightHit = false;
                         }
-
+                        if (animLength <= 0)
+                        {
+                            attacks = Attacks.NotAtt;
+                            states = nextState;
+                            attacked = false;
+                            flameCone.SetActive(false);
+                            isLightHit = false;
+                        }
 
                         break;
 
                     case (Attacks.StrongAttack1):
                         damage = baseAttack + (baseAttack * 0.5f);
-                        isLightHit = false;
                         if (!attacked)
                         {
                             animator.SetBool("isIdle", true);
@@ -404,12 +398,12 @@ public class PlayerController : MonoBehaviour {
                         }
                         if (animLength <= 0)
                         {
-                            flameCone.SetActive(false);
                             attacks = Attacks.NotAtt;
                             states = nextState;
                             attacked = false;
                             weapon.tag = "Untagged";
                             isLightHit = false;
+                            flameCone.SetActive(false);
                         } 
 
                         break;
