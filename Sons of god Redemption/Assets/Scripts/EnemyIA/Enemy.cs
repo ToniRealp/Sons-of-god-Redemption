@@ -100,7 +100,11 @@ public abstract class Enemy : MonoBehaviour {
                 damaged = true;
                 animator.SetTrigger("Damaged");
             }
-            
+            if (other.tag == "Arrow")
+            {
+                health -= 15;
+            }
+
             Instantiate(blood, bloodPosition.position, bloodPosition.rotation, transform);
             health -= (int)other.GetComponentInParent<PlayerController>().damage;
         }

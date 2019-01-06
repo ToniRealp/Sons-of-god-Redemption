@@ -254,11 +254,20 @@ public class TankEnemy : Enemy {
     }
     new private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "StrongAttack2"&&!damaged)
+        if (other.tag != "Untagged")
         {
-            animator.SetTrigger("Damaged");
-            state = State.DAMAGED;
-            damaged = true;
-        }
+            Instantiate(blood, bloodPosition.position, bloodPosition.rotation, transform);
+            health -= (int)other.GetComponentInParent<PlayerController>().damage;
+            if (other.tag == "Arrow")
+            {
+                health -= 15;
+            }
+            if (other.tag == "StrongAttack2" && !damaged)
+            {
+                animator.SetTrigger("Damaged");
+                state = State.DAMAGED;
+                damaged = true;
+            }
+        } 
     }
 }
