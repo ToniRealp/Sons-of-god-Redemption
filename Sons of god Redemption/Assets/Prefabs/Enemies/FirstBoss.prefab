@@ -2458,7 +2458,7 @@ MonoBehaviour:
   canvas: {fileID: 0}
   textPos: {fileID: 0}
   weapon: {fileID: 1883238938298510}
-  font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  font: {fileID: 12800000, guid: cc8fb7e3b2fd1794db8c212bc31a24f7, type: 3}
   blood: {fileID: 1766210467136178, guid: 3dbe7a26933ab80478c3cef9187f27f1, type: 2}
   bloodPosition: {fileID: 4967374045783266}
 --- !u!136 &136566827087189704

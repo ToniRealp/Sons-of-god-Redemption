@@ -19,6 +19,7 @@ public class Level1Controller : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        bossHandler.GetComponent<FirstBossBehaviour>().movingSpeed = 0f;
         trigger = new bool[19];
         for (int i = 0; i < 19; i++)
         {
@@ -108,7 +109,7 @@ public class Level1Controller : MonoBehaviour {
         {
             if (!bossSpawn)
             {
-                bossHandler.SetActive(false);
+                bossHandler.GetComponent<FirstBossBehaviour>().movingSpeed=0.005f;
                 camera.GetComponent<AudioSource>().clip = audioClip;
                 camera.GetComponent<AudioSource>().volume = 0;
                 camera.GetComponent<AudioSource>().Play();

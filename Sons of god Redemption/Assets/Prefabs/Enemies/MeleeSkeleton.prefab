@@ -2119,7 +2119,7 @@ MonoBehaviour:
   attackCooldown: 0
   healthTextGO: {fileID: 0}
   weapon: {fileID: 1688645483568458}
-  font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  font: {fileID: 12800000, guid: cc8fb7e3b2fd1794db8c212bc31a24f7, type: 3}
   state: 0
   blood: {fileID: 1540188549263062, guid: 9241f871267c8a6478b40eebaffd61f6, type: 2}
   bloodPosition: {fileID: 4618262005695112}
