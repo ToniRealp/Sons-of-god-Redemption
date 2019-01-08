@@ -170,13 +170,14 @@ public class TankEnemy : Enemy {
                         if (!roar)
                         {
                             ChangeSpeed(0);
-                            destination = playerPosition;
+                            //destination = playerPosition;
                             LookToDestination();
                             animTimes["Roar"].cooldown -= Time.deltaTime;
                             if (animTimes["Roar"].cooldown < 0)
                             {
                                 roar = true;
                                 animTimes["Roar"].cooldown = animTimes["Roar"].duration;
+                                destination = playerPosition;
                             }
                         }
                         else
