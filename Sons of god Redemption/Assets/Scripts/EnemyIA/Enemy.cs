@@ -47,6 +47,7 @@ public abstract class Enemy : MonoBehaviour {
     //blood particles
     public GameObject blood;
     public Transform bloodPosition;
+    public GameObject dieParticles;
 
     protected void Start()
     {
@@ -259,8 +260,9 @@ public abstract class Enemy : MonoBehaviour {
 
     protected void Die()
     {
-            Destroy(healthTextGO);
-            Destroy(this.gameObject);
+        Instantiate(dieParticles,bloodPosition.position,bloodPosition.rotation);
+        Destroy(healthTextGO);
+        Destroy(this.gameObject);
     }
 
     protected void GetAnimations()

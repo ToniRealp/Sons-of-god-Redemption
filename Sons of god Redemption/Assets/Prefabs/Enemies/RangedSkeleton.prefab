@@ -1462,8 +1462,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1525900080903410}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.9590394, y: -4.1376805e-17, z: 58.236134}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 37.403366, y: 0, z: 189.19107}
   m_LocalScale: {x: 1.75, y: 1.75, z: 1.75}
   m_Children:
   - {fileID: 4351573002006972}
@@ -2212,6 +2212,8 @@ MonoBehaviour:
   state: 0
   blood: {fileID: 1540188549263062, guid: 9241f871267c8a6478b40eebaffd61f6, type: 2}
   bloodPosition: {fileID: 4415840283794136}
+  dieParticles: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,
+    type: 2}
   arrow: {fileID: 1012792579377776, guid: f37038417ec42d84b82e06242311224f, type: 2}
   spawnPos: {fileID: 4258610392401184}
   bulletSpeed: 15

@@ -1298,8 +1298,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1345666069583242}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.250117, y: -1.1738244e-17, z: 0.5286435}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.7454185, y: 0, z: 178.73521}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4128696469392626}
@@ -1601,6 +1601,8 @@ MonoBehaviour:
   state: 0
   blood: {fileID: 1540188549263062, guid: 9241f871267c8a6478b40eebaffd61f6, type: 2}
   bloodPosition: {fileID: 4520827401729348}
+  dieParticles: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,
+    type: 2}
   baseAttackDuration: 0
   baseAttackCooldown: 0
   rushCooldown: 0
