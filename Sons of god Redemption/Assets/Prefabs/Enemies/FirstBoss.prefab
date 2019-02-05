@@ -2295,7 +2295,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1008205161994760}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 6.42}
+  m_LocalPosition: {x: 0.098176956, y: 0, z: 244.51}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4236671491116046}
@@ -2461,6 +2461,8 @@ MonoBehaviour:
   font: {fileID: 12800000, guid: cc8fb7e3b2fd1794db8c212bc31a24f7, type: 3}
   blood: {fileID: 1766210467136178, guid: 3dbe7a26933ab80478c3cef9187f27f1, type: 2}
   bloodPosition: {fileID: 4967374045783266}
+  dieParticles: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,
+    type: 2}
 --- !u!136 &136566827087189704
 CapsuleCollider:
   m_ObjectHideFlags: 1

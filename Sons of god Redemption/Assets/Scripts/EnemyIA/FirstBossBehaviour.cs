@@ -30,6 +30,7 @@ public class FirstBossBehaviour : MonoBehaviour
 
     public GameObject blood;
     public Transform bloodPosition;
+    public GameObject dieParticles;
 
     // Use this for initialization
     void Start()
@@ -72,6 +73,7 @@ public class FirstBossBehaviour : MonoBehaviour
         if (health <= 0)
         {
             GameObject.Find("Level1Controller").GetComponent<Level1Controller>().BossDead();
+            Instantiate(dieParticles, bloodPosition.position, bloodPosition.rotation);
             Destroy(this.gameObject);
             Destroy(healthTextGO);
         }
