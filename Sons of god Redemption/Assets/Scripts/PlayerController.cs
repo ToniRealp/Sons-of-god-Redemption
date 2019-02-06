@@ -629,5 +629,11 @@ public class PlayerController : MonoBehaviour {
             healthBar.value = health;
             damaged = true;
         }
+        if (other.tag == "FinalBossWeapon")
+        {
+            health -= (int)other.GetComponentInParent<FinalBossBehaviour>().damage;
+            healthBar.value = health;
+            damaged = true;
+        }
     }
 }

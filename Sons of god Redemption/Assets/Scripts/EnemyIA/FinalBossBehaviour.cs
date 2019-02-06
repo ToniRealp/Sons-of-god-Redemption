@@ -9,12 +9,12 @@ public class FinalBossBehaviour : MonoBehaviour {
     public Animator animator;
     public float attackDistance = 4f, explosionRange = 10, movingSpeed = 0.02f, rotationSpeed = 0.05f, meteorInterval = 0.3f, meteorRange = 5;
     public int meteorNum = 5, actualAttack, actualAttack2, patron;
-    public Vector3[] meteorPosition;
+    public Quaternion[] meteorRotation;
 
 
     private GameObject player;
-    private float chargeAnimationTime, explosionAnimationTime, roarAnimationTime, swipeAnimationTime, rainAnimationTime, initMeteorTime;
-    private float actualAttackInterval, actualChargeTime, actualExplosionTime, actualRoarTime, actualSwipeTime, actualRainTime;
+    private float chargeAnimationTime, explosionAnimationTime, roarAnimationTime, dashAnimationTime, fireAnimationTime, initMeteorTime;
+    private float actualAttackInterval, actualChargeTime, actualExplosionTime, actualRoarTime, actualDashTime, actualFireTime;
     private int meteorCounter;
     private bool explosionChecked, patron1switched, patron2switched, patron3switched;
 
@@ -27,7 +27,7 @@ public class FinalBossBehaviour : MonoBehaviour {
     public GameObject healthTextGO, canvas, textPos;
     public Font font;
 
-    public GameObject blood;
+    public GameObject fireBall, blood;
     public Transform bloodPosition;
     public GameObject dieParticles;
 
@@ -40,8 +40,8 @@ public class FinalBossBehaviour : MonoBehaviour {
         actualChargeTime = chargeAnimationTime = AnimationLength("Mutant Flexing Muscles", animator);
         actualExplosionTime = explosionAnimationTime = AnimationLength("Mutant Jumping", animator);
         actualRoarTime = roarAnimationTime = AnimationLength("Mutant Roaring", animator);
-        actualSwipeTime = swipeAnimationTime = AnimationLength("Stable Sword Outward Slash", animator);
-        actualRainTime = rainAnimationTime = AnimationLength("Wide Arm Spell Casting", animator);
+        actualDashTime = dashAnimationTime = AnimationLength("Running Slide (1)", animator);
+        actualFireTime = fireAnimationTime = AnimationLength("Standing", animator);
         //fireParticles.SetActive(false);
         //explosionParticles.SetActive(false);
         lastTag = "value";
@@ -59,7 +59,7 @@ public class FinalBossBehaviour : MonoBehaviour {
         patron = 1;
         patron1switched = patron2switched = patron3switched = false;
         actualAttack2 = actualAttack = meteorCounter = 0;
-        meteorPosition = new Vector3[meteorNum];
+        meteorRotation = new Quaternion[meteorNum];
         explosionChecked = false;
     }
 
@@ -113,6 +113,8 @@ public class FinalBossBehaviour : MonoBehaviour {
                 {
                     if ((actualAttackInterval -= Time.deltaTime) <= 0)
                     {
+                        Dash();
+                        actualAttackInterval = 1;
                         //animator.SetBool("isIdle", false);
                         //switch (patron)
                         //{
@@ -303,6 +305,8 @@ public class FinalBossBehaviour : MonoBehaviour {
                     transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z), movingSpeed);
                     if ((actualAttackInterval -= Time.deltaTime) <= 0)
                     {
+                        Fire();
+                        actualAttackInterval = 3;
                         //animator.SetBool("isMoving", false);
                         //switch (patron)
                         //{
@@ -435,18 +439,19 @@ public class FinalBossBehaviour : MonoBehaviour {
                 break;
             case State.DASH:
 
-                //actualSwipeTime -= Time.deltaTime;
-                //if (actualSwipeTime > swipeAnimationTime * 0.6)
+                actualDashTime -= Time.deltaTime;
+
+                //if (actualDashTime > dashAnimationTime * 0.6)
                 //    LookPlayer();
-                //if (actualSwipeTime <= swipeAnimationTime * 0.95)
-                //    weapon.tag = "FirstBossWeapon";
-                //if (actualSwipeTime <= swipeAnimationTime * 0.1)
-                //    weapon.tag = "Untagged";
-                //if (actualSwipeTime <= 0)
-                //{
-                //    actualSwipeTime = swipeAnimationTime;
-                //    state = State.IDLE;
-                //}
+                if (actualDashTime <= dashAnimationTime)
+                    this.tag = "FinalBossWeapon";
+                if (actualDashTime <= dashAnimationTime * 0.1)
+                    this.tag = "Enemy";
+                if (actualDashTime <= 0)
+                {
+                    actualDashTime = dashAnimationTime;
+                    state = State.IDLE;
+                }
                 break;
             //case State.CHARGE:
             //    // Look to player
@@ -483,18 +488,26 @@ public class FinalBossBehaviour : MonoBehaviour {
                 //}
                 break;
 
+
+
             case State.FIRE:
-                //if (Time.time - initMeteorTime >= meteorInterval && meteorCounter < meteorNum)
-                //{
-                //    Instantiate(meteor, meteorPosition[meteorCounter], new Quaternion(0, 0, 0, 0));
-                //    meteorCounter++;
-                //    initMeteorTime = Time.time;
-                //}
-                //if ((actualRainTime -= Time.deltaTime) <= 0 && meteorCounter >= meteorNum)
-                //{
-                //    actualRainTime = rainAnimationTime;
-                //    state = State.IDLE;
-                //}
+                actualFireTime -= Time.deltaTime;
+                if (actualFireTime <= fireAnimationTime * 0.8)
+                {
+                    if (Time.time - initMeteorTime >= meteorInterval && meteorCounter < meteorNum)
+                    {
+                        Vector3 t = transform.position + meteorRotation[meteorCounter] * Vector3.forward * meteorRange;
+                        t.y = 2;
+                        Instantiate(fireBall, t, meteorRotation[meteorCounter]);
+                        meteorCounter++;
+                        initMeteorTime = Time.time;
+                    }
+                }
+                if (actualFireTime <= 0 && meteorCounter >= meteorNum)
+                {
+                    actualFireTime = fireAnimationTime;
+                    state = State.IDLE;
+                }
                 break;
             case State.GODMODE:
                 //actualRoarTime -= Time.deltaTime;
@@ -540,7 +553,7 @@ public class FinalBossBehaviour : MonoBehaviour {
         meteorCounter = 0;
         for (int i = 0; i < meteorNum; i++)
         {
-            meteorPosition[i] = new Vector3(Random.Range(player.transform.position.x - meteorRange, player.transform.position.x + meteorRange), 20, Random.Range(player.transform.position.z - meteorRange, player.transform.position.z + meteorRange));
+            meteorRotation[i] = Quaternion.Euler(0, Random.Range(0, 359), 0).normalized;
         }
         state = State.FIRE;
     }

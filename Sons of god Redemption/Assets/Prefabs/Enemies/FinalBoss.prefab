@@ -2035,7 +2035,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 3a68f4534d0774542a3ef8ee34833a40, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -2057,13 +2057,13 @@ MonoBehaviour:
   explosionRange: 10
   movingSpeed: 0.02
   rotationSpeed: 0.05
-  meteorInterval: 0.3
-  meteorRange: 5
-  meteorNum: 5
+  meteorInterval: 0.1
+  meteorRange: 2.5
+  meteorNum: 15
   actualAttack: 0
   actualAttack2: 0
   patron: 0
-  meteorPosition: []
+  meteorRotation: []
   state: 0
   playerDistance: 0
   maxHealth: 1800
@@ -2077,6 +2077,7 @@ MonoBehaviour:
   canvas: {fileID: 0}
   textPos: {fileID: 0}
   font: {fileID: 12800000, guid: cc8fb7e3b2fd1794db8c212bc31a24f7, type: 3}
+  fireBall: {fileID: 1419308403063956, guid: 5f222da87c19ad14c991b4ec54636688, type: 2}
   blood: {fileID: 1766210467136178, guid: 3dbe7a26933ab80478c3cef9187f27f1, type: 2}
   bloodPosition: {fileID: 4432517950612244}
   dieParticles: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,
@@ -2090,10 +2091,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.6
+  m_Radius: 0.9
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0.96, z: 0}
 --- !u!137 &137571468961198892
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
