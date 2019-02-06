@@ -102,7 +102,12 @@ public class PlayerController : MonoBehaviour {
             fireUI.SetActive(false);
             lightUI.SetActive(true);
         }
-
+        if (inputs[(int)ButtonInputs.Dash] && !dashed)
+        {
+            states = States.Dashing;
+            animator.SetTrigger("isDashing");
+            dashed = true;
+        }
         if (health<=0)
         {
             states = States.Dead;
@@ -214,15 +219,11 @@ public class PlayerController : MonoBehaviour {
                 
                 actualDashTime -= Time.deltaTime;
                 if (actualDashTime >= 0)
-                {
-                    if (!dashed)
-                        Dash();
-                }
+                    Dash();
                 else
                 {
                     dashed = true;
-                    states = States.Running;
-                    actualDashTime = dashDuration;
+                    ResetAll();
                 }
                  
                 break;
@@ -487,6 +488,21 @@ public class PlayerController : MonoBehaviour {
         dead = lightOnCD = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
         dashCooldownCounter = dashCooldownTime;
         actualDashTime = dashDuration;
+        actualLightCooldown = lightCooldown;
+        onHitDelay = onHitAnimDelay;
+        animator.ResetTrigger("lightAttack1");
+        animator.ResetTrigger("lightAttack2");
+        animator.ResetTrigger("lightAttack3");
+        animator.ResetTrigger("strongAttack1");
+        animator.ResetTrigger("strongAttack2");
+    }
+
+    private void ResetDash()
+    {
+        weapon.tag = "Untagged";
+        states = States.Idle;
+        attacks = Attacks.NotAtt;
+        dead = lightOnCD = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
         actualLightCooldown = lightCooldown;
         onHitDelay = onHitAnimDelay;
     }
