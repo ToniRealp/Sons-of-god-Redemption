@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4863802550731688}
   - component: {fileID: 198207016696171342}
   - component: {fileID: 199732942277169674}
+  - component: {fileID: 114866246075646184}
   m_Layer: 0
   m_Name: LightHit
   m_TagString: Untagged
@@ -41,6 +42,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114866246075646184
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1008891602714680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0d5bb27c51ee3f4dbf15b87acf50941, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198207016696171342
 ParticleSystem:
   m_ObjectHideFlags: 1

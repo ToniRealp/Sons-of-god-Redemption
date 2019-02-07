@@ -337,9 +337,19 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114824579914962590, guid: 531ca478e6bf53747af930ceaced27fb,
+        type: 2}
+      propertyPath: glow
+      value: 
+      objectReference: {fileID: 162623187}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 531ca478e6bf53747af930ceaced27fb, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &162623187 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1431960624646094, guid: 531ca478e6bf53747af930ceaced27fb,
+    type: 2}
+  m_PrefabInternal: {fileID: 162623186}
 --- !u!1 &314841968
 GameObject:
   m_ObjectHideFlags: 0

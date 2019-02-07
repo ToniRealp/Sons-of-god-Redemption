@@ -7,18 +7,18 @@ public class FinalBossBehaviour : MonoBehaviour {
 
     //public GameObject fireParticles, explosionParticles, meteor;
     public Animator animator;
-    public float attackDistance = 4f, explosionRange = 10, movingSpeed = 0.02f, rotationSpeed = 0.05f, meteorInterval = 0.3f, meteorRange = 5;
+    public float attackDistance = 4f, explosionRange = 10, movingSpeed = 0.02f, rotationSpeed = 0.05f, meteorInterval = 0.3f, meteorRange = 5, godModeMinTime = 3, godModeMaxTime = 8, godModeMinDelay = 20, godModeMaxDelay = 35;
     public int meteorNum = 5, actualAttack, actualAttack2, patron;
     public Quaternion[] meteorRotation;
 
 
     private GameObject player;
-    private float chargeAnimationTime, darkAnimationTime, roarAnimationTime, dashAnimationTime, fireAnimationTime, initMeteorTime;
-    private float actualAttackInterval, actualChargeTime, actualDarkTime, actualRoarTime, actualDashTime, actualFireTime;
+    private float godModeTime, godDelayTime, darkAnimationTime, dizzyAnimationTime, dashAnimationTime, fireAnimationTime, initMeteorTime, godModeHealth;
+    private float actualAttackInterval, actualGodModeTime, actualGodDelayTime, actualDarkTime, actualDizzyTime, actualDashTime, actualFireTime;
     private int meteorCounter;
-    private bool explosionChecked, patron1switched, patron2switched, patron3switched;
+    private bool explosionChecked, patron1switched, patron2switched, patron3switched, godMode;
 
-    enum State { IDLE, WALKING, DASH, FIRE, DARK, GODMODE };
+    enum State { IDLE, WALKING, DASH, FIRE, DARK, DIZZY };
     [SerializeField] State state = State.IDLE;
 
     public float playerDistance, maxHealth = 1800, health, damage, dashDmg = 15, fireDmg = 55, darkDmg = 25;
@@ -27,7 +27,7 @@ public class FinalBossBehaviour : MonoBehaviour {
     public GameObject healthTextGO, canvas, textPos;
     public Font font;
 
-    public GameObject fireBall, darkBox, dashTrigger, blood;
+    public GameObject fireBall, darkBox, dashTrigger, glow, blood;
     public Transform bloodPosition;
     public GameObject dieParticles;
 
@@ -37,12 +37,13 @@ public class FinalBossBehaviour : MonoBehaviour {
         health = maxHealth;
         actualAttackInterval = 1;
         player = GameObject.FindGameObjectWithTag("Player");
-        actualChargeTime = chargeAnimationTime = AnimationLength("Mutant Flexing Muscles", animator);
+        actualDizzyTime = dizzyAnimationTime = AnimationLength("Dizzy", animator);
         actualDarkTime = darkAnimationTime = AnimationLength("Standing2", animator);
-        actualRoarTime = roarAnimationTime = AnimationLength("Mutant Roaring", animator);
         actualDashTime = dashAnimationTime = AnimationLength("Running Slide (1)", animator);
         actualFireTime = fireAnimationTime = AnimationLength("Standing", animator);
+        godDelayTime = actualGodDelayTime = Random.Range(godModeMinDelay, godModeMaxDelay);
         darkBox.SetActive(false);
+        glow.SetActive(false);
         dashTrigger.SetActive(false);
         lastTag = "value";
 
@@ -60,7 +61,7 @@ public class FinalBossBehaviour : MonoBehaviour {
         patron1switched = patron2switched = patron3switched = false;
         actualAttack2 = actualAttack = meteorCounter = 0;
         meteorRotation = new Quaternion[meteorNum];
-        explosionChecked = false;
+        godMode = explosionChecked = false;
     }
 
     // Update is called once per frame
@@ -75,6 +76,30 @@ public class FinalBossBehaviour : MonoBehaviour {
             Instantiate(dieParticles, bloodPosition.position, bloodPosition.rotation);
             Destroy(this.gameObject);
             Destroy(healthTextGO);
+        }
+
+        //GodMode
+        if (godMode)
+        {
+            health = godModeHealth;
+            actualGodModeTime -= Time.deltaTime;
+            if (actualGodModeTime <= 0)
+            {
+                glow.SetActive(false);
+                godDelayTime = actualGodDelayTime = Random.Range(godModeMinDelay, godModeMaxDelay);
+                godMode = false;
+            }
+        }
+        else
+        {
+            actualGodDelayTime -= Time.deltaTime;
+            if (actualGodDelayTime<=0)
+            {
+                glow.SetActive(true);
+                godModeTime = actualGodModeTime = Random.Range(godModeMinTime,godModeMaxTime);
+                godMode = true;
+                godModeHealth = health;
+            }
         }
 
         // Health text update
@@ -440,9 +465,6 @@ public class FinalBossBehaviour : MonoBehaviour {
             case State.DASH:
 
                 actualDashTime -= Time.deltaTime;
-
-                //if (actualDashTime > dashAnimationTime * 0.6)
-                //    LookPlayer();
                 if (actualDashTime <= dashAnimationTime)
                     dashTrigger.SetActive(true);
                 if (actualDashTime <= dashAnimationTime * 0.1)
@@ -453,15 +475,7 @@ public class FinalBossBehaviour : MonoBehaviour {
                     state = State.IDLE;
                 }
                 break;
-            //case State.CHARGE:
-            //    // Look to player
-            //    LookPlayer();
-            //    if ((actualChargeTime -= Time.deltaTime) <= 0)
-            //    {
-            //        actualChargeTime = chargeAnimationTime;
-            //        state = State.EXPLOSION;
-            //    }
-            //    break;
+
             case State.DARK:
 
                 actualDarkTime -= Time.deltaTime;
@@ -498,21 +512,13 @@ public class FinalBossBehaviour : MonoBehaviour {
                     state = State.IDLE;
                 }
                 break;
-            case State.GODMODE:
-                //actualRoarTime -= Time.deltaTime;
-                //if ((actualRoarTime / roarAnimationTime) < 0.7f)
-                //{
-                //    fireParticles.SetActive(true);
-                //}
-                //if ((actualRoarTime / roarAnimationTime) < 0.1f)
-                //{
-                //    fireParticles.SetActive(false);
-                //}
-                //if (actualRoarTime <= 0)
-                //{
-                //    actualRoarTime = roarAnimationTime;
-                //    state = State.IDLE;
-                //}
+            case State.DIZZY:
+                actualDizzyTime -= Time.deltaTime;
+                if (actualDizzyTime <= 0)
+                {
+                    actualDizzyTime = dizzyAnimationTime;
+                    state = State.IDLE;
+                }
                 break;
             default:
                 break;
@@ -554,10 +560,10 @@ public class FinalBossBehaviour : MonoBehaviour {
         state = State.DARK;
     }
 
-    void GodMode()
+    void Dizzy()
     {
         animator.SetTrigger("GodMode");
-        state = State.GODMODE;
+        state = State.DIZZY;
     }
 
     public void Heal()
