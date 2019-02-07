@@ -13,8 +13,8 @@ public class FinalBossBehaviour : MonoBehaviour {
 
 
     private GameObject player;
-    private float chargeAnimationTime, explosionAnimationTime, roarAnimationTime, dashAnimationTime, fireAnimationTime, initMeteorTime;
-    private float actualAttackInterval, actualChargeTime, actualExplosionTime, actualRoarTime, actualDashTime, actualFireTime;
+    private float chargeAnimationTime, darkAnimationTime, roarAnimationTime, dashAnimationTime, fireAnimationTime, initMeteorTime;
+    private float actualAttackInterval, actualChargeTime, actualDarkTime, actualRoarTime, actualDashTime, actualFireTime;
     private int meteorCounter;
     private bool explosionChecked, patron1switched, patron2switched, patron3switched;
 
@@ -27,7 +27,7 @@ public class FinalBossBehaviour : MonoBehaviour {
     public GameObject healthTextGO, canvas, textPos;
     public Font font;
 
-    public GameObject fireBall, blood;
+    public GameObject fireBall, darkBox, blood;
     public Transform bloodPosition;
     public GameObject dieParticles;
 
@@ -38,11 +38,11 @@ public class FinalBossBehaviour : MonoBehaviour {
         actualAttackInterval = 1;
         player = GameObject.FindGameObjectWithTag("Player");
         actualChargeTime = chargeAnimationTime = AnimationLength("Mutant Flexing Muscles", animator);
-        actualExplosionTime = explosionAnimationTime = AnimationLength("Mutant Jumping", animator);
+        actualDarkTime = darkAnimationTime = AnimationLength("Standing2", animator);
         actualRoarTime = roarAnimationTime = AnimationLength("Mutant Roaring", animator);
         actualDashTime = dashAnimationTime = AnimationLength("Running Slide (1)", animator);
         actualFireTime = fireAnimationTime = AnimationLength("Standing", animator);
-        //fireParticles.SetActive(false);
+        darkBox.SetActive(false);
         //explosionParticles.SetActive(false);
         lastTag = "value";
 
@@ -113,7 +113,7 @@ public class FinalBossBehaviour : MonoBehaviour {
                 {
                     if ((actualAttackInterval -= Time.deltaTime) <= 0)
                     {
-                        Dash();
+                        Dark();
                         actualAttackInterval = 1;
                         //animator.SetBool("isIdle", false);
                         //switch (patron)
@@ -463,29 +463,18 @@ public class FinalBossBehaviour : MonoBehaviour {
             //    }
             //    break;
             case State.DARK:
-                //actualExplosionTime -= Time.deltaTime;
-                //if (actualExplosionTime <= explosionAnimationTime * 0.5)
-                //{
-                //    explosionParticles.SetActive(true);
-                //    if (!explosionChecked)
-                //    {
-                //        if (playerDistance < explosionRange)
-                //        {
-                //            player.GetComponent<PlayerController>().bossDmg = explosionDmg;
-                //            player.GetComponent<PlayerController>().explosionHit = true;
-                //        }
-                //        explosionChecked = true;
-                //    }
 
-                //}
+                actualDarkTime -= Time.deltaTime;
 
+                if (actualDarkTime <= darkAnimationTime * 0.6)
+                    darkBox.SetActive(true);
+                if (actualDarkTime <= 0)
+                {
+                    darkBox.SetActive(false);
+                    actualDarkTime = darkAnimationTime;
+                    state = State.IDLE;
+                }
 
-                //if (actualExplosionTime <= 0)
-                //{
-                //    explosionParticles.SetActive(false);
-                //    actualExplosionTime = explosionAnimationTime;
-                //    state = State.IDLE;
-                //}
                 break;
 
 
@@ -569,6 +558,14 @@ public class FinalBossBehaviour : MonoBehaviour {
     {
         animator.SetTrigger("GodMode");
         state = State.GODMODE;
+    }
+
+    public void Heal()
+    {
+        if (health<=maxHealth-20)
+        {
+            health += 20;
+        }
     }
 
     float AnimationLength(string animName, Animator animator)
