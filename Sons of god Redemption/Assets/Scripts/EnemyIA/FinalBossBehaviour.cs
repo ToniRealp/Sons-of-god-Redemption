@@ -27,7 +27,7 @@ public class FinalBossBehaviour : MonoBehaviour {
     public GameObject healthTextGO, canvas, textPos;
     public Font font;
 
-    public GameObject fireBall, darkBox, blood;
+    public GameObject fireBall, darkBox, dashTrigger, blood;
     public Transform bloodPosition;
     public GameObject dieParticles;
 
@@ -43,7 +43,7 @@ public class FinalBossBehaviour : MonoBehaviour {
         actualDashTime = dashAnimationTime = AnimationLength("Running Slide (1)", animator);
         actualFireTime = fireAnimationTime = AnimationLength("Standing", animator);
         darkBox.SetActive(false);
-        //explosionParticles.SetActive(false);
+        dashTrigger.SetActive(false);
         lastTag = "value";
 
         //Health Text
@@ -113,7 +113,7 @@ public class FinalBossBehaviour : MonoBehaviour {
                 {
                     if ((actualAttackInterval -= Time.deltaTime) <= 0)
                     {
-                        Dark();
+                        Dash();
                         actualAttackInterval = 1;
                         //animator.SetBool("isIdle", false);
                         //switch (patron)
@@ -444,9 +444,9 @@ public class FinalBossBehaviour : MonoBehaviour {
                 //if (actualDashTime > dashAnimationTime * 0.6)
                 //    LookPlayer();
                 if (actualDashTime <= dashAnimationTime)
-                    this.tag = "FinalBossWeapon";
+                    dashTrigger.SetActive(true);
                 if (actualDashTime <= dashAnimationTime * 0.1)
-                    this.tag = "Enemy";
+                    dashTrigger.SetActive(false);
                 if (actualDashTime <= 0)
                 {
                     actualDashTime = dashAnimationTime;
