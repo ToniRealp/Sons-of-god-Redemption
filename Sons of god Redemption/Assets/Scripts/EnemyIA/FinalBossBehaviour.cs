@@ -138,180 +138,138 @@ public class FinalBossBehaviour : MonoBehaviour {
                 {
                     if ((actualAttackInterval -= Time.deltaTime) <= 0)
                     {
-                        Dash();
-                        actualAttackInterval = 1;
-                        //animator.SetBool("isIdle", false);
-                        //switch (patron)
-                        //{
-                            //    case 1:
-                            //        switch (actualAttack)
-                            //        {
-                            //            case 0:
-                            //                Swipe();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 1;
-                            //                break;
-                            //            case 1:
-                            //                Swipe();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 1;
-                            //                break;
-                            //            case 2:
-                            //                Rain();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 1;
-                            //                break;
-                            //            case 3:
-                            //                Swipe();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 1;
-                            //                break;
-                            //            case 4:
-                            //                Swipe();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 1;
-                            //                break;
-                            //            case 5:
-                            //                Roar();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 1;
-                            //                break;
-                            //            case 6:
-                            //                Explosion();
-                            //                actualAttack = 0;
-                            //                actualAttackInterval = 1;
-                            //                break;
-                            //            default:
-                            //                break;
-                            //        }
-                            //        break;
-                            //    case 2:
-                            //        switch (actualAttack)
-                            //        {
-                            //            case 0:
-                            //                Swipe();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 0;
-                            //                break;
-                            //            case 1:
-                            //                Swipe();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 1;
-                            //                break;
-                            //            case 2:
-                            //                Explosion();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 1;
-                            //                break;
-                            //            case 3:
-                            //                Swipe();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 0;
-                            //                break;
-                            //            case 4:
-                            //                Swipe();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 1;
-                            //                break;
-                            //            case 5:
-                            //                Roar();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 1;
-                            //                break;
-                            //            case 6:
-                            //                Swipe();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 1;
-                            //                break;
-                            //            case 7:
-                            //                Rain();
-                            //                actualAttack = 0;
-                            //                actualAttackInterval = 1;
-                            //                break;
-                            //            default:
-                            //                break;
-                            //        }
-                            //        break;
-                            //    case 3:
-                            //        switch (actualAttack)
-                            //        {
-                            //            case 0:
-                            //                Explosion();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 1;
-                            //                break;
-                            //            case 1:
-                            //                Roar();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 0;
-                            //                break;
-                            //            case 2:
-                            //                Swipe();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 0;
-                            //                break;
-                            //            case 3:
-                            //                Swipe();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 1;
-                            //                break;
-                            //            case 4:
-                            //                Rain();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 0;
-                            //                break;
-                            //            case 5:
-                            //                Roar();
-                            //                actualAttack = 0;
-                            //                actualAttackInterval = 1;
-                            //                break;
-                            //            default:
-                            //                break;
-                            //        }
-                            //        break;
-                            //    case 4:
-                            //        switch (actualAttack)
-                            //        {
-                            //            case 0:
-                            //                Roar();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 0;
-                            //                break;
-                            //            case 1:
-                            //                Explosion();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 0;
-                            //                break;
-                            //            case 2:
-                            //                Rain();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 0;
-                            //                break;
-                            //            case 3:
-                            //                Swipe();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 0;
-                            //                break;
-                            //            case 4:
-                            //                Swipe();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 0;
-                            //                break;
-                            //            case 5:
-                            //                Swipe();
-                            //                actualAttack++;
-                            //                actualAttackInterval = 0;
-                            //                break;
-                            //            case 6:
-                            //                Roar();
-                            //                actualAttack = 0;
-                            //                actualAttackInterval = 0;
-                            //                break;
-                            //            default:
-                            //                break;
-                            //        }
-                            //        break;
-                        //}
+                        animator.SetBool("isIdle", false);
+                        switch (patron)
+                        {
+                            case 1:
+                                switch (actualAttack)
+                                {
+                                    case 0:
+                                        Dash();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 1:
+                                        Dash();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 2:
+                                        Fire();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 3:
+                                        Dash();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 4:
+                                        Dash();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 5:
+                                        Dark();
+                                        actualAttack=0;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            case 2:
+                                switch (actualAttack)
+                                {
+                                    case 0:
+                                        Dash();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 1:
+                                        Dash();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 2:
+                                        Fire();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 3:
+                                        Dash();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 4:
+                                        Dark();
+                                        actualAttack=0;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            case 3:
+                                switch (actualAttack)
+                                {
+                                    case 0:
+                                        Dash();
+                                        actualAttack++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 1:
+                                        Dash();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 2:
+                                        Fire();
+                                        actualAttack++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 3:
+                                        Dark();
+                                        actualAttack=0;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            case 4:
+                                switch (actualAttack)
+                                {
+                                    case 0:
+                                        Fire();
+                                        actualAttack++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 1:
+                                        Dark();
+                                        actualAttack++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 2:
+                                        Dash();
+                                        actualAttack++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 3:
+                                        Dash();
+                                        actualAttack++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 4:
+                                        Dark();
+                                        actualAttack=0;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                        }
                     }
                 }
                 else
@@ -330,130 +288,103 @@ public class FinalBossBehaviour : MonoBehaviour {
                     transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z), movingSpeed);
                     if ((actualAttackInterval -= Time.deltaTime) <= 0)
                     {
-                        Fire();
-                        actualAttackInterval = 3;
-                        //animator.SetBool("isMoving", false);
-                        //switch (patron)
-                        //{
-                            //case 1:
-                            //    switch (actualAttack2)
-                            //    {
-                            //        case 0:
-                            //            Rain();
-                            //            actualAttack2++;
-                            //            actualAttackInterval = 1;
-                            //            break;
-                            //        case 1:
-                            //            Roar();
-                            //            actualAttack2++;
-                            //            actualAttackInterval = 1;
-                            //            break;
-                            //        case 2:
-                            //            Explosion();
-                            //            actualAttack2++;
-                            //            actualAttackInterval = 1;
-                            //            break;
-                            //        case 3:
-                            //            Roar();
-                            //            actualAttack2 = 0;
-                            //            actualAttackInterval = 1;
-                            //            break;
-                            //        default:
-                            //            break;
-                            //    }
-                            //    break;
-                            //case 2:
-                            //    switch (actualAttack2)
-                            //    {
-                            //        case 0:
-                            //            Rain();
-                            //            actualAttack2++;
-                            //            actualAttackInterval = 0;
-                            //            break;
-                            //        case 1:
-                            //            Explosion();
-                            //            actualAttack2++;
-                            //            actualAttackInterval = 1;
-                            //            break;
-                            //        case 2:
-                            //            Roar();
-                            //            actualAttack2++;
-                            //            actualAttackInterval = 1;
-                            //            break;
-                            //        case 3:
-                            //            Roar();
-                            //            actualAttack2 = 0;
-                            //            actualAttackInterval = 1;
-                            //            break;
-                            //        default:
-                            //            break;
-                            //    }
-                            //    break;
-                            //case 3:
-                            //    switch (actualAttack2)
-                            //    {
-                            //        case 0:
-                            //            Explosion();
-                            //            actualAttack2++;
-                            //            actualAttackInterval = 0;
-                            //            break;
-                            //        case 1:
-                            //            Roar();
-                            //            actualAttack2++;
-                            //            actualAttackInterval = 1;
-                            //            break;
-                            //        case 2:
-                            //            Rain();
-                            //            actualAttack2++;
-                            //            actualAttackInterval = 0;
-                            //            break;
-                            //        case 3:
-                            //            Roar();
-                            //            actualAttack2 = 0;
-                            //            actualAttackInterval = 1;
-                            //            break;
-                            //        default:
-                            //            break;
-                            //    }
-                            //    break;
-                            //case 4:
-                            //    switch (actualAttack2)
-                            //    {
-                            //        case 0:
-                            //            Rain();
-                            //            actualAttack2++;
-                            //            actualAttackInterval = 0;
-                            //            break;
-                            //        case 1:
-                            //            Explosion();
-                            //            actualAttack2++;
-                            //            actualAttackInterval = 0;
-                            //            break;
-                            //        case 2:
-                            //            Rain();
-                            //            actualAttack2++;
-                            //            actualAttackInterval = 0;
-                            //            break;
-                            //        case 3:
-                            //            Roar();
-                            //            actualAttack2++;
-                            //            actualAttackInterval = 0;
-                            //            break;
-                            //        case 4:
-                            //            Explosion();
-                            //            actualAttack2++;
-                            //            actualAttackInterval = 0;
-                            //            break;
-                            //        case 5:
-                            //            Roar();
-                            //            actualAttack2 = 0;
-                            //            actualAttackInterval = 0;
-                            //            break;
-                            //        default:
-                            //            break;
-                            //    }
-                            //    break;
-                        //}
+                        animator.SetBool("isMoving", false);
+                        switch (patron)
+                        {
+                            case 1:
+                                switch (actualAttack2)
+                                {
+                                    case 0:
+                                        Fire();
+                                        actualAttack2++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 1:
+                                        Fire();
+                                        actualAttack2++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 2:
+                                        Dash();
+                                        actualAttack2=0;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            case 2:
+                                switch (actualAttack2)
+                                {
+                                    case 0:
+                                        Fire();
+                                        actualAttack2++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 1:
+                                        Dark();
+                                        actualAttack2++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 2:
+                                        Dash();
+                                        actualAttack2=0;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            case 3:
+                                switch (actualAttack2)
+                                {
+                                    case 0:
+                                        Dash();
+                                        actualAttack2++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 1:
+                                        Dark();
+                                        actualAttack2++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 2:
+                                        Fire();
+                                        actualAttack2=0;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            case 4:
+                                switch (actualAttack2)
+                                {
+                                    case 0:
+                                        Dark();
+                                        actualAttack2++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 1:
+                                        Dash();
+                                        actualAttack2++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 2:
+                                        Dark();
+                                        actualAttack2++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 3:
+                                        Fire();
+                                        actualAttack2=0;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                        }
                     }
                 }
                 else

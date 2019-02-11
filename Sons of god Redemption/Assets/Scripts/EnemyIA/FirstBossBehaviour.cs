@@ -126,17 +126,17 @@ public class FirstBossBehaviour : MonoBehaviour
                                         actualAttackInterval = 1;
                                         break;
                                     case 1:
-                                        Swipe();
-                                        actualAttack++;
-                                        actualAttackInterval = 1;
-                                        break;
-                                    case 2:
                                         Rain();
                                         actualAttack++;
                                         actualAttackInterval = 1;
                                         break;
-                                    case 3:
+                                    case 2:
                                         Swipe();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 3:
+                                        Roar();
                                         actualAttack++;
                                         actualAttackInterval = 1;
                                         break;
@@ -146,13 +146,8 @@ public class FirstBossBehaviour : MonoBehaviour
                                         actualAttackInterval = 1;
                                         break;
                                     case 5:
-                                        Roar();
-                                        actualAttack++;
-                                        actualAttackInterval = 1;
-                                        break;
-                                    case 6:
                                         Explosion();
-                                        actualAttack = 0;
+                                        actualAttack=0;
                                         actualAttackInterval = 1;
                                         break;
                                     default:
@@ -165,39 +160,29 @@ public class FirstBossBehaviour : MonoBehaviour
                                     case 0:
                                         Swipe();
                                         actualAttack++;
-                                        actualAttackInterval = 0;
-                                        break;
-                                    case 1:
-                                        Swipe();
-                                        actualAttack++;
                                         actualAttackInterval = 1;
                                         break;
-                                    case 2:
+                                    case 1:
                                         Explosion();
                                         actualAttack++;
                                         actualAttackInterval = 1;
                                         break;
-                                    case 3:
+                                    case 2:
                                         Swipe();
                                         actualAttack++;
                                         actualAttackInterval = 0;
                                         break;
-                                    case 4:
+                                    case 3:
                                         Swipe();
                                         actualAttack++;
                                         actualAttackInterval = 1;
                                         break;
-                                    case 5:
+                                    case 4:
                                         Roar();
                                         actualAttack++;
                                         actualAttackInterval = 1;
                                         break;
-                                    case 6:
-                                        Swipe();
-                                        actualAttack++;
-                                        actualAttackInterval = 1;
-                                        break;
-                                    case 7:
+                                    case 5:
                                         Rain();
                                         actualAttack=0;
                                         actualAttackInterval = 1;
@@ -257,7 +242,7 @@ public class FirstBossBehaviour : MonoBehaviour
                                         actualAttackInterval = 0;
                                         break;
                                     case 2:
-                                        Rain();
+                                        Swipe();
                                         actualAttack++;
                                         actualAttackInterval = 0;
                                         break;
@@ -272,12 +257,7 @@ public class FirstBossBehaviour : MonoBehaviour
                                         actualAttackInterval = 0;
                                         break;
                                     case 5:
-                                        Swipe();
-                                        actualAttack++;
-                                        actualAttackInterval = 0;
-                                        break;
-                                    case 6:
-                                        Roar();
+                                        Explosion();
                                         actualAttack=0;
                                         actualAttackInterval = 0;
                                         break;
