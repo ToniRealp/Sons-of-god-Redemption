@@ -228,7 +228,7 @@ public class PlayerController : MonoBehaviour {
                  
                 break;
             case (States.Attacking):
-
+                Rotation();
                 switch (attacks) {
 
                     case (Attacks.LightAttack1):
