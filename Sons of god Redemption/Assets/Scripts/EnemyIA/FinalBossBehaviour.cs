@@ -3,32 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FirstBossBehaviour : MonoBehaviour
-{
+public class FinalBossBehaviour : MonoBehaviour {
 
-    public GameObject fireParticles, explosionParticles, meteor;
+    //public GameObject fireParticles, explosionParticles, meteor;
     public Animator animator;
-    public float attackDistance = 5f, explosionRange = 10, movingSpeed = 0.05f, rotationSpeed = 0.05f, meteorInterval = 0.3f, meteorRange = 5;
+    public float attackDistance = 4f, explosionRange = 10, movingSpeed = 0.02f, rotationSpeed = 0.05f, meteorInterval = 0.3f, meteorRange = 5, godModeMinTime = 3, godModeMaxTime = 8, godModeMinDelay = 20, godModeMaxDelay = 35;
     public int meteorNum = 5, actualAttack, actualAttack2, patron;
-    public Vector3[] meteorPosition;
+    public Quaternion[] meteorRotation;
 
 
     private GameObject player;
-    private float chargeAnimationTime, explosionAnimationTime, roarAnimationTime, swipeAnimationTime, rainAnimationTime, initMeteorTime;
-    private float actualAttackInterval, actualChargeTime, actualExplosionTime, actualRoarTime, actualSwipeTime, actualRainTime;
+    private float godModeTime, godDelayTime, darkAnimationTime, dizzyAnimationTime, dashAnimationTime, fireAnimationTime, initMeteorTime, godModeHealth;
+    private float actualAttackInterval, actualGodModeTime, actualGodDelayTime, actualDarkTime, actualDizzyTime, actualDashTime, actualFireTime;
     private int meteorCounter;
-    private bool explosionChecked, patron1switched, patron2switched, patron3switched;
+    private bool explosionChecked, patron1switched, patron2switched, patron3switched, godMode;
 
-    enum State { IDLE, WALKING, SWIPEATTACK, CHARGE, EXPLOSION, ROAR, RAIN, DAMAGED };
+    enum State { IDLE, WALKING, DASH, FIRE, DARK, DIZZY };
     [SerializeField] State state = State.IDLE;
 
-    public float playerDistance, maxHealth = 1800, health, damage, swipeDmg = 15, explosionDmg = 55, roarDmg = 25, rainDmg=15;
+    public float playerDistance, maxHealth = 1800, health, damage, dashDmg = 15, fireDmg = 55, darkDmg = 25;
     string lastTag;
     public Text healthText;
-    public GameObject healthTextGO, canvas, textPos, weapon;
+    public GameObject healthTextGO, canvas, textPos;
     public Font font;
 
-    public GameObject blood;
+    public GameObject fireBall, darkBox, dashTrigger, glow, blood;
     public Transform bloodPosition;
     public GameObject dieParticles;
 
@@ -38,13 +37,14 @@ public class FirstBossBehaviour : MonoBehaviour
         health = maxHealth;
         actualAttackInterval = 1;
         player = GameObject.FindGameObjectWithTag("Player");
-        actualChargeTime = chargeAnimationTime = AnimationLength("Mutant Flexing Muscles", animator);
-        actualExplosionTime = explosionAnimationTime = AnimationLength("Mutant Jumping", animator);
-        actualRoarTime = roarAnimationTime = AnimationLength("Mutant Roaring", animator);
-        actualSwipeTime = swipeAnimationTime = AnimationLength("Stable Sword Outward Slash", animator);
-        actualRainTime = rainAnimationTime = AnimationLength("Wide Arm Spell Casting", animator);
-        fireParticles.SetActive(false);
-        explosionParticles.SetActive(false);
+        actualDizzyTime = dizzyAnimationTime = AnimationLength("Dizzy", animator);
+        actualDarkTime = darkAnimationTime = AnimationLength("Standing2", animator);
+        actualDashTime = dashAnimationTime = AnimationLength("Running Slide (1)", animator);
+        actualFireTime = fireAnimationTime = AnimationLength("Standing", animator);
+        godDelayTime = actualGodDelayTime = Random.Range(godModeMinDelay, godModeMaxDelay);
+        darkBox.SetActive(false);
+        glow.SetActive(false);
+        dashTrigger.SetActive(false);
         lastTag = "value";
 
         //Health Text
@@ -60,8 +60,8 @@ public class FirstBossBehaviour : MonoBehaviour
         patron = 1;
         patron1switched = patron2switched = patron3switched = false;
         actualAttack2 = actualAttack = meteorCounter = 0;
-        meteorPosition = new Vector3[meteorNum];
-        explosionChecked = false;
+        meteorRotation = new Quaternion[meteorNum];
+        godMode = explosionChecked = false;
     }
 
     // Update is called once per frame
@@ -78,11 +78,35 @@ public class FirstBossBehaviour : MonoBehaviour
             Destroy(healthTextGO);
         }
 
+        //GodMode
+        if (godMode)
+        {
+            health = godModeHealth;
+            actualGodModeTime -= Time.deltaTime;
+            if (actualGodModeTime <= 0)
+            {
+                glow.SetActive(false);
+                godDelayTime = actualGodDelayTime = Random.Range(godModeMinDelay, godModeMaxDelay);
+                godMode = false;
+            }
+        }
+        else
+        {
+            actualGodDelayTime -= Time.deltaTime;
+            if (actualGodDelayTime<=0)
+            {
+                glow.SetActive(true);
+                godModeTime = actualGodModeTime = Random.Range(godModeMinTime,godModeMaxTime);
+                godMode = true;
+                godModeHealth = health;
+            }
+        }
+
         // Health text update
         healthTextGO.GetComponent<Transform>().position = Camera.main.WorldToScreenPoint(textPos.transform.position);
         healthText.text = health.ToString();
 
-        if (health<maxHealth * 0.75 && !patron1switched)
+        if (health < maxHealth * 0.75 && !patron1switched)
         {
             patron = 2;
             actualAttack = 0;
@@ -121,32 +145,32 @@ public class FirstBossBehaviour : MonoBehaviour
                                 switch (actualAttack)
                                 {
                                     case 0:
-                                        Swipe();
+                                        Dash();
                                         actualAttack++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 1:
-                                        Rain();
+                                        Dash();
                                         actualAttack++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 2:
-                                        Swipe();
+                                        Fire();
                                         actualAttack++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 3:
-                                        Roar();
+                                        Dash();
                                         actualAttack++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 4:
-                                        Swipe();
+                                        Dash();
                                         actualAttack++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 5:
-                                        Explosion();
+                                        Dark();
                                         actualAttack=0;
                                         actualAttackInterval = 1;
                                         break;
@@ -158,32 +182,27 @@ public class FirstBossBehaviour : MonoBehaviour
                                 switch (actualAttack)
                                 {
                                     case 0:
-                                        Swipe();
+                                        Dash();
                                         actualAttack++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 1:
-                                        Explosion();
+                                        Dash();
                                         actualAttack++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 2:
-                                        Swipe();
+                                        Fire();
                                         actualAttack++;
-                                        actualAttackInterval = 0;
+                                        actualAttackInterval = 1;
                                         break;
                                     case 3:
-                                        Swipe();
+                                        Dash();
                                         actualAttack++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 4:
-                                        Roar();
-                                        actualAttack++;
-                                        actualAttackInterval = 1;
-                                        break;
-                                    case 5:
-                                        Rain();
+                                        Dark();
                                         actualAttack=0;
                                         actualAttackInterval = 1;
                                         break;
@@ -195,32 +214,22 @@ public class FirstBossBehaviour : MonoBehaviour
                                 switch (actualAttack)
                                 {
                                     case 0:
-                                        Explosion();
-                                        actualAttack++;
-                                        actualAttackInterval = 1;
-                                        break;
-                                    case 1:
-                                        Roar();
+                                        Dash();
                                         actualAttack++;
                                         actualAttackInterval = 0;
                                         break;
+                                    case 1:
+                                        Dash();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
                                     case 2:
-                                        Swipe();
+                                        Fire();
                                         actualAttack++;
                                         actualAttackInterval = 0;
                                         break;
                                     case 3:
-                                        Swipe();
-                                        actualAttack++;
-                                        actualAttackInterval = 1;
-                                        break;
-                                    case 4:
-                                        Rain();
-                                        actualAttack++;
-                                        actualAttackInterval = 0;
-                                        break;
-                                    case 5:
-                                        Roar();
+                                        Dark();
                                         actualAttack=0;
                                         actualAttackInterval = 1;
                                         break;
@@ -232,32 +241,27 @@ public class FirstBossBehaviour : MonoBehaviour
                                 switch (actualAttack)
                                 {
                                     case 0:
-                                        Roar();
+                                        Fire();
                                         actualAttack++;
                                         actualAttackInterval = 0;
                                         break;
                                     case 1:
-                                        Explosion();
+                                        Dark();
                                         actualAttack++;
                                         actualAttackInterval = 0;
                                         break;
                                     case 2:
-                                        Swipe();
+                                        Dash();
                                         actualAttack++;
                                         actualAttackInterval = 0;
                                         break;
                                     case 3:
-                                        Swipe();
+                                        Dash();
                                         actualAttack++;
                                         actualAttackInterval = 0;
                                         break;
                                     case 4:
-                                        Swipe();
-                                        actualAttack++;
-                                        actualAttackInterval = 0;
-                                        break;
-                                    case 5:
-                                        Explosion();
+                                        Dark();
                                         actualAttack=0;
                                         actualAttackInterval = 0;
                                         break;
@@ -291,22 +295,17 @@ public class FirstBossBehaviour : MonoBehaviour
                                 switch (actualAttack2)
                                 {
                                     case 0:
-                                        Rain();
+                                        Fire();
                                         actualAttack2++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 1:
-                                        Roar();
+                                        Fire();
                                         actualAttack2++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 2:
-                                        Explosion();
-                                        actualAttack2++;
-                                        actualAttackInterval = 1;
-                                        break;
-                                    case 3:
-                                        Roar();
+                                        Dash();
                                         actualAttack2=0;
                                         actualAttackInterval = 1;
                                         break;
@@ -318,22 +317,17 @@ public class FirstBossBehaviour : MonoBehaviour
                                 switch (actualAttack2)
                                 {
                                     case 0:
-                                        Rain();
+                                        Fire();
                                         actualAttack2++;
-                                        actualAttackInterval = 0;
+                                        actualAttackInterval = 1;
                                         break;
                                     case 1:
-                                        Explosion();
+                                        Dark();
                                         actualAttack2++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 2:
-                                        Roar();
-                                        actualAttack2++;
-                                        actualAttackInterval = 1;
-                                        break;
-                                    case 3:
-                                        Roar();
+                                        Dash();
                                         actualAttack2=0;
                                         actualAttackInterval = 1;
                                         break;
@@ -345,24 +339,19 @@ public class FirstBossBehaviour : MonoBehaviour
                                 switch (actualAttack2)
                                 {
                                     case 0:
-                                        Explosion();
+                                        Dash();
                                         actualAttack2++;
-                                        actualAttackInterval = 0;
+                                        actualAttackInterval = 1;
                                         break;
                                     case 1:
-                                        Roar();
-                                        actualAttack2++;
-                                        actualAttackInterval = 1;
-                                        break;
-                                    case 2:
-                                        Rain();
+                                        Dark();
                                         actualAttack2++;
                                         actualAttackInterval = 0;
                                         break;
-                                    case 3:
-                                        Roar();
+                                    case 2:
+                                        Fire();
                                         actualAttack2=0;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 0;
                                         break;
                                     default:
                                         break;
@@ -372,32 +361,22 @@ public class FirstBossBehaviour : MonoBehaviour
                                 switch (actualAttack2)
                                 {
                                     case 0:
-                                        Rain();
+                                        Dark();
                                         actualAttack2++;
                                         actualAttackInterval = 0;
                                         break;
                                     case 1:
-                                        Explosion();
+                                        Dash();
                                         actualAttack2++;
                                         actualAttackInterval = 0;
                                         break;
                                     case 2:
-                                        Rain();
+                                        Dark();
                                         actualAttack2++;
                                         actualAttackInterval = 0;
                                         break;
                                     case 3:
-                                        Roar();
-                                        actualAttack2++;
-                                        actualAttackInterval = 0;
-                                        break;
-                                    case 4:
-                                        Explosion();
-                                        actualAttack2++;
-                                        actualAttackInterval = 0;
-                                        break;
-                                    case 5:
-                                        Roar();
+                                        Fire();
                                         actualAttack2=0;
                                         actualAttackInterval = 0;
                                         break;
@@ -414,85 +393,63 @@ public class FirstBossBehaviour : MonoBehaviour
                     state = State.IDLE;
                 }
                 break;
-            case State.SWIPEATTACK:
+            case State.DASH:
 
-                actualSwipeTime -= Time.deltaTime;
-                if (actualSwipeTime > swipeAnimationTime * 0.6)
-                    LookPlayer();
-                if (actualSwipeTime <= swipeAnimationTime * 0.95)
-                    weapon.tag = "FirstBossWeapon";
-                if (actualSwipeTime <= swipeAnimationTime * 0.1)
-                    weapon.tag = "Untagged";
-                if (actualSwipeTime <= 0)
+                actualDashTime -= Time.deltaTime;
+                if (actualDashTime <= dashAnimationTime)
+                    dashTrigger.SetActive(true);
+                if (actualDashTime <= dashAnimationTime * 0.1)
+                    dashTrigger.SetActive(false);
+                if (actualDashTime <= 0)
                 {
-                    actualSwipeTime = swipeAnimationTime;
+                    actualDashTime = dashAnimationTime;
                     state = State.IDLE;
                 }
                 break;
-            case State.CHARGE:
-                // Look to player
-                LookPlayer();
-                if ((actualChargeTime -= Time.deltaTime) <= 0)
+
+            case State.DARK:
+
+                actualDarkTime -= Time.deltaTime;
+
+                if (actualDarkTime <= darkAnimationTime * 0.6)
+                    darkBox.SetActive(true);
+                if (actualDarkTime <= 0)
                 {
-                    actualChargeTime = chargeAnimationTime;
-                    state = State.EXPLOSION;
+                    darkBox.SetActive(false);
+                    actualDarkTime = darkAnimationTime;
+                    state = State.IDLE;
                 }
+
                 break;
-            case State.EXPLOSION:
-                actualExplosionTime -= Time.deltaTime;
-                if (actualExplosionTime <= explosionAnimationTime * 0.5)
+
+
+
+            case State.FIRE:
+                actualFireTime -= Time.deltaTime;
+                if (actualFireTime <= fireAnimationTime * 0.8)
                 {
-                    explosionParticles.SetActive(true);
-                    if (!explosionChecked)
+                    if (Time.time - initMeteorTime >= meteorInterval && meteorCounter < meteorNum)
                     {
-                        if (playerDistance < explosionRange)
-                        {
-                            player.GetComponent<PlayerController>().bossDmg = explosionDmg;
-                            player.GetComponent<PlayerController>().explosionHit = true;
-                        }
-                        explosionChecked = true;
+                        Vector3 t = transform.position + meteorRotation[meteorCounter] * Vector3.forward * meteorRange;
+                        t.y = 2;
+                        Instantiate(fireBall, t, meteorRotation[meteorCounter]);
+                        meteorCounter++;
+                        initMeteorTime = Time.time;
                     }
-
                 }
-
-                    
-                if (actualExplosionTime <= 0)
+                if (actualFireTime <= 0 && meteorCounter >= meteorNum)
                 {
-                    explosionParticles.SetActive(false);
-                    actualExplosionTime = explosionAnimationTime;
+                    actualFireTime = fireAnimationTime;
                     state = State.IDLE;
                 }
                 break;
-            case State.ROAR:
-                actualRoarTime -= Time.deltaTime;
-                if ((actualRoarTime / roarAnimationTime) < 0.7f)
+            case State.DIZZY:
+                actualDizzyTime -= Time.deltaTime;
+                if (actualDizzyTime <= 0)
                 {
-                    fireParticles.SetActive(true);
-                }
-                if ((actualRoarTime / roarAnimationTime) < 0.1f)
-                {
-                    fireParticles.SetActive(false);
-                }
-                if (actualRoarTime <= 0)
-                {
-                    actualRoarTime = roarAnimationTime;
+                    actualDizzyTime = dizzyAnimationTime;
                     state = State.IDLE;
                 }
-                break;
-            case State.RAIN:
-                if (Time.time - initMeteorTime >= meteorInterval && meteorCounter < meteorNum)
-                {
-                    Instantiate(meteor, meteorPosition[meteorCounter], new Quaternion(0, 0, 0, 0));
-                    meteorCounter++;
-                    initMeteorTime = Time.time;
-                }
-                if ((actualRainTime -= Time.deltaTime) <= 0 && meteorCounter>=meteorNum)
-                {
-                    actualRainTime = rainAnimationTime;
-                    state = State.IDLE;
-                }
-                break;
-            case State.DAMAGED:
                 break;
             default:
                 break;
@@ -507,39 +464,45 @@ public class FirstBossBehaviour : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(player.transform.position.x - transform.position.x, transform.position.y, player.transform.position.z - transform.position.z)), rotationSpeed);
     }
 
-    void Swipe()
+    void Dash()
     {
-        animator.SetTrigger("SwipeAttack");
-        damage = swipeDmg;
-        state = State.SWIPEATTACK;
+        animator.SetTrigger("Dash");
+        damage = dashDmg;
+        state = State.DASH;
     }
 
-    void Rain()
+    void Fire()
     {
-        animator.SetTrigger("Rain");
-        damage = rainDmg;
+        animator.SetTrigger("Fire");
+        damage = fireDmg;
         initMeteorTime = Time.time;
         meteorCounter = 0;
         for (int i = 0; i < meteorNum; i++)
         {
-            meteorPosition[i] = new Vector3(Random.Range(player.transform.position.x - meteorRange, player.transform.position.x + meteorRange), 20, Random.Range(player.transform.position.z - meteorRange, player.transform.position.z + meteorRange));
+            meteorRotation[i] = Quaternion.Euler(0, Random.Range(0, 359), 0).normalized;
         }
-        state = State.RAIN;
+        state = State.FIRE;
     }
 
-    void Roar()
+    void Dark()
     {
-        animator.SetTrigger("Roar");
-        damage = roarDmg;
-        state = State.ROAR;
+        animator.SetTrigger("Dark");
+        damage = darkDmg;
+        state = State.DARK;
     }
 
-    void Explosion()
+    void Dizzy()
     {
-        animator.SetTrigger("Explosion");
-        damage = explosionDmg;
-        explosionChecked = false;
-        state = State.CHARGE;
+        animator.SetTrigger("GodMode");
+        state = State.DIZZY;
+    }
+
+    public void Heal()
+    {
+        if (health<=maxHealth-20)
+        {
+            health += 20;
+        }
     }
 
     float AnimationLength(string animName, Animator animator)
@@ -563,4 +526,3 @@ public class FirstBossBehaviour : MonoBehaviour
         }
     }
 }
-
