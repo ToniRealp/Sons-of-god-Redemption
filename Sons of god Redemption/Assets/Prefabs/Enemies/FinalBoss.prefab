@@ -1426,8 +1426,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1668427939586934}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
-  m_LocalScale: {x: 1, y: 10, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 4545649377141728}
   m_RootOrder: 0
@@ -1709,7 +1709,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1431960624646094}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4257271287417264}
@@ -1907,7 +1907,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1420340346919874}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -1.19, y: 0, z: 9.87}
+  m_LocalPosition: {x: 0, y: 0, z: 22.13}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4789169081459302}
@@ -2301,7 +2301,7 @@ MonoBehaviour:
   fireBall: {fileID: 1419308403063956, guid: 5f222da87c19ad14c991b4ec54636688, type: 2}
   darkBox: {fileID: 1440939557327906}
   dashTrigger: {fileID: 1667244580626372}
-  glow: {fileID: 0}
+  glow: {fileID: 1431960624646094}
   blood: {fileID: 1766210467136178, guid: 3dbe7a26933ab80478c3cef9187f27f1, type: 2}
   bloodPosition: {fileID: 4432517950612244}
   dieParticles: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,

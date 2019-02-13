@@ -21,7 +21,7 @@ public class FinalBossBehaviour : MonoBehaviour {
     enum State { IDLE, WALKING, DASH, FIRE, DARK, DIZZY };
     [SerializeField] State state = State.IDLE;
 
-    public float playerDistance, maxHealth = 1800, health, damage, dashDmg = 15, fireDmg = 55, darkDmg = 25;
+    public float playerDistance, maxHealth = 3000, health, damage, dashDmg = 15, fireDmg = 55, darkDmg = 25;
     string lastTag;
     public Text healthText;
     public GameObject healthTextGO, canvas, textPos;
