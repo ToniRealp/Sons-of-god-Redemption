@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class SecondBossBehaviour : MonoBehaviour
 {
 
-    //public GameObject fireParticles, explosionParticles, circles;
     public Animator animator;
     public float attackDistance = 4f, explosionRange = 10, movingSpeed = 0.02f, rotationSpeed = 0.05f, circlesRange = 5;
     public int circlesNum = 5, actualAttack, actualAttack2, patron;
@@ -28,8 +27,7 @@ public class SecondBossBehaviour : MonoBehaviour
     public GameObject healthTextGO, canvas, textPos;
     public Font font;
 
-    public GameObject darkCircle, darkExplosion;
-    //public GameObject darkCircle, darkKame, darkExplosion;
+    public GameObject darkCircle, darkExplosion, darkKame;
     public GameObject blood;
     public Transform bloodPosition;
     public GameObject dieParticles;
@@ -43,7 +41,7 @@ public class SecondBossBehaviour : MonoBehaviour
         actualCircleTime = circleAnimationTime = AnimationLength("Circles", animator);
         actualKameTime = kameAnimationTime = AnimationLength("Kame", animator);
         actualExplosionTime = explosionAnimationTime = AnimationLength("Explosion", animator);
-        //darkKame.SetActive(false);
+        darkKame.SetActive(false);
         darkExplosion.SetActive(false);
         lastTag = "value";
 
@@ -265,7 +263,7 @@ public class SecondBossBehaviour : MonoBehaviour
                     transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z), movingSpeed);
                     if ((actualAttackInterval -= Time.deltaTime) <= 0)
                     {
-                        Explosion();
+                        Kame();
                         actualAttackInterval = 5;
                         //animator.SetBool("isMoving", false);
                         //switch (patron)
@@ -394,17 +392,18 @@ public class SecondBossBehaviour : MonoBehaviour
 
         
             case State.KAME:
-                //actualDashTime -= Time.deltaTime;
-                //if (actualDashTime <= dashAnimationTime)
-                //    dashTrigger.SetActive(true);
-                //if (actualDashTime <= dashAnimationTime * 0.1)
-                //    dashTrigger.SetActive(false);
-                //if (actualDashTime <= 0)
-                //{
-                //    actualDashTime = dashAnimationTime;
-                //    state = State.IDLE;
-                //}
-                //break;
+
+                actualKameTime -= Time.deltaTime;
+                if (actualKameTime > kameAnimationTime * 0.75)
+                    LookPlayer();
+                if (actualKameTime <= kameAnimationTime * 0.65f)
+                    darkKame.SetActive(true);
+                if (actualKameTime <= 0)
+                {
+                    darkKame.SetActive(false);
+                    actualKameTime = kameAnimationTime;
+                    state = State.IDLE;
+                }
 
 
                 break;
