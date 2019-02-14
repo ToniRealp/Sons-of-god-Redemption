@@ -2057,13 +2057,12 @@ MonoBehaviour:
   explosionRange: 10
   movingSpeed: 0.02
   rotationSpeed: 0.05
-  meteorInterval: 0.3
-  meteorRange: 5
-  meteorNum: 5
+  circlesRange: 5
+  circlesNum: 5
   actualAttack: 0
   actualAttack2: 0
   patron: 0
-  meteorRotation: []
+  circlePosition: []
   state: 0
   playerDistance: 0
   maxHealth: 2300
@@ -2077,6 +2076,7 @@ MonoBehaviour:
   canvas: {fileID: 0}
   textPos: {fileID: 0}
   font: {fileID: 12800000, guid: cc8fb7e3b2fd1794db8c212bc31a24f7, type: 3}
+  darkCircle: {fileID: 1276738568084198, guid: 460c7cd5c66dc7049aa457cc60c570aa, type: 2}
   blood: {fileID: 1766210467136178, guid: 3dbe7a26933ab80478c3cef9187f27f1, type: 2}
   bloodPosition: {fileID: 4355804996048154}
   dieParticles: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,

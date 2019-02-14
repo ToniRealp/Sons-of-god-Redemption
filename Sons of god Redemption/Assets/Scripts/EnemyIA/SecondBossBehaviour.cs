@@ -6,17 +6,17 @@ using UnityEngine.UI;
 public class SecondBossBehaviour : MonoBehaviour
 {
 
-    //public GameObject fireParticles, explosionParticles, meteor;
+    //public GameObject fireParticles, explosionParticles, circles;
     public Animator animator;
-    public float attackDistance = 4f, explosionRange = 10, movingSpeed = 0.02f, rotationSpeed = 0.05f, meteorInterval = 0.3f, meteorRange = 5;
-    public int meteorNum = 5, actualAttack, actualAttack2, patron;
-    public Quaternion[] meteorRotation;
+    public float attackDistance = 4f, explosionRange = 10, movingSpeed = 0.02f, rotationSpeed = 0.05f, circlesRange = 5;
+    public int circlesNum = 5, actualAttack, actualAttack2, patron;
+    public Vector3[] circlePosition;
 
 
     private GameObject player;
-    private float circleAnimationTime, kameAnimationTime, explosionAnimationTime, initMeteorTime;
+    private float circleAnimationTime, kameAnimationTime, explosionAnimationTime, initcirclesTime;
     private float actualAttackInterval,  actualCircleTime, actualKameTime, actualExplosionTime;
-    private int meteorCounter;
+    private int circlesCounter;
     private bool explosionChecked, patron1switched, patron2switched, patron3switched, godMode;
 
     enum State { IDLE, WALKING, CIRCLES, KAME, EXPLOSION };
@@ -28,6 +28,7 @@ public class SecondBossBehaviour : MonoBehaviour
     public GameObject healthTextGO, canvas, textPos;
     public Font font;
 
+    public GameObject darkCircle;
     //public GameObject darkCircle, darkKame, darkExplosion;
     public GameObject blood;
     public Transform bloodPosition;
@@ -59,8 +60,8 @@ public class SecondBossBehaviour : MonoBehaviour
 
         patron = 1;
         patron1switched = patron2switched = patron3switched = false;
-        actualAttack2 = actualAttack = meteorCounter = 0;
-        meteorRotation = new Quaternion[meteorNum];
+        actualAttack2 = actualAttack = circlesCounter = 0;
+        circlePosition = new Vector3[circlesNum];
         godMode = explosionChecked = false;
     }
 
@@ -265,6 +266,8 @@ public class SecondBossBehaviour : MonoBehaviour
                     transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z), movingSpeed);
                     if ((actualAttackInterval -= Time.deltaTime) <= 0)
                     {
+                        Circles();
+                        actualAttackInterval = 5;
                         //animator.SetBool("isMoving", false);
                         //switch (patron)
                         //{
@@ -372,18 +375,25 @@ public class SecondBossBehaviour : MonoBehaviour
                 break;
             case State.CIRCLES:
 
-                //actualDashTime -= Time.deltaTime;
-                //if (actualDashTime <= dashAnimationTime)
-                //    dashTrigger.SetActive(true);
-                //if (actualDashTime <= dashAnimationTime * 0.1)
-                //    dashTrigger.SetActive(false);
-                //if (actualDashTime <= 0)
-                //{
-                //    actualDashTime = dashAnimationTime;
-                //    state = State.IDLE;
-                //}
-                //break;
+                actualCircleTime -= Time.deltaTime;
+                if (actualCircleTime <= circleAnimationTime *0.8)
+                {
+                    if (circlesCounter < circlesNum)
+                    {
+                        Instantiate(darkCircle, circlePosition[circlesCounter], new Quaternion(0, 0, 0, 0));
+                        circlesCounter++;
+                    }
+                }
+                if (actualCircleTime <=0 && circlesCounter>=circlesNum)
+                {
+                    actualCircleTime = circleAnimationTime;
+                    state = State.IDLE;
+                }
 
+
+                break;
+
+        
             case State.KAME:
 
                 //actualDarkTime -= Time.deltaTime;
@@ -402,26 +412,19 @@ public class SecondBossBehaviour : MonoBehaviour
 
 
             case State.EXPLOSION:
-                //actualFireTime -= Time.deltaTime;
-                //if (actualFireTime <= fireAnimationTime * 0.8)
+                //actualDashTime -= Time.deltaTime;
+                //if (actualDashTime <= dashAnimationTime)
+                //    dashTrigger.SetActive(true);
+                //if (actualDashTime <= dashAnimationTime * 0.1)
+                //    dashTrigger.SetActive(false);
+                //if (actualDashTime <= 0)
                 //{
-                //    if (Time.time - initMeteorTime >= meteorInterval && meteorCounter < meteorNum)
-                //    {
-                //        Vector3 t = transform.position + meteorRotation[meteorCounter] * Vector3.forward * meteorRange;
-                //        t.y = 2;
-                //        Instantiate(fireBall, t, meteorRotation[meteorCounter]);
-                //        meteorCounter++;
-                //        initMeteorTime = Time.time;
-                //    }
-                //}
-                //if (actualFireTime <= 0 && meteorCounter >= meteorNum)
-                //{
-                //    actualFireTime = fireAnimationTime;
+                //    actualDashTime = dashAnimationTime;
                 //    state = State.IDLE;
                 //}
                 //break;
 
-
+                break;
             default:
                 break;
         }
@@ -446,11 +449,11 @@ public class SecondBossBehaviour : MonoBehaviour
     {
         animator.SetTrigger("Circles");
         damage = circleDmg;
-        initMeteorTime = Time.time;
-        meteorCounter = 0;
-        for (int i = 0; i < meteorNum; i++)
+        initcirclesTime = Time.time;
+        circlesCounter = 0;
+        for (int i = 0; i < circlesNum; i++)
         {
-            meteorRotation[i] = Quaternion.Euler(0, Random.Range(0, 359), 0).normalized;
+            circlePosition[i] = new Vector3(Random.Range(transform.position.x-circlesRange, transform.position.x + circlesRange),0, Random.Range(transform.position.z - circlesRange, transform.position.z + circlesRange));
         }
         state = State.CIRCLES;
     }
