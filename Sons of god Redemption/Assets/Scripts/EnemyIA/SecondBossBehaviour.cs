@@ -28,7 +28,7 @@ public class SecondBossBehaviour : MonoBehaviour
     public GameObject healthTextGO, canvas, textPos;
     public Font font;
 
-    public GameObject darkCircle;
+    public GameObject darkCircle, darkExplosion;
     //public GameObject darkCircle, darkKame, darkExplosion;
     public GameObject blood;
     public Transform bloodPosition;
@@ -43,9 +43,8 @@ public class SecondBossBehaviour : MonoBehaviour
         actualCircleTime = circleAnimationTime = AnimationLength("Circles", animator);
         actualKameTime = kameAnimationTime = AnimationLength("Kame", animator);
         actualExplosionTime = explosionAnimationTime = AnimationLength("Explosion", animator);
-        //darkCircle.SetActive(false);
         //darkKame.SetActive(false);
-        //darkExplosion.SetActive(false);
+        darkExplosion.SetActive(false);
         lastTag = "value";
 
         //Health Text
@@ -266,7 +265,7 @@ public class SecondBossBehaviour : MonoBehaviour
                     transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z), movingSpeed);
                     if ((actualAttackInterval -= Time.deltaTime) <= 0)
                     {
-                        Circles();
+                        Explosion();
                         actualAttackInterval = 5;
                         //animator.SetBool("isMoving", false);
                         //switch (patron)
@@ -395,23 +394,6 @@ public class SecondBossBehaviour : MonoBehaviour
 
         
             case State.KAME:
-
-                //actualDarkTime -= Time.deltaTime;
-
-                //if (actualDarkTime <= darkAnimationTime * 0.6)
-                //    darkBox.SetActive(true);
-                //if (actualDarkTime <= 0)
-                //{
-                //    darkBox.SetActive(false);
-                //    actualDarkTime = darkAnimationTime;
-                //    state = State.IDLE;
-                //}
-
-                break;
-
-
-
-            case State.EXPLOSION:
                 //actualDashTime -= Time.deltaTime;
                 //if (actualDashTime <= dashAnimationTime)
                 //    dashTrigger.SetActive(true);
@@ -423,6 +405,24 @@ public class SecondBossBehaviour : MonoBehaviour
                 //    state = State.IDLE;
                 //}
                 //break;
+
+
+                break;
+
+
+
+            case State.EXPLOSION:
+                actualExplosionTime -= Time.deltaTime;
+
+                if (actualExplosionTime <= explosionAnimationTime * 0.35)
+                    darkExplosion.SetActive(true);
+                if (actualExplosionTime <= 0)
+                {
+                    darkExplosion.SetActive(false);
+                    actualExplosionTime = explosionAnimationTime;
+                    state = State.IDLE;
+                }
+
 
                 break;
             default:
