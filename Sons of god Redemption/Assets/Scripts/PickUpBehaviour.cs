@@ -48,6 +48,11 @@ public class PickUpBehaviour : MonoBehaviour {
                 }
                 else
                 {
+                    GameObject.Find("Leliel 1").GetComponent<PlayerController>().baseAttack += 2;
+                    GameObject.Find("Leliel 1").GetComponent<PlayerController>().stats.health += 10;
+                    GameObject.Find("Leliel 1").GetComponent<PlayerController>().health += 10;
+                    GameObject.Find("Leliel 1").GetComponent<PlayerController>().healthBar.value = GameObject.Find("Leliel 1").GetComponent<PlayerController>().health;
+
                     Destroy(this.gameObject);
                 }
 
