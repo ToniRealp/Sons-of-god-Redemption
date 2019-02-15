@@ -412,6 +412,10 @@ public class PlayerController : MonoBehaviour {
                             {
                                 isLightHit = true;
                             }
+                            else if (elements[(int)Elements.Dark].activeSelf)
+                            {
+                                darkHit = true;
+                            }
                         }
                         if (animLength <= 0)
                         {
