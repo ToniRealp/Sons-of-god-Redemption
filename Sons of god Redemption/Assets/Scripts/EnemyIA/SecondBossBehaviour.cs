@@ -113,138 +113,133 @@ public class SecondBossBehaviour : MonoBehaviour
                 {
                     if ((actualAttackInterval -= Time.deltaTime) <= 0)
                     {
-                        //animator.SetBool("isIdle", false);
-                        //switch (patron)
-                        //{
-                        //    case 1:
-                        //        switch (actualAttack)
-                        //        {
-                        //            case 0:
-                        //                Dash();
-                        //                actualAttack++;
-                        //                actualAttackInterval = 1;
-                        //                break;
-                        //            case 1:
-                        //                Dash();
-                        //                actualAttack++;
-                        //                actualAttackInterval = 1;
-                        //                break;
-                        //            case 2:
-                        //                Fire();
-                        //                actualAttack++;
-                        //                actualAttackInterval = 1;
-                        //                break;
-                        //            case 3:
-                        //                Dash();
-                        //                actualAttack++;
-                        //                actualAttackInterval = 1;
-                        //                break;
-                        //            case 4:
-                        //                Dash();
-                        //                actualAttack++;
-                        //                actualAttackInterval = 1;
-                        //                break;
-                        //            case 5:
-                        //                Dark();
-                        //                actualAttack = 0;
-                        //                actualAttackInterval = 1;
-                        //                break;
-                        //            default:
-                        //                break;
-                        //        }
-                        //        break;
-                        //    case 2:
-                        //        switch (actualAttack)
-                        //        {
-                        //            case 0:
-                        //                Dash();
-                        //                actualAttack++;
-                        //                actualAttackInterval = 1;
-                        //                break;
-                        //            case 1:
-                        //                Dash();
-                        //                actualAttack++;
-                        //                actualAttackInterval = 1;
-                        //                break;
-                        //            case 2:
-                        //                Fire();
-                        //                actualAttack++;
-                        //                actualAttackInterval = 1;
-                        //                break;
-                        //            case 3:
-                        //                Dash();
-                        //                actualAttack++;
-                        //                actualAttackInterval = 1;
-                        //                break;
-                        //            case 4:
-                        //                Dark();
-                        //                actualAttack = 0;
-                        //                actualAttackInterval = 1;
-                        //                break;
-                        //            default:
-                        //                break;
-                        //        }
-                        //        break;
-                        //    case 3:
-                        //        switch (actualAttack)
-                        //        {
-                        //            case 0:
-                        //                Dash();
-                        //                actualAttack++;
-                        //                actualAttackInterval = 0;
-                        //                break;
-                        //            case 1:
-                        //                Dash();
-                        //                actualAttack++;
-                        //                actualAttackInterval = 1;
-                        //                break;
-                        //            case 2:
-                        //                Fire();
-                        //                actualAttack++;
-                        //                actualAttackInterval = 0;
-                        //                break;
-                        //            case 3:
-                        //                Dark();
-                        //                actualAttack = 0;
-                        //                actualAttackInterval = 1;
-                        //                break;
-                        //            default:
-                        //                break;
-                        //        }
-                        //        break;
-                        //    case 4:
-                        //        switch (actualAttack)
-                        //        {
-                        //            case 0:
-                        //                Fire();
-                        //                actualAttack++;
-                        //                actualAttackInterval = 0;
-                        //                break;
-                        //            case 1:
-                        //                Dark();
-                        //                actualAttack++;
-                        //                actualAttackInterval = 0;
-                        //                break;
-                        //            case 2:
-                        //                Dash();
-                        //                actualAttack++;
-                        //                actualAttackInterval = 0;
-                        //                break;
-                        //            case 3:
-                        //                Dash();
-                        //                actualAttack++;
-                        //                actualAttackInterval = 0;
-                        //                break;
-                        //            case 4:
-                        //                Dark();
-                        //                actualAttack = 0;
-                        //                actualAttackInterval = 0;
-                        //                break;
-                        //            default:
-                        //                break;
-                        //        }
-                        //        break;
-                        //}
+                        animator.SetBool("isIdle", false);
+                        switch (patron)
+                        {
+                            case 1:
+                                switch (actualAttack)
+                                {
+                                    case 0:
+                                        Explosion();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 1:
+                                        Circles();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 2:
+                                        Kame();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 3:
+                                        Kame();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 4:
+                                        Circles();
+                                        actualAttack=0;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            case 2:
+                                switch (actualAttack)
+                                {
+                                    case 0:
+                                        Kame();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 1:
+                                        Circles();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 2:
+                                        Explosion();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 3:
+                                        Kame();
+                                        actualAttack=0;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            case 3:
+                                switch (actualAttack)
+                                {
+                                    case 0:
+                                        Kame();
+                                        actualAttack++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 1:
+                                        Kame();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 2:
+                                        Circles();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 3:
+                                        Explosion();
+                                        actualAttack++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 4:
+                                        Kame();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 5:
+                                        Circles();
+                                        actualAttack=0;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            case 4:
+                                switch (actualAttack)
+                                {
+                                    case 0:
+                                        Explosion();
+                                        actualAttack++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 1:
+                                        Kame();
+                                        actualAttack++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 2:
+                                        Circles();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 3:
+                                        Kame();
+                                        actualAttack=0;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                        }
                     }
                 }
                 else
@@ -263,105 +258,103 @@ public class SecondBossBehaviour : MonoBehaviour
                     transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z), movingSpeed);
                     if ((actualAttackInterval -= Time.deltaTime) <= 0)
                     {
-                        Kame();
-                        actualAttackInterval = 5;
-                        //animator.SetBool("isMoving", false);
-                        //switch (patron)
-                        //{
-                        //    case 1:
-                        //        switch (actualAttack2)
-                        //        {
-                        //            case 0:
-                        //                Fire();
-                        //                actualAttack2++;
-                        //                actualAttackInterval = 1;
-                        //                break;
-                        //            case 1:
-                        //                Fire();
-                        //                actualAttack2++;
-                        //                actualAttackInterval = 1;
-                        //                break;
-                        //            case 2:
-                        //                Dash();
-                        //                actualAttack2 = 0;
-                        //                actualAttackInterval = 1;
-                        //                break;
-                        //            default:
-                        //                break;
-                        //        }
-                        //        break;
-                        //    case 2:
-                        //        switch (actualAttack2)
-                        //        {
-                        //            case 0:
-                        //                Fire();
-                        //                actualAttack2++;
-                        //                actualAttackInterval = 1;
-                        //                break;
-                        //            case 1:
-                        //                Dark();
-                        //                actualAttack2++;
-                        //                actualAttackInterval = 1;
-                        //                break;
-                        //            case 2:
-                        //                Dash();
-                        //                actualAttack2 = 0;
-                        //                actualAttackInterval = 1;
-                        //                break;
-                        //            default:
-                        //                break;
-                        //        }
-                        //        break;
-                        //    case 3:
-                        //        switch (actualAttack2)
-                        //        {
-                        //            case 0:
-                        //                Dash();
-                        //                actualAttack2++;
-                        //                actualAttackInterval = 1;
-                        //                break;
-                        //            case 1:
-                        //                Dark();
-                        //                actualAttack2++;
-                        //                actualAttackInterval = 0;
-                        //                break;
-                        //            case 2:
-                        //                Fire();
-                        //                actualAttack2 = 0;
-                        //                actualAttackInterval = 0;
-                        //                break;
-                        //            default:
-                        //                break;
-                        //        }
-                        //        break;
-                        //    case 4:
-                        //        switch (actualAttack2)
-                        //        {
-                        //            case 0:
-                        //                Dark();
-                        //                actualAttack2++;
-                        //                actualAttackInterval = 0;
-                        //                break;
-                        //            case 1:
-                        //                Dash();
-                        //                actualAttack2++;
-                        //                actualAttackInterval = 0;
-                        //                break;
-                        //            case 2:
-                        //                Dark();
-                        //                actualAttack2++;
-                        //                actualAttackInterval = 0;
-                        //                break;
-                        //            case 3:
-                        //                Fire();
-                        //                actualAttack2 = 0;
-                        //                actualAttackInterval = 0;
-                        //                break;
-                        //            default:
-                        //                break;
-                        //        }
-                        //        break;
-                        //}
+                        animator.SetBool("isMoving", false);
+                        switch (patron)
+                        {
+                            case 1:
+                                switch (actualAttack2)
+                                {
+                                    case 0:
+                                        Kame();
+                                        actualAttack2++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 1:
+                                        Explosion();
+                                        actualAttack2++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 2:
+                                        Circles();
+                                        actualAttack2 = 0;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            case 2:
+                                switch (actualAttack2)
+                                {
+                                    case 0:
+                                        Kame();
+                                        actualAttack2++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 1:
+                                        Kame();
+                                        actualAttack2++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 2:
+                                        Explosion();
+                                        actualAttack2 = 0;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            case 3:
+                                switch (actualAttack2)
+                                {
+                                    case 0:
+                                        Explosion();
+                                        actualAttack2++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 1:
+                                        Kame();
+                                        actualAttack2++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 2:
+                                        Circles();
+                                        actualAttack2 = 0;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            case 4:
+                                switch (actualAttack2)
+                                {
+                                    case 0:
+                                        Explosion();
+                                        actualAttack2++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 1:
+                                        Kame();
+                                        actualAttack2++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 2:
+                                        Circles();
+                                        actualAttack2++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 3:
+                                        Kame();
+                                        actualAttack2 = 0;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                        }
                     }
                 }
                 else
