@@ -37,10 +37,10 @@ public class PlayerController : MonoBehaviour {
     //General atributes
     public Vector3 direction;
     public int walkVelocity, runVelocity, dashDistance;    
-    public float dashCooldownTime, dashDuration, deadDuration, onHitAnimDelay, damage, lightCooldown, darkCooldown;
+    public float dashCooldownTime, dashDuration, deadDuration, onHitAnimDelay, damage, lightCooldown, darkCooldown, healCooldown, actualHealCooldown;
     private float dashCooldownCounter, actualDashTime, actualDeadTime, animLength, animDuration, onHitDelay, actualLightCooldown, actualDarkCooldown;
-    public bool interact, fireHit, explosionHit, meteorHit, spawnMe;
-    private bool dashed, attacked, transition, hit, isLightHit, lightOnCD, darkOnCD, dead, darkHit;
+    public bool interact, fireHit, explosionHit, meteorHit, spawnMe, healOnCD;
+    private bool dashed, attacked, transition, hit, isLightHit, lightOnCD, darkOnCD,  dead, darkHit;
     const float velChange = 0.5f;
 
     public static bool damaged;
@@ -66,12 +66,13 @@ public class PlayerController : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
         states = States.Idle;
         attacks = Attacks.NotAtt;
-        spawnMe = dead = lightOnCD = darkOnCD = darkHit = isLightHit = dashed = attacked = transition = hit = fireHit = damaged= false;
+        spawnMe = dead = lightOnCD = darkOnCD = healOnCD = darkHit = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
         dashCooldownCounter = dashCooldownTime;
         actualDashTime = dashDuration;
         actualDeadTime = deadDuration = AnimationLength("Dying",animator);
         actualLightCooldown = lightCooldown;
         actualDarkCooldown = darkCooldown;
+        actualHealCooldown = healCooldown;
         onHitDelay = onHitAnimDelay;
         weapon = GameObject.Find("Sword");
         flameCone = GameObject.Find("FlameCone");
@@ -112,6 +113,15 @@ public class PlayerController : MonoBehaviour {
             elements[(int)Elements.Fire].SetActive(false);
             elements[(int)Elements.Holy].SetActive(false);
             elements[(int)Elements.Dark].SetActive(true);
+        }
+        if (inputs[(int)ButtonInputs.padUp])
+        {
+            if (!healOnCD && health <= stats.health - 40)
+            {
+                healOnCD = true;
+                health += 40;
+                healthBar.value = health;
+            }
         }
         if (inputs[(int)ButtonInputs.Dash] && !dashed)
         {
@@ -465,6 +475,7 @@ public class PlayerController : MonoBehaviour {
         DashCooldown();
         LightCooldown();
         DarkCooldown();
+        HealCooldown();
 
         if (hit)
         {
@@ -507,7 +518,7 @@ public class PlayerController : MonoBehaviour {
         weapon.tag = "Untagged";
         states = States.Idle;
         attacks = Attacks.NotAtt;
-        dead = lightOnCD= darkOnCD = darkHit =  isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
+        dead = lightOnCD = darkOnCD = darkHit =  isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
         dashCooldownCounter = dashCooldownTime;
         actualDashTime = dashDuration;
         actualLightCooldown = lightCooldown;
@@ -584,6 +595,19 @@ public class PlayerController : MonoBehaviour {
                 dashed = false;
                 dashCooldownCounter = dashCooldownTime;
 
+            }
+        }
+    }
+
+    void HealCooldown()
+    {
+        if (healOnCD)
+        {
+            actualHealCooldown -= Time.deltaTime;
+            if (actualHealCooldown <= 0f)
+            {
+                healOnCD = false;
+                actualHealCooldown = healCooldown;
             }
         }
     }

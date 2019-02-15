@@ -2345,7 +2345,7 @@ MonoBehaviour:
   baseAttack: 20
   fireDmg: 20
   lightDmg: 60
-  darkLifeSteal: 0
+  darkLifeSteal: 5
   healthBar: {fileID: 0}
   fireUI: {fileID: 0}
   lightUI: {fileID: 0}
@@ -2370,6 +2370,7 @@ MonoBehaviour:
   damage: 20
   lightCooldown: 1
   darkCooldown: 1
+  healCooldown: 30
   interact: 0
   fireHit: 0
   explosionHit: 0
