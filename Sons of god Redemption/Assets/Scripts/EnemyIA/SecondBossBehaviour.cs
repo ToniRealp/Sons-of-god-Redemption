@@ -3,31 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FinalBossBehaviour : MonoBehaviour {
+public class SecondBossBehaviour : MonoBehaviour
+{
 
-    //public GameObject fireParticles, explosionParticles, meteor;
     public Animator animator;
-    public float attackDistance = 4f, explosionRange = 10, movingSpeed = 0.02f, rotationSpeed = 0.05f, meteorInterval = 0.3f, meteorRange = 5, godModeMinTime = 3, godModeMaxTime = 8, godModeMinDelay = 20, godModeMaxDelay = 35;
-    public int meteorNum = 5, actualAttack, actualAttack2, patron;
-    public Quaternion[] meteorRotation;
+    public float attackDistance = 4f, explosionRange = 10, movingSpeed = 0.02f, rotationSpeed = 0.05f, circlesRange = 5;
+    public int circlesNum = 5, actualAttack, actualAttack2, patron;
+    public Vector3[] circlePosition;
 
 
     private GameObject player;
-    private float godModeTime, godDelayTime, darkAnimationTime, dizzyAnimationTime, dashAnimationTime, fireAnimationTime, initMeteorTime, godModeHealth;
-    private float actualAttackInterval, actualGodModeTime, actualGodDelayTime, actualDarkTime, actualDizzyTime, actualDashTime, actualFireTime;
-    private int meteorCounter;
+    private float circleAnimationTime, kameAnimationTime, explosionAnimationTime, initcirclesTime;
+    private float actualAttackInterval,  actualCircleTime, actualKameTime, actualExplosionTime;
+    private int circlesCounter;
     private bool explosionChecked, patron1switched, patron2switched, patron3switched, godMode;
 
-    enum State { IDLE, WALKING, DASH, FIRE, DARK, DIZZY };
+    enum State { IDLE, WALKING, CIRCLES, KAME, EXPLOSION };
     [SerializeField] State state = State.IDLE;
 
-    public float playerDistance, maxHealth = 3000, health, damage, dashDmg = 15, fireDmg = 55, darkDmg = 25;
+    public float playerDistance, maxHealth = 2300, health, damage, circleDmg = 1, kameDmg = 25, explosionDmg = 45;
     string lastTag;
     public Text healthText;
     public GameObject healthTextGO, canvas, textPos;
     public Font font;
 
-    public GameObject fireBall, darkBox, dashTrigger, glow, blood;
+    public GameObject darkCircle, darkExplosion, darkKame;
+    public GameObject blood;
     public Transform bloodPosition;
     public GameObject dieParticles;
 
@@ -37,14 +38,11 @@ public class FinalBossBehaviour : MonoBehaviour {
         health = maxHealth;
         actualAttackInterval = 1;
         player = GameObject.FindGameObjectWithTag("Player");
-        actualDizzyTime = dizzyAnimationTime = AnimationLength("Dizzy", animator);
-        actualDarkTime = darkAnimationTime = AnimationLength("Standing2", animator);
-        actualDashTime = dashAnimationTime = AnimationLength("Running Slide (1)", animator);
-        actualFireTime = fireAnimationTime = AnimationLength("Standing", animator);
-        godDelayTime = actualGodDelayTime = Random.Range(godModeMinDelay, godModeMaxDelay);
-        darkBox.SetActive(false);
-        glow.SetActive(false);
-        dashTrigger.SetActive(false);
+        actualCircleTime = circleAnimationTime = AnimationLength("Circles", animator);
+        actualKameTime = kameAnimationTime = AnimationLength("Kame", animator);
+        actualExplosionTime = explosionAnimationTime = AnimationLength("Explosion", animator);
+        darkKame.SetActive(false);
+        darkExplosion.SetActive(false);
         lastTag = "value";
 
         //Health Text
@@ -59,8 +57,8 @@ public class FinalBossBehaviour : MonoBehaviour {
 
         patron = 1;
         patron1switched = patron2switched = patron3switched = false;
-        actualAttack2 = actualAttack = meteorCounter = 0;
-        meteorRotation = new Quaternion[meteorNum];
+        actualAttack2 = actualAttack = circlesCounter = 0;
+        circlePosition = new Vector3[circlesNum];
         godMode = explosionChecked = false;
     }
 
@@ -78,30 +76,7 @@ public class FinalBossBehaviour : MonoBehaviour {
             Destroy(healthTextGO);
         }
 
-        //GodMode
-        if (godMode)
-        {
-            health = godModeHealth;
-            actualGodModeTime -= Time.deltaTime;
-            if (actualGodModeTime <= 0)
-            {
-                glow.SetActive(false);
-                godDelayTime = actualGodDelayTime = Random.Range(godModeMinDelay, godModeMaxDelay);
-                godMode = false;
-            }
-        }
-        else
-        {
-            actualGodDelayTime -= Time.deltaTime;
-            if (actualGodDelayTime<=0)
-            {
-                glow.SetActive(true);
-                godModeTime = actualGodModeTime = Random.Range(godModeMinTime,godModeMaxTime);
-                godMode = true;
-                godModeHealth = health;
-            }
-        }
-
+     
         // Health text update
         healthTextGO.GetComponent<Transform>().position = Camera.main.WorldToScreenPoint(textPos.transform.position);
         healthText.text = health.ToString();
@@ -145,32 +120,27 @@ public class FinalBossBehaviour : MonoBehaviour {
                                 switch (actualAttack)
                                 {
                                     case 0:
-                                        Dash();
+                                        Explosion();
                                         actualAttack++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 1:
-                                        Dash();
+                                        Circles();
                                         actualAttack++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 2:
-                                        Fire();
+                                        Kame();
                                         actualAttack++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 3:
-                                        Dash();
+                                        Kame();
                                         actualAttack++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 4:
-                                        Dash();
-                                        actualAttack++;
-                                        actualAttackInterval = 1;
-                                        break;
-                                    case 5:
-                                        Dark();
+                                        Circles();
                                         actualAttack=0;
                                         actualAttackInterval = 1;
                                         break;
@@ -182,27 +152,22 @@ public class FinalBossBehaviour : MonoBehaviour {
                                 switch (actualAttack)
                                 {
                                     case 0:
-                                        Dash();
+                                        Kame();
                                         actualAttack++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 1:
-                                        Dash();
+                                        Circles();
                                         actualAttack++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 2:
-                                        Fire();
+                                        Explosion();
                                         actualAttack++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 3:
-                                        Dash();
-                                        actualAttack++;
-                                        actualAttackInterval = 1;
-                                        break;
-                                    case 4:
-                                        Dark();
+                                        Kame();
                                         actualAttack=0;
                                         actualAttackInterval = 1;
                                         break;
@@ -214,22 +179,32 @@ public class FinalBossBehaviour : MonoBehaviour {
                                 switch (actualAttack)
                                 {
                                     case 0:
-                                        Dash();
+                                        Kame();
                                         actualAttack++;
                                         actualAttackInterval = 0;
                                         break;
                                     case 1:
-                                        Dash();
+                                        Kame();
                                         actualAttack++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 2:
-                                        Fire();
+                                        Circles();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 3:
+                                        Explosion();
                                         actualAttack++;
                                         actualAttackInterval = 0;
                                         break;
-                                    case 3:
-                                        Dark();
+                                    case 4:
+                                        Kame();
+                                        actualAttack++;
+                                        actualAttackInterval = 1;
+                                        break;
+                                    case 5:
+                                        Circles();
                                         actualAttack=0;
                                         actualAttackInterval = 1;
                                         break;
@@ -241,27 +216,22 @@ public class FinalBossBehaviour : MonoBehaviour {
                                 switch (actualAttack)
                                 {
                                     case 0:
-                                        Fire();
+                                        Explosion();
                                         actualAttack++;
                                         actualAttackInterval = 0;
                                         break;
                                     case 1:
-                                        Dark();
+                                        Kame();
                                         actualAttack++;
                                         actualAttackInterval = 0;
                                         break;
                                     case 2:
-                                        Dash();
+                                        Circles();
                                         actualAttack++;
-                                        actualAttackInterval = 0;
+                                        actualAttackInterval = 1;
                                         break;
                                     case 3:
-                                        Dash();
-                                        actualAttack++;
-                                        actualAttackInterval = 0;
-                                        break;
-                                    case 4:
-                                        Dark();
+                                        Kame();
                                         actualAttack=0;
                                         actualAttackInterval = 0;
                                         break;
@@ -295,18 +265,18 @@ public class FinalBossBehaviour : MonoBehaviour {
                                 switch (actualAttack2)
                                 {
                                     case 0:
-                                        Fire();
+                                        Kame();
                                         actualAttack2++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 1:
-                                        Fire();
+                                        Explosion();
                                         actualAttack2++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 2:
-                                        Dash();
-                                        actualAttack2=0;
+                                        Circles();
+                                        actualAttack2 = 0;
                                         actualAttackInterval = 1;
                                         break;
                                     default:
@@ -317,18 +287,18 @@ public class FinalBossBehaviour : MonoBehaviour {
                                 switch (actualAttack2)
                                 {
                                     case 0:
-                                        Fire();
+                                        Kame();
                                         actualAttack2++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 1:
-                                        Dark();
+                                        Kame();
                                         actualAttack2++;
                                         actualAttackInterval = 1;
                                         break;
                                     case 2:
-                                        Dash();
-                                        actualAttack2=0;
+                                        Explosion();
+                                        actualAttack2 = 0;
                                         actualAttackInterval = 1;
                                         break;
                                     default:
@@ -339,19 +309,19 @@ public class FinalBossBehaviour : MonoBehaviour {
                                 switch (actualAttack2)
                                 {
                                     case 0:
-                                        Dash();
+                                        Explosion();
+                                        actualAttack2++;
+                                        actualAttackInterval = 0;
+                                        break;
+                                    case 1:
+                                        Kame();
                                         actualAttack2++;
                                         actualAttackInterval = 1;
                                         break;
-                                    case 1:
-                                        Dark();
-                                        actualAttack2++;
-                                        actualAttackInterval = 0;
-                                        break;
                                     case 2:
-                                        Fire();
-                                        actualAttack2=0;
-                                        actualAttackInterval = 0;
+                                        Circles();
+                                        actualAttack2 = 0;
+                                        actualAttackInterval = 1;
                                         break;
                                     default:
                                         break;
@@ -361,23 +331,23 @@ public class FinalBossBehaviour : MonoBehaviour {
                                 switch (actualAttack2)
                                 {
                                     case 0:
-                                        Dark();
+                                        Explosion();
                                         actualAttack2++;
                                         actualAttackInterval = 0;
                                         break;
                                     case 1:
-                                        Dash();
+                                        Kame();
                                         actualAttack2++;
                                         actualAttackInterval = 0;
                                         break;
                                     case 2:
-                                        Dark();
+                                        Circles();
                                         actualAttack2++;
                                         actualAttackInterval = 0;
                                         break;
                                     case 3:
-                                        Fire();
-                                        actualAttack2=0;
+                                        Kame();
+                                        actualAttack2 = 0;
                                         actualAttackInterval = 0;
                                         break;
                                     default:
@@ -393,63 +363,59 @@ public class FinalBossBehaviour : MonoBehaviour {
                     state = State.IDLE;
                 }
                 break;
-            case State.DASH:
+            case State.CIRCLES:
 
-                actualDashTime -= Time.deltaTime;
-                if (actualDashTime <= dashAnimationTime)
-                    dashTrigger.SetActive(true);
-                if (actualDashTime <= dashAnimationTime * 0.1)
-                    dashTrigger.SetActive(false);
-                if (actualDashTime <= 0)
+                actualCircleTime -= Time.deltaTime;
+                if (actualCircleTime <= circleAnimationTime *0.8)
                 {
-                    actualDashTime = dashAnimationTime;
-                    state = State.IDLE;
-                }
-                break;
-
-            case State.DARK:
-
-                actualDarkTime -= Time.deltaTime;
-
-                if (actualDarkTime <= darkAnimationTime * 0.6)
-                    darkBox.SetActive(true);
-                if (actualDarkTime <= 0)
-                {
-                    darkBox.SetActive(false);
-                    actualDarkTime = darkAnimationTime;
-                    state = State.IDLE;
-                }
-
-                break;
-
-
-
-            case State.FIRE:
-                actualFireTime -= Time.deltaTime;
-                if (actualFireTime <= fireAnimationTime * 0.8)
-                {
-                    if (Time.time - initMeteorTime >= meteorInterval && meteorCounter < meteorNum)
+                    if (circlesCounter < circlesNum)
                     {
-                        Vector3 t = transform.position + meteorRotation[meteorCounter] * Vector3.forward * meteorRange;
-                        t.y = 2;
-                        Instantiate(fireBall, t, meteorRotation[meteorCounter]);
-                        meteorCounter++;
-                        initMeteorTime = Time.time;
+                        Instantiate(darkCircle, circlePosition[circlesCounter], new Quaternion(0, 0, 0, 0));
+                        circlesCounter++;
                     }
                 }
-                if (actualFireTime <= 0 && meteorCounter >= meteorNum)
+                if (actualCircleTime <=0 && circlesCounter>=circlesNum)
                 {
-                    actualFireTime = fireAnimationTime;
+                    actualCircleTime = circleAnimationTime;
                     state = State.IDLE;
                 }
+
+
                 break;
-            case State.DIZZY:
-                actualDizzyTime -= Time.deltaTime;
-                if (actualDizzyTime <= 0)
+
+        
+            case State.KAME:
+
+                actualKameTime -= Time.deltaTime;
+                if (actualKameTime > kameAnimationTime * 0.75)
+                    LookPlayer();
+                if (actualKameTime <= kameAnimationTime * 0.65f)
+                    darkKame.SetActive(true);
+                if (actualKameTime <= 0)
                 {
-                    actualDizzyTime = dizzyAnimationTime;
+                    darkKame.SetActive(false);
+                    actualKameTime = kameAnimationTime;
                     state = State.IDLE;
                 }
+
+
+                break;
+
+
+
+            case State.EXPLOSION:
+                actualExplosionTime -= Time.deltaTime;
+
+                if (actualExplosionTime <= explosionAnimationTime * 0.35)
+                    darkExplosion.SetActive(true);
+                if (actualExplosionTime <= 0)
+                {
+                    darkExplosion.SetActive(false);
+                    actualExplosionTime = explosionAnimationTime;
+                    state = State.IDLE;
+                }
+
+
                 break;
             default:
                 break;
@@ -464,44 +430,39 @@ public class FinalBossBehaviour : MonoBehaviour {
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(player.transform.position.x - transform.position.x, transform.position.y, player.transform.position.z - transform.position.z)), rotationSpeed);
     }
 
-    void Dash()
+    void Kame()
     {
-        animator.SetTrigger("Dash");
-        damage = dashDmg;
-        state = State.DASH;
+        animator.SetTrigger("Kame");
+        damage = kameDmg;
+        state = State.KAME;
     }
 
-    void Fire()
+    void Circles()
     {
-        animator.SetTrigger("Fire");
-        damage = fireDmg;
-        initMeteorTime = Time.time;
-        meteorCounter = 0;
-        for (int i = 0; i < meteorNum; i++)
+        animator.SetTrigger("Circles");
+        damage = circleDmg;
+        initcirclesTime = Time.time;
+        circlesCounter = 0;
+        for (int i = 0; i < circlesNum; i++)
         {
-            meteorRotation[i] = Quaternion.Euler(0, Random.Range(0, 359), 0).normalized;
+            circlePosition[i] = new Vector3(Random.Range(transform.position.x-circlesRange, transform.position.x + circlesRange),0, Random.Range(transform.position.z - circlesRange, transform.position.z + circlesRange));
         }
-        state = State.FIRE;
+        state = State.CIRCLES;
     }
 
-    void Dark()
+    void Explosion()
     {
-        animator.SetTrigger("Dark");
-        damage = darkDmg;
-        state = State.DARK;
+        animator.SetTrigger("Explosion");
+        damage = explosionDmg;
+        state = State.EXPLOSION;
     }
 
-    void Dizzy()
-    {
-        animator.SetTrigger("GodMode");
-        state = State.DIZZY;
-    }
 
     public void Heal()
     {
-        if (health<=maxHealth-20)
+        if (health <= maxHealth - 15)
         {
-            health += 20;
+            health += 15;
         }
     }
 
