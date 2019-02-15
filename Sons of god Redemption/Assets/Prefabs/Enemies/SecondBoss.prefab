@@ -554,7 +554,7 @@ GameObject:
   - component: {fileID: 136695527247661860}
   m_Layer: 0
   m_Name: SecondBoss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1596,7 +1596,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1379692069457904}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 7.38}
+  m_LocalPosition: {x: -2.732147, y: -8.050276e-18, z: 3.625522}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4605164934768014}

@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
 
     //Player stats
     public Stats stats;
-    public int health, movementSpeed, baseAttack, fireDmg, lightDmg;
+    public int health, movementSpeed, baseAttack, fireDmg, lightDmg, darkLifeSteal;
 
     //Canvas
     public Slider healthBar;
@@ -17,8 +17,8 @@ public class PlayerController : MonoBehaviour {
     //Enums
     enum States { Idle, Walking, Running, Dashing, Attacking, Dead, MAX };
     enum Attacks { LightAttack1, LightAttack2, LightAttack3, StrongAttack1, StrongAttack2, StrongAttack3, NotAtt };
-    enum ButtonInputs { Dash, LightAttack, StrongAttack, padLeft, padRight, Interact, MAX };
-    enum Elements {Holy, Fire, MAX };
+    enum ButtonInputs { Dash, LightAttack, StrongAttack, padLeft, padRight, padUp, padDown, Interact, MAX };
+    enum Elements {Holy, Fire, Dark, MAX };
 
     //External attributes
     InputManager inputManager;
@@ -37,10 +37,10 @@ public class PlayerController : MonoBehaviour {
     //General atributes
     public Vector3 direction;
     public int walkVelocity, runVelocity, dashDistance;    
-    public float dashCooldownTime, dashDuration, deadDuration, onHitAnimDelay, damage, lightCooldown;
-    private float dashCooldownCounter, actualDashTime, actualDeadTime, animLength, animDuration, onHitDelay, actualLightCooldown;
+    public float dashCooldownTime, dashDuration, deadDuration, onHitAnimDelay, damage, lightCooldown, darkCooldown;
+    private float dashCooldownCounter, actualDashTime, actualDeadTime, animLength, animDuration, onHitDelay, actualLightCooldown, actualDarkCooldown;
     public bool interact, fireHit, explosionHit, meteorHit, spawnMe;
-    private bool dashed, attacked, transition, hit, isLightHit, lightOnCD, dead;
+    private bool dashed, attacked, transition, hit, isLightHit, lightOnCD, darkOnCD, dead, darkHit;
     const float velChange = 0.5f;
 
     public static bool damaged;
@@ -66,18 +66,21 @@ public class PlayerController : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
         states = States.Idle;
         attacks = Attacks.NotAtt;
-        spawnMe = dead = lightOnCD = isLightHit = dashed = attacked = transition = hit = fireHit = damaged= false;
+        spawnMe = dead = lightOnCD = darkOnCD = darkHit = isLightHit = dashed = attacked = transition = hit = fireHit = damaged= false;
         dashCooldownCounter = dashCooldownTime;
         actualDashTime = dashDuration;
         actualDeadTime = deadDuration = AnimationLength("Dying",animator);
         actualLightCooldown = lightCooldown;
+        actualDarkCooldown = darkCooldown;
         onHitDelay = onHitAnimDelay;
         weapon = GameObject.Find("Sword");
         flameCone = GameObject.Find("FlameCone");
         elements[(int)Elements.Fire] = GameObject.Find("Fire particles");
         elements[(int)Elements.Holy] = GameObject.Find("Light particles");
+        elements[(int)Elements.Dark] = GameObject.Find("Dark particles");
         elements[(int)Elements.Fire].SetActive(false);
         elements[(int)Elements.Holy].SetActive(false);
+        elements[(int)Elements.Dark].SetActive(false);
         flameCone.SetActive(false);
     }
 	
@@ -90,6 +93,7 @@ public class PlayerController : MonoBehaviour {
         {
             elements[(int)Elements.Fire].SetActive(true);
             elements[(int)Elements.Holy].SetActive(false);
+            elements[(int)Elements.Dark].SetActive(false);
             fireUI.SetActive(true);
             lightUI.SetActive(false);
             health = stats.health;
@@ -99,8 +103,15 @@ public class PlayerController : MonoBehaviour {
         {
             elements[(int)Elements.Fire].SetActive(false);
             elements[(int)Elements.Holy].SetActive(true);
+            elements[(int)Elements.Dark].SetActive(false);
             fireUI.SetActive(false);
             lightUI.SetActive(true);
+        }
+        if (inputs[(int)ButtonInputs.padDown])
+        {
+            elements[(int)Elements.Fire].SetActive(false);
+            elements[(int)Elements.Holy].SetActive(false);
+            elements[(int)Elements.Dark].SetActive(true);
         }
         if (inputs[(int)ButtonInputs.Dash] && !dashed)
         {
@@ -322,6 +333,10 @@ public class PlayerController : MonoBehaviour {
                             {
                                 isLightHit = true;
                             }
+                            else if (elements[(int)Elements.Dark].activeSelf)
+                            {
+                                darkHit = true;
+                            }
                         }
                         if (animLength < animDuration * 0.3)
                         {
@@ -334,6 +349,7 @@ public class PlayerController : MonoBehaviour {
                             attacked = false;
                             flameCone.SetActive(false);
                             isLightHit = false;
+                            darkHit = false;
                         }
 
                         break;
@@ -404,6 +420,7 @@ public class PlayerController : MonoBehaviour {
                             attacked = false;
                             weapon.tag = "Untagged";
                             isLightHit = false;
+                            darkHit = false;
                             flameCone.SetActive(false);
                         } 
 
@@ -443,6 +460,7 @@ public class PlayerController : MonoBehaviour {
         
         DashCooldown();
         LightCooldown();
+        DarkCooldown();
 
         if (hit)
         {
@@ -485,10 +503,11 @@ public class PlayerController : MonoBehaviour {
         weapon.tag = "Untagged";
         states = States.Idle;
         attacks = Attacks.NotAtt;
-        dead = lightOnCD = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
+        dead = lightOnCD= darkOnCD = darkHit =  isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
         dashCooldownCounter = dashCooldownTime;
         actualDashTime = dashDuration;
         actualLightCooldown = lightCooldown;
+        actualDarkCooldown = darkCooldown;
         onHitDelay = onHitAnimDelay;
         animator.ResetTrigger("lightAttack1");
         animator.ResetTrigger("lightAttack2");
@@ -502,8 +521,9 @@ public class PlayerController : MonoBehaviour {
         weapon.tag = "Untagged";
         states = States.Idle;
         attacks = Attacks.NotAtt;
-        dead = lightOnCD = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
+        dead = lightOnCD= darkOnCD = darkHit = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
         actualLightCooldown = lightCooldown;
+        actualDarkCooldown = darkCooldown;
         onHitDelay = onHitAnimDelay;
     }
 
@@ -526,6 +546,15 @@ public class PlayerController : MonoBehaviour {
         else
             inputs[(int)ButtonInputs.padLeft] = false;
 
+        if (inputManager.padYAxis == 1)
+            inputs[(int)ButtonInputs.padUp] = true;
+        else
+            inputs[(int)ButtonInputs.padUp] = false;
+
+        if (inputManager.padYAxis == -1)
+            inputs[(int)ButtonInputs.padDown] = true;
+        else
+            inputs[(int)ButtonInputs.padDown] = false;
     }
 
     void Rotation()
@@ -563,6 +592,18 @@ public class PlayerController : MonoBehaviour {
             if (actualLightCooldown<=0f)
             {
                 lightOnCD = false;
+            }
+        }
+    }
+
+    void DarkCooldown()
+    {
+        if (darkOnCD)
+        {
+            actualDarkCooldown -= Time.deltaTime;
+            if (actualDarkCooldown <= 0f)
+            {
+                darkOnCD = false;
             }
         }
     }
@@ -612,6 +653,13 @@ public class PlayerController : MonoBehaviour {
                 audioSource.Play();
                 animator.speed = 0f;
                 hit = true;
+                if (darkHit && !darkOnCD && health<=stats.health-15)
+                {
+                    darkOnCD = true;
+                    health += 15;
+                    healthBar.value = health;
+                    darkHit = false;
+                }
             }
             if (isLightHit && !lightOnCD)
             {
