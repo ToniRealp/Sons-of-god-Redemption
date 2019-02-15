@@ -621,6 +621,10 @@ public class PlayerController : MonoBehaviour {
                 {
                     other.GetComponentInParent<FirstBossBehaviour>().health -= lightDmg;
                 }
+                else if (other.gameObject.name == "SecondBoss")
+                {
+                    other.GetComponentInParent<SecondBossBehaviour>().health -= lightDmg;
+                }
                 else if (other.gameObject.name == "FinalBoss")
                 {
                     other.GetComponentInParent<FinalBossBehaviour>().health -= lightDmg;
