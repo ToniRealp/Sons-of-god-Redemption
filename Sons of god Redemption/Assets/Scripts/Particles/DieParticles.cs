@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DieParticles : MonoBehaviour {
 
-    private float dieTime = 2;
+    public float dieTime = 2;
 
 	// Use this for initialization
 	void Start () {

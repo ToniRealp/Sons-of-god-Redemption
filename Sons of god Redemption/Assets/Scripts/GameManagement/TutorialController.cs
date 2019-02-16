@@ -5,157 +5,114 @@ using UnityEngine;
 public class TutorialController : MonoBehaviour {
 
     public float firstEnemySpawnTime = 5;
-    public int numberOfSimultaneousEnemies = 1;
-    public int enemiesTillNextIncrease = 2;
-    public int enemiesTillBoss = 6;
 
+    public GameObject wasd, lightAt, strongAt, elements, dash, goodJob;
     public GameObject enemy;
     public GameObject boss;
     private InputManager inputManager;
-    public int lastEnemyCounter, enemyCounter, enemiesDefeated, enemiesSpawned;
+    public int enemyCounter;
 
-    public bool spawnEnemy, lastEnemyState, spawnBoss, lastBossState, clearAll, lastClearState, spawnFirstEnemy, enemyIncrease, spawnFirstBoss;
+    public bool spawnLightAtEnemy, spawnDashEnemy, spawnStrongAtEnemies, spawnElementEnemies, openDoor;
 
 	// Use this for initialization
 	void Start () {
         inputManager = GetComponent<InputManager>();
-        spawnFirstBoss = enemyIncrease = spawnFirstEnemy = false;
-        lastEnemyCounter = enemiesSpawned = enemiesDefeated = enemyCounter = 0;
+
+        //Initialization for the enemies spawns
+        spawnLightAtEnemy = true;
+        openDoor = spawnDashEnemy = spawnStrongAtEnemies = spawnElementEnemies = false;
+        enemyCounter = 0;
+
+        //Initialization for the tutorial texts
+        wasd.SetActive(true);
+        lightAt.SetActive(false);
+        strongAt.SetActive(false);
+        elements.SetActive(false);
+        dash.SetActive(false);
+        goodJob.SetActive(false);
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        GetInput();
+        //GetInput();
 
         if(inputManager.escape)
         {
             GetComponent<SceneController>().changeScene("MainMenu");
         }
 
-        //Spawn First Enemy
-        if ((firstEnemySpawnTime-=Time.deltaTime)<=0 && !spawnFirstEnemy)
-        {
-            spawnFirstEnemy = true;
-            DoSpawnEnemy();
-            enemiesSpawned++;
-        }
-
-
-
         // Number of enemies Controller
         foreach (var item in GameObject.FindGameObjectsWithTag("Enemy"))
         {
             enemyCounter++;
         }
-        if (spawnFirstEnemy && enemyCounter < numberOfSimultaneousEnemies  && !spawnFirstBoss)
+
+
+        //Spawn Light At Enemy
+        if ((firstEnemySpawnTime-=Time.deltaTime)<=0 && spawnLightAtEnemy)
         {
-            if (lastEnemyCounter - enemyCounter > 0)
-            {
-                enemiesDefeated += lastEnemyCounter - enemyCounter;
-            }
-            if (enemiesSpawned <= enemiesTillBoss)
-            {
-                DoSpawnEnemy();
-                enemiesSpawned++;
-            }
-        }
-
-        // Aumentar el numero de enemigos simultaneos
-        if (enemiesDefeated == enemiesTillNextIncrease && !enemyIncrease)
-        {
-            enemyIncrease = true;
-            enemiesDefeated--;
-            numberOfSimultaneousEnemies++;
-        }
-
-        if (enemiesDefeated == enemiesTillBoss && !spawnFirstBoss)
-        {
-            spawnFirstBoss = true;
-            DoSpawnBoss();
-        }
-
-        if (spawnFirstBoss && enemyCounter == 0)
-        {
-            GetComponent<BoxCollider>().isTrigger = true;
-        }
-
-
-
-        // Manual Spawner
-
-        if (spawnEnemy==true && lastEnemyState==false)
-        {
+            Debug.Log("LightEnemy");
             DoSpawnEnemy();
+            spawnLightAtEnemy = false;
+            spawnDashEnemy = true;
+            wasd.SetActive(false);
+            lightAt.SetActive(true);
         }
 
-        if (spawnBoss == true && lastBossState == false)
+        //Spawn Dash Enemy
+        else if (enemyCounter == 0 && spawnDashEnemy)
         {
-            DoSpawnBoss();
+            Debug.Log("DashEnemy");
+            DoSpawnEnemy();
+            spawnDashEnemy = false;
+            spawnStrongAtEnemies = true;
+            lightAt.SetActive(false);
+            dash.SetActive(true);
         }
 
-        if (clearAll == true && lastClearState == false)
+        //Spawn Strong At Enemies
+        else if (enemyCounter == 0 && spawnStrongAtEnemies)
         {
-            DoClearAll();
+            Debug.Log("StrongEnemy");
+            DoSpawnEnemy();
+            DoSpawnEnemy();
+            spawnStrongAtEnemies = false;
+            spawnElementEnemies = true;
+            dash.SetActive(false);
+            strongAt.SetActive(true);
         }
 
-        lastEnemyCounter = enemyCounter;
-        lastEnemyState = spawnEnemy;
-        lastBossState = spawnBoss;
-        lastClearState = clearAll;
+        //Spawn Element Enemies
+        else if (enemyCounter == 0 && spawnElementEnemies)
+        {
+            Debug.Log("ElementEnemy");
+            DoSpawnEnemy();
+            DoSpawnEnemy();
+            spawnElementEnemies = false;
+            openDoor = true;
+            strongAt.SetActive(false);
+            elements.SetActive(true);
+        }
+
+        //Open Door
+        else if (enemyCounter == 0 && openDoor)
+        {
+            Debug.Log("OpenDoor");
+            gameObject.GetComponent<BoxCollider>().isTrigger = true;
+            openDoor = false;
+            elements.SetActive(false);
+            goodJob.SetActive(true);
+        }
+
+
         enemyCounter = 0;
 	}
 
-    void GetInput()
-    {
-        if (inputManager.addEnemy==true){
-            spawnEnemy = true;
-        }
-        else
-        {
-            spawnEnemy = false;
-        }
-
-        if (inputManager.addBoss == true)
-        {
-            spawnBoss = true;
-        }
-        else
-        {
-            spawnBoss = false;
-        }
-
-        if (inputManager.clearEnemies == true)
-        {
-            clearAll = true;
-        }
-        else
-        {
-            clearAll = false;
-        }
-
-    }
 
     void DoSpawnEnemy()
     {
         Instantiate(enemy);
     }
 
-    void DoSpawnBoss()
-    {
-        Instantiate(boss);
-    }
-
-    void DoClearAll()
-    {
-        foreach (var GameObject in GameObject.FindGameObjectsWithTag("Enemy"))
-        {
-            if (GameObject.GetComponent<BasicEnemy>()!=null)
-            {
-                Destroy(GameObject.GetComponent<BasicEnemy>().healthTextGO);
-            }
-            Destroy(GameObject);
-        }
-        ;
-    }
 }
