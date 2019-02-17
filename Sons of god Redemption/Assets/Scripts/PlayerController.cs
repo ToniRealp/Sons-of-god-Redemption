@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour {
                 healthBar.value = health;
             }
         }
-        if (inputs[(int)ButtonInputs.Dash] && !dashed)
+        if (inputs[(int)ButtonInputs.Dash] && !dashed && !dead)
         {
             states = States.Dashing;
             animator.SetTrigger("isDashing");
@@ -243,8 +243,7 @@ public class PlayerController : MonoBehaviour {
                     Dash();
                 else
                 {
-                    dashed = true;
-                    ResetAll();
+                    ResetDash();
                 }
                  
                 break;
@@ -536,10 +535,16 @@ public class PlayerController : MonoBehaviour {
         weapon.tag = "Untagged";
         states = States.Idle;
         attacks = Attacks.NotAtt;
-        dead = lightOnCD= darkOnCD = darkHit = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
+        lightOnCD = darkOnCD = darkHit = isLightHit = attacked = transition = hit = fireHit = damaged = false;
         actualLightCooldown = lightCooldown;
         actualDarkCooldown = darkCooldown;
+        actualDashTime = dashDuration;
         onHitDelay = onHitAnimDelay;
+        animator.ResetTrigger("lightAttack1");
+        animator.ResetTrigger("lightAttack2");
+        animator.ResetTrigger("lightAttack3");
+        animator.ResetTrigger("strongAttack1");
+        animator.ResetTrigger("strongAttack2");
     }
 
     void GetInput()
