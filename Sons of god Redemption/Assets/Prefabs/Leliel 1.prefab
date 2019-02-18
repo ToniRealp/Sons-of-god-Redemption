@@ -2213,8 +2213,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 8.363799, y: 76.75545, z: 12.168216}
-  m_Center: {x: -0.044283032, y: 61.47018, z: -1.9148266}
+  m_Size: {x: 8.363799, y: 89.89993, z: 12.168216}
+  m_Center: {x: -0.04422466, y: 68.04228, z: -1.9148176}
 --- !u!82 &82524634645416168
 AudioSource:
   m_ObjectHideFlags: 1
@@ -2353,6 +2353,8 @@ MonoBehaviour:
   hitSound: {fileID: 8300000, guid: 9d54cd11b601e1b428925b1897cd4042, type: 3}
   flameCone: {fileID: 1533153879405776}
   lightHit: {fileID: 1008891602714680, guid: 58d1e5b52a3ad734db07b18f829c70ed, type: 2}
+  healParticles: {fileID: 1045061750658230, guid: 469929624c08b0a4183d49b0cbc1b0ff,
+    type: 2}
   weapon: {fileID: 1214115538332592}
   elements:
   - {fileID: 1727931824325610}
@@ -2371,11 +2373,14 @@ MonoBehaviour:
   lightCooldown: 1
   darkCooldown: 1
   healCooldown: 30
+  actualHealCooldown: 0
   interact: 0
   fireHit: 0
   explosionHit: 0
   meteorHit: 0
   spawnMe: 0
+  healOnCD: 0
+  finalDashHit: 0
   states: 0
   nextState: 0
   attacks: 6
@@ -2414,7 +2419,7 @@ CapsuleCollider:
   m_Radius: 0.3506936
   m_Height: 1.7
   m_Direction: 1
-  m_Center: {x: 0, y: 0.8, z: 0.1}
+  m_Center: {x: 0, y: 0.86, z: 0.1}
 --- !u!137 &137094051112066764
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2700,7 +2705,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 0.42398846, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -6121,12 +6126,12 @@ ParticleSystem:
       type: 0
       properties: 0
   LightsModule:
-    enabled: 0
-    ratio: 0
-    light: {fileID: 0}
-    randomDistribution: 1
+    enabled: 1
+    ratio: 1
+    light: {fileID: 108249560718586358, guid: aed0e2d82a453474f9f6758aa13000c5, type: 2}
+    randomDistribution: 0
     color: 1
-    range: 1
+    range: 0
     intensity: 1
     rangeCurve:
       serializedVersion: 2
@@ -6184,7 +6189,7 @@ ParticleSystem:
     intensityCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -6234,7 +6239,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    maxLights: 20
+    maxLights: 100
   TrailModule:
     enabled: 0
     mode: 0
@@ -15187,9 +15192,9 @@ ParticleSystem:
       type: 0
       properties: 0
   LightsModule:
-    enabled: 0
-    ratio: 0
-    light: {fileID: 0}
+    enabled: 1
+    ratio: 1
+    light: {fileID: 108249560718586358, guid: aed0e2d82a453474f9f6758aa13000c5, type: 2}
     randomDistribution: 1
     color: 1
     range: 1
@@ -15250,7 +15255,7 @@ ParticleSystem:
     intensityCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.3
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -16299,7 +16304,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 0.99215686, g: 0.38817525, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -19720,9 +19725,9 @@ ParticleSystem:
       type: 0
       properties: 0
   LightsModule:
-    enabled: 0
-    ratio: 0
-    light: {fileID: 0}
+    enabled: 1
+    ratio: 1
+    light: {fileID: 108249560718586358, guid: aed0e2d82a453474f9f6758aa13000c5, type: 2}
     randomDistribution: 1
     color: 1
     range: 1
@@ -19783,7 +19788,7 @@ ParticleSystem:
     intensityCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.6
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -20662,7 +20667,7 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 2a24b896dbe48144ab8d4a90468ad00e, type: 2}
+  - {fileID: 2100000, guid: cef16129a0893594cb88aa423881e3e9, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FireBallScript : MonoBehaviour {
 
+    public GameObject explosion;
     public float Speed = 1;
 
 	// Use this for initialization
@@ -11,10 +12,6 @@ public class FireBallScript : MonoBehaviour {
         gameObject.GetComponent<Rigidbody>().velocity = gameObject.transform.forward * Speed;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -23,6 +20,7 @@ public class FireBallScript : MonoBehaviour {
             collision.gameObject.GetComponent<PlayerController>().bossDmg = GameObject.Find("FinalBoss").GetComponent<FinalBossBehaviour>().fireDmg;
             collision.gameObject.GetComponent<PlayerController>().meteorHit = true;
         }
+        Instantiate(explosion, transform.position, transform.rotation);
         Destroy(this.gameObject);
     }
 }

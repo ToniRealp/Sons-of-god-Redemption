@@ -85,9 +85,16 @@ public class FinalBossBehaviour : MonoBehaviour {
             actualGodModeTime -= Time.deltaTime;
             if (actualGodModeTime <= 0)
             {
+                actualAttackInterval = 3;
+                darkBox.SetActive(false);
+                actualDarkTime = darkAnimationTime;
+                actualFireTime = fireAnimationTime;
+                actualDashTime = dashAnimationTime;
                 glow.SetActive(false);
                 godDelayTime = actualGodDelayTime = Random.Range(godModeMinDelay, godModeMaxDelay);
                 godMode = false;
+                animator.SetTrigger("GodMode");
+                state = State.DIZZY;
             }
         }
         else
@@ -399,7 +406,11 @@ public class FinalBossBehaviour : MonoBehaviour {
                 if (actualDashTime <= dashAnimationTime)
                     dashTrigger.SetActive(true);
                 if (actualDashTime <= dashAnimationTime * 0.1)
+                {
                     dashTrigger.SetActive(false);
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().finalDashHit = false;
+                }
+
                 if (actualDashTime <= 0)
                 {
                     actualDashTime = dashAnimationTime;
@@ -411,6 +422,8 @@ public class FinalBossBehaviour : MonoBehaviour {
 
                 actualDarkTime -= Time.deltaTime;
 
+                if (actualDarkTime >= darkAnimationTime * 0.8)
+                    LookPlayer();
                 if (actualDarkTime <= darkAnimationTime * 0.6)
                     darkBox.SetActive(true);
                 if (actualDarkTime <= 0)
@@ -426,6 +439,8 @@ public class FinalBossBehaviour : MonoBehaviour {
 
             case State.FIRE:
                 actualFireTime -= Time.deltaTime;
+                if (actualFireTime >= fireAnimationTime * 0.8)
+                    LookPlayer();
                 if (actualFireTime <= fireAnimationTime * 0.8)
                 {
                     if (Time.time - initMeteorTime >= meteorInterval && meteorCounter < meteorNum)

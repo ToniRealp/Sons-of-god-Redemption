@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour {
     Animator animator;
     AudioSource audioSource;
     public AudioClip swingSound, hitSound;
-    public GameObject flameCone, lightHit;
+    public GameObject flameCone, lightHit, healParticles;
     [SerializeField] GameObject weapon;
     [SerializeField] GameObject[] elements = new GameObject[(int)Elements.MAX];
     public float bossDmg;
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour {
     public int walkVelocity, runVelocity, dashDistance;    
     public float dashCooldownTime, dashDuration, deadDuration, onHitAnimDelay, damage, lightCooldown, darkCooldown, healCooldown, actualHealCooldown;
     private float dashCooldownCounter, actualDashTime, actualDeadTime, animLength, animDuration, onHitDelay, actualLightCooldown, actualDarkCooldown;
-    public bool interact, fireHit, explosionHit, meteorHit, spawnMe, healOnCD;
+    public bool interact, fireHit, explosionHit, meteorHit, spawnMe, healOnCD, finalDashHit;
     private bool dashed, attacked, transition, hit, isLightHit, lightOnCD, darkOnCD,  dead, darkHit;
     const float velChange = 0.5f;
 
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
         states = States.Idle;
         attacks = Attacks.NotAtt;
-        spawnMe = dead = lightOnCD = darkOnCD = healOnCD = darkHit = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
+        finalDashHit = spawnMe = dead = lightOnCD = darkOnCD = healOnCD = darkHit = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
         dashCooldownCounter = dashCooldownTime;
         actualDashTime = dashDuration;
         actualDeadTime = deadDuration = AnimationLength("Dying",animator);
@@ -118,12 +118,13 @@ public class PlayerController : MonoBehaviour {
         {
             if (!healOnCD && health <= stats.health - 40)
             {
+                Instantiate(healParticles, transform);
                 healOnCD = true;
                 health += 40;
                 healthBar.value = health;
             }
         }
-        if (inputs[(int)ButtonInputs.Dash] && !dashed)
+        if (inputs[(int)ButtonInputs.Dash] && !dashed && !dead)
         {
             states = States.Dashing;
             animator.SetTrigger("isDashing");
@@ -233,8 +234,7 @@ public class PlayerController : MonoBehaviour {
                     Dash();
                 else
                 {
-                    //dashed = false;
-                    ResetAll();
+                    ResetDash();
                 }
                  
                 break;
@@ -526,10 +526,16 @@ public class PlayerController : MonoBehaviour {
         weapon.tag = "Untagged";
         states = States.Idle;
         attacks = Attacks.NotAtt;
-        dead = lightOnCD= darkOnCD = darkHit = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
+        lightOnCD = darkOnCD = darkHit = isLightHit = attacked = transition = hit = fireHit = damaged = false;
         actualLightCooldown = lightCooldown;
         actualDarkCooldown = darkCooldown;
+        actualDashTime = dashDuration;
         onHitDelay = onHitAnimDelay;
+        animator.ResetTrigger("lightAttack1");
+        animator.ResetTrigger("lightAttack2");
+        animator.ResetTrigger("lightAttack3");
+        animator.ResetTrigger("strongAttack1");
+        animator.ResetTrigger("strongAttack2");
     }
 
     void GetInput()
@@ -719,8 +725,9 @@ public class PlayerController : MonoBehaviour {
             healthBar.value = health;
             damaged = true;
         }
-        if (other.tag == "FinalBossWeapon")
+        if (other.tag == "FinalBossWeapon" && !finalDashHit)
         {
+            finalDashHit = true;
             health -= (int)other.GetComponentInParent<FinalBossBehaviour>().damage;
             healthBar.value = health;
             damaged = true;
