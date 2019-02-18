@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour {
     Animator animator;
     AudioSource audioSource;
     public AudioClip swingSound, hitSound;
-    public GameObject flameCone, lightHit;
+    public GameObject flameCone, lightHit, healParticles;
     [SerializeField] GameObject weapon;
     [SerializeField] GameObject[] elements = new GameObject[(int)Elements.MAX];
     public float bossDmg;
@@ -118,6 +118,7 @@ public class PlayerController : MonoBehaviour {
         {
             if (!healOnCD && health <= stats.health - 40)
             {
+                Instantiate(healParticles, transform);
                 healOnCD = true;
                 health += 40;
                 healthBar.value = health;
