@@ -182,11 +182,6 @@ public class PlayerController : MonoBehaviour {
                     states = States.Attacking;
                     attacks = Attacks.StrongAttack1;
                 }
-                else if (inputs[(int)ButtonInputs.Dash] && !dashed)
-                {
-                    states = States.Dashing;
-                    animator.SetTrigger("isDashing");
-                }
                 else if (Mathf.Abs(xAxis) > velChange || Mathf.Abs(yAxis) > velChange)
                 {
                     states = States.Running;
@@ -221,11 +216,6 @@ public class PlayerController : MonoBehaviour {
                     states = States.Attacking;
                     attacks = Attacks.StrongAttack1;
                 }
-                else if(inputs[(int)ButtonInputs.Dash] && !dashed)
-                {
-                    states = States.Dashing;
-                    animator.SetTrigger("isDashing");
-                }
                 else if (Mathf.Abs(yAxis) < velChange && Mathf.Abs(xAxis) < velChange)
                 {
                     states = States.Walking;
@@ -243,7 +233,7 @@ public class PlayerController : MonoBehaviour {
                     Dash();
                 else
                 {
-                    dashed = true;
+                    //dashed = false;
                     ResetAll();
                 }
                  
