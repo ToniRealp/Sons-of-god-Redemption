@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour {
     public int walkVelocity, runVelocity, dashDistance;    
     public float dashCooldownTime, dashDuration, deadDuration, onHitAnimDelay, damage, lightCooldown, darkCooldown, healCooldown, actualHealCooldown;
     private float dashCooldownCounter, actualDashTime, actualDeadTime, animLength, animDuration, onHitDelay, actualLightCooldown, actualDarkCooldown;
-    public bool interact, fireHit, explosionHit, meteorHit, spawnMe, healOnCD;
+    public bool interact, fireHit, explosionHit, meteorHit, spawnMe, healOnCD, finalDashHit;
     private bool dashed, attacked, transition, hit, isLightHit, lightOnCD, darkOnCD,  dead, darkHit;
     const float velChange = 0.5f;
 
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
         states = States.Idle;
         attacks = Attacks.NotAtt;
-        spawnMe = dead = lightOnCD = darkOnCD = healOnCD = darkHit = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
+        finalDashHit = spawnMe = dead = lightOnCD = darkOnCD = healOnCD = darkHit = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
         dashCooldownCounter = dashCooldownTime;
         actualDashTime = dashDuration;
         actualDeadTime = deadDuration = AnimationLength("Dying",animator);
@@ -734,8 +734,9 @@ public class PlayerController : MonoBehaviour {
             healthBar.value = health;
             damaged = true;
         }
-        if (other.tag == "FinalBossWeapon")
+        if (other.tag == "FinalBossWeapon" && !finalDashHit)
         {
+            finalDashHit = true;
             health -= (int)other.GetComponentInParent<FinalBossBehaviour>().damage;
             healthBar.value = health;
             damaged = true;

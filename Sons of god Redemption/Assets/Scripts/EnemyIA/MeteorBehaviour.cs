@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class MeteorBehaviour : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public GameObject explosion;
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -20,6 +14,7 @@ public class MeteorBehaviour : MonoBehaviour {
             collision.gameObject.GetComponent<PlayerController>().bossDmg = GameObject.Find("FirstBoss").GetComponent<FirstBossBehaviour>().rainDmg;
             collision.gameObject.GetComponent<PlayerController>().meteorHit = true;
         }
+        Instantiate(explosion, transform.position, transform.rotation);
         Destroy(this.gameObject);
     }
 

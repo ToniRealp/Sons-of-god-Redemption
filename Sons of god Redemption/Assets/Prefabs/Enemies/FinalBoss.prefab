@@ -1907,7 +1907,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1420340346919874}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 22.13}
+  m_LocalPosition: {x: -1.0579023, y: -9.0379855e-18, z: 4.070347}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4789169081459302}
@@ -2290,7 +2290,7 @@ MonoBehaviour:
   maxHealth: 1800
   health: 0
   damage: 0
-  dashDmg: 15
+  dashDmg: 20
   fireDmg: 55
   darkDmg: 25
   healthText: {fileID: 0}
