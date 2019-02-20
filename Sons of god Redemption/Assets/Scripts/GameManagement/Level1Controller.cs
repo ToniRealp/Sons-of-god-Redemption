@@ -11,6 +11,7 @@ public class Level1Controller : MonoBehaviour {
     public AudioClip audioClip;
     public bool[] trigger;
     [SerializeField] Transform[] spawns = new Transform[1];
+    public RoomController[] roomControllers;
 
     public Transform actualSpawn;
     public int roomsExplored;
@@ -28,6 +29,12 @@ public class Level1Controller : MonoBehaviour {
         roomsExplored = 0;
         actualSpawn = spawns[0];
         volumeSet = bossSpawn = false;
+
+        foreach(RoomController room in roomControllers)
+        {
+            room.InstantiateEnemies();
+        }
+
 	}
 	
 	// Update is called once per frame

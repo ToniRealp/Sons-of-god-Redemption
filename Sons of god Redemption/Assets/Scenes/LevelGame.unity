@@ -3515,7 +3515,7 @@ GameObject:
   m_Component:
   - component: {fileID: 146100660}
   m_Layer: 0
-  m_Name: Room1 (8)
+  m_Name: Room8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3862,7 +3862,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_RootOrder
-      value: 40
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_LocalScale.x
@@ -6269,7 +6269,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_RootOrder
-      value: 41
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_LocalScale.x
@@ -6742,7 +6742,7 @@ GameObject:
   m_Component:
   - component: {fileID: 374833363}
   m_Layer: 0
-  m_Name: Room1 (2)
+  m_Name: Room2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9521,7 +9521,7 @@ GameObject:
   m_Component:
   - component: {fileID: 499493582}
   m_Layer: 0
-  m_Name: Room1 (4)
+  m_Name: Room4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9865,8 +9865,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 523606613}
+  - component: {fileID: 523606614}
   m_Layer: 0
-  m_Name: Room1 (1)
+  m_Name: Room1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9901,9 +9902,29 @@ Transform:
   - {fileID: 559231504}
   - {fileID: 1787857330}
   - {fileID: 1929377902}
+  - {fileID: 910857480}
   m_Father: {fileID: 728885443}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &523606614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 523606612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df5c8fab13c664e4d9f9e75b920ec642, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies:
+  - {fileID: 1386956449640616, guid: 5382e3fbd00a8e64a81c42b76276af2a, type: 2}
+  - {fileID: 1386956449640616, guid: 5382e3fbd00a8e64a81c42b76276af2a, type: 2}
+  - {fileID: 1386956449640616, guid: 5382e3fbd00a8e64a81c42b76276af2a, type: 2}
+  - {fileID: 1193037644560804, guid: 29ed807f3bbc8d34e8c966b9a9b60890, type: 2}
+  instEnemies: []
+  roomDoors: []
+  spawnPosition: {fileID: 910857480}
 --- !u!1001 &524059588
 Prefab:
   m_ObjectHideFlags: 0
@@ -10852,7 +10873,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_RootOrder
-      value: 47
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_LocalScale.x
@@ -13747,7 +13768,7 @@ GameObject:
   - component: {fileID: 714903136}
   - component: {fileID: 714903137}
   m_Layer: 10
-  m_Name: Trigger 3
+  m_Name: Trigger 2-3
   m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14021,7 +14042,7 @@ GameObject:
   m_Component:
   - component: {fileID: 720949132}
   m_Layer: 0
-  m_Name: Room1 (13)
+  m_Name: Room13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15317,7 +15338,7 @@ GameObject:
   - component: {fileID: 800695780}
   - component: {fileID: 800695781}
   m_Layer: 10
-  m_Name: Trigger 1
+  m_Name: Trigger 0-1
   m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15503,7 +15524,7 @@ GameObject:
   m_Component:
   - component: {fileID: 812455764}
   m_Layer: 0
-  m_Name: Room1 (7)
+  m_Name: Room7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15757,7 +15778,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_RootOrder
-      value: 42
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_LocalScale.x
@@ -17005,6 +17026,34 @@ RectTransform:
   m_AnchoredPosition: {x: -7.5, y: 0}
   m_SizeDelta: {x: -15, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &910857479
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 910857480}
+  m_Layer: 0
+  m_Name: EnemiesSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &910857480
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 910857479}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 523606613}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &915977255
 GameObject:
   m_ObjectHideFlags: 0
@@ -17964,7 +18013,7 @@ GameObject:
   - component: {fileID: 962383574}
   - component: {fileID: 962383575}
   m_Layer: 10
-  m_Name: Trigger 3 (1)
+  m_Name: Trigger 2-5
   m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18114,7 +18163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 972990316}
   m_Layer: 0
-  m_Name: Room1
+  m_Name: Room0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18565,7 +18614,7 @@ GameObject:
   m_Component:
   - component: {fileID: 998131282}
   m_Layer: 0
-  m_Name: Room1 (16)
+  m_Name: Room16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21047,7 +21096,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1122125049}
   m_Layer: 0
-  m_Name: Room1 (10)
+  m_Name: Room10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21356,7 +21405,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh16610
+  m_Name: pb_Mesh20688
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -22062,7 +22111,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_RootOrder
-      value: 37
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_LocalScale.x
@@ -24707,7 +24756,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1298859003}
   m_Layer: 0
-  m_Name: Room1 (15)
+  m_Name: Room15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25051,7 +25100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1323094331}
   m_Layer: 0
-  m_Name: Room1 (12)
+  m_Name: Room12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25776,7 +25825,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_RootOrder
-      value: 43
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_LocalScale.x
@@ -27263,7 +27312,7 @@ GameObject:
   - component: {fileID: 1450641784}
   - component: {fileID: 1450641785}
   m_Layer: 10
-  m_Name: Trigger 2 (2)
+  m_Name: 'Trigger 1-2 '
   m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28053,7 +28102,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_RootOrder
-      value: 44
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_LocalScale.x
@@ -29442,7 +29491,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1562402156}
   m_Layer: 0
-  m_Name: Room1 (11)
+  m_Name: Room11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29728,7 +29777,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_RootOrder
-      value: 36
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_LocalScale.x
@@ -30355,7 +30404,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1608022229}
   m_Layer: 0
-  m_Name: Room1 (9)
+  m_Name: Room9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30750,7 +30799,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1625596225}
   m_Layer: 0
-  m_Name: Room1 (14)
+  m_Name: Room14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32750,7 +32799,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_RootOrder
-      value: 46
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_LocalScale.x
@@ -33195,7 +33244,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1772145153}
   m_Layer: 0
-  m_Name: Room1 (5)
+  m_Name: Room5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33494,7 +33543,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4527783255986040, guid: 4b4adffd8fbd34d43b63c9e097aa43e3, type: 2}
       propertyPath: m_RootOrder
-      value: 48
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 4527783255986040, guid: 4b4adffd8fbd34d43b63c9e097aa43e3, type: 2}
       propertyPath: m_LocalScale.z
@@ -33840,7 +33889,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1807060302}
   m_Layer: 0
-  m_Name: Room1 (3)
+  m_Name: Room3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34887,6 +34936,8 @@ MonoBehaviour:
   - {fileID: 2133058606}
   - {fileID: 841602525}
   - {fileID: 456815537}
+  roomControllers:
+  - {fileID: 523606614}
   actualSpawn: {fileID: 0}
   roomsExplored: 0
 --- !u!4 &1867115081
@@ -35544,7 +35595,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_RootOrder
-      value: 39
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_LocalScale.x
@@ -36071,7 +36122,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4527783255986040, guid: 4b4adffd8fbd34d43b63c9e097aa43e3, type: 2}
       propertyPath: m_RootOrder
-      value: 49
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4527783255986040, guid: 4b4adffd8fbd34d43b63c9e097aa43e3, type: 2}
       propertyPath: m_LocalScale.z
@@ -36612,7 +36663,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1970852919}
   m_Layer: 0
-  m_Name: Room1 (6)
+  m_Name: Room6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40071,7 +40122,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_RootOrder
-      value: 45
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_LocalScale.x
@@ -40189,7 +40240,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_RootOrder
-      value: 38
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4694743102354046, guid: 51cb15c377e33ef4a89c3b61ed93a571, type: 2}
       propertyPath: m_LocalScale.x
