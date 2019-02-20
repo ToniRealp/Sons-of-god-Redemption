@@ -110,13 +110,14 @@ public class DevilEnemy : Enemy
                 break;
 
             case State.ATTAKING:
+               
+                // No movement or rotation
+                ChangeSpeed(0);
 
                 switch (attacks)
                 {
                     case Attacks.BASIC:
-                        // No movement or rotation
-                        ChangeSpeed(0);
-
+                        
                         // Save player last known position
                         destination = playerPosition;
 

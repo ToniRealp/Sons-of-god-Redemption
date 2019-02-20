@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Name: DevilStats
   m_EditorClassIdentifier: 
   health: 250
-  movementSpeed: 4
+  movementSpeed: 5
   baseAttack: 20
   movingRange: 15
   rotationSpeed: 0.15
   ViewDistance: 20
   hearDistance: 15
   attackDistance: 3
-  attackSpeed: 3
+  attackSpeed: 0
