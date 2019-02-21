@@ -14,6 +14,8 @@ public class RoomController : MonoBehaviour {
 
         isEmpty = false;
         instEnemies = new List<GameObject>();
+        foreach (GameObject door in roomDoors)
+            door.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -29,7 +31,11 @@ public class RoomController : MonoBehaviour {
         }
         Debug.Log(instEnemies.Count);
         if (instEnemies.Count == 0)
-            Debug.Log("All enemies have been destroyed");
+        {
+            foreach (GameObject door in roomDoors)
+                door.SetActive(false);
+        }
+            
             
 	}
 
@@ -38,6 +44,15 @@ public class RoomController : MonoBehaviour {
         foreach(GameObject gameObject in enemies)
         {
             instEnemies.Add(Instantiate(gameObject, spawnPosition.position, spawnPosition.rotation));
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            foreach (GameObject door in roomDoors)
+                door.SetActive(true);
         }
     }
 }
