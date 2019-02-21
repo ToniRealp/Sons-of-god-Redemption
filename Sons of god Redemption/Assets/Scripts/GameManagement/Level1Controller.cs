@@ -141,5 +141,13 @@ public class Level1Controller : MonoBehaviour {
         sceneController.changeScene("Win");
     }
 
+    public void OpenAllDoors()
+    {
+        foreach (RoomController room in roomControllers)
+        {
+            room.OpenDoors();
+        }
+    }
+
 
 }

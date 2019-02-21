@@ -6,7 +6,7 @@ public class RoomController : MonoBehaviour {
 
     bool isEmpty;
     public List<GameObject> enemies;
-    public List<GameObject> instEnemies;
+    private List<GameObject> instEnemies;
     public List<GameObject> roomDoors;
     public Transform spawnPosition;
 	// Use this for initialization
@@ -32,8 +32,8 @@ public class RoomController : MonoBehaviour {
         Debug.Log(instEnemies.Count);
         if (instEnemies.Count == 0)
         {
-            foreach (GameObject door in roomDoors)
-                door.SetActive(false);
+            OpenDoors();
+            isEmpty = true;
         }
             
             
@@ -47,12 +47,21 @@ public class RoomController : MonoBehaviour {
         }
     }
 
+    public void OpenDoors()
+    {
+        foreach (GameObject door in roomDoors)
+            door.SetActive(false);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            foreach (GameObject door in roomDoors)
-                door.SetActive(true);
+            if (!isEmpty)
+            {
+                foreach (GameObject door in roomDoors)
+                    door.SetActive(true);
+            } 
         }
     }
 }
