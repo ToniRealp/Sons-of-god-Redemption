@@ -170,7 +170,7 @@ public class TankEnemy : Enemy {
                         if (!roar)
                         {
                             ChangeSpeed(0);
-                            //destination = playerPosition;
+                            destination = playerPosition;
                             LookToDestination();
                             animTimes["Roar"].cooldown -= Time.deltaTime;
                             if (animTimes["Roar"].cooldown < 0)
@@ -186,7 +186,7 @@ public class TankEnemy : Enemy {
                             NavAgent.acceleration = 1000;
                             MoveToDestination();
                             accelerationTime += Time.deltaTime;
-                            if (collided || NavAgent.velocity.magnitude < 0.5 && accelerationTime > 0.2)
+                            if (collided || NavAgent.velocity.magnitude < 0.5 && accelerationTime > 0.4)
                             {
                                 ChangeSpeed(0);
                                 animTimes["Swipe"].duration -= Time.deltaTime;
@@ -224,6 +224,7 @@ public class TankEnemy : Enemy {
             case State.DAMAGED:
                 weapon.tag = weapon2.tag = "Untagged";
                 animTimes["Reaction Hit"].cooldown -= Time.deltaTime;
+                collided = false;
                 if (animTimes["Reaction Hit"].cooldown <= 0)
                 {
                     animTimes["Reaction Hit"].cooldown = animTimes["Reaction Hit"].duration;

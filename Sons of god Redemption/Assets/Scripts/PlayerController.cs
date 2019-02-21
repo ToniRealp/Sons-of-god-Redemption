@@ -67,7 +67,8 @@ public class PlayerController : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
         states = States.Idle;
         attacks = Attacks.NotAtt;
-        finalDashHit = spawnMe = dead = lightOnCD = darkOnCD = healOnCD = darkHit = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
+        finalDashHit = dead = lightOnCD = darkOnCD = healOnCD = darkHit = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
+        spawnMe = true;
         dashCooldownCounter = dashCooldownTime;
         actualDashTime = dashDuration;
         actualDeadTime = deadDuration = AnimationLength("Dying",animator);
