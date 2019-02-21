@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RoomController : MonoBehaviour {
 
-    bool isEmpty;
+    public bool isEmpty;
     public List<GameObject> enemies;
     private List<GameObject> instEnemies;
     public List<GameObject> roomDoors;
@@ -29,7 +29,6 @@ public class RoomController : MonoBehaviour {
             }
                 
         }
-        Debug.Log(instEnemies.Count);
         if (instEnemies.Count == 0)
         {
             OpenDoors();

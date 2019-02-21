@@ -3515,6 +3515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5c8fab13c664e4d9f9e75b920ec642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEmpty: 0
   enemies:
   - {fileID: 1193037644560804, guid: 29ed807f3bbc8d34e8c966b9a9b60890, type: 2}
   - {fileID: 1525900080903410, guid: acace2ddb07164343898a950994e701a, type: 2}
@@ -6748,6 +6749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5c8fab13c664e4d9f9e75b920ec642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEmpty: 0
   enemies:
   - {fileID: 1525900080903410, guid: acace2ddb07164343898a950994e701a, type: 2}
   - {fileID: 1193037644560804, guid: 29ed807f3bbc8d34e8c966b9a9b60890, type: 2}
@@ -8415,6 +8417,17 @@ MonoBehaviour:
           m_StringArgument: MainMenu
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1867115080}
+        m_MethodName: SaveGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &460140119
@@ -9862,6 +9875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5c8fab13c664e4d9f9e75b920ec642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEmpty: 0
   enemies:
   - {fileID: 1386956449640616, guid: 5382e3fbd00a8e64a81c42b76276af2a, type: 2}
   - {fileID: 1386956449640616, guid: 5382e3fbd00a8e64a81c42b76276af2a, type: 2}
@@ -21640,6 +21654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5c8fab13c664e4d9f9e75b920ec642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEmpty: 0
   enemies:
   - {fileID: 1386956449640616, guid: 5382e3fbd00a8e64a81c42b76276af2a, type: 2}
   - {fileID: 1386956449640616, guid: 5382e3fbd00a8e64a81c42b76276af2a, type: 2}
@@ -25398,6 +25413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5c8fab13c664e4d9f9e75b920ec642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEmpty: 0
   enemies:
   - {fileID: 1525900080903410, guid: acace2ddb07164343898a950994e701a, type: 2}
   - {fileID: 1345666069583242, guid: adc5e42097a898249aebf88ea4a8432d, type: 2}
@@ -25767,6 +25783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5c8fab13c664e4d9f9e75b920ec642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEmpty: 0
   enemies:
   - {fileID: 1386956449640616, guid: 5382e3fbd00a8e64a81c42b76276af2a, type: 2}
   - {fileID: 1386956449640616, guid: 5382e3fbd00a8e64a81c42b76276af2a, type: 2}
@@ -31238,6 +31255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5c8fab13c664e4d9f9e75b920ec642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEmpty: 0
   enemies:
   - {fileID: 1345666069583242, guid: adc5e42097a898249aebf88ea4a8432d, type: 2}
   - {fileID: 1345666069583242, guid: adc5e42097a898249aebf88ea4a8432d, type: 2}
@@ -31656,6 +31674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5c8fab13c664e4d9f9e75b920ec642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEmpty: 0
   enemies:
   - {fileID: 1386956449640616, guid: 5382e3fbd00a8e64a81c42b76276af2a, type: 2}
   - {fileID: 1386956449640616, guid: 5382e3fbd00a8e64a81c42b76276af2a, type: 2}
@@ -34360,6 +34379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5c8fab13c664e4d9f9e75b920ec642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEmpty: 0
   enemies:
   - {fileID: 1386956449640616, guid: 5382e3fbd00a8e64a81c42b76276af2a, type: 2}
   - {fileID: 1193037644560804, guid: 29ed807f3bbc8d34e8c966b9a9b60890, type: 2}
@@ -35049,6 +35069,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5c8fab13c664e4d9f9e75b920ec642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEmpty: 0
   enemies:
   - {fileID: 1525900080903410, guid: acace2ddb07164343898a950994e701a, type: 2}
   - {fileID: 1525900080903410, guid: acace2ddb07164343898a950994e701a, type: 2}

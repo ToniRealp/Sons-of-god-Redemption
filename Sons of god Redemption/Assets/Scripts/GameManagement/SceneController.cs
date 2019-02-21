@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 
 public class SceneController : MonoBehaviour {
@@ -32,5 +33,10 @@ public class SceneController : MonoBehaviour {
 #else
         Application.Quit();
 #endif
+    }
+
+    public void NewGame()
+    {
+        File.Delete(Application.persistentDataPath + "/save.data");
     }
 }

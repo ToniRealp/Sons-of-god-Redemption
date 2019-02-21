@@ -20,22 +20,46 @@ public class Level1Controller : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        bossHandler.GetComponent<FirstBossBehaviour>().movingSpeed = 0f;
-        trigger = new bool[19];
-        for (int i = 0; i < 19; i++)
-        {
-            trigger[i] = false;
-        }
-        roomsExplored = 0;
-        actualSpawn = spawns[0];
-        volumeSet = bossSpawn = false;
 
-        foreach(RoomController room in roomControllers)
+        if (SaveSystem.LoadData() != null)
         {
-            room.InstantiateEnemies();
+            SaveData saveData = SaveSystem.LoadData();
+            bossHandler.GetComponent<FirstBossBehaviour>().movingSpeed = 0f;
+            trigger = new bool[19];
+            for (int i = 0; i < 19; i++)
+            {
+                trigger[i] = false;
+            }
+            roomsExplored = saveData.roomsExplored;
+            actualSpawn = spawns[roomsExplored];
+            volumeSet = bossSpawn = false;
+
+            for (int i = 0; i < roomControllers.Length; i++)
+            {
+                if (!saveData.rooms[i])
+                    roomControllers[i].InstantiateEnemies();
+            }
+        }
+        else
+        {
+            bossHandler.GetComponent<FirstBossBehaviour>().movingSpeed = 0f;
+            trigger = new bool[19];
+            for (int i = 0; i < 19; i++)
+            {
+                trigger[i] = false;
+            }
+            roomsExplored = 0;
+            actualSpawn = spawns[0];
+            volumeSet = bossSpawn = false;
+
+            foreach (RoomController room in roomControllers)
+            {
+                room.InstantiateEnemies();
+            }
+
         }
 
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -149,5 +173,9 @@ public class Level1Controller : MonoBehaviour {
         }
     }
 
+    public void SaveGame()
+    {
+        SaveSystem.SaveData(this, player.GetComponent<PlayerController>());
+    }
 
 }
