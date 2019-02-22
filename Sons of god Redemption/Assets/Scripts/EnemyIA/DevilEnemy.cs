@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class DevilEnemy : Enemy
 {
-    public GameObject baby;
+    public GameObject baby, weapon2;
     float babySpawnCdr, actualBabySpawn;
     public Transform spawnPos;
     enum Attacks { BASIC, SPAWNING };
     Attacks attacks;
-    bool spawned;
+    bool spawned, attackSide;
 
     new void Start()
     {
         base.Start();
         babySpawnCdr = actualBabySpawn = 5;
-        spawned = false;
+        spawned = attackSide = false;
     }
 
     private void Update()
@@ -94,7 +94,11 @@ public class DevilEnemy : Enemy
                     {
                         state = State.ATTAKING;
                         attacks = Attacks.BASIC;
-                        animator.SetTrigger("Attack");
+                        if (attackSide)
+                            animator.SetTrigger("Attack");
+                        else
+                            animator.SetTrigger("Attack2");
+                        attackSide = !attackSide;
                     }
                     else if (actualBabySpawn <= 0)
                     {
@@ -125,10 +129,20 @@ public class DevilEnemy : Enemy
                         animTimes["Attack"].cooldown -= Time.deltaTime;
 
                         if (animTimes["Attack"].cooldown <= animTimes["Attack"].start)
-                            weapon.tag = "EnemyWeapon";
+                        {
+                            if(attackSide)
+                                weapon.tag = "EnemyWeapon";
+                            else
+                                weapon2.tag = "EnemyWeapon";
+                        }
 
                         if (animTimes["Attack"].cooldown <= animTimes["Attack"].duration * 0.6f)
-                            weapon.tag = "Untagged";
+                        {
+                            if (attackSide)
+                                weapon.tag = "Untagged";
+                            else
+                                weapon2.tag = "Untagged";
+                        }
 
                         if (animTimes["Attack"].cooldown >= animTimes["Attack"].duration * 0.75f)
                             LookToDestination();
