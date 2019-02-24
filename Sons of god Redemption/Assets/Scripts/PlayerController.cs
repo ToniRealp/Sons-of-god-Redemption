@@ -100,8 +100,8 @@ public class PlayerController : MonoBehaviour {
             elements[(int)Elements.Dark].SetActive(false);
             fireUI.SetActive(true);
             lightUI.SetActive(false);
-            health = stats.health;
-            healthBar.value = health;
+            //health = stats.health;
+            //healthBar.value = health;
         }
         if (inputs[(int)ButtonInputs.padLeft])
         {

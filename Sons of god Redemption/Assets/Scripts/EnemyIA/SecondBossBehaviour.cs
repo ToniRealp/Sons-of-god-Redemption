@@ -445,7 +445,7 @@ public class SecondBossBehaviour : MonoBehaviour
         circlesCounter = 0;
         for (int i = 0; i < circlesNum; i++)
         {
-            circlePosition[i] = new Vector3(Random.Range(transform.position.x-circlesRange, transform.position.x + circlesRange),0, Random.Range(transform.position.z - circlesRange, transform.position.z + circlesRange));
+            circlePosition[i] = new Vector3(Random.Range(transform.position.x-circlesRange, transform.position.x + circlesRange),this.gameObject.transform.position.y, Random.Range(transform.position.z - circlesRange, transform.position.z + circlesRange));
         }
         state = State.CIRCLES;
     }

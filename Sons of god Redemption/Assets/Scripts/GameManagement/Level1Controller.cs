@@ -5,7 +5,7 @@ using UnityEngine;
 public class Level1Controller : MonoBehaviour {
 
     public GameObject player;
-    public GameObject bossHandler;
+    public GameObject bossHandler, secondBossHandler;
     public SceneController sceneController;
     public GameObject camera;
     public AudioClip audioClip;
@@ -16,7 +16,7 @@ public class Level1Controller : MonoBehaviour {
     public Transform actualSpawn;
     public int roomsExplored;
 
-    private bool bossSpawn, volumeSet;
+    private bool bossSpawn, secondBossSpawn, volumeSet;
 
 	// Use this for initialization
 	void Start () {
@@ -145,6 +145,14 @@ public class Level1Controller : MonoBehaviour {
                 camera.GetComponent<AudioSource>().volume = 0;
                 camera.GetComponent<AudioSource>().Play();
                 bossSpawn = true;
+            }
+        }
+        if (trigger[18])
+        {
+            if (!secondBossSpawn)
+            {
+                secondBossHandler.GetComponent<SecondBossBehaviour>().movingSpeed = 0.02f;
+                secondBossSpawn = true;
             }
         }
 

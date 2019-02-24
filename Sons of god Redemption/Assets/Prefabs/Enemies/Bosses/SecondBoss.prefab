@@ -1004,7 +1004,7 @@ GameObject:
   - component: {fileID: 4171291689681288}
   - component: {fileID: 95786306338856006}
   - component: {fileID: 114213993182040452}
-  - component: {fileID: 136045707385634178}
+  - component: {fileID: 65808792890168596}
   m_Layer: 0
   m_Name: SecondBoss
   m_TagString: Enemy
@@ -1309,7 +1309,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1889288100730766}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -6.85}
+  m_LocalPosition: {x: 35.36, y: 1.772, z: 23.52122}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4377178866339450}
@@ -2155,6 +2155,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 3, z: 10}
   m_Center: {x: 0, y: 0, z: 6}
+--- !u!65 &65808792890168596
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1889288100730766}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2.3609116, z: 1}
+  m_Center: {x: 0, y: 1.1812555, z: 0}
 --- !u!95 &95786306338856006
 Animator:
   serializedVersion: 3
@@ -2198,7 +2210,7 @@ MonoBehaviour:
   animator: {fileID: 95786306338856006}
   attackDistance: 4
   explosionRange: 10
-  movingSpeed: 0.02
+  movingSpeed: 0
   rotationSpeed: 0.05
   circlesRange: 5
   circlesNum: 5
@@ -2249,19 +2261,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 4
   m_Center: {x: 0, y: 1, z: 0}
---- !u!136 &136045707385634178
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1889288100730766}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.6
-  m_Height: 2.05
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!137 &137178217381943976
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2277,7 +2276,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 8916838f410bc2341aae83bf8edb29a4, type: 3}
+  - {fileID: 2100000, guid: 9212f8dcf1a1d534f9fe997b514b3420, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2376,7 +2375,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100002, guid: 8916838f410bc2341aae83bf8edb29a4, type: 3}
+  - {fileID: 2100000, guid: 3607190ce2a52b1418615c54c6d2ae2b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
