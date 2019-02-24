@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject lightUI;
 
     //Enums
-    enum States { Idle, Walking, Running, Dashing, Attacking, Dead, MAX };
+    enum States { Idle, Walking, Running, Dashing, Attacking, Damaged, Dead, MAX };
     enum Attacks { LightAttack1, LightAttack2, LightAttack3, StrongAttack1, StrongAttack2, StrongAttack3, NotAtt };
     enum ButtonInputs { Dash, LightAttack, StrongAttack, padLeft, padRight, padUp, padDown, Interact, MAX };
     enum Elements {Holy, Fire, Dark, MAX };
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour {
     public Vector3 direction;
     public int walkVelocity, runVelocity, dashDistance;    
     public float dashCooldownTime, dashDuration, deadDuration, onHitAnimDelay, damage, lightCooldown, darkCooldown, healCooldown, actualHealCooldown;
-    private float dashCooldownCounter, actualDashTime, actualDeadTime, animLength, animDuration, onHitDelay, actualLightCooldown, actualDarkCooldown;
+    private float dashCooldownCounter, actualDashTime, actualDeadTime, animLength, animDuration, onHitDelay, actualLightCooldown, actualDarkCooldown, damagedCooldown, actualDamagedCooldown;
     public bool interact, fireHit, explosionHit, meteorHit, spawnMe, healOnCD, finalDashHit;
     private bool dashed, attacked, transition, hit, isLightHit, lightOnCD, darkOnCD,  dead, darkHit;
     const float velChange = 0.5f;
@@ -85,6 +85,7 @@ public class PlayerController : MonoBehaviour {
         elements[(int)Elements.Holy].SetActive(false);
         elements[(int)Elements.Dark].SetActive(false);
         flameCone.SetActive(false);
+        actualDamagedCooldown = damagedCooldown = AnimationLength("Reaction Hit", animator);
     }
 	
 	void Update () {
@@ -131,6 +132,7 @@ public class PlayerController : MonoBehaviour {
             states = States.Dashing;
             animator.SetTrigger("isDashing");
             dashed = true;
+            this.gameObject.layer = 11;
         }
         if (health<=0)
         {
@@ -237,6 +239,7 @@ public class PlayerController : MonoBehaviour {
                 else
                 {
                     ResetDash();
+                    this.gameObject.layer = 0;
                 }
                  
                 break;
@@ -459,6 +462,15 @@ public class PlayerController : MonoBehaviour {
                 }
                     break;
 
+            case (States.Damaged):
+                actualDamagedCooldown -= Time.deltaTime;
+                if (actualDamagedCooldown <= 0)
+                {
+                    states = States.Idle;
+                    actualDamagedCooldown = damagedCooldown;
+                }
+
+                break;
             default:
                 break;
             
@@ -715,6 +727,9 @@ public class PlayerController : MonoBehaviour {
             health -= (int)other.GetComponentInParent<Enemy>().baseAttack;
             healthBar.value = health;
             damaged = true;
+            states = States.Damaged;
+            animator.SetTrigger("Hit");
+            ResetDash();
         }
         if (other.tag == "Arrow")
         {
