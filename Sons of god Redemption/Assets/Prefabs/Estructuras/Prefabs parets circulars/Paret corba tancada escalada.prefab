@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4025355714830104}
   - component: {fileID: 33648316271344466}
   - component: {fileID: 23319662356217340}
+  - component: {fileID: 64218182619027096}
   m_Layer: 0
   m_Name: Paret corba tancada escalada
   m_TagString: Untagged
@@ -34,9 +35,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000287019736520}
-  m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 76.07, y: -1.01, z: 55.7}
-  m_LocalScale: {x: 5.5, y: 5.8, z: 5.8}
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: -17.895002, y: 0.33, z: 1.5000019}
+  m_LocalScale: {x: 2.7500007, y: 2.9000008, z: 4.925}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -82,4 +83,18 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000287019736520}
+  m_Mesh: {fileID: 4300000, guid: 3d0d9a4dd57c24542bac99e32f10f01a, type: 3}
+--- !u!64 &64218182619027096
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000287019736520}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 3d0d9a4dd57c24542bac99e32f10f01a, type: 3}
