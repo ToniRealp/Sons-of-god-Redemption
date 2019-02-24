@@ -450,6 +450,7 @@ public class PlayerController : MonoBehaviour {
                 {
                     animator.SetTrigger("Dead");
                     dead = true;
+                    animator.ResetTrigger("Hit");
                 }
                 if (actualDeadTime<=0)
                 {
@@ -533,6 +534,7 @@ public class PlayerController : MonoBehaviour {
         animator.ResetTrigger("lightAttack3");
         animator.ResetTrigger("strongAttack1");
         animator.ResetTrigger("strongAttack2");
+        animator.ResetTrigger("Hit");
         levelController.OpenAllDoors();
     }
 
@@ -722,33 +724,37 @@ public class PlayerController : MonoBehaviour {
                 }
             }
         }
-        if(other.tag == "EnemyWeapon")
+        if (!dead)
         {
-            health -= (int)other.GetComponentInParent<Enemy>().baseAttack;
-            healthBar.value = health;
-            damaged = true;
-            states = States.Damaged;
-            animator.SetTrigger("Hit");
-            ResetDash();
+            if (other.tag == "EnemyWeapon")
+            {
+                health -= (int)other.GetComponentInParent<Enemy>().baseAttack;
+                healthBar.value = health;
+                damaged = true;
+                states = States.Damaged;
+                animator.SetTrigger("Hit");
+                ResetDash();
+            }
+            if (other.tag == "Arrow")
+            {
+                health -= 15;
+                healthBar.value = health;
+                damaged = true;
+            }
+            if (other.tag == "FirstBossWeapon")
+            {
+                health -= (int)other.GetComponentInParent<FirstBossBehaviour>().damage;
+                healthBar.value = health;
+                damaged = true;
+            }
+            if (other.tag == "FinalBossWeapon" && !finalDashHit)
+            {
+                finalDashHit = true;
+                health -= (int)other.GetComponentInParent<FinalBossBehaviour>().damage;
+                healthBar.value = health;
+                damaged = true;
+            }
         }
-        if (other.tag == "Arrow")
-        {
-            health -= 15;
-            healthBar.value = health;
-            damaged = true;
-        }
-        if (other.tag == "FirstBossWeapon")
-        {
-            health -= (int)other.GetComponentInParent<FirstBossBehaviour>().damage;
-            healthBar.value = health;
-            damaged = true;
-        }
-        if (other.tag == "FinalBossWeapon" && !finalDashHit)
-        {
-            finalDashHit = true;
-            health -= (int)other.GetComponentInParent<FinalBossBehaviour>().damage;
-            healthBar.value = health;
-            damaged = true;
-        }
+        
     }
 }

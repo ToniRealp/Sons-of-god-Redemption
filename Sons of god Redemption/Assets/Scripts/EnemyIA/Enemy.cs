@@ -96,7 +96,7 @@ public abstract class Enemy : MonoBehaviour {
         {
             lastTag = other.tag;
 
-            if(other.tag != "LightAttack2" && !damaged)
+            if(!damaged)
             {
                 damaged = true;
                 animator.SetTrigger("Damaged");
