@@ -147,7 +147,17 @@ ModelImporter:
     9500000: //RootNode
     13700000: AlesRekiel
     13700002: Rekiel001
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 03 - Default
+    second: {fileID: 2100000, guid: 9212f8dcf1a1d534f9fe997b514b3420, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: 3607190ce2a52b1418615c54c6d2ae2b, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
