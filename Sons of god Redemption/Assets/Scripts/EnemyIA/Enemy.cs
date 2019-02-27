@@ -96,11 +96,11 @@ public abstract class Enemy : MonoBehaviour {
         {
             lastTag = other.tag;
 
-            if(!damaged)
-            {
-                damaged = true;
-                animator.SetTrigger("Damaged");
-            }
+            damaged = true;
+            animator.SetTrigger("Damaged");
+            animTimes["Reaction Hit"].cooldown = animTimes["Reaction Hit"].duration;
+
+
             if (other.tag == "Arrow")
             {
                 health -= 15;
@@ -206,6 +206,7 @@ public abstract class Enemy : MonoBehaviour {
                     playerDetected = true;
                     playerPosition = hit[i].collider.gameObject.transform.position;
                 }
+                Debug.Log(hit[i].collider.gameObject.tag);
             }
         }
         for (int i = 37; i < 41; i++)

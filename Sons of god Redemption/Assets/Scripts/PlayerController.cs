@@ -38,8 +38,8 @@ public class PlayerController : MonoBehaviour {
     public Level1Controller levelController;
     public Vector3 direction;
     public int walkVelocity, runVelocity, dashDistance;    
-    public float dashCooldownTime, dashDuration, deadDuration, onHitAnimDelay, damage, lightCooldown, darkCooldown, healCooldown, actualHealCooldown;
-    private float dashCooldownCounter, actualDashTime, actualDeadTime, animLength, animDuration, onHitDelay, actualLightCooldown, actualDarkCooldown, damagedCooldown, actualDamagedCooldown;
+    public float dashCooldownTime, dashDuration, deadDuration, onHitAnimDelay, damage, lightCooldown, darkCooldown, healCooldown, actualHealCooldown, damagedCooldown, actualDamagedCooldown;
+    private float dashCooldownCounter, actualDashTime, actualDeadTime, animLength, animDuration, onHitDelay, actualLightCooldown, actualDarkCooldown;
     public bool interact, fireHit, explosionHit, meteorHit, spawnMe, healOnCD, finalDashHit;
     private bool dashed, attacked, transition, hit, isLightHit, lightOnCD, darkOnCD,  dead, darkHit;
     const float velChange = 0.5f;
@@ -232,7 +232,7 @@ public class PlayerController : MonoBehaviour {
                 break;
 
             case (States.Dashing):
-                
+                animator.ResetTrigger("Hit");
                 actualDashTime -= Time.deltaTime;
                 if (actualDashTime >= 0)
                     Dash();
@@ -454,12 +454,12 @@ public class PlayerController : MonoBehaviour {
                 }
                 if (actualDeadTime<=0)
                 {
-                    ResetAll();
                     health = stats.health;
                     healthBar.value = health;
                     spawnMe = true;
                     states = States.Idle;
                     actualDeadTime = deadDuration;
+                    ResetAll();
                 }
                     break;
 
@@ -544,6 +544,22 @@ public class PlayerController : MonoBehaviour {
         states = States.Idle;
         attacks = Attacks.NotAtt;
         lightOnCD = darkOnCD = darkHit = isLightHit = attacked = transition = hit = fireHit = damaged = false;
+        actualLightCooldown = lightCooldown;
+        actualDarkCooldown = darkCooldown;
+        actualDashTime = dashDuration;
+        onHitDelay = onHitAnimDelay;
+        animator.ResetTrigger("lightAttack1");
+        animator.ResetTrigger("lightAttack2");
+        animator.ResetTrigger("lightAttack3");
+        animator.ResetTrigger("strongAttack1");
+        animator.ResetTrigger("strongAttack2");
+    }
+
+    private void ResetHit()
+    {
+        weapon.tag = "Untagged";
+        attacks = Attacks.NotAtt;
+        lightOnCD = darkOnCD = darkHit = isLightHit = attacked = transition = hit = fireHit = false;
         actualLightCooldown = lightCooldown;
         actualDarkCooldown = darkCooldown;
         actualDashTime = dashDuration;
@@ -733,7 +749,7 @@ public class PlayerController : MonoBehaviour {
                 damaged = true;
                 states = States.Damaged;
                 animator.SetTrigger("Hit");
-                ResetDash();
+                ResetHit();
             }
             if (other.tag == "Arrow")
             {

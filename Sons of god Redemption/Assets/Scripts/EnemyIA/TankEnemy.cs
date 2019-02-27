@@ -134,7 +134,8 @@ public class TankEnemy : Enemy {
 
                         ChangeSpeed(0);
                         destination = playerPosition;
-                        LookToDestination();
+                        if(baseAttackCooldown > baseAttackDuration * 0.90)
+                            LookToDestination();
 
                         baseAttackCooldown -= Time.deltaTime;
 
@@ -173,11 +174,11 @@ public class TankEnemy : Enemy {
                             destination = playerPosition;
                             LookToDestination();
                             animTimes["Roar"].cooldown -= Time.deltaTime;
-                            if (animTimes["Roar"].cooldown < 0)
+                            if (animTimes["Roar"].cooldown <= 0)
                             {
                                 roar = true;
                                 animTimes["Roar"].cooldown = animTimes["Roar"].duration;
-                                destination = playerPosition;
+                                collided = false;
                             }
                         }
                         else
@@ -223,7 +224,10 @@ public class TankEnemy : Enemy {
                 break;
             case State.DAMAGED:
                 weapon.tag = weapon2.tag = "Untagged";
+                baseAttackCooldown = baseAttackDuration;
                 animTimes["Reaction Hit"].cooldown -= Time.deltaTime;
+                animTimes["Roar"].cooldown = animTimes["Roar"].duration;
+                animTimes["Swipe"].duration = animTimes["Swipe"].cooldown;
                 collided = false;
                 if (animTimes["Reaction Hit"].cooldown <= 0)
                 {
@@ -264,10 +268,11 @@ public class TankEnemy : Enemy {
             {
                 health -= 15;
             }
-            if (other.tag == "StrongAttack2" && !damaged)
+            if (other.tag == "StrongAttack2" && !damaged )
             {
                 animator.SetTrigger("Damaged");
                 state = State.DAMAGED;
+                animTimes["Reaction Hit"].cooldown = animTimes["Reaction Hit"].duration;
                 damaged = true;
             }
         } 

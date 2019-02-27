@@ -136,7 +136,7 @@ public class DevilEnemy : Enemy
                                 weapon2.tag = "EnemyWeapon";
                         }
 
-                        if (animTimes["Attack"].cooldown <= animTimes["Attack"].duration * 0.6f)
+                        if (animTimes["Attack"].cooldown <= animTimes["Attack"].duration * 0.2f)
                         {
                             if (attackSide)
                                 weapon.tag = "Untagged";
@@ -227,6 +227,25 @@ public class DevilEnemy : Enemy
                 break;
             default:
                 break;
+        }
+    }
+    new private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag != "Untagged")
+        {
+            Instantiate(blood, bloodPosition.position, bloodPosition.rotation, transform);
+            health -= (int)other.GetComponentInParent<PlayerController>().damage;
+            if (other.tag == "Arrow")
+            {
+                health -= 15;
+            }
+            if (other.tag == "StrongAttack2")
+            {
+                animator.SetTrigger("Damaged");
+                state = State.DAMAGED;
+                animTimes["Reaction Hit"].cooldown = animTimes["Reaction Hit"].duration;
+                damaged = true;
+            }
         }
     }
 }
