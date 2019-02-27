@@ -206,7 +206,6 @@ public abstract class Enemy : MonoBehaviour {
                     playerDetected = true;
                     playerPosition = hit[i].collider.gameObject.transform.position;
                 }
-                Debug.Log(hit[i].collider.gameObject.tag);
             }
         }
         for (int i = 37; i < 41; i++)
