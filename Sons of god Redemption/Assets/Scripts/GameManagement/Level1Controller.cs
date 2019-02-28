@@ -5,13 +5,15 @@ using UnityEngine;
 public class Level1Controller : MonoBehaviour {
 
     public GameObject player;
-    public GameObject bossHandler, secondBossHandler;
+    public GameObject bossHandler, secondBossHandler, boss;
+    public Transform secondBossSpawnPos;
     public SceneController sceneController;
     public GameObject camera;
     public AudioClip audioClip;
     public bool[] trigger;
     [SerializeField] Transform[] spawns = new Transform[1];
     public RoomController[] roomControllers;
+    InputManager inputManager;
 
     public Transform actualSpawn;
     public int roomsExplored;
@@ -24,12 +26,7 @@ public class Level1Controller : MonoBehaviour {
         if (SaveSystem.LoadData() != null)
         {
             SaveData saveData = SaveSystem.LoadData();
-            bossHandler.GetComponent<FirstBossBehaviour>().movingSpeed = 0f;
-            trigger = new bool[19];
-            for (int i = 0; i < 19; i++)
-            {
-                trigger[i] = false;
-            }
+     
             roomsExplored = saveData.roomsExplored;
             actualSpawn = spawns[roomsExplored];
             volumeSet = bossSpawn = false;
@@ -41,13 +38,7 @@ public class Level1Controller : MonoBehaviour {
             }
         }
         else
-        {
-            bossHandler.GetComponent<FirstBossBehaviour>().movingSpeed = 0f;
-            trigger = new bool[19];
-            for (int i = 0; i < 19; i++)
-            {
-                trigger[i] = false;
-            }
+        { 
             roomsExplored = 0;
             actualSpawn = spawns[0];
             volumeSet = bossSpawn = false;
@@ -56,9 +47,15 @@ public class Level1Controller : MonoBehaviour {
             {
                 room.InstantiateEnemies();
             }
-
         }
-
+        trigger = new bool[19];
+        for (int i = 0; i < 19; i++)
+        {
+            trigger[i] = false;
+        }
+        bossHandler.GetComponent<FirstBossBehaviour>().movingSpeed = 0f;
+        inputManager = gameObject.GetComponent<InputManager>();
+        secondBossSpawn = false;
     }
 	
 	// Update is called once per frame
@@ -147,14 +144,19 @@ public class Level1Controller : MonoBehaviour {
                 bossSpawn = true;
             }
         }
-        if (trigger[18])
+        
+        
+        if (inputManager.addBoss && !secondBossSpawn)
         {
-            if (!secondBossSpawn)
-            {
-                secondBossHandler.GetComponent<SecondBossBehaviour>().movingSpeed = 0.02f;
-                secondBossSpawn = true;
-            }
+            boss = Instantiate(secondBossHandler, secondBossSpawnPos);
+            secondBossSpawn = true;
+            Debug.Log("hola caracola");
         }
+        else if(inputManager.clearEnemies && secondBossSpawn)
+        {
+            Destroy(boss);
+        }
+        
 
         if (bossSpawn && !volumeSet)
         {
