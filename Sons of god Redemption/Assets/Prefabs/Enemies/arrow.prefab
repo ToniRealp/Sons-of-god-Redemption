@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23826547759019580}
   - component: {fileID: 54942300778974908}
   - component: {fileID: 65334726958073212}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: arrow
   m_TagString: Arrow
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 4321008786909376}
   - component: {fileID: 198614936176396738}
   - component: {fileID: 199768668744996958}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TinyFlames
   m_TagString: Untagged
   m_Icon: {fileID: 0}

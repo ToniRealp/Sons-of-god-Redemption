@@ -129,10 +129,10 @@ public class PlayerController : MonoBehaviour {
         }
         if (inputs[(int)ButtonInputs.Dash] && !dashed && !dead)
         {
+            this.gameObject.layer = 11;
             states = States.Dashing;
             animator.SetTrigger("isDashing");
             dashed = true;
-            this.gameObject.layer = 11;
         }
         if (health<=0)
         {
@@ -467,8 +467,7 @@ public class PlayerController : MonoBehaviour {
                 actualDamagedCooldown -= Time.deltaTime;
                 if (actualDamagedCooldown <= 0)
                 {
-                    states = States.Idle;
-                    actualDamagedCooldown = damagedCooldown;
+                    ResetHit();
                 }
 
                 break;
@@ -535,6 +534,9 @@ public class PlayerController : MonoBehaviour {
         animator.ResetTrigger("strongAttack1");
         animator.ResetTrigger("strongAttack2");
         animator.ResetTrigger("Hit");
+        animator.SetBool("isIdle", true);
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isRunning", false);
         levelController.OpenAllDoors();
     }
 
@@ -553,22 +555,30 @@ public class PlayerController : MonoBehaviour {
         animator.ResetTrigger("lightAttack3");
         animator.ResetTrigger("strongAttack1");
         animator.ResetTrigger("strongAttack2");
+        animator.SetBool("isIdle", true);
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isRunning", false);
     }
 
     private void ResetHit()
     {
         weapon.tag = "Untagged";
         attacks = Attacks.NotAtt;
+        states = States.Idle;
         lightOnCD = darkOnCD = darkHit = isLightHit = attacked = transition = hit = fireHit = false;
         actualLightCooldown = lightCooldown;
         actualDarkCooldown = darkCooldown;
         actualDashTime = dashDuration;
         onHitDelay = onHitAnimDelay;
+        actualDamagedCooldown = damagedCooldown;
         animator.ResetTrigger("lightAttack1");
         animator.ResetTrigger("lightAttack2");
         animator.ResetTrigger("lightAttack3");
         animator.ResetTrigger("strongAttack1");
         animator.ResetTrigger("strongAttack2");
+        animator.SetBool("isIdle", true);
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isRunning", false);
     }
 
     void GetInput()
@@ -749,7 +759,6 @@ public class PlayerController : MonoBehaviour {
                 damaged = true;
                 states = States.Damaged;
                 animator.SetTrigger("Hit");
-                ResetHit();
             }
             if (other.tag == "Arrow")
             {
@@ -762,6 +771,8 @@ public class PlayerController : MonoBehaviour {
                 health -= (int)other.GetComponentInParent<FirstBossBehaviour>().damage;
                 healthBar.value = health;
                 damaged = true;
+                states = States.Damaged;
+                animator.SetTrigger("Hit");
             }
             if (other.tag == "FinalBossWeapon" && !finalDashHit)
             {
@@ -769,6 +780,8 @@ public class PlayerController : MonoBehaviour {
                 health -= (int)other.GetComponentInParent<FinalBossBehaviour>().damage;
                 healthBar.value = health;
                 damaged = true;
+                states = States.Damaged;
+                animator.SetTrigger("Hit");
             }
         }
         

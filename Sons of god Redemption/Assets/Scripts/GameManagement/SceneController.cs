@@ -14,6 +14,7 @@ public class SceneController : MonoBehaviour {
     {
         StartCoroutine(LoadAsynchronously(sceneName));
         isLoading = true;
+        Time.timeScale = 1.0f;
     }
 
     IEnumerator LoadAsynchronously (string sceneName)

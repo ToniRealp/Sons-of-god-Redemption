@@ -17577,8 +17577,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 719524424}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.4502236, y: -0, z: -0, w: 0.89291584}
+  m_LocalPosition: {x: 0.08, y: 20.100588, z: -14.854935}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 649203138}
@@ -17643,7 +17643,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.799
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -43511,6 +43511,7 @@ MonoBehaviour:
   bossHandler: {fileID: 1264204996}
   secondBossHandler: {fileID: 1889288100730766, guid: 169b7a86d93f0884d9af6f0588c436f1,
     type: 2}
+  boss: {fileID: 0}
   secondBossSpawnPos: {fileID: 1413998162}
   sceneController: {fileID: 1867115082}
   camera: {fileID: 719524424}
@@ -45938,6 +45939,16 @@ Prefab:
     - target: {fileID: 1532023036423736, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
       propertyPath: m_Name
       value: Leliel
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062393654652366, guid: ddd6aa0c312240c4f960b9d9751a654a,
+        type: 2}
+      propertyPath: dashDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062393654652366, guid: ddd6aa0c312240c4f960b9d9751a654a,
+        type: 2}
+      propertyPath: dashDuration
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
