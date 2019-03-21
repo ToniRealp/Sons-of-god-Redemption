@@ -23,8 +23,6 @@ public class PlayerController : MonoBehaviour {
     //External attributes
     InputManager inputManager;
     Animator animator;
-    AudioSource audioSource;
-    public AudioClip swingSound, hitSound;
     public GameObject flameCone, lightHit, healParticles;
     [SerializeField] GameObject weapon;
     [SerializeField] GameObject[] elements = new GameObject[(int)Elements.MAX];
@@ -64,7 +62,6 @@ public class PlayerController : MonoBehaviour {
         //initialize player atributes(not stats)
         inputManager = GetComponent<InputManager>();
         animator = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
         states = States.Idle;
         attacks = Attacks.NotAtt;
         finalDashHit = dead = lightOnCD = darkOnCD = healOnCD = darkHit = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
@@ -715,9 +712,6 @@ public class PlayerController : MonoBehaviour {
         {
             if (weapon.tag != "Untagged")
             {
-                audioSource.clip = hitSound;
-                audioSource.Stop();
-                audioSource.Play();
                 animator.speed = 0f;
                 hit = true;
                 if (darkHit && !darkOnCD && health<=stats.health-15)
