@@ -39,6 +39,8 @@ public abstract class Enemy : MonoBehaviour {
     public GameObject healthTextGO, weapon;
     public Font font;
 
+    public AudioManager audioManager;
+
     protected enum State { SEARCHING, CHASING, ATTAKING, DAMAGED };
     [SerializeField] protected State state;
 
@@ -82,6 +84,7 @@ public abstract class Enemy : MonoBehaviour {
         actualDamagedCooldown = 0;
         damagedCooldown = 3f;
         attackCooldown = attackSpeed;
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         //Animator
         animator = GetComponent<Animator>();
         animTimes = new Dictionary<string, AnimInfo>();

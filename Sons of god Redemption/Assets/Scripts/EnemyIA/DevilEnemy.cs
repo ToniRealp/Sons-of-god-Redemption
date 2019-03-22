@@ -87,6 +87,9 @@ public class DevilEnemy : Enemy
                 LookToDestination();
                 MoveToDestination();
 
+                if (!audioManager.isPlaying("DevilMain"))
+                    audioManager.Play("DevilMain");
+
                 if (playerDetected)
                 {
                     // If in attack conditions, go to attack
@@ -172,6 +175,7 @@ public class DevilEnemy : Enemy
                         {
                             Instantiate(baby, spawnPos.position, spawnPos.rotation);
                             spawned = true;
+                            audioManager.Play("DevilSpawn");
                         }
                         if (animTimes["Spawn"].cooldown <= 0)
                         {
