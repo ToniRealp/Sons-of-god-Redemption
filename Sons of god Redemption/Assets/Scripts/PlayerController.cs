@@ -459,6 +459,7 @@ public class PlayerController : MonoBehaviour {
                 actualDeadTime -= Time.deltaTime;
                 if (!dead)
                 {
+                    
                     animator.SetTrigger("Dead");
                     dead = true;
                     animator.ResetTrigger("Hit");
@@ -726,7 +727,7 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")
+        if (other.tag == "Enemy" && !dead)
         {
             if (weapon.tag != "Untagged")
             {
