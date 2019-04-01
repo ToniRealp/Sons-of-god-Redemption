@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour {
                 healthBar.value = health;
             }
         }
-        if (inputs[(int)ButtonInputs.Dash] && !dashed && !dead)
+        if (inputs[(int)ButtonInputs.Dash] && !dashed && !dead && !damaged)
         {
             this.gameObject.layer = 11;
             states = States.Dashing;
@@ -526,7 +526,7 @@ public class PlayerController : MonoBehaviour {
 
 
         fireHit = false;
-        //damaged = false;
+
     }
 
     private void ResetAll()
@@ -549,6 +549,7 @@ public class PlayerController : MonoBehaviour {
         animator.SetBool("isIdle", true);
         animator.SetBool("isWalking", false);
         animator.SetBool("isRunning", false);
+        flameCone.SetActive(false);
         levelController.OpenAllDoors();
     }
 
@@ -570,6 +571,7 @@ public class PlayerController : MonoBehaviour {
         animator.SetBool("isIdle", true);
         animator.SetBool("isWalking", false);
         animator.SetBool("isRunning", false);
+        flameCone.SetActive(false);
     }
 
     private void ResetHit()
@@ -577,7 +579,7 @@ public class PlayerController : MonoBehaviour {
         weapon.tag = "Untagged";
         attacks = Attacks.NotAtt;
         states = States.Idle;
-        lightOnCD = darkOnCD = darkHit = isLightHit = attacked = transition = hit = fireHit = false;
+        damaged = lightOnCD = darkOnCD = darkHit = isLightHit = attacked = transition = hit = fireHit = false;
         actualLightCooldown = lightCooldown;
         actualDarkCooldown = darkCooldown;
         actualDashTime = dashDuration;
@@ -591,6 +593,7 @@ public class PlayerController : MonoBehaviour {
         animator.SetBool("isIdle", true);
         animator.SetBool("isWalking", false);
         animator.SetBool("isRunning", false);
+        flameCone.SetActive(false);
     }
 
     void GetInput()
