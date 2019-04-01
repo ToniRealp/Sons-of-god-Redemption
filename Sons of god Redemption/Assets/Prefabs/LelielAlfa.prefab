@@ -1763,7 +1763,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1532023036423736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.24, y: 0.27, z: -0.43}
+  m_LocalPosition: {x: 0.08, y: 1.03932796e-17, z: 0.4}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4012368197550088}
@@ -2349,8 +2349,6 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   fireUI: {fileID: 0}
   lightUI: {fileID: 0}
-  swingSound: {fileID: 8300000, guid: 4ab2086b82ae0344d9e47731a83f9743, type: 3}
-  hitSound: {fileID: 8300000, guid: 9d54cd11b601e1b428925b1897cd4042, type: 3}
   flameCone: {fileID: 1614076690806676}
   lightHit: {fileID: 1008891602714680, guid: 58d1e5b52a3ad734db07b18f829c70ed, type: 2}
   healParticles: {fileID: 1045061750658230, guid: 469929624c08b0a4183d49b0cbc1b0ff,
@@ -2365,9 +2363,9 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   walkVelocity: 3
   runVelocity: 6
-  dashDistance: 4
+  dashDistance: 5
   dashCooldownTime: 0.5
-  dashDuration: 0.2
+  dashDuration: 0.3
   deadDuration: 3.4833336
   onHitAnimDelay: 0.05
   damage: 20
@@ -2375,6 +2373,8 @@ MonoBehaviour:
   darkCooldown: 1
   healCooldown: 30
   actualHealCooldown: 0
+  damagedCooldown: 0
+  actualDamagedCooldown: 0
   interact: 0
   fireHit: 0
   explosionHit: 0
@@ -2382,6 +2382,7 @@ MonoBehaviour:
   spawnMe: 0
   healOnCD: 0
   finalDashHit: 0
+  onCinematic: 0
   states: 0
   nextState: 0
   attacks: 6

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   movementSpeed: 3
-  baseAttack: 200
+  baseAttack: 20
   movingRange: 0
   rotationSpeed: 0
   ViewDistance: 0

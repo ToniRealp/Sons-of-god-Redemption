@@ -9452,12 +9452,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114345354480778942, guid: 85929e598004db14d9c17b1da9207d1c,
-        type: 2}
-      propertyPath: title
-      value: 
-      objectReference: {fileID: 1933098827701178, guid: d881cc48486bd18488ba1a6de96b4ede,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85929e598004db14d9c17b1da9207d1c, type: 2}
   m_IsPrefabAsset: 0
@@ -48378,14 +48372,14 @@ Prefab:
       objectReference: {fileID: 2035592905}
     - target: {fileID: 114062393654652366, guid: ddd6aa0c312240c4f960b9d9751a654a,
         type: 2}
-      propertyPath: lightUI
-      value: 
-      objectReference: {fileID: 1289026370}
-    - target: {fileID: 114062393654652366, guid: ddd6aa0c312240c4f960b9d9751a654a,
-        type: 2}
       propertyPath: fireUI
       value: 
       objectReference: {fileID: 1355553947}
+    - target: {fileID: 114062393654652366, guid: ddd6aa0c312240c4f960b9d9751a654a,
+        type: 2}
+      propertyPath: lightUI
+      value: 
+      objectReference: {fileID: 1289026370}
     - target: {fileID: 114062393654652366, guid: ddd6aa0c312240c4f960b9d9751a654a,
         type: 2}
       propertyPath: levelController
@@ -48394,16 +48388,6 @@ Prefab:
     - target: {fileID: 1532023036423736, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
       propertyPath: m_Name
       value: Leliel
-      objectReference: {fileID: 0}
-    - target: {fileID: 114062393654652366, guid: ddd6aa0c312240c4f960b9d9751a654a,
-        type: 2}
-      propertyPath: dashDistance
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114062393654652366, guid: ddd6aa0c312240c4f960b9d9751a654a,
-        type: 2}
-      propertyPath: dashDuration
-      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
