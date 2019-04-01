@@ -14,18 +14,18 @@ public class FirstBossBehaviour : MonoBehaviour
 
 
     private GameObject player;
-    private float chargeAnimationTime, explosionAnimationTime, roarAnimationTime, swipeAnimationTime, rainAnimationTime, initMeteorTime;
-    private float actualAttackInterval, actualChargeTime, actualExplosionTime, actualRoarTime, actualSwipeTime, actualRainTime;
+    private float standingAnimationTime, chargeAnimationTime, explosionAnimationTime, roarAnimationTime, swipeAnimationTime, rainAnimationTime, initMeteorTime;
+    private float actualStandingTime, actualAttackInterval, actualChargeTime, actualExplosionTime, actualRoarTime, actualSwipeTime, actualRainTime;
     private int meteorCounter;
     private bool explosionChecked, patron1switched, patron2switched, patron3switched;
 
-    enum State { IDLE, WALKING, SWIPEATTACK, CHARGE, EXPLOSION, ROAR, RAIN, DAMAGED };
+    enum State { STANDING, IDLE, WALKING, SWIPEATTACK, CHARGE, EXPLOSION, ROAR, RAIN, DAMAGED };
     [SerializeField] State state = State.IDLE;
 
     public float playerDistance, maxHealth = 1800, health, damage, swipeDmg = 15, explosionDmg = 55, roarDmg = 25, rainDmg=15;
     string lastTag;
     public Text healthText;
-    public GameObject healthTextGO, canvas, textPos, weapon;
+    public GameObject title, healthTextGO, canvas, textPos, weapon;
     public Font font;
 
     public GameObject blood;
@@ -35,10 +35,12 @@ public class FirstBossBehaviour : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
         health = maxHealth;
         actualAttackInterval = 1;
         player = GameObject.FindGameObjectWithTag("Player");
         actualChargeTime = chargeAnimationTime = AnimationLength("Mutant Flexing Muscles", animator);
+        actualStandingTime = standingAnimationTime = AnimationLength("Standing", animator);
         actualExplosionTime = explosionAnimationTime = AnimationLength("Mutant Jumping", animator);
         actualRoarTime = roarAnimationTime = AnimationLength("Mutant Roaring", animator);
         actualSwipeTime = swipeAnimationTime = AnimationLength("Stable Sword Outward Slash", animator);
@@ -106,6 +108,14 @@ public class FirstBossBehaviour : MonoBehaviour
 
         switch (state)
         {
+            case State.STANDING:
+                if ((actualStandingTime -= Time.deltaTime) <= 0)
+                {
+                    player.GetComponent<PlayerController>().onCinematic = false;
+                    actualStandingTime = standingAnimationTime;
+                    state = State.IDLE;
+                }
+                break;
             case State.IDLE:
                 animator.SetBool("isIdle", true);
                 // Look to player
@@ -505,6 +515,22 @@ public class FirstBossBehaviour : MonoBehaviour
     void LookPlayer()
     {
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(player.transform.position.x - transform.position.x, transform.position.y, player.transform.position.z - transform.position.z)), rotationSpeed);
+    }
+
+    public void StandUp()
+    {
+        player.GetComponent<PlayerController>().onCinematic = true;
+        animator.SetTrigger("Standing");
+        state = State.STANDING;
+        actualRainTime = rainAnimationTime;
+        actualRoarTime = roarAnimationTime;
+        actualExplosionTime = explosionAnimationTime;
+        actualSwipeTime = swipeAnimationTime;
+        actualChargeTime = chargeAnimationTime;
+        fireParticles.SetActive(false);
+        explosionParticles.SetActive(false);
+        Instantiate(title, canvas.transform);
+        weapon.tag = "Untagged";
     }
 
     void Swipe()

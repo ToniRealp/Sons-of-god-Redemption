@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour {
     public int walkVelocity, runVelocity, dashDistance;    
     public float dashCooldownTime, dashDuration, deadDuration, onHitAnimDelay, damage, lightCooldown, darkCooldown, healCooldown, actualHealCooldown, damagedCooldown, actualDamagedCooldown;
     private float dashCooldownCounter, actualDashTime, actualDeadTime, animLength, animDuration, onHitDelay, actualLightCooldown, actualDarkCooldown;
-    public bool interact, fireHit, explosionHit, meteorHit, spawnMe, healOnCD, finalDashHit;
+    public bool interact, fireHit, explosionHit, meteorHit, spawnMe, healOnCD, finalDashHit, onCinematic;
     private bool dashed, attacked, transition, hit, isLightHit, lightOnCD, darkOnCD,  dead, darkHit;
     const float velChange = 0.5f;
 
@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour {
         animator = GetComponent<Animator>();
         states = States.Idle;
         attacks = Attacks.NotAtt;
-        finalDashHit = dead = lightOnCD = darkOnCD = healOnCD = darkHit = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
+        onCinematic = finalDashHit = dead = lightOnCD = darkOnCD = healOnCD = darkHit = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
         spawnMe = true;
         dashCooldownCounter = dashCooldownTime;
         actualDashTime = dashDuration;
@@ -87,7 +87,21 @@ public class PlayerController : MonoBehaviour {
 	
 	void Update () {
 
-        GetInput();
+        if (onCinematic)
+        {
+            movementSpeed = 0;
+            states = States.Idle;
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isIdle", true);
+            animator.Play("Idle");
+        }
+        else
+        {
+            GetInput();
+            movementSpeed = stats.movementSpeed;
+        }
+
 
         //Element controller
         if (inputs[(int)ButtonInputs.padRight])
@@ -124,7 +138,7 @@ public class PlayerController : MonoBehaviour {
                 healthBar.value = health;
             }
         }
-        if (inputs[(int)ButtonInputs.Dash] && !dashed && !dead)
+        if (inputs[(int)ButtonInputs.Dash] && !dashed && !dead && !damaged)
         {
             this.gameObject.layer = 11;
             states = States.Dashing;
@@ -445,6 +459,7 @@ public class PlayerController : MonoBehaviour {
                 actualDeadTime -= Time.deltaTime;
                 if (!dead)
                 {
+                    
                     animator.SetTrigger("Dead");
                     dead = true;
                     animator.ResetTrigger("Hit");
@@ -488,6 +503,7 @@ public class PlayerController : MonoBehaviour {
                 hit = false;
             }
         }
+
         
         if (fireHit)
         {
@@ -511,7 +527,7 @@ public class PlayerController : MonoBehaviour {
 
 
         fireHit = false;
-        //damaged = false;
+
     }
 
     private void ResetAll()
@@ -534,6 +550,7 @@ public class PlayerController : MonoBehaviour {
         animator.SetBool("isIdle", true);
         animator.SetBool("isWalking", false);
         animator.SetBool("isRunning", false);
+        flameCone.SetActive(false);
         levelController.OpenAllDoors();
     }
 
@@ -555,6 +572,7 @@ public class PlayerController : MonoBehaviour {
         animator.SetBool("isIdle", true);
         animator.SetBool("isWalking", false);
         animator.SetBool("isRunning", false);
+        flameCone.SetActive(false);
     }
 
     private void ResetHit()
@@ -562,7 +580,7 @@ public class PlayerController : MonoBehaviour {
         weapon.tag = "Untagged";
         attacks = Attacks.NotAtt;
         states = States.Idle;
-        lightOnCD = darkOnCD = darkHit = isLightHit = attacked = transition = hit = fireHit = false;
+        damaged = lightOnCD = darkOnCD = darkHit = isLightHit = attacked = transition = hit = fireHit = false;
         actualLightCooldown = lightCooldown;
         actualDarkCooldown = darkCooldown;
         actualDashTime = dashDuration;
@@ -576,6 +594,7 @@ public class PlayerController : MonoBehaviour {
         animator.SetBool("isIdle", true);
         animator.SetBool("isWalking", false);
         animator.SetBool("isRunning", false);
+        flameCone.SetActive(false);
     }
 
     void GetInput()
@@ -610,9 +629,9 @@ public class PlayerController : MonoBehaviour {
 
     void Rotation()
     {
-        direction.Set(xAxis,0,yAxis);
-        if(direction.magnitude!=0)
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction,Vector3.up), 0.15F);
+            direction.Set(xAxis, 0, yAxis);
+            if (direction.magnitude != 0)
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction, Vector3.up), 0.15F);
     }
 
     void Dash()
@@ -708,7 +727,7 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")
+        if (other.tag == "Enemy" && !dead)
         {
             if (weapon.tag != "Untagged")
             {

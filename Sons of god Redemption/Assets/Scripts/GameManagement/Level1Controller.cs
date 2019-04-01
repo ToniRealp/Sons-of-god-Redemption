@@ -138,6 +138,7 @@ public class Level1Controller : MonoBehaviour {
             if (!bossSpawn)
             {
                 bossHandler.GetComponent<FirstBossBehaviour>().movingSpeed=0.005f;
+                bossHandler.GetComponent<FirstBossBehaviour>().StandUp();
                 camera.GetComponent<AudioSource>().clip = audioClip;
                 camera.GetComponent<AudioSource>().volume = 0;
                 camera.GetComponent<AudioSource>().Play();
