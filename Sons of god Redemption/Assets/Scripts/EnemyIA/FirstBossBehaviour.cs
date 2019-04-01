@@ -111,14 +111,7 @@ public class FirstBossBehaviour : MonoBehaviour
             case State.STANDING:
                 if ((actualStandingTime -= Time.deltaTime) <= 0)
                 {
-                    actualRainTime = rainAnimationTime;
-                    actualRoarTime = roarAnimationTime;
-                    actualExplosionTime = explosionAnimationTime;
-                    actualSwipeTime = swipeAnimationTime;
-                    actualChargeTime = chargeAnimationTime;
-                    fireParticles.SetActive(false);
-                    explosionParticles.SetActive(false);
-                    weapon.tag = "Untagged";
+                    player.GetComponent<PlayerController>().onCinematic = false;
                     actualStandingTime = standingAnimationTime;
                     state = State.IDLE;
                 }
@@ -526,6 +519,7 @@ public class FirstBossBehaviour : MonoBehaviour
 
     public void StandUp()
     {
+        player.GetComponent<PlayerController>().onCinematic = true;
         animator.SetTrigger("Standing");
         state = State.STANDING;
         actualRainTime = rainAnimationTime;
