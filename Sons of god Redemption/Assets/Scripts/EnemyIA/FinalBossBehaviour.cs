@@ -13,13 +13,13 @@ public class FinalBossBehaviour : MonoBehaviour {
 
 
     private GameObject player;
-    private float godModeTime, godDelayTime, darkAnimationTime, dizzyAnimationTime, dashAnimationTime, fireAnimationTime, initMeteorTime, godModeHealth;
-    private float actualAttackInterval, actualGodModeTime, actualGodDelayTime, actualDarkTime, actualDizzyTime, actualDashTime, actualFireTime;
+    private float cinematicAnimationTime, godModeTime, godDelayTime, darkAnimationTime, dizzyAnimationTime, dashAnimationTime, fireAnimationTime, initMeteorTime, godModeHealth;
+    private float actualCinematicTime, actualAttackInterval, actualGodModeTime, actualGodDelayTime, actualDarkTime, actualDizzyTime, actualDashTime, actualFireTime;
     private int meteorCounter;
     private bool explosionChecked, patron1switched, patron2switched, patron3switched, godMode;
 
-    enum State { IDLE, WALKING, DASH, FIRE, DARK, DIZZY };
-    [SerializeField] State state = State.IDLE;
+    enum State { CINEMATIC, IDLE, WALKING, DASH, FIRE, DARK, DIZZY };
+    [SerializeField] State state = State.CINEMATIC;
 
     public float playerDistance, maxHealth = 3000, health, damage, dashDmg = 15, fireDmg = 55, darkDmg = 25;
     string lastTag;
@@ -27,7 +27,7 @@ public class FinalBossBehaviour : MonoBehaviour {
     public GameObject healthTextGO, canvas, textPos;
     public Font font;
 
-    public GameObject fireBall, darkBox, dashTrigger, glow, blood;
+    public GameObject title, fireBall, darkBox, dashTrigger, glow, blood;
     public Transform bloodPosition;
     public GameObject dieParticles;
 
@@ -37,10 +37,11 @@ public class FinalBossBehaviour : MonoBehaviour {
         health = maxHealth;
         actualAttackInterval = 1;
         player = GameObject.FindGameObjectWithTag("Player");
-        actualDizzyTime = dizzyAnimationTime = AnimationLength("Dizzy", animator);
-        actualDarkTime = darkAnimationTime = AnimationLength("Standing2", animator);
-        actualDashTime = dashAnimationTime = AnimationLength("Running Slide (1)", animator);
-        actualFireTime = fireAnimationTime = AnimationLength("Standing", animator);
+        actualCinematicTime = cinematicAnimationTime = AnimationLength("Standing", animator);
+        actualDizzyTime = dizzyAnimationTime = AnimationLength("Dizzy Idle", animator);
+        actualDarkTime = darkAnimationTime = AnimationLength("Standing 2", animator);
+        actualDashTime = dashAnimationTime = AnimationLength("Kick", animator);
+        actualFireTime = fireAnimationTime = AnimationLength("Standing 1", animator);
         godDelayTime = actualGodDelayTime = Random.Range(godModeMinDelay, godModeMaxDelay);
         darkBox.SetActive(false);
         glow.SetActive(false);
@@ -62,6 +63,10 @@ public class FinalBossBehaviour : MonoBehaviour {
         actualAttack2 = actualAttack = meteorCounter = 0;
         meteorRotation = new Quaternion[meteorNum];
         godMode = explosionChecked = false;
+
+        //Cinematic
+        player.GetComponent<PlayerController>().onCinematic = true;
+        Instantiate(title, canvas.transform);
     }
 
     // Update is called once per frame
@@ -137,6 +142,14 @@ public class FinalBossBehaviour : MonoBehaviour {
 
         switch (state)
         {
+            case State.CINEMATIC:
+                if ((actualCinematicTime -= Time.deltaTime) <= 0)
+                {
+                    player.GetComponent<PlayerController>().onCinematic = false;
+                    actualCinematicTime = cinematicAnimationTime;
+                    state = State.IDLE;
+                }
+                break;
             case State.IDLE:
                 animator.SetBool("isIdle", true);
                 // Look to player
@@ -403,8 +416,12 @@ public class FinalBossBehaviour : MonoBehaviour {
             case State.DASH:
 
                 actualDashTime -= Time.deltaTime;
-                if (actualDashTime <= dashAnimationTime)
+                if (actualDashTime <= dashAnimationTime * 0.6 && actualDashTime >= dashAnimationTime * 0.1)
+                {
                     dashTrigger.SetActive(true);
+                    transform.position += transform.forward.normalized * movingSpeed * 3f;
+                }
+
                 if (actualDashTime <= dashAnimationTime * 0.1)
                 {
                     dashTrigger.SetActive(false);
@@ -471,6 +488,11 @@ public class FinalBossBehaviour : MonoBehaviour {
         }
 
 
+
+    }
+
+    public void StandUp()
+    {
 
     }
 
