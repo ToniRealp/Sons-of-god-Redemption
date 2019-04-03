@@ -5,8 +5,7 @@ using UnityEngine;
 public class Level1Controller : MonoBehaviour {
 
     public GameObject player;
-    public GameObject bossHandler, secondBossHandler, boss;
-    public Transform secondBossSpawnPos;
+    public GameObject bossHandler;
     public SceneController sceneController;
     public GameObject camera;
     public AudioClip audioClip;
@@ -18,7 +17,7 @@ public class Level1Controller : MonoBehaviour {
     public Transform actualSpawn;
     public int roomsExplored;
 
-    private bool bossSpawn, secondBossSpawn, volumeSet;
+    private bool bossSpawn, volumeSet;
 
 	// Use this for initialization
 	void Start () {
@@ -55,7 +54,6 @@ public class Level1Controller : MonoBehaviour {
         }
         bossHandler.GetComponent<FirstBossBehaviour>().movingSpeed = 0f;
         inputManager = gameObject.GetComponent<InputManager>();
-        secondBossSpawn = false;
     }
 	
 	// Update is called once per frame
@@ -144,18 +142,6 @@ public class Level1Controller : MonoBehaviour {
                 camera.GetComponent<AudioSource>().Play();
                 bossSpawn = true;
             }
-        }
-        
-        
-        if (inputManager.addBoss && !secondBossSpawn)
-        {
-            boss = Instantiate(secondBossHandler, secondBossSpawnPos);
-            secondBossSpawn = true;
-            Debug.Log("hola caracola");
-        }
-        else if(inputManager.clearEnemies && secondBossSpawn)
-        {
-            Destroy(boss);
         }
         
 
