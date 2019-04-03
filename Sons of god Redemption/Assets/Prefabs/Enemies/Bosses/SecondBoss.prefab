@@ -2234,6 +2234,7 @@ MonoBehaviour:
   darkCircle: {fileID: 1276738568084198, guid: 460c7cd5c66dc7049aa457cc60c570aa, type: 2}
   darkExplosion: {fileID: 1931970947986540}
   darkKame: {fileID: 1888406163957606}
+  title: {fileID: 1283008830765480, guid: 6d19fbf293cba97449c58525a42c2793, type: 2}
   blood: {fileID: 1766210467136178, guid: 3dbe7a26933ab80478c3cef9187f27f1, type: 2}
   bloodPosition: {fileID: 4074295323245866}
   dieParticles: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,

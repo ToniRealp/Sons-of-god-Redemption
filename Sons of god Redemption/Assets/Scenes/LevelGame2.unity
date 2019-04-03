@@ -13167,7 +13167,7 @@ MonoBehaviour:
           m_StringArgument: MainMenu
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1867115080}
+      - m_Target: {fileID: 0}
         m_MethodName: SaveGame
         m_Mode: 1
         m_Arguments:
@@ -28312,7 +28312,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 6.5999756, y: 0}
+  m_AnchoredPosition: {x: 6.6000977, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!1001 &1004041175
@@ -38184,34 +38184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1413998161
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1413998162}
-  m_Layer: 0
-  m_Name: SecondBossSpawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1413998162
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1413998161}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.84, y: 1.765, z: 25.46}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1414866319
 GameObject:
   m_ObjectHideFlags: 0
@@ -52181,26 +52153,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1867115079}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a27023fbab1b25242b3de23a3ea4d840, type: 3}
+  m_Script: {fileID: 11500000, guid: fd373adb3c4e8b24a9d0dac2fc49af09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1158049245}
-  bossHandler: {fileID: 0}
-  sceneController: {fileID: 1867115082}
-  camera: {fileID: 719524424}
-  audioClip: {fileID: 8300000, guid: 0589cbf4324ff384993182282818c007, type: 3}
+  bossHandler: {fileID: 1889288100730766, guid: 169b7a86d93f0884d9af6f0588c436f1,
+    type: 2}
+  bossSpawnPos: {fileID: 2064259698}
+  sceneController: {fileID: 0}
+  camera: {fileID: 0}
+  audioClip: {fileID: 0}
   trigger: 
   spawns:
-  - {fileID: 375333505}
-  - {fileID: 1966609107}
-  - {fileID: 1127679347}
-  - {fileID: 534853881}
-  - {fileID: 1972556512}
-  - {fileID: 1133426417}
-  - {fileID: 489169987}
-  roomControllers:
-  - {fileID: 291142957}
-  - {fileID: 1232682582}
+  - {fileID: 0}
+  roomControllers: []
   actualSpawn: {fileID: 0}
   roomsExplored: 0
 --- !u!4 &1867115081
@@ -55011,7 +54977,7 @@ Prefab:
         type: 2}
       propertyPath: levelController
       value: 
-      objectReference: {fileID: 1867115080}
+      objectReference: {fileID: 0}
     - target: {fileID: 1532023036423736, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
       propertyPath: m_Name
       value: Leliel
@@ -57655,13 +57621,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2064259697}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -1.6800003, y: 0, z: 2.0699997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 566172381}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1001 &2078377684
 Prefab:
   m_ObjectHideFlags: 0

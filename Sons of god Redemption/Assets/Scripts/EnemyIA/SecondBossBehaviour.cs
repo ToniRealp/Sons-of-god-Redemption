@@ -13,13 +13,13 @@ public class SecondBossBehaviour : MonoBehaviour
 
 
     private GameObject player;
-    private float circleAnimationTime, kameAnimationTime, explosionAnimationTime, initcirclesTime;
-    private float actualAttackInterval,  actualCircleTime, actualKameTime, actualExplosionTime;
+    private float cinematicAnimationTime, circleAnimationTime, kameAnimationTime, explosionAnimationTime, initcirclesTime;
+    private float actualCinematicTime, actualAttackInterval,  actualCircleTime, actualKameTime, actualExplosionTime;
     private int circlesCounter;
-    private bool explosionChecked, patron1switched, patron2switched, patron3switched, godMode;
+    private bool explosionChecked, patron1switched, patron2switched, patron3switched;
 
-    enum State { IDLE, WALKING, CIRCLES, KAME, EXPLOSION };
-    [SerializeField] State state = State.IDLE;
+    enum State { CINEMATIC, IDLE, WALKING, CIRCLES, KAME, EXPLOSION };
+    [SerializeField] State state = State.CINEMATIC;
 
     public float playerDistance, maxHealth = 2300, health, damage, circleDmg = 1, kameDmg = 25, explosionDmg = 45;
     string lastTag;
@@ -28,7 +28,7 @@ public class SecondBossBehaviour : MonoBehaviour
     public Font font;
 
     public GameObject darkCircle, darkExplosion, darkKame;
-    public GameObject blood;
+    public GameObject title, blood;
     public Transform bloodPosition;
     public GameObject dieParticles;
 
@@ -38,6 +38,7 @@ public class SecondBossBehaviour : MonoBehaviour
         health = maxHealth;
         actualAttackInterval = 1;
         player = GameObject.FindGameObjectWithTag("Player");
+        actualCinematicTime = cinematicAnimationTime = AnimationLength("Standing", animator);
         actualCircleTime = circleAnimationTime = AnimationLength("Circles", animator);
         actualKameTime = kameAnimationTime = AnimationLength("Kame", animator);
         actualExplosionTime = explosionAnimationTime = AnimationLength("Explosion", animator);
@@ -59,7 +60,11 @@ public class SecondBossBehaviour : MonoBehaviour
         patron1switched = patron2switched = patron3switched = false;
         actualAttack2 = actualAttack = circlesCounter = 0;
         circlePosition = new Vector3[circlesNum];
-        godMode = explosionChecked = false;
+        explosionChecked = false;
+
+        //Cinematic
+        player.GetComponent<PlayerController>().onCinematic = true;
+        Instantiate(title, canvas.transform);
     }
 
     // Update is called once per frame
@@ -105,6 +110,14 @@ public class SecondBossBehaviour : MonoBehaviour
 
         switch (state)
         {
+            case State.CINEMATIC:
+                if ((actualCinematicTime -= Time.deltaTime) <= 0)
+                {
+                    player.GetComponent<PlayerController>().onCinematic = false;
+                    actualCinematicTime = cinematicAnimationTime;
+                    state = State.IDLE;
+                }
+                break;
             case State.IDLE:
                 animator.SetBool("isIdle", true);
                 // Look to player

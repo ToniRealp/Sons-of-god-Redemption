@@ -491,10 +491,6 @@ public class FinalBossBehaviour : MonoBehaviour {
 
     }
 
-    public void StandUp()
-    {
-
-    }
 
     void LookPlayer()
     {
