@@ -2471,7 +2471,7 @@ MonoBehaviour:
   canvas: {fileID: 0}
   textPos: {fileID: 0}
   font: {fileID: 12800000, guid: cc8fb7e3b2fd1794db8c212bc31a24f7, type: 3}
-  title: {fileID: 1933098827701178, guid: d881cc48486bd18488ba1a6de96b4ede, type: 2}
+  title: {fileID: 1348849242258232, guid: 5a878780984d55f489d008389f7ada7e, type: 2}
   fireBall: {fileID: 1419308403063956, guid: 5f222da87c19ad14c991b4ec54636688, type: 2}
   darkBox: {fileID: 1067518224059244}
   dashTrigger: {fileID: 1083551810994648}
