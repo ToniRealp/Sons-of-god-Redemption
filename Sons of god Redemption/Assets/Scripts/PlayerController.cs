@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour {
     //External attributes
     InputManager inputManager;
     Animator animator;
-    public GameObject flameCone, lightHit, healParticles;
+    public GameObject canvas, youDead, flameCone, lightHit, healParticles;
     [SerializeField] GameObject weapon;
     [SerializeField] GameObject[] elements = new GameObject[(int)Elements.MAX];
     public float bossDmg;
@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour {
         //initialize player atributes(not stats)
         inputManager = GetComponent<InputManager>();
         animator = GetComponent<Animator>();
+        canvas = GameObject.Find("Canvas");
         states = States.Idle;
         attacks = Attacks.NotAtt;
         onCinematic = finalDashHit = dead = lightOnCD = darkOnCD = healOnCD = darkHit = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
@@ -459,7 +460,7 @@ public class PlayerController : MonoBehaviour {
                 actualDeadTime -= Time.deltaTime;
                 if (!dead)
                 {
-                    
+                    Instantiate(youDead, canvas.transform);
                     animator.SetTrigger("Dead");
                     dead = true;
                     animator.ResetTrigger("Hit");

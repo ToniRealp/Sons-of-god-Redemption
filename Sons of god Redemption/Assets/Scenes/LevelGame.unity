@@ -45872,10 +45872,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1158049245}
   bossHandler: {fileID: 1264204996}
-  secondBossHandler: {fileID: 1889288100730766, guid: 169b7a86d93f0884d9af6f0588c436f1,
-    type: 2}
-  boss: {fileID: 0}
-  secondBossSpawnPos: {fileID: 1413998162}
   sceneController: {fileID: 1867115082}
   camera: {fileID: 719524424}
   audioClip: {fileID: 8300000, guid: 0589cbf4324ff384993182282818c007, type: 3}

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class FadeImage : MonoBehaviour {
 
+    
     public float dieTime = 5;
     public Image image;
 
@@ -14,16 +15,23 @@ public class FadeImage : MonoBehaviour {
     void Start()
     {
         c = image.color;
+        c.a = 0;
+        image.color = c;
     }
 
     // Update is called once per frame
     void Update()
     {
+
         dieTime -= Time.deltaTime;
         if (dieTime <= 0)
         {
             c.a -= 0.01f;
-
+            image.color = c;
+        }
+        else
+        {
+            c.a += 0.01f;
             image.color = c;
         }
 
