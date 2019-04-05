@@ -21868,7 +21868,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0589cbf4324ff384993182282818c007, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.799
   m_Pitch: 1
@@ -29894,6 +29894,72 @@ MonoBehaviour:
   - {fileID: 1456318041362940, guid: fb4caff4695695d43a9621fdd1f93921, type: 2}
   roomDoors: []
   spawnPosition: {fileID: 0}
+--- !u!1 &1051071609
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1051071611}
+  - component: {fileID: 1051071610}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1051071610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1051071609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd56148e8ce9b674c8f7195aa72efd5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: MainTheme
+    clip: {fileID: 8300000, guid: 9dcf3f7c49077b34083fdade1abb7a2d, type: 3}
+    volume: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Hit
+    clip: {fileID: 8300000, guid: 9d54cd11b601e1b428925b1897cd4042, type: 3}
+    volume: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Swing
+    clip: {fileID: 8300000, guid: 4ab2086b82ae0344d9e47731a83f9743, type: 3}
+    volume: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: DevilMain
+    clip: {fileID: 8300000, guid: e55fddcf3a7e2e2448becf733e28e565, type: 3}
+    volume: 0.498
+    loop: 0
+    source: {fileID: 0}
+  - name: DevilSpawn
+    clip: {fileID: 8300000, guid: 1660d88931f92b147bc901188c7115b2, type: 3}
+    volume: 0.665
+    loop: 0
+    source: {fileID: 0}
+--- !u!4 &1051071611
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1051071609}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.34163284, y: -15.620317, z: -37.36663}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1051127884
 GameObject:
   m_ObjectHideFlags: 0
