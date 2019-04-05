@@ -1,0 +1,1045 @@
+fileFormatVersion: 2
+guid: a7fe72e2673194745bceedcc61da5a8b
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: PauseMenu
+    21300002: MenusButtons_9
+    21300004: Resume
+    21300006: ResumeGlow
+    21300008: Options
+    21300010: MenusButtons_19
+    21300012: OptionsGlow
+    21300014: MainMenu
+    21300016: MenusButtons_27
+    21300018: MainMenuGlow
+    21300020: Exit
+    21300022: MenusButtons_37
+    21300024: ExitGlow
+    21300026: OptionsMenuBig
+    21300028: MenusButtons_43
+    21300030: MenusButtons_44
+    21300032: MenusButtons_45
+    21300034: MenusButtons_46
+    21300036: SpaceBar
+    21300038: MenusButtons_48
+    21300040: MenusButtons_49
+    21300042: MenusButtons_50
+    21300044: MenusButtons_51
+    21300046: MenusButtons_52
+    21300048: MenusButtons_53
+    21300050: MenusButtons_54
+    21300052: MenusButtons_55
+    21300054: Resolution
+    21300056: MenusButtons_57
+    21300058: MenusButtons_58
+    21300060: MenusButtons_59
+    21300062: ResolutionGlow
+    21300064: MenusButtons_61
+    21300066: MenusButtons_62
+    21300068: MenusButtons_63
+    21300070: MenusButtons_64
+    21300072: MenusButtons_65
+    21300074: MenusButtons_66
+    21300076: MenusButtons_67
+    21300078: MenusButtons_68
+    21300080: Volume
+    21300082: MenusButtons_70
+    21300084: MenusButtons_71
+    21300086: MenusButtons_72
+    21300088: MenusButtons_73
+    21300090: MenusButtons_74
+    21300092: VolumeGlow
+    21300094: MenusButtons_76
+    21300096: MenusButtons_77
+    21300098: MenusButtons_78
+    21300100: MenusButtons_79
+    21300102: MenusButtons_80
+    21300104: MenusButtons_81
+    21300106: MenusButtons_82
+    21300108: MenusButtons_83
+    21300110: WASD
+    21300112: 1
+    21300114: MenusButtons_86
+    21300116: MenusButtons_87
+    21300118: Move
+    21300120: MenusButtons_89
+    21300122: MenusButtons_90
+    21300124: MenusButtons_91
+    21300126: MenusButtons_92
+    21300128: MenusButtons_93
+    21300130: MenusButtons_94
+    21300132: MenusButtons_95
+    21300134: MenusButtons_96
+    21300136: Dodge
+    21300138: MenusButtons_98
+    21300140: MenusButtons_99
+    21300142: LeftClick
+    21300144: 2
+    21300146: MenusButtons_102
+    21300148: MenusButtons_103
+    21300150: MenusButtons_104
+    21300152: MenusButtons_105
+    21300154: MenusButtons_106
+    21300156: MenusButtons_107
+    21300158: MenusButtons_108
+    21300160: MenusButtons_109
+    21300162: MenusButtons_110
+    21300164: MenusButtons_111
+    21300166: MenusButtons_112
+    21300168: MenusButtons_113
+    21300170: MenusButtons_114
+    21300172: MenusButtons_115
+    21300174: AngelProwess
+    21300176: MenusButtons_117
+    21300178: MenusButtons_118
+    21300180: MenusButtons_119
+    21300182: MenusButtons_120
+    21300184: MenusButtons_121
+    21300186: MenusButtons_122
+    21300188: MenusButtons_123
+    21300190: MenusButtons_124
+    21300192: MenusButtons_125
+    21300194: MenusButtons_126
+    21300196: MenusButtons_127
+    21300198: RightClick
+    21300200: 3
+    21300202: MenusButtons_130
+    21300204: MenusButtons_131
+    21300206: MenusButtons_132
+    21300208: MenusButtons_133
+    21300210: MenusButtons_134
+    21300212: MenusButtons_135
+    21300214: MenusButtons_136
+    21300216: MenusButtons_137
+    21300218: MenusButtons_138
+    21300220: MenusButtons_139
+    21300222: MenusButtons_140
+    21300224: MenusButtons_141
+    21300226: MenusButtons_142
+    21300228: MenusButtons_143
+    21300230: MenusButtons_144
+    21300232: MenusButtons_145
+    21300234: MenusButtons_146
+    21300236: MenusButtons_147
+    21300238: MenusButtons_148
+    21300240: MenusButtons_149
+    21300242: LightAttack
+    21300244: StrongAttack
+    21300246: Darkness
+    21300248: Light
+    21300250: Fire
+  externalObjects: {}
+  serializedVersion: 7
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PauseMenu
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 998
+        width: 295
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02b64e5f8042ad44b99d449f0ba5be94
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MenusButtons_9
+      rect:
+        serializedVersion: 2
+        x: 1203
+        y: 990
+        width: 196
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbd66fe2bca489446b9538580bda2c0c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Resume
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 915
+        width: 119
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b098f6cbde093f4b94e8135ebeef2ef
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ResumeGlow
+      rect:
+        serializedVersion: 2
+        x: 1203
+        y: 904
+        width: 135
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1caecffc53d9ba042848a805dad40ef1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Options
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 820
+        width: 117
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6064267359f13c846931e1fa5494a257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MenusButtons_19
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 849
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da97f1664aa720144a5726900588aa6c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OptionsGlow
+      rect:
+        serializedVersion: 2
+        x: 1202
+        y: 810
+        width: 133
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87f20c2213b79ce46bfbe4294c417dae
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MainMenu
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 742
+        width: 175
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 623da61a5afd4714d8214c303e2211d2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MenusButtons_27
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 763
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d178e0171c7d4d64fbd3bc5d24260565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MainMenuGlow
+      rect:
+        serializedVersion: 2
+        x: 1201
+        y: 731
+        width: 191
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33f4d9f9b56c93741899ae0c6a3fe345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Exit
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 655
+        width: 59
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0ba132d1a3c7d24d93494280527f22f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MenusButtons_37
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 676
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd93ce92f41b02b45a1cfd6e6d9154b8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExitGlow
+      rect:
+        serializedVersion: 2
+        x: 1202
+        y: 644
+        width: 79
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b19c84a2eb0e2704eae3db94b066c639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OptionsMenuBig
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 531
+        width: 350
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff53484089fddfd4aad3003b2700540b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MenusButtons_44
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 574
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3758626725a533d46a21073dbd82f1d1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MenusButtons_46
+      rect:
+        serializedVersion: 2
+        x: 1202
+        y: 551
+        width: 225
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 352c61e9ce2c5c34b8b692e7e003ab11
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpaceBar
+      rect:
+        serializedVersion: 2
+        x: 1655
+        y: 545
+        width: 164
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de3a6bb15221ba54cbc3382c0bfe749c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Resolution
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 448
+        width: 164
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee6aa66bfb093384aa27c41c74832c2e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MenusButtons_59
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 475
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e448763770ae2ce4d9a5fa6a87768b59
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ResolutionGlow
+      rect:
+        serializedVersion: 2
+        x: 1203
+        y: 472
+        width: 177
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72c471b8987b54b448f2641600b67902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MenusButtons_61
+      rect:
+        serializedVersion: 2
+        x: 1655
+        y: 463
+        width: 36
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca553785e4c42ba48bff32b1da11373c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Volume
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 361
+        width: 122
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 164c7a478ddc9fc46a0d66b10fdb3798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VolumeGlow
+      rect:
+        serializedVersion: 2
+        x: 1201
+        y: 385
+        width: 133
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb9257750033d414fae074f125420c7e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WASD
+      rect:
+        serializedVersion: 2
+        x: 1648
+        y: 233
+        width: 114
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e4f37238de32864390c8094840a89ca
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1
+      rect:
+        serializedVersion: 2
+        x: 1429
+        y: 232
+        width: 28
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8961d1a0034561143a8b36b4a0e69886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MenusButtons_87
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 216
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2fe9aef4da90f94f9c246b2b044a7f6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Move
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 183
+        width: 97
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6a46c57b09996c4fa631432e2376b8f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dodge
+      rect:
+        serializedVersion: 2
+        x: 887
+        y: 182
+        width: 109
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc9be7fbedecc504b829d0fa2eb09998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeftClick
+      rect:
+        serializedVersion: 2
+        x: 1649
+        y: 152
+        width: 150
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82491d18c387acb4cb6883e20c1e9c87
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2
+      rect:
+        serializedVersion: 2
+        x: 1428
+        y: 146
+        width: 34
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a2dc92f6a33cf64ab45112925650d4b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MenusButtons_112
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 108
+        width: 11
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff6869ef74e038e4bbeb548ed873ef9f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AngelProwess
+      rect:
+        serializedVersion: 2
+        x: 890
+        y: 89
+        width: 205
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4421bcbe1cdf08b4480038e7b5073c51
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RightClick
+      rect:
+        serializedVersion: 2
+        x: 1649
+        y: 63
+        width: 178
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 819af5200fa69b8438f136d0af6a8445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3
+      rect:
+        serializedVersion: 2
+        x: 1427
+        y: 57
+        width: 35
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b29221a466492d448ad4bc461d9d165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MenusButtons_136
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 22
+        width: 12
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c681dc533d4c7b4f9ea224f69ba4644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MenusButtons_142
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 22
+        width: 18
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b5d7053a1702f849be686109c90e2be
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightAttack
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 93
+        width: 203
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 221fd0ce85c5333419a99c93d6685c5c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StrongAttack
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 10
+        width: 222
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e3d7db021672224e8bb00f748170997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkness
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 10
+        width: 154
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35e730947e8f297479bf65d620f13b06
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Light
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 96
+        width: 84
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78db52f60eed75c48bc44cfba7faaae0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 179
+        width: 93
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0132ede7a44b97e439cd9bb4b1b41f47
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 29a462c89ea1b5146a4ac3cae35d76a6
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
