@@ -2295,7 +2295,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1008205161994760}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.098176956, y: 0, z: 223.1}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
   - {fileID: 4236671491116046}
@@ -2454,7 +2454,7 @@ MonoBehaviour:
   roarDmg: 5
   rainDmg: 40
   healthText: {fileID: 0}
-  title: {fileID: 1933098827701178, guid: d881cc48486bd18488ba1a6de96b4ede, type: 2}
+  title: {fileID: 1911229960649754, guid: 661882a09d462a04996960ebbbc3772b, type: 2}
   healthTextGO: {fileID: 0}
   canvas: {fileID: 0}
   textPos: {fileID: 0}
