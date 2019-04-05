@@ -7033,7 +7033,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: c64372c6ec5cf414085b43f090c24e4d, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 0dafd0b462a836e45a843bc56880ba18, type: 2}
 --- !u!4 &291601555
 Transform:
   m_ObjectHideFlags: 0
@@ -45872,10 +45872,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1158049245}
   bossHandler: {fileID: 1264204996}
-  secondBossHandler: {fileID: 1889288100730766, guid: 169b7a86d93f0884d9af6f0588c436f1,
-    type: 2}
-  boss: {fileID: 0}
-  secondBossSpawnPos: {fileID: 1413998162}
   sceneController: {fileID: 1867115082}
   camera: {fileID: 719524424}
   audioClip: {fileID: 8300000, guid: 0589cbf4324ff384993182282818c007, type: 3}
