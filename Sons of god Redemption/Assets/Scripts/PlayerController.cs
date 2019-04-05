@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
 
     //Canvas
     public Slider healthBar;
+    public Slider potionBar;
     public GameObject fireUI;
     public GameObject lightUI;
     public GameObject darkUI;
@@ -57,6 +58,8 @@ public class PlayerController : MonoBehaviour {
         baseAttack = stats.baseAttack;
         healthBar.maxValue = health;
         healthBar.value = health;
+        potionBar.maxValue = healCooldown;
+        potionBar.value = healCooldown;
         walkVelocity = movementSpeed;
         runVelocity = movementSpeed * 2;
 
@@ -104,6 +107,14 @@ public class PlayerController : MonoBehaviour {
             movementSpeed = stats.movementSpeed;
         }
 
+        if (actualHealCooldown >= 0 && actualHealCooldown != healCooldown)
+        {
+            potionBar.value = healCooldown - actualHealCooldown;
+        }
+        else
+        {
+            potionBar.value = healCooldown;
+        }
 
         //Element controller
         if (inputs[(int)ButtonInputs.padRight])
@@ -756,11 +767,11 @@ public class PlayerController : MonoBehaviour {
                 {
                     other.GetComponentInParent<FirstBossBehaviour>().health -= lightDmg;
                 }
-                else if (other.gameObject.name == "SecondBoss")
+                else if (other.gameObject.name == "SecondBoss(Clone)")
                 {
                     other.GetComponentInParent<SecondBossBehaviour>().health -= lightDmg;
                 }
-                else if (other.gameObject.name == "FinalBoss")
+                else if (other.gameObject.name == "GoDFinal(Clone)")
                 {
                     other.GetComponentInParent<FinalBossBehaviour>().health -= lightDmg;
                 }

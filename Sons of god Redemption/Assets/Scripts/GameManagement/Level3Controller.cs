@@ -52,6 +52,7 @@ public class Level3Controller : MonoBehaviour {
                 camera.GetComponent<AudioSource>().volume = 0;
                 camera.GetComponent<AudioSource>().Play();
                 bossSpawn = true;
+                actualSpawn = spawns[1];
             }
         }
 
@@ -75,10 +76,7 @@ public class Level3Controller : MonoBehaviour {
 
     public void OpenAllDoors()
     {
-        foreach (RoomController room in roomControllers)
-        {
-            room.OpenDoors();
-        }
+
     }
 
     //public void SaveGame()

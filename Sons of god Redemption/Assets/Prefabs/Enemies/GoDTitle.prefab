@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114352795029882476}
   - component: {fileID: 114097421692651674}
   m_Layer: 5
-  m_Name: GoDTitle
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3c9a6145b4373f4e96cfa0d1efe4ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dieTime: 5.5
+  imageDieTime: 5
   image: {fileID: 114351534669930012}
 --- !u!114 &114351534669930012
 MonoBehaviour:

@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcfc687c1d3ede6449e7c2805c544638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeTime: 5
-  dieTime: 10
+  fadeTime: 3.6
+  dieTime: 7
   text: {fileID: 114857157682453272}
 --- !u!114 &114857157682453272
 MonoBehaviour:
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3c9a6145b4373f4e96cfa0d1efe4ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dieTime: 3.5
+  imageDieTime: 3.6
   image: {fileID: 114121406150324256}
 --- !u!222 &222261138192873794
 CanvasRenderer:

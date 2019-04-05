@@ -6,33 +6,36 @@ using UnityEngine.UI;
 public class FadeImage : MonoBehaviour {
 
     
-    public float dieTime = 5;
+    public float imageDieTime = 5;
     public Image image;
 
-    private Color c;
+    private Color i;
 
     // Use this for initialization
     void Start()
     {
-        c = image.color;
-        c.a = 0;
-        image.color = c;
+        i = image.color;
+        i.a = 0;
+        image.color = i;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        dieTime -= Time.deltaTime;
-        if (dieTime <= 0)
+        imageDieTime -= Time.deltaTime;
+        if (imageDieTime <= 0)
         {
-            c.a -= 0.01f;
-            image.color = c;
+            i.a -= 0.01f;
+            image.color = i;
         }
         else
         {
-            c.a += 0.01f;
-            image.color = c;
+            if (i.a <= 1)
+            {
+                i.a += 0.01f;
+                image.color = i;
+            }
         }
 
     }
