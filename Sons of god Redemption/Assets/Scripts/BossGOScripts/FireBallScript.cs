@@ -17,7 +17,7 @@ public class FireBallScript : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerController>().bossDmg = GameObject.Find("GoDFinal").GetComponent<FinalBossBehaviour>().fireDmg;
+            collision.gameObject.GetComponent<PlayerController>().bossDmg = GameObject.Find("GoDFinal(Clone)").GetComponent<FinalBossBehaviour>().fireDmg;
             collision.gameObject.GetComponent<PlayerController>().meteorHit = true;
         }
         Instantiate(explosion, transform.position, transform.rotation);
