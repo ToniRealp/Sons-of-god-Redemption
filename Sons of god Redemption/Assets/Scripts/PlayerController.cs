@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
     public Slider healthBar;
     public GameObject fireUI;
     public GameObject lightUI;
+    public GameObject darkUI;
 
     //Enums
     enum States { Idle, Walking, Running, Dashing, Attacking, Damaged, Dead, MAX };
@@ -23,7 +24,7 @@ public class PlayerController : MonoBehaviour {
     //External attributes
     InputManager inputManager;
     Animator animator;
-    public GameObject flameCone, lightHit, healParticles;
+    public GameObject canvas, youDead, flameCone, lightHit, healParticles;
     [SerializeField] GameObject weapon;
     [SerializeField] GameObject[] elements = new GameObject[(int)Elements.MAX];
     public float bossDmg;
@@ -62,6 +63,7 @@ public class PlayerController : MonoBehaviour {
         //initialize player atributes(not stats)
         inputManager = GetComponent<InputManager>();
         animator = GetComponent<Animator>();
+        canvas = GameObject.Find("Canvas");
         states = States.Idle;
         attacks = Attacks.NotAtt;
         onCinematic = finalDashHit = dead = lightOnCD = darkOnCD = healOnCD = darkHit = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
@@ -111,6 +113,7 @@ public class PlayerController : MonoBehaviour {
             elements[(int)Elements.Dark].SetActive(false);
             fireUI.SetActive(true);
             lightUI.SetActive(false);
+            darkUI.SetActive(false);
             //health = stats.health;
             //healthBar.value = health;
         }
@@ -121,12 +124,16 @@ public class PlayerController : MonoBehaviour {
             elements[(int)Elements.Dark].SetActive(false);
             fireUI.SetActive(false);
             lightUI.SetActive(true);
+            darkUI.SetActive(false);
         }
         if (inputs[(int)ButtonInputs.padDown])
         {
             elements[(int)Elements.Fire].SetActive(false);
             elements[(int)Elements.Holy].SetActive(false);
             elements[(int)Elements.Dark].SetActive(true);
+            fireUI.SetActive(false);
+            lightUI.SetActive(false);
+            darkUI.SetActive(true);
         }
         if (inputs[(int)ButtonInputs.padUp])
         {
@@ -459,7 +466,7 @@ public class PlayerController : MonoBehaviour {
                 actualDeadTime -= Time.deltaTime;
                 if (!dead)
                 {
-                    
+                    Instantiate(youDead, canvas.transform);
                     animator.SetTrigger("Dead");
                     dead = true;
                     animator.ResetTrigger("Hit");

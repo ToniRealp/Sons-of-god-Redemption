@@ -494,7 +494,7 @@ public class FinalBossBehaviour : MonoBehaviour {
 
     void LookPlayer()
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(player.transform.position.x - transform.position.x, transform.position.y, player.transform.position.z - transform.position.z)), rotationSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y, player.transform.position.z - transform.position.z)), rotationSpeed);
     }
 
     void Dash()

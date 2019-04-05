@@ -11,7 +11,7 @@ public class Level2Controller : MonoBehaviour {
     public GameObject camera;
     public AudioClip audioClip;
     public bool[] trigger;
-    [SerializeField] Transform[] spawns = new Transform[1];
+    [SerializeField] Transform[] spawns = new Transform[8];
     public RoomController[] roomControllers;
     InputManager inputManager;
 
@@ -54,7 +54,6 @@ public class Level2Controller : MonoBehaviour {
         {
             trigger[i] = false;
         }
-        bossHandler.GetComponent<FirstBossBehaviour>().movingSpeed = 0f;
         inputManager = gameObject.GetComponent<InputManager>();
     }
 
@@ -73,7 +72,7 @@ public class Level2Controller : MonoBehaviour {
         switch (roomsExplored)
         {
             case 0:
-                if (trigger[1])
+                if (trigger[0] || trigger[1])
                 {
                     roomsExplored = 1;
                     actualSpawn = spawns[1];
@@ -89,7 +88,7 @@ public class Level2Controller : MonoBehaviour {
                 break;
 
             case 2:
-                if (trigger[5] || trigger[6])
+                if (trigger[4] || trigger[5])
                 {
                     roomsExplored = 3;
                     actualSpawn = spawns[3];
@@ -97,33 +96,10 @@ public class Level2Controller : MonoBehaviour {
                 break;
 
             case 3:
-                if (trigger[7] || trigger[8] || trigger[9])
+                if (trigger[6] || trigger[7])
                 {
                     roomsExplored = 4;
                     actualSpawn = spawns[4];
-                }
-                break;
-
-            case 4:
-                if (trigger[12] || trigger[13])
-                {
-                    roomsExplored = 5;
-                    actualSpawn = spawns[5];
-                }
-                break;
-
-            case 5:
-                if (trigger[14] || trigger[15])
-                {
-                    roomsExplored = 6;
-                    actualSpawn = spawns[6];
-                }
-                break;
-
-            case 6:
-                if (trigger[1])
-                {
-                    roomsExplored = 7;
                 }
                 break;
 
@@ -134,7 +110,7 @@ public class Level2Controller : MonoBehaviour {
         }
 
         //SpawnBoss
-        if (trigger[15])
+        if (trigger[8])
         {
             if (!bossSpawn)
             {

@@ -1763,7 +1763,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1532023036423736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.08, y: 1.03932796e-17, z: 0.4}
+  m_LocalPosition: {x: 18.22, y: -2, z: 25.69}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4012368197550088}
@@ -2349,6 +2349,9 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   fireUI: {fileID: 0}
   lightUI: {fileID: 0}
+  darkUI: {fileID: 0}
+  canvas: {fileID: 0}
+  youDead: {fileID: 1892856782702840, guid: 492396e082c6b6446bb8962b277ff1ac, type: 2}
   flameCone: {fileID: 1614076690806676}
   lightHit: {fileID: 1008891602714680, guid: 58d1e5b52a3ad734db07b18f829c70ed, type: 2}
   healParticles: {fileID: 1045061750658230, guid: 469929624c08b0a4183d49b0cbc1b0ff,
