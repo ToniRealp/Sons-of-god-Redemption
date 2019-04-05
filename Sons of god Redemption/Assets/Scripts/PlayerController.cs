@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
     public Slider healthBar;
     public GameObject fireUI;
     public GameObject lightUI;
+    public GameObject darkUI;
 
     //Enums
     enum States { Idle, Walking, Running, Dashing, Attacking, Damaged, Dead, MAX };
@@ -112,6 +113,7 @@ public class PlayerController : MonoBehaviour {
             elements[(int)Elements.Dark].SetActive(false);
             fireUI.SetActive(true);
             lightUI.SetActive(false);
+            darkUI.SetActive(false);
             //health = stats.health;
             //healthBar.value = health;
         }
@@ -122,12 +124,16 @@ public class PlayerController : MonoBehaviour {
             elements[(int)Elements.Dark].SetActive(false);
             fireUI.SetActive(false);
             lightUI.SetActive(true);
+            darkUI.SetActive(false);
         }
         if (inputs[(int)ButtonInputs.padDown])
         {
             elements[(int)Elements.Fire].SetActive(false);
             elements[(int)Elements.Holy].SetActive(false);
             elements[(int)Elements.Dark].SetActive(true);
+            fireUI.SetActive(false);
+            lightUI.SetActive(false);
+            darkUI.SetActive(true);
         }
         if (inputs[(int)ButtonInputs.padUp])
         {
