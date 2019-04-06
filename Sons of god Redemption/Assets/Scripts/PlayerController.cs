@@ -148,11 +148,13 @@ public class PlayerController : MonoBehaviour {
         }
         if (inputs[(int)ButtonInputs.padUp])
         {
-            if (!healOnCD && health <= stats.health - 40)
+            if (!healOnCD)
             {
                 Instantiate(healParticles, transform);
                 healOnCD = true;
-                health += 40;
+                if (health <= stats.health - 40)
+                    health += 40;
+                else health = stats.health;
                 healthBar.value = health;
             }
         }

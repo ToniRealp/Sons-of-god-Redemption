@@ -16,7 +16,7 @@ public class PressStart : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Time.time>= startTime+1.0f)
+        if (Time.time >= startTime+1.0f)
         {
             if (inputManager.attackButton || inputManager.dashButton || inputManager.escape || inputManager.interact || inputManager.strongAttackButton)
             {
