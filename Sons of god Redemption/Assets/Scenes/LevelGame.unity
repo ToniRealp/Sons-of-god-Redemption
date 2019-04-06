@@ -7033,7 +7033,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: 0dafd0b462a836e45a843bc56880ba18, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 5b04b0ef7daa33d4c8206e4e3df2f13a, type: 2}
 --- !u!4 &291601555
 Transform:
   m_ObjectHideFlags: 0
@@ -48972,6 +48972,11 @@ Prefab:
       propertyPath: darkUI
       value: 
       objectReference: {fileID: 1269451058}
+    - target: {fileID: 114062393654652366, guid: ddd6aa0c312240c4f960b9d9751a654a,
+        type: 2}
+      propertyPath: potionBar
+      value: 
+      objectReference: {fileID: 1118164694}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
   m_IsPrefabAsset: 0

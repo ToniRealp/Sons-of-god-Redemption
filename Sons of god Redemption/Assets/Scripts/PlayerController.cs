@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour {
         {
             this.gameObject.layer = 11;
             states = States.Dashing;
-            animator.SetTrigger("isDashing");
+            animator.SetBool("isDashing",true);
             dashed = true;
         }
         if (health<=0)
@@ -590,6 +590,7 @@ public class PlayerController : MonoBehaviour {
         animator.SetBool("isIdle", true);
         animator.SetBool("isWalking", false);
         animator.SetBool("isRunning", false);
+        animator.SetBool("isDashing", false);
         flameCone.SetActive(false);
     }
 
