@@ -128,6 +128,7 @@ TextureImporter:
     21300246: Darkness
     21300248: Light
     21300250: Fire
+    21300252: MenusButtons_0
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -413,10 +414,10 @@ TextureImporter:
       name: Exit
       rect:
         serializedVersion: 2
-        x: 103
-        y: 655
-        width: 59
-        height: 25
+        x: 100
+        y: 653
+        width: 65
+        height: 28
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -453,10 +454,10 @@ TextureImporter:
       name: ExitGlow
       rect:
         serializedVersion: 2
-        x: 1202
-        y: 644
-        width: 79
-        height: 47
+        x: 1210
+        y: 653
+        width: 65
+        height: 28
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -938,7 +939,7 @@ TextureImporter:
         width: 203
         height: 59
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -958,7 +959,7 @@ TextureImporter:
         width: 222
         height: 53
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -978,7 +979,7 @@ TextureImporter:
         width: 154
         height: 51
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -998,7 +999,7 @@ TextureImporter:
         width: 84
         height: 46
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1018,13 +1019,33 @@ TextureImporter:
         width: 93
         height: 62
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 0132ede7a44b97e439cd9bb4b1b41f47
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MenusButtons_0
+      rect:
+        serializedVersion: 2
+        x: 1718
+        y: 700
+        width: 205
+        height: 234
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c95e436ced7a8e4f8ffadc1317998be
       vertices: []
       indices: 
       edges: []
