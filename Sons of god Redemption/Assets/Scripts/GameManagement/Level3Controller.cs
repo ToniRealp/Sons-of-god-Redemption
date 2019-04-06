@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Level3Controller : MonoBehaviour {
+public class Level3Controller : LevelController {
 
     public GameObject player;
     public GameObject bossHandler;
     public Transform bossSpawnPos;
     public SceneController sceneController;
-    public GameObject camera;
-    public AudioClip audioClip;
+    public AudioManager audioManager;
     public bool[] trigger;
     [SerializeField] Transform[] spawns = new Transform[1];
     public RoomController[] roomControllers;
@@ -47,22 +46,26 @@ public class Level3Controller : MonoBehaviour {
         {
             if (!bossSpawn)
             {
-                Instantiate(bossHandler, bossSpawnPos.position, bossSpawnPos.rotation);
-                camera.GetComponent<AudioSource>().clip = audioClip;
-                camera.GetComponent<AudioSource>().volume = 0;
-                camera.GetComponent<AudioSource>().Play();
+                bossHandler.GetComponent<FirstBossBehaviour>().movingSpeed = 0.005f;
+                bossHandler.GetComponent<FirstBossBehaviour>().StandUp();
+                audioManager.Play("GodTheme");
+
                 bossSpawn = true;
-                actualSpawn = spawns[1];
             }
         }
 
-
+        float volume = 0;
+        float volume2 = 1;
         if (bossSpawn && !volumeSet)
         {
-            camera.GetComponent<AudioSource>().volume += 0.001f;
-            if (camera.GetComponent<AudioSource>().volume == 1f)
+            volume += 0.001f;
+            volume2 -= 0.001f;
+            audioManager.SetVolume("GodTheme", volume);
+            audioManager.SetVolume("MainTheme", volume2);
+            if (audioManager.GetVolume("GodTheme") == 1f)
             {
                 volumeSet = true;
+                audioManager.Stop("MainTheme");
             }
         }
 
@@ -74,7 +77,7 @@ public class Level3Controller : MonoBehaviour {
         sceneController.changeScene("Win");
     }
 
-    public void OpenAllDoors()
+    override public void OpenAllDoors()
     {
 
     }

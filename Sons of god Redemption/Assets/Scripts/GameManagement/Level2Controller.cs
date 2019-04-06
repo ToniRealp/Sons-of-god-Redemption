@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Level2Controller : MonoBehaviour {
+public class Level2Controller : LevelController {
 
     public GameObject player;
     public GameObject bossHandler;
     public Transform bossSpawnPos;
     public SceneController sceneController;
-    public GameObject camera;
-    public AudioClip audioClip;
+    public AudioManager audioManager;
     public bool[] trigger;
     [SerializeField] Transform[] spawns = new Transform[8];
     public RoomController[] roomControllers;
@@ -49,8 +48,8 @@ public class Level2Controller : MonoBehaviour {
                 room.InstantiateEnemies();
             }
         }
-        trigger = new bool[19];
-        for (int i = 0; i < 19; i++)
+        trigger = new bool[9];
+        for (int i = 0; i < 9; i++)
         {
             trigger[i] = false;
         }
@@ -114,21 +113,26 @@ public class Level2Controller : MonoBehaviour {
         {
             if (!bossSpawn)
             {
-                Instantiate(bossHandler, bossSpawnPos);
-                camera.GetComponent<AudioSource>().clip = audioClip;
-                camera.GetComponent<AudioSource>().volume = 0;
-                camera.GetComponent<AudioSource>().Play();
+                bossHandler.GetComponent<FirstBossBehaviour>().movingSpeed = 0.005f;
+                bossHandler.GetComponent<FirstBossBehaviour>().StandUp();
+                audioManager.Play("BossTheme");
+
                 bossSpawn = true;
             }
         }
 
-
+        float volume = 0;
+        float volume2 = 1;
         if (bossSpawn && !volumeSet)
         {
-            camera.GetComponent<AudioSource>().volume += 0.001f;
-            if (camera.GetComponent<AudioSource>().volume == 1f)
+            volume += 0.001f;
+            volume2 -= 0.001f;
+            audioManager.SetVolume("BossTheme", volume);
+            audioManager.SetVolume("MainTheme", volume2);
+            if (audioManager.GetVolume("BossTheme") == 1f)
             {
                 volumeSet = true;
+                audioManager.Stop("MainTheme");
             }
         }
 
@@ -140,7 +144,7 @@ public class Level2Controller : MonoBehaviour {
         sceneController.changeScene("Win");
     }
 
-    public void OpenAllDoors()
+    override public void OpenAllDoors() 
     {
         foreach (RoomController room in roomControllers)
         {

@@ -77,7 +77,7 @@ public class FinalBossBehaviour : MonoBehaviour {
 
         if (health <= 0)
         {
-            GameObject.Find("Level1Controller").GetComponent<Level1Controller>().BossDead();
+            GameObject.Find("LevelController").GetComponent<Level3Controller>().BossDead();
             Instantiate(dieParticles, bloodPosition.position, bloodPosition.rotation);
             Destroy(this.gameObject);
             Destroy(healthTextGO);

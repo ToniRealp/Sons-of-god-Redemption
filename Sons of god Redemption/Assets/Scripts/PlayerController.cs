@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour {
     private float xAxis, yAxis;
 
     //General atributes
-    public Level1Controller levelController;
+    public LevelController levelController;
     public Vector3 direction;
     public int walkVelocity, runVelocity, dashDistance;    
     public float dashCooldownTime, dashDuration, deadDuration, onHitAnimDelay, damage, lightCooldown, darkCooldown, healCooldown, actualHealCooldown, damagedCooldown, actualDamagedCooldown;
