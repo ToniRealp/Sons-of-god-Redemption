@@ -6,6 +6,7 @@ public class Level1Controller : LevelController {
 
     public GameObject player;
     public GameObject bossHandler;
+    public GameObject bossDoor;
     public SceneController sceneController;
     public AudioManager audioManager;
        
@@ -138,7 +139,7 @@ public class Level1Controller : LevelController {
 
     public void BossDead()
     {
-        sceneController.changeScene("LevelGame2");
+        bossDoor.SetActive(false);
     }
 
     override public void OpenAllDoors()
