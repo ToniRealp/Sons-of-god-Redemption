@@ -3393,7 +3393,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 968064979}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b459f1dfc809b014980b0f73cd3dab7d, type: 3}
+  m_Script: {fileID: 11500000, guid: 555aa37a51104384eb035cc84a83c0d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   LevelController: {fileID: 1867115079}
@@ -6355,8 +6355,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.1533637, y: 2.616522, z: 2.3265}
-  m_Center: {x: 0.07668185, y: -0.08059919, z: -0.13984203}
+  m_Size: {x: 7.767407, y: 6.4090815, z: 5.3900604}
+  m_Center: {x: -3.2303398, y: -1.288115, z: 0.39510632}
 --- !u!1 &1841080258
 GameObject:
   m_ObjectHideFlags: 0
@@ -6576,20 +6576,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51698c5bd11c53b49bd9a37da15a6002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomsExplored: 0
+  roomControllers: []
+  actualSpawn: {fileID: 0}
+  spawns:
+  - {fileID: 1346402704}
+  - {fileID: 449273310}
+  trigger: 
   player: {fileID: 1158049245}
   bossHandler: {fileID: 1818985006133832, guid: df19d9b539ce54d49830752049126fd9,
     type: 2}
   bossSpawnPos: {fileID: 1841080259}
   sceneController: {fileID: 1867115082}
-  camera: {fileID: 719524424}
-  audioClip: {fileID: 8300000, guid: 36ca28cc7ebdaf34c8704c7ad3ecec42, type: 3}
-  trigger: 
-  spawns:
-  - {fileID: 1346402704}
-  - {fileID: 449273310}
-  roomControllers: []
-  actualSpawn: {fileID: 0}
-  roomsExplored: 0
+  audioManager: {fileID: 454469064}
 --- !u!4 &1867115081
 Transform:
   m_ObjectHideFlags: 0

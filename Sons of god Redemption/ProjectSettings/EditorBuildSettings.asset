@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelGame3.unity
     guid: 31a98a59f30be0148be25ef0cd5f6692
+  - enabled: 1
+    path: Assets/Scenes/FinalCinematic.unity
+    guid: 9b84caa11a6d7de4faa39cb05115b0f5
   m_configObjects: {}
