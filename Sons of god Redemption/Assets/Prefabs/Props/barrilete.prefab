@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33511357507640144}
   - component: {fileID: 23938819632501540}
   - component: {fileID: 65212192319086650}
+  - component: {fileID: 114451432152079500}
   m_Layer: 0
   m_Name: barrilete
   m_TagString: Untagged
@@ -35,9 +36,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1928233100909650}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 5.0869937, y: 0, z: 0.47}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -4.017747, y: 0.0041853962, z: -0.87316895}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -94,5 +95,18 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.67612725, y: 0.67612743, z: 0.75348866}
-  m_Center: {x: 0, y: 0, z: 0.37255895}
+  m_Size: {x: 0.67612725, y: 0.67612743, z: 1.7567127}
+  m_Center: {x: 0, y: -1.7881323e-15, z: 0.87417114}
+--- !u!114 &114451432152079500
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1928233100909650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d77c4f359d2fe114395aec53078f8fab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fracturedMesh: {fileID: 1945009783253464, guid: 4cc061ea6fd2acc49953bd21b2b78870,
+    type: 2}
