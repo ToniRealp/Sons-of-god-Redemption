@@ -45,7 +45,7 @@ public class Level3Controller : LevelController {
             {
                 Instantiate(bossHandler, bossSpawnPos.position, bossSpawnPos.rotation);
                 //audioManager.Play("GodTheme");
-
+                actualSpawn = spawns[1];
                 bossSpawn = true;
             }
         }
