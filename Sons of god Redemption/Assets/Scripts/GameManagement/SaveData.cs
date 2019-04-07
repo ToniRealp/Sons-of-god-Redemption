@@ -8,8 +8,9 @@ public class SaveData {
     public int health, attack, roomsExplored;
     public float[] playerSpawn;
     public bool[] rooms;
+    public int level;
 
-    public SaveData(Level1Controller levelController, PlayerController playerStats )
+    public SaveData(LevelController levelController, PlayerController playerStats, int _level )
     {
         rooms = new bool[levelController.roomControllers.Length];
         roomsExplored = levelController.roomsExplored;
@@ -20,6 +21,7 @@ public class SaveData {
 
         health = playerStats.health;
         attack = playerStats.baseAttack;
+        level = _level;
 
         playerSpawn = new float[3];
         playerSpawn[0] = levelController.actualSpawn.position.x;

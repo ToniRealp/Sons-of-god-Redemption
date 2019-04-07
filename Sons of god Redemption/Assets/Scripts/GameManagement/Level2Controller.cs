@@ -10,12 +10,7 @@ public class Level2Controller : LevelController {
     public SceneController sceneController;
     public AudioManager audioManager;
     public bool[] trigger;
-    [SerializeField] Transform[] spawns = new Transform[8];
-    public RoomController[] roomControllers;
     InputManager inputManager;
-
-    public Transform actualSpawn;
-    public int roomsExplored;
 
     private bool bossSpawn, volumeSet;
 
@@ -23,31 +18,8 @@ public class Level2Controller : LevelController {
     void Start()
     {
 
-        if (SaveSystem.LoadData() != null)
-        {
-            SaveData saveData = SaveSystem.LoadData();
-
-            roomsExplored = saveData.roomsExplored;
-            actualSpawn = spawns[roomsExplored];
-            volumeSet = bossSpawn = false;
-
-            for (int i = 0; i < roomControllers.Length; i++)
-            {
-                if (!saveData.rooms[i])
-                    roomControllers[i].InstantiateEnemies();
-            }
-        }
-        else
-        {
-            roomsExplored = 0;
-            actualSpawn = spawns[0];
-            volumeSet = bossSpawn = false;
-
-            foreach (RoomController room in roomControllers)
-            {
-                room.InstantiateEnemies();
-            }
-        }
+        LoadGame();
+        volumeSet = bossSpawn = false;
         trigger = new bool[9];
         for (int i = 0; i < 9; i++)
         {
@@ -152,9 +124,9 @@ public class Level2Controller : LevelController {
         }
     }
 
-    //public void SaveGame()
-    //{
-    //    SaveSystem.SaveData(this, player.GetComponent<PlayerController>());
-    //}
+    public void SaveGame()
+    {
+        SaveSystem.SaveData(this, player.GetComponent<PlayerController>(),2);
+    }
 
 }
