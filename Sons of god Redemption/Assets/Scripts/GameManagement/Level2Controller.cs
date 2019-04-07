@@ -84,35 +84,34 @@ public class Level2Controller : LevelController {
         {
             if (!bossSpawn)
             {
-                bossHandler.GetComponent<FirstBossBehaviour>().movingSpeed = 0.005f;
-                bossHandler.GetComponent<FirstBossBehaviour>().StandUp();
-                audioManager.Play("BossTheme");
+                Instantiate(bossHandler, bossSpawnPos.position, bossSpawnPos.rotation);
+                //audioManager.Play("BossTheme");
 
                 bossSpawn = true;
             }
         }
 
-        float volume = 0;
-        float volume2 = 1;
-        if (bossSpawn && !volumeSet)
-        {
-            volume += 0.001f;
-            volume2 -= 0.001f;
-            audioManager.SetVolume("BossTheme", volume);
-            audioManager.SetVolume("MainTheme", volume2);
-            if (audioManager.GetVolume("BossTheme") == 1f)
-            {
-                volumeSet = true;
-                audioManager.Stop("MainTheme");
-            }
-        }
+        //float volume = 0;
+        //float volume2 = 1;
+        //if (bossSpawn && !volumeSet)
+        //{
+        //    volume += 0.001f;
+        //    volume2 -= 0.001f;
+        //    audioManager.SetVolume("BossTheme", volume);
+        //    audioManager.SetVolume("MainTheme", volume2);
+        //    if (audioManager.GetVolume("BossTheme") == 1f)
+        //    {
+        //        volumeSet = true;
+        //        audioManager.Stop("MainTheme");
+        //    }
+        //}
 
 
     }
 
     public void BossDead()
     {
-        sceneController.changeScene("Win");
+        sceneController.changeScene("LevelGame3");
     }
 
     override public void OpenAllDoors() 

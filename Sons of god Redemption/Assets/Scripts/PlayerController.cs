@@ -297,7 +297,7 @@ public class PlayerController : MonoBehaviour {
                         if (animLength < animDuration * 0.7)
                         {
                             //weapon.tag = "Weapon";
-                            weapon.tag = "lightAttack1";
+                            weapon.tag = "LightAttack1";
                         }
                         if (attackTransition)
                         {
