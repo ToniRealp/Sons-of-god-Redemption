@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4755267131839350}
   - component: {fileID: 114218669675462344}
+  - component: {fileID: 65687918461824150}
   m_Layer: 0
   m_Name: Projector
   m_TagString: Untagged
@@ -68,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1907196383211726}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.8580883, y: 0.47850376, z: -0.5628362}
+  m_LocalPosition: {x: 2.01, y: -0.02, z: 28.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4999005031734700}
@@ -83,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1310535278846242}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.29, z: 0}
   m_LocalScale: {x: 3.5, y: 2.5, z: 2.5}
   m_Children: []
   m_Father: {fileID: 4573040424846784}
@@ -144,6 +145,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1319459720991292}
   m_Mesh: {fileID: 4300000, guid: bb21be373bfd25e46b3b25381824fd32, type: 2}
+--- !u!65 &65687918461824150
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1310535278846242}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114218669675462344
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,7 +188,7 @@ MonoBehaviour:
   useCustomMeshMinimizerMaximumErrors: 0
   m_MeshMinimizerMaximumAbsoluteError: 0.0001
   m_MeshMinimizerMaximumRelativeError: 0.0001
-  affectMeshes: 0
+  affectMeshes: 1
   affectTerrains: 1
   useTerrainDensity: 0
   terrainDensity: 0.5

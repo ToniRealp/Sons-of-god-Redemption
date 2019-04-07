@@ -930,6 +930,7 @@ GameObject:
   - component: {fileID: 95885375184095348}
   - component: {fileID: 114260984066344340}
   - component: {fileID: 136779765100420730}
+  - component: {fileID: 114269027328316628}
   m_Layer: 9
   m_Name: GoDFinal
   m_TagString: Enemy
@@ -2290,6 +2291,19 @@ MonoBehaviour:
   bloodPosition: {fileID: 4144089420123610}
   dieParticles: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,
     type: 2}
+--- !u!114 &114269027328316628
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1818985006133832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f8f261c199c6aa44a91d188fcf2c2e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam1: {fileID: 0}
+  cam2: {fileID: 0}
 --- !u!114 &114892370144709010
 MonoBehaviour:
   m_ObjectHideFlags: 1

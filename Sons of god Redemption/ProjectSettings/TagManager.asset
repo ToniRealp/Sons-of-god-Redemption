@@ -17,6 +17,7 @@ TagManager:
   - Trigger
   - Arrow
   - FinalBossWeapon
+  - Floor
   layers:
   - Default
   - TransparentFX

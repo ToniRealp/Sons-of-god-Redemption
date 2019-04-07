@@ -4,24 +4,25 @@ using UnityEngine;
 
 public class PickUpBehaviour : MonoBehaviour {
 
-    public bool picked;
+    public bool picked, flag;
     public Animator animator;
 
     private GameObject player;
 
 	// Use this for initialization
 	void Start () {
-        picked = false;
+        picked = flag = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (picked)
+        if (picked&&!flag)
         {
             GameObject.Find("Leliel").GetComponent<PlayerController>().baseAttack += 2;
             GameObject.Find("Leliel").GetComponent<PlayerController>().stats.health += 10;
             GameObject.Find("Leliel").GetComponent<PlayerController>().health += 10;
             GameObject.Find("Leliel").GetComponent<PlayerController>().healthBar.value = GameObject.Find("Leliel").GetComponent<PlayerController>().health;
+            flag = true;
         }
 	}
 
