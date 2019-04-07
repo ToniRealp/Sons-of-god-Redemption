@@ -9,7 +9,6 @@ public class Level2Controller : LevelController {
     public Transform bossSpawnPos;
     public SceneController sceneController;
     public AudioManager audioManager;
-    public bool[] trigger;
     InputManager inputManager;
 
     private bool bossSpawn, volumeSet;

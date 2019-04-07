@@ -11,14 +11,14 @@ public class TriggerScript : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            LevelController.GetComponent<Level1Controller>().trigger[id] = true;
+            LevelController.GetComponent<LevelController>().trigger[id] = true;
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
         {
-            LevelController.GetComponent<Level1Controller>().trigger[id] = false;
+            LevelController.GetComponent<LevelController>().trigger[id] = false;
         }
     }
 

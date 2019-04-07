@@ -8,6 +8,7 @@ public abstract class LevelController : MonoBehaviour
     public RoomController[] roomControllers;
     public Transform actualSpawn;
     public Transform[] spawns;
+    public bool[] trigger;
     // Use this for initialization
 
 
