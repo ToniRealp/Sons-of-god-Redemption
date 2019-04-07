@@ -86,6 +86,7 @@ public class Level2Controller : LevelController {
             if (!bossSpawn)
             {
                 Instantiate(bossHandler, bossSpawnPos.position, bossSpawnPos.rotation);
+                player.GetComponent<PlayerController>().onCinematic = true;
                 //audioManager.Play("BossTheme");
 
                 bossSpawn = true;
