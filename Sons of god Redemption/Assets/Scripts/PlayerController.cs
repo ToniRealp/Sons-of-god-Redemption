@@ -518,7 +518,6 @@ public class PlayerController : MonoBehaviour {
             onHitDelay -= Time.deltaTime;
             if (onHitDelay <= 0)
             {
-                animator.speed = 1f;
                 onHitDelay = onHitAnimDelay;
                 hit = false;
             }
@@ -752,7 +751,6 @@ public class PlayerController : MonoBehaviour {
         {
             if (weapon.tag != "Untagged")
             {
-                animator.speed = 0f;
                 hit = true;
                 if (darkHit && !darkOnCD && health<=stats.health-15)
                 {

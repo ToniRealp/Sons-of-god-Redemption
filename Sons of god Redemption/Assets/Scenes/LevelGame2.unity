@@ -29959,7 +29959,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: MainTheme
-    clip: {fileID: 8300000, guid: 9dcf3f7c49077b34083fdade1abb7a2d, type: 3}
+    clip: {fileID: 8300000, guid: 0589cbf4324ff384993182282818c007, type: 3}
     volume: 1
     loop: 1
     source: {fileID: 0}
@@ -61400,16 +61400,13 @@ MonoBehaviour:
     type: 2}
   bossSpawnPos: {fileID: 2064259698}
   sceneController: {fileID: 1867115082}
-  audioManager: {fileID: 0}
+  audioManager: {fileID: 923844762}
   trigger: 000000000000000000
   spawns:
   - {fileID: 375333505}
   - {fileID: 1966609107}
   - {fileID: 1127679347}
-  - {fileID: 0}
   - {fileID: 1972556512}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 1610001913}
   roomControllers:
   - {fileID: 291142957}
@@ -64884,7 +64881,7 @@ Prefab:
         type: 2}
       propertyPath: levelController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1867115080}
     - target: {fileID: 1532023036423736, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
       propertyPath: m_Name
       value: Leliel

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4060278754654446}
   - component: {fileID: 33135877750043694}
   - component: {fileID: 23708669658217364}
+  - component: {fileID: 64982634805921462}
   m_Layer: 0
   m_Name: 2_Circular_Plano
   m_TagString: Untagged
@@ -82,4 +83,18 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1512815522777110}
+  m_Mesh: {fileID: 4300000, guid: f2132b231e6b47c47aebf4c63df5caaf, type: 3}
+--- !u!64 &64982634805921462
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1512815522777110}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: f2132b231e6b47c47aebf4c63df5caaf, type: 3}
