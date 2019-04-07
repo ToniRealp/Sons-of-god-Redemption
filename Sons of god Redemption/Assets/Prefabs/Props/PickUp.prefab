@@ -109,8 +109,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   picked: 0
-  ascensionHeight: 1
-  ascendingSpeed: 0.01
-  rotationSpeed: 1
-  movingSpeed: 0.05
-  scalingSpeed: 0.005
+  animator: {fileID: 0}

@@ -5,11 +5,7 @@ using UnityEngine;
 public class PickUpBehaviour : MonoBehaviour {
 
     public bool picked;
-    public float ascensionHeight=1;
-    public float ascendingSpeed = 0.01f;
-    public float rotationSpeed = 1;
-    public float movingSpeed = 0.01f;
-    public float scalingSpeed = 0.005f;
+    public Animator animator;
 
     private Vector3 initPosition;
     private GameObject player;
@@ -26,38 +22,11 @@ public class PickUpBehaviour : MonoBehaviour {
 	void Update () {
         if (picked)
         {
-            if (ascending)
-            {
-                if (transform.position.y<initPosition.y+ascensionHeight)
-                {
-                    transform.position += new Vector3(0, ascendingSpeed, 0);
-                    transform.Rotate(0, rotationSpeed, 0);
-                }
-                else
-                {
-                    ascending = false;
-                }
-            }
-            else
-            {
-                transform.Rotate(0, rotationSpeed, 0);
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, player.transform.position.y+1, player.transform.position.z), movingSpeed);
-                if (transform.localScale.x > 0.01f && transform.localScale.y > 0.01f && transform.localScale.z > 0.01f)
-                {
-                    transform.localScale -= new Vector3(scalingSpeed, scalingSpeed, scalingSpeed);
-                }
-                else
-                {
-                    GameObject.Find("Leliel").GetComponent<PlayerController>().baseAttack += 2;
-                    GameObject.Find("Leliel").GetComponent<PlayerController>().stats.health += 10;
-                    GameObject.Find("Leliel").GetComponent<PlayerController>().health += 10;
-                    GameObject.Find("Leliel").GetComponent<PlayerController>().healthBar.value = GameObject.Find("Leliel").GetComponent<PlayerController>().health;
-
-                    Destroy(this.gameObject);
-                }
-
-
-            }
+           
+            GameObject.Find("Leliel").GetComponent<PlayerController>().baseAttack += 2;
+            GameObject.Find("Leliel").GetComponent<PlayerController>().stats.health += 10;
+            GameObject.Find("Leliel").GetComponent<PlayerController>().health += 10;
+            GameObject.Find("Leliel").GetComponent<PlayerController>().healthBar.value = GameObject.Find("Leliel").GetComponent<PlayerController>().health;
         }
 	}
 
@@ -76,8 +45,8 @@ public class PickUpBehaviour : MonoBehaviour {
         {
             if (other.gameObject.GetComponent<PlayerController>().interact)
             {
-                ascending = true;
                 picked = true;
+                animator.SetTrigger("open");
             }
         }
     }
@@ -87,6 +56,11 @@ public class PickUpBehaviour : MonoBehaviour {
         {
             //Hide pick text
         }
+    }
+
+    public void DestroyPickUp()
+    {
+        Destroy(this.gameObject);
     }
 
 }
