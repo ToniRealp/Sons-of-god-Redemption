@@ -1884,35 +1884,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 982860092}
   m_CullTransparentMesh: 0
---- !u!1 &1072848614 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1105469288949138, guid: 5445728c0bc8a2f498dc555da1651d04,
-    type: 2}
-  m_PrefabInternal: {fileID: 2046639942}
---- !u!65 &1072848618
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1072848614}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &1072848619
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1072848614}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.39078403, y: 0.45482573, z: 0.5282546}
-  m_Center: {x: -0.010765076, y: 0.17554793, z: -0.006687681}
 --- !u!1 &1164536193
 GameObject:
   m_ObjectHideFlags: 0

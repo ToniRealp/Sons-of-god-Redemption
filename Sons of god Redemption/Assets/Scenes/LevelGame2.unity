@@ -10380,7 +10380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEmpty: 0
   enemies:
-  - {fileID: 1456318041362940, guid: fb4caff4695695d43a9621fdd1f93921, type: 2}
+  - {fileID: 1105469288949138, guid: 5445728c0bc8a2f498dc555da1651d04, type: 2}
   roomDoors: []
   spawnPosition: {fileID: 269343264}
 --- !u!1 &291601553
@@ -10652,7 +10652,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEmpty: 0
   enemies:
-  - {fileID: 1456318041362940, guid: fb4caff4695695d43a9621fdd1f93921, type: 2}
+  - {fileID: 1105469288949138, guid: 5445728c0bc8a2f498dc555da1651d04, type: 2}
   roomDoors: []
   spawnPosition: {fileID: 673286887}
 --- !u!1001 &302068643
@@ -23008,7 +23008,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEmpty: 0
   enemies:
-  - {fileID: 1456318041362940, guid: fb4caff4695695d43a9621fdd1f93921, type: 2}
+  - {fileID: 1105469288949138, guid: 5445728c0bc8a2f498dc555da1651d04, type: 2}
   roomDoors: []
   spawnPosition: {fileID: 1137075805}
 --- !u!4 &661202212 stripped
@@ -33853,7 +33853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEmpty: 0
   enemies:
-  - {fileID: 1456318041362940, guid: fb4caff4695695d43a9621fdd1f93921, type: 2}
+  - {fileID: 1105469288949138, guid: 5445728c0bc8a2f498dc555da1651d04, type: 2}
   roomDoors: []
   spawnPosition: {fileID: 1918988744}
 --- !u!1001 &1050159598
@@ -57734,7 +57734,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEmpty: 0
   enemies:
-  - {fileID: 1456318041362940, guid: fb4caff4695695d43a9621fdd1f93921, type: 2}
+  - {fileID: 1105469288949138, guid: 5445728c0bc8a2f498dc555da1651d04, type: 2}
   roomDoors: []
   spawnPosition: {fileID: 1567087357}
 --- !u!1001 &1784701459

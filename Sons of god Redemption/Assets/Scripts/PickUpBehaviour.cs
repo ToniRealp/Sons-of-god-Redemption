@@ -7,22 +7,17 @@ public class PickUpBehaviour : MonoBehaviour {
     public bool picked;
     public Animator animator;
 
-    private Vector3 initPosition;
     private GameObject player;
-    private bool ascending;
 
 	// Use this for initialization
 	void Start () {
         picked = false;
-        ascending = false;
-        initPosition = transform.position;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (picked)
         {
-           
             GameObject.Find("Leliel").GetComponent<PlayerController>().baseAttack += 2;
             GameObject.Find("Leliel").GetComponent<PlayerController>().stats.health += 10;
             GameObject.Find("Leliel").GetComponent<PlayerController>().health += 10;

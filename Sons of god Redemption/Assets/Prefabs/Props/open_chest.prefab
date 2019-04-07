@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4532860094217198}
   - component: {fileID: 95284845042754702}
   - component: {fileID: 114679582325810012}
+  - component: {fileID: 65622879338592060}
+  - component: {fileID: 65126354186069214}
   m_Layer: 0
   m_Name: open_chest
   m_TagString: Untagged
@@ -187,6 +189,30 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1438096261779220}
   m_Mesh: {fileID: 4300002, guid: 82657bc76a4d40945acb3b4793bb9766, type: 3}
+--- !u!65 &65126354186069214
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1105469288949138}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.39078403, y: 0.45482573, z: 0.5282546}
+  m_Center: {x: -0.010765076, y: 0.17554793, z: -0.006687681}
+--- !u!65 &65622879338592060
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1105469288949138}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95284845042754702
 Animator:
   serializedVersion: 3
