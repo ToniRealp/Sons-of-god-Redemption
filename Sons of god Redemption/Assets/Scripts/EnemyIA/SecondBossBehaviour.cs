@@ -33,7 +33,7 @@ public class SecondBossBehaviour : MonoBehaviour
     public GameObject dieParticles;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         health = maxHealth;
         actualAttackInterval = 1;
@@ -48,6 +48,7 @@ public class SecondBossBehaviour : MonoBehaviour
 
         //Health Text
         canvas = GameObject.Find("Canvas");
+        Instantiate(title, canvas.transform);
         healthTextGO = new GameObject();
         healthTextGO.transform.SetParent(canvas.transform);
         healthText = healthTextGO.AddComponent<Text>();
@@ -63,9 +64,8 @@ public class SecondBossBehaviour : MonoBehaviour
         explosionChecked = false;
 
         //Cinematic
-        GetComponent<BossCinematic>().ChangeCamera();
         player.GetComponent<PlayerController>().onCinematic = true;
-        Instantiate(title, canvas.transform);
+        
     }
 
     // Update is called once per frame

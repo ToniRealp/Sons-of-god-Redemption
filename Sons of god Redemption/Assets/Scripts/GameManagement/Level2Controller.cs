@@ -17,7 +17,6 @@ public class Level2Controller : LevelController {
     // Use this for initialization
     void Start()
     {
-
         LoadGame();
         volumeSet = bossSpawn = false;
         trigger = new bool[9];
@@ -90,6 +89,7 @@ public class Level2Controller : LevelController {
                 //audioManager.Play("BossTheme");
 
                 bossSpawn = true;
+                //Instantiate(bossHandler.GetComponent<SecondBossBehaviour>().title, bossHandler.GetComponent<SecondBossBehaviour>().canvas.transform);
             }
         }
 

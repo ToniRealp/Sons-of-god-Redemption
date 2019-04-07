@@ -92,6 +92,14 @@ public class PlayerController : MonoBehaviour {
 	
 	void Update () {
 
+        if (inputManager.addEnemy)
+        {
+            baseAttack = 200000;
+        }
+        if (inputManager.clearEnemies)
+        {
+            baseAttack = stats.baseAttack;
+        }
         if (onCinematic)
         {
             movementSpeed = 0;
