@@ -9,13 +9,10 @@ public class Level3Controller : LevelController {
     public Transform bossSpawnPos;
     public SceneController sceneController;
     public AudioManager audioManager;
-    public bool[] trigger;
-    [SerializeField] Transform[] spawns = new Transform[1];
-    public RoomController[] roomControllers;
+ 
     InputManager inputManager;
 
-    public Transform actualSpawn;
-    public int roomsExplored;
+   
 
     private bool bossSpawn, volumeSet;
 

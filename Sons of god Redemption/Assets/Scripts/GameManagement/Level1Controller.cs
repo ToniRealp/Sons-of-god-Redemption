@@ -8,8 +8,7 @@ public class Level1Controller : LevelController {
     public GameObject bossHandler;
     public SceneController sceneController;
     public AudioManager audioManager;
-    public bool[] trigger;
-    
+       
     InputManager inputManager;
 
     
@@ -139,7 +138,7 @@ public class Level1Controller : LevelController {
 
     public void BossDead()
     {
-        sceneController.changeScene("Win");
+        sceneController.changeScene("LevelGame2");
     }
 
     override public void OpenAllDoors()
