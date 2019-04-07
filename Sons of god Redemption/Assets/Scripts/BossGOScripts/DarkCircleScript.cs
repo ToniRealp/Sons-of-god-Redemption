@@ -27,7 +27,7 @@ public class DarkCircleScript : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            other.GetComponent<PlayerController>().bossDmg = GameObject.Find("SecondBoss").GetComponent<SecondBossBehaviour>().circleDmg;
+            other.GetComponent<PlayerController>().bossDmg = GameObject.Find("SecondBoss(Clone)").GetComponent<SecondBossBehaviour>().circleDmg;
             other.GetComponent<PlayerController>().fireHit = true;
         }
     }

@@ -18,7 +18,7 @@ public class KameScript : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            other.gameObject.GetComponent<PlayerController>().bossDmg = GameObject.Find("SecondBoss").GetComponent<SecondBossBehaviour>().kameDmg;
+            other.gameObject.GetComponent<PlayerController>().bossDmg = GameObject.Find("SecondBoss(Clone)").GetComponent<SecondBossBehaviour>().kameDmg;
             other.gameObject.GetComponent<PlayerController>().explosionHit = true;
         }
     }

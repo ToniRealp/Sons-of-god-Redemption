@@ -18,7 +18,7 @@ public class DarkExplosionBehaviour : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            other.gameObject.GetComponent<PlayerController>().bossDmg = GameObject.Find("SecondBoss").GetComponent<SecondBossBehaviour>().explosionDmg;
+            other.gameObject.GetComponent<PlayerController>().bossDmg = GameObject.Find("SecondBoss(Clone)").GetComponent<SecondBossBehaviour>().explosionDmg;
             other.gameObject.GetComponent<PlayerController>().explosionHit = true;
         }
     }
