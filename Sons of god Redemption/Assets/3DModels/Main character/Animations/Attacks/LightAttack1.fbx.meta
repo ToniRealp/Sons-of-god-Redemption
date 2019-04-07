@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2cc20f4cd3ca9134fadc98482603e6e5
+guid: 6573dea23bdecdd478bf4b4e3e584815
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -169,7 +169,7 @@ ModelImporter:
       name: light attack
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 42
+      lastFrame: 28
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -188,7 +188,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.96394235
+        functionName: AttackTransition
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

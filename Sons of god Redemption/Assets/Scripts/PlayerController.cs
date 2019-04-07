@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour {
     public float dashCooldownTime, dashDuration, deadDuration, onHitAnimDelay, damage, lightCooldown, darkCooldown, healCooldown, actualHealCooldown, damagedCooldown, actualDamagedCooldown;
     private float dashCooldownCounter, actualDashTime, actualDeadTime, animLength, animDuration, onHitDelay, actualLightCooldown, actualDarkCooldown;
     public bool interact, fireHit, explosionHit, meteorHit, spawnMe, healOnCD, finalDashHit, onCinematic;
-    private bool dashed, attacked, transition, hit, isLightHit, lightOnCD, darkOnCD,  dead, darkHit;
+    private bool dashed, attacked, transition, hit, isLightHit, lightOnCD, darkOnCD,  dead, darkHit, attackTransition;
     const float velChange = 0.5f;
 
     public static bool damaged;
@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour {
         canvas = GameObject.Find("Canvas");
         states = States.Idle;
         attacks = Attacks.NotAtt;
-        onCinematic = finalDashHit = dead = lightOnCD = darkOnCD = healOnCD = darkHit = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = false;
+        onCinematic = finalDashHit = dead = lightOnCD = darkOnCD = healOnCD = darkHit = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = attackTransition = false;
         spawnMe = true;
         dashCooldownCounter = dashCooldownTime;
         actualDashTime = dashDuration;
@@ -276,6 +276,9 @@ public class PlayerController : MonoBehaviour {
                 break;
             case (States.Attacking):
                 Rotation();
+                animator.SetBool("isIdle", false);
+                animator.SetBool("isRunning", false);
+                animator.SetBool("isWalking", false);
                 switch (attacks) {
 
                     case (Attacks.LightAttack1):
@@ -283,7 +286,6 @@ public class PlayerController : MonoBehaviour {
 
                         if (!attacked)
                         {
-                            animator.SetBool("isIdle", true);
                             animator.SetTrigger("lightAttack1");
                             animLength = animDuration = AnimationLength("light attack", animator);
                             attacked = true;
@@ -291,27 +293,26 @@ public class PlayerController : MonoBehaviour {
                         if (inputs[(int)ButtonInputs.LightAttack] && animLength > animDuration * 0.3)
                         {
                             transition = true;
-                            animator.SetBool("isIdle", false);
                         }
                         if (animLength < animDuration * 0.7)
                         {
                             //weapon.tag = "Weapon";
                             weapon.tag = "LightAttack1";
                         }
-                        if (animLength <= 0)
+                        if (attackTransition)
                         {
                             if (transition)
                             {
                                 attacks = Attacks.LightAttack2;
-                                attacked = transition = false;
                             }
                             else
                             {
                                 attacks = Attacks.NotAtt;
-                                states = nextState;
-                                attacked = false;
+                                states = CheckState();
+                              
                                 weapon.tag = "Untagged";
                             }
+                            attackTransition = attacked = transition = false;
                         }
 
                         break;
@@ -320,7 +321,6 @@ public class PlayerController : MonoBehaviour {
 
                         if (!attacked)
                         {
-                            animator.SetBool("isIdle", true);
                             animator.SetTrigger("lightAttack2");
                             animLength = animDuration = AnimationLength("light attack 2", animator);
                             attacked = true;
@@ -329,22 +329,22 @@ public class PlayerController : MonoBehaviour {
                         if (inputs[(int)ButtonInputs.LightAttack])
                         {
                             transition = true;
-                            animator.SetBool("isIdle", false);
                         }
-                        if (animLength <= 0)
+                        if (attackTransition)
                         {
                             if (transition)
                             {
                                 attacks = Attacks.LightAttack3;
-                                attacked = transition = false;
+
                             }
                             else
                             {
                                 attacks = Attacks.NotAtt;
-                                states = nextState;
-                                attacked = false;
+                                states = CheckState();
+
                                 weapon.tag = "Untagged";
-                            }                         
+                            }
+                            attackTransition = attacked = transition = false;
                         }                                            
 
                         break;
@@ -352,7 +352,6 @@ public class PlayerController : MonoBehaviour {
 
                         if (!attacked)
                         {
-                            animator.SetBool("isIdle", true);
                             animator.SetTrigger("lightAttack3");
                             animLength = animDuration = AnimationLength("light attack 3", animator);
                             attacked = true;
@@ -378,14 +377,14 @@ public class PlayerController : MonoBehaviour {
                         {
                             weapon.tag = "Untagged";
                         }
-                        if (animLength <= 0)
+                        if (attackTransition)
                         {
                             attacks = Attacks.NotAtt;
-                            states = nextState;
-                            attacked = false;
+                            states = CheckState();
                             flameCone.SetActive(false);
                             isLightHit = false;
                             darkHit = false;
+                            attackTransition = attacked = transition = false;
                         }
 
                         break;
@@ -394,7 +393,6 @@ public class PlayerController : MonoBehaviour {
                         damage = baseAttack + (baseAttack * 0.5f);
                         if (!attacked)
                         {
-                            animator.SetBool("isIdle", true);
                             animator.SetTrigger("strongAttack1");
                             animLength = animDuration = AnimationLength("strong attack", animator);
                             attacked = true;                           
@@ -402,27 +400,25 @@ public class PlayerController : MonoBehaviour {
                         if (inputs[(int)ButtonInputs.StrongAttack])
                         {
                             transition = true;
-                            animator.SetBool("isIdle", false);
                         }
                         if (animLength < animDuration * 0.8)
                         {
                             weapon.tag = "StrongAttack1";
                             //weapon.tag = "Weapon";                          
                         }
-                        if (animLength <= 0)
+                        if (attackTransition)
                         {
                             if (transition)
                             {
                                 attacks = Attacks.StrongAttack2;
-                                attacked = transition = false;
                             }
                             else
                             {
                                 attacks = Attacks.NotAtt;
-                                states = nextState;
-                                attacked = false;
+                                states = CheckState();
                                 weapon.tag = "Untagged";
-                            }                          
+                            }
+                            attackTransition = attacked = transition = false;
                         }
 
                         break;
@@ -431,7 +427,6 @@ public class PlayerController : MonoBehaviour {
 
                         if (!attacked)
                         {
-                            animator.SetBool("isIdle", true);
                             animator.SetTrigger("strongAttack2");
                             animDuration = animLength = AnimationLength("strong attack 2", animator);
                             attacked = true;
@@ -453,15 +448,15 @@ public class PlayerController : MonoBehaviour {
                                 darkHit = true;
                             }
                         }
-                        if (animLength <= 0)
+                        if (attackTransition)
                         {
                             attacks = Attacks.NotAtt;
-                            states = nextState;
-                            attacked = false;
+                            states = CheckState();
                             weapon.tag = "Untagged";
                             isLightHit = false;
                             darkHit = false;
                             flameCone.SetActive(false);
+                            attackTransition = attacked = transition = false;
                         } 
 
                         break;
@@ -472,7 +467,7 @@ public class PlayerController : MonoBehaviour {
 
                 }
                 animLength -= Time.deltaTime;
-                nextState = CheckState();
+                //nextState = CheckState();
                 break;
 
             case (States.Dead):
@@ -547,6 +542,11 @@ public class PlayerController : MonoBehaviour {
 
         fireHit = false;
 
+    }
+
+    public void AttackTransition()
+    {
+        attackTransition = true;
     }
 
     private void ResetAll()
@@ -725,7 +725,8 @@ public class PlayerController : MonoBehaviour {
 
     States CheckState()
     {
-        if (xAxis > 0.5 || yAxis > 0.5)
+        animator.SetBool("isIdle", true);
+        if (Mathf.Abs(xAxis) > 0.5 || Mathf.Abs(yAxis) > 0.5)
         {
             animator.SetBool("isWalking", true);
             animator.SetBool("isRunning", true);
