@@ -63,6 +63,7 @@ public class SecondBossBehaviour : MonoBehaviour
         explosionChecked = false;
 
         //Cinematic
+        GetComponent<BossCinematic>().ChangeCamera();
         player.GetComponent<PlayerController>().onCinematic = true;
         Instantiate(title, canvas.transform);
     }
@@ -113,6 +114,7 @@ public class SecondBossBehaviour : MonoBehaviour
             case State.CINEMATIC:
                 if ((actualCinematicTime -= Time.deltaTime) <= 0)
                 {
+                    GetComponent<BossCinematic>().ResetCamera();
                     player.GetComponent<PlayerController>().onCinematic = false;
                     actualCinematicTime = cinematicAnimationTime;
                     state = State.IDLE;
