@@ -1005,6 +1005,7 @@ GameObject:
   - component: {fileID: 95786306338856006}
   - component: {fileID: 114213993182040452}
   - component: {fileID: 65808792890168596}
+  - component: {fileID: 114498327881362728}
   m_Layer: 9
   m_Name: SecondBoss
   m_TagString: Enemy
@@ -2239,6 +2240,19 @@ MonoBehaviour:
   bloodPosition: {fileID: 4074295323245866}
   dieParticles: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,
     type: 2}
+--- !u!114 &114498327881362728
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1889288100730766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f8f261c199c6aa44a91d188fcf2c2e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam1: {fileID: 0}
+  cam2: {fileID: 0}
 --- !u!114 &114558917339332948
 MonoBehaviour:
   m_ObjectHideFlags: 1
