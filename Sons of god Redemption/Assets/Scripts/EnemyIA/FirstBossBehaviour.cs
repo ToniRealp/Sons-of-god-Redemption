@@ -43,7 +43,7 @@ public class FirstBossBehaviour : MonoBehaviour
         actualStandingTime = standingAnimationTime = AnimationLength("Standing", animator);
         actualExplosionTime = explosionAnimationTime = AnimationLength("Mutant Jumping", animator);
         actualRoarTime = roarAnimationTime = AnimationLength("Mutant Roaring", animator);
-        actualSwipeTime = swipeAnimationTime = AnimationLength("Stable Sword Outward Slash", animator);
+        actualSwipeTime = swipeAnimationTime = AnimationLength("Stable Sword Inward Slash", animator);
         actualRainTime = rainAnimationTime = AnimationLength("Wide Arm Spell Casting", animator);
         fireParticles.SetActive(false);
         explosionParticles.SetActive(false);
