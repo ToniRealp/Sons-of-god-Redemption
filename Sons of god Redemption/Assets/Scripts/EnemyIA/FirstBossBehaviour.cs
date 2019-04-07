@@ -14,8 +14,9 @@ public class FirstBossBehaviour : MonoBehaviour
 
 
     private GameObject player;
-    private float standingAnimationTime, chargeAnimationTime, explosionAnimationTime, roarAnimationTime, swipeAnimationTime, rainAnimationTime, initMeteorTime;
-    private float actualStandingTime, actualAttackInterval, actualChargeTime, actualExplosionTime, actualRoarTime, actualSwipeTime, actualRainTime;
+    public float standingAnimationTime, actualStandingTime;
+    private float chargeAnimationTime, explosionAnimationTime, roarAnimationTime, swipeAnimationTime, rainAnimationTime, initMeteorTime;
+    private float actualAttackInterval, actualChargeTime, actualExplosionTime, actualRoarTime, actualSwipeTime, actualRainTime;
     private int meteorCounter;
     private bool explosionChecked, patron1switched, patron2switched, patron3switched;
 
@@ -111,6 +112,7 @@ public class FirstBossBehaviour : MonoBehaviour
             case State.STANDING:
                 if ((actualStandingTime -= Time.deltaTime) <= 0)
                 {
+                    GetComponent<BossCinematic>().ResetCamera();
                     player.GetComponent<PlayerController>().onCinematic = false;
                     actualStandingTime = standingAnimationTime;
                     state = State.IDLE;
@@ -429,7 +431,7 @@ public class FirstBossBehaviour : MonoBehaviour
                 actualSwipeTime -= Time.deltaTime;
                 if (actualSwipeTime > swipeAnimationTime * 0.6)
                     LookPlayer();
-                if (actualSwipeTime <= swipeAnimationTime * 0.95)
+                if (actualSwipeTime <= swipeAnimationTime * 0.6)
                     weapon.tag = "FirstBossWeapon";
                 if (actualSwipeTime <= swipeAnimationTime * 0.1)
                     weapon.tag = "Untagged";
@@ -519,6 +521,7 @@ public class FirstBossBehaviour : MonoBehaviour
 
     public void StandUp()
     {
+        GetComponent<BossCinematic>().ChangeCamera();
         player.GetComponent<PlayerController>().onCinematic = true;
         animator.SetTrigger("Standing");
         state = State.STANDING;

@@ -12343,7 +12343,6 @@ GameObject:
   - component: {fileID: 468259716}
   - component: {fileID: 468259717}
   - component: {fileID: 468259718}
-  - component: {fileID: 468259719}
   m_Layer: 10
   m_Name: Trigger 10 (1)
   m_TagString: Trigger
@@ -12389,19 +12388,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelController: {fileID: 1867115079}
   id: 15
---- !u!114 &468259719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 468259715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db44a5c4f028755408b0cede3996eb1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam1: {fileID: 0}
-  cam2: {fileID: 0}
 --- !u!1001 &471794503
 Prefab:
   m_ObjectHideFlags: 0
@@ -46328,11 +46314,11 @@ MonoBehaviour:
   - {fileID: 2133058606}
   - {fileID: 841602525}
   - {fileID: 456815537}
+  trigger: 
   player: {fileID: 1158049245}
   bossHandler: {fileID: 1955609212}
   sceneController: {fileID: 1867115082}
   audioManager: {fileID: 454469064}
-  trigger: 
 --- !u!4 &1867115081
 Transform:
   m_ObjectHideFlags: 0

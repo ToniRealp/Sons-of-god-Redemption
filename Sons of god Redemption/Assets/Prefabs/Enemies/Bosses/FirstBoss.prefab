@@ -2427,7 +2427,9 @@ MonoBehaviour:
   actualAttack2: 0
   patron: 0
   meteorPosition: []
-  state: 0
+  standingAnimationTime: 0
+  actualStandingTime: 0
+  state: 1
   playerDistance: 0
   maxHealth: 1800
   health: 1800
