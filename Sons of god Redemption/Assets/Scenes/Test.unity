@@ -532,11 +532,11 @@ MonoBehaviour:
   m_AreRenderersEditable: 0
   m_TextureAtlasType: 0
   m_TextureAtlasAsset: {fileID: 0}
-  m_Material: {fileID: 2100000, guid: 97a1d4d64acc8a842aac1558fd4cfe37, type: 2}
+  m_Material: {fileID: 2100000, guid: cf332dd786ddb2048b61ed5282ae2e1d, type: 2}
   uvRectangles:
   - name: Test
-    lowerLeftUV: {x: 0.52976125, y: 0.46694866}
-    upperRightUV: {x: 0.66223335, y: 0.60297537}
+    lowerLeftUV: {x: 0, y: 0}
+    upperRightUV: {x: 1, y: 1}
   uv2Rectangles:
   - name: Test
     lowerLeftUV: {x: 0, y: 0}
@@ -553,8 +553,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 148322631}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.36, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.13, y: 0.36, z: -1.68}
+  m_LocalScale: {x: 0.84, y: 1.04, z: 1}
   m_Children:
   - {fileID: 949371253}
   - {fileID: 1191218710}
@@ -885,14 +885,14 @@ Mesh:
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
-    indexCount: 42
+    indexCount: 30
     topology: 0
     baseVertex: 0
     firstVertex: 0
-    vertexCount: 15
+    vertexCount: 12
     localAABB:
-      m_Center: {x: 3.4467893, y: -0.05062321, z: 2.5798538}
-      m_Extent: {x: 0.50007033, y: 0.017148659, z: 0.50004005}
+      m_Center: {x: 3.4465852, y: -0.113932565, z: 2.5799003}
+      m_Extent: {x: 0.5952796, y: 0.044202242, z: 0.49996495}
   m_Shapes:
     vertices: []
     shapes: []
@@ -906,10 +906,10 @@ Mesh:
   m_KeepVertices: 1
   m_KeepIndices: 1
   m_IndexFormat: 0
-  m_IndexBuffer: 09000a000000000004000500040000000600020001000000000003000200030000000b000000050009000000010006000b000d0003000c000500070001000800060000000a000b0005000c00090007000e000c00
+  m_IndexBuffer: 0200050006000200060000000900040001000a0001000b0007000800000003000000010000000300020001000400030000000600070001000a000900
   m_VertexData:
     serializedVersion: 2
-    m_VertexCount: 15
+    m_VertexCount: 12
     m_Channels:
     - stream: 0
       offset: 0
@@ -967,8 +967,8 @@ Mesh:
       offset: 0
       format: 0
       dimension: 0
-    m_DataSize: 480
-    _typelessdata: c60a4c40752009bdf8b6254068b5cabccddd7f3fce17aabc3dce0f3ff647093fe9973c40582009bd84ad324097fababccddd7f3fb84ab7bc6f9e073fc055103f70973c408f1d67bd10c01840dd8fd2bcd2da7f3fc7aeb0bc6f9e073f323a023f29973c40355581bd811b0d404263e0bcf2d97f3f92a79ebc6f9e073f82c8f73e0d474b40a11e09bdf11b4540a866a5bc18e47f3fc3c98abc22660f3f985c1a3f9f7571401e1d09bd981c4540960f7dbca7ea7f3ff75754bc26a1233f985c1a3f6bd54840b81e09bddc1b45405159a5bcade37f3fea018fbc9e1a0e3f985c1a3f59997c409c1c09bdfb1c4540b8e765bc3bed7f3fc7e12dbc2088293f985c1a3f59983c40391f09bd701b45408516a5bc93e17f3f2723a4bc6f9e073f985c1a3ff5506340fb1f09bd221c05407340d9bcd5de7f3f853681bc90231c3fe513ef3ef0dd5e404c2009bdfb1b054048e0ddbccddd7f3fdee488bc0fc8193fe513ef3e6aa34540708370bdc01b05404103e4bc85da7f3fea7994bcd4690c3fe513ef3e0da07840a11e09bddf1c0540b71ac3bcc3e37f3f2cda38bceb6d273fe513ef3e0b973c40facb8abdab1b0540b136e6bc58d97f3f56a198bc6f9e073fe513ef3ed4977c40691e09bd021d0540f8fabebcaee47f3ffd262bbc2088293fe513ef3e
+    m_DataSize: 384
+    _typelessdata: cf568140bfc6a1bddc6f34403985d9bc44e47f3fe0d83bbcfeff7f3f604c3d3fb55681405459a8bd30cd2340c076e0bc87e47f3f24b3e0bbfeff7f3f187df53e797c364049a910be59283340337ee6bce7dd7f3f031e73bc0000a0b4a030383f177c3640062f1dbe57241d407e8bf3bc6add7f3fd1fa52bc0000a0b4883ec03e0b7c364008e71dbedc8019404810f5bc79dd7f3f717742bc0000a0b45021a33efb7c36405c7306bea31b4540a146d5bc9cdd7f3fa33b94bc0000a0b40000803fe5e74340c8b1f6bd061c4540feb2d9bc6bdf7f3f43a181bcf256343e0000803fe4cf8040d38d90bd811c4540dfcdcfbc8ce47f3fa1fa54bc5f747c3f0000803ff5568140c5ce8ebd831c454090a2cfbca3e47f3f103054bcfeff7f3f0000803fcb7b364017ee21bea91d0540ba92fdbccbdd7f3fd9e1cbbb0000a0b4000000001fb653407d6d06be2c1e0540aa51f7bc90e07f3fe21552bbf867c43e000000009c568140ac78b4bd2c1e0540d409e7bc64e47f3fe11552bbfeff7f3f00000000
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -1022,8 +1022,8 @@ Mesh:
       m_BitSize: 0
     m_UVInfo: 0
   m_LocalAABB:
-    m_Center: {x: 3.4467893, y: -0.05062321, z: 2.5798538}
-    m_Extent: {x: 0.50007033, y: 0.017148659, z: 0.50004005}
+    m_Center: {x: 3.4465852, y: -0.113932565, z: 2.5799003}
+    m_Extent: {x: 0.5952796, y: 0.044202242, z: 0.49996495}
   m_MeshUsageFlags: 0
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
@@ -1773,7 +1773,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 97a1d4d64acc8a842aac1558fd4cfe37, type: 2}
+  - {fileID: 2100000, guid: cf332dd786ddb2048b61ed5282ae2e1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2074,7 +2074,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1191218709}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.447, y: 0.67, z: 2.58}
+  m_LocalPosition: {x: 3.447, y: 0.637, z: 2.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 148322633}
