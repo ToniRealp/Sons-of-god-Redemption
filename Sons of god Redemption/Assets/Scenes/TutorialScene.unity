@@ -2702,6 +2702,7 @@ MonoBehaviour:
     volume: 0.665
     loop: 0
     source: {fileID: 0}
+  masterMixer: {fileID: 24300002, guid: 60bfbd53358596e48a5f62aa8d3fe33b, type: 2}
 --- !u!4 &1063453246
 Transform:
   m_ObjectHideFlags: 0
