@@ -1657,6 +1657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneController: {fileID: 437279731}
+  sceneName: LevelGame
 --- !u!1 &437696253
 GameObject:
   m_ObjectHideFlags: 0

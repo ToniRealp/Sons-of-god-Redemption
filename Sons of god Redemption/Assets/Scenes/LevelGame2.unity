@@ -2353,7 +2353,6 @@ GameObject:
   - component: {fileID: 23377585}
   - component: {fileID: 23377584}
   - component: {fileID: 23377583}
-  - component: {fileID: 23377586}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -2369,12 +2368,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 23377582}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 135c92c4760e4e74d95a88245612cd9d, type: 3}
+  m_Script: {fileID: 11500000, guid: 81474e35fd066a642bce011d85c8679b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PausePanel: {fileID: 1914554481}
-  OptionsPanel: {fileID: 439961502}
-  inputManager: {fileID: 23377586}
+  loadingScreen: {fileID: 1574315729}
+  slider: {fileID: 1410508423}
+  sceneController: {fileID: 23377584}
 --- !u!114 &23377584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2401,29 +2400,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &23377586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 23377582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37fd3a42000e64340ad9ba6b049d3886, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  yAxis: 0
-  xAxis: 0
-  attackButton: 0
-  strongAttackButton: 0
-  dashButton: 0
-  padXAxis: 0
-  padYAxis: 0
-  interact: 0
-  addEnemy: 0
-  addBoss: 0
-  clearEnemies: 0
-  escape: 0
 --- !u!4 &25551559 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4588461443262036, guid: 87a32bff0e789f746a29b00599c310a6,
@@ -25968,8 +25944,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 719524424}
-  m_LocalRotation: {x: 0.4502236, y: -0, z: -0, w: 0.89291584}
-  m_LocalPosition: {x: 19, y: 43.740585, z: -15.474935}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 649203138}
@@ -27534,7 +27510,6 @@ GameObject:
   m_Component:
   - component: {fileID: 789683914}
   - component: {fileID: 789683915}
-  - component: {fileID: 789683917}
   - component: {fileID: 789683916}
   m_Layer: 0
   m_Name: EndTrigger
@@ -27576,23 +27551,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 789683913}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 062dcd0390a9f8a4083f429578e1903f, type: 3}
+  m_Script: {fileID: 11500000, guid: c1d4b50f3fa12f847ac28ac88e7b7811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLoading: 0
-  progress: 0
---- !u!114 &789683917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 789683913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db79e1d1e1b5e7f498d6ded329797f37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneController: {fileID: 789683916}
+  sceneController: {fileID: 23377584}
+  sceneName: LevelGame3
 --- !u!1 &801187718
 GameObject:
   m_ObjectHideFlags: 0
@@ -55752,7 +55715,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 23377583}
+      - m_Target: {fileID: 1867115082}
         m_MethodName: exitPauseMenu
         m_Mode: 1
         m_Arguments:
@@ -63015,8 +62978,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1867115081}
   - component: {fileID: 1867115080}
-  - component: {fileID: 1867115082}
   - component: {fileID: 1867115083}
+  - component: {fileID: 1867115082}
   m_Layer: 0
   m_Name: LevelController
   m_TagString: Untagged
@@ -63066,7 +63029,7 @@ MonoBehaviour:
     type: 2}
   bossDoor: {fileID: 1898111735}
   bossSpawnPos: {fileID: 2064259698}
-  sceneController: {fileID: 1867115082}
+  sceneController: {fileID: 0}
   audioManager: {fileID: 923844762}
 --- !u!4 &1867115081
 Transform:
@@ -63089,11 +63052,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1867115079}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 062dcd0390a9f8a4083f429578e1903f, type: 3}
+  m_Script: {fileID: 11500000, guid: 135c92c4760e4e74d95a88245612cd9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLoading: 0
-  progress: 0
+  PausePanel: {fileID: 1914554481}
+  OptionsPanel: {fileID: 439961502}
+  inputManager: {fileID: 1867115083}
 --- !u!114 &1867115083
 MonoBehaviour:
   m_ObjectHideFlags: 0

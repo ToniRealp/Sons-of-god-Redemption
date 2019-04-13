@@ -452,7 +452,6 @@ GameObject:
   - component: {fileID: 23377585}
   - component: {fileID: 23377584}
   - component: {fileID: 23377583}
-  - component: {fileID: 23377586}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -468,12 +467,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 23377582}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 135c92c4760e4e74d95a88245612cd9d, type: 3}
+  m_Script: {fileID: 11500000, guid: 81474e35fd066a642bce011d85c8679b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PausePanel: {fileID: 1914554481}
-  OptionsPanel: {fileID: 2039565443}
-  inputManager: {fileID: 23377586}
+  loadingScreen: {fileID: 1003091070}
+  slider: {fileID: 488218942}
+  sceneController: {fileID: 23377584}
 --- !u!114 &23377584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,29 +499,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &23377586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 23377582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37fd3a42000e64340ad9ba6b049d3886, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  yAxis: 0
-  xAxis: 0
-  attackButton: 0
-  strongAttackButton: 0
-  dashButton: 0
-  padXAxis: 0
-  padYAxis: 0
-  interact: 0
-  addEnemy: 0
-  addBoss: 0
-  clearEnemies: 0
-  escape: 0
 --- !u!1001 &25175135
 Prefab:
   m_ObjectHideFlags: 0
@@ -4630,7 +4606,6 @@ GameObject:
   m_Component:
   - component: {fileID: 163170658}
   - component: {fileID: 163170659}
-  - component: {fileID: 163170661}
   - component: {fileID: 163170660}
   m_Layer: 0
   m_Name: TriggerEnd
@@ -4672,23 +4647,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 163170657}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 062dcd0390a9f8a4083f429578e1903f, type: 3}
+  m_Script: {fileID: 11500000, guid: c1d4b50f3fa12f847ac28ac88e7b7811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLoading: 0
-  progress: 0
---- !u!114 &163170661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 163170657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 256f68dd4642ca7468ea003551eaaf08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneController: {fileID: 163170660}
+  sceneController: {fileID: 23377584}
+  sceneName: LevelGame2
 --- !u!1001 &167919832
 Prefab:
   m_ObjectHideFlags: 0
@@ -9938,7 +9901,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh67604
+  m_Name: pb_Mesh38760
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -42036,7 +41999,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 23377583}
+      - m_Target: {fileID: 1867115082}
         m_MethodName: exitPauseMenu
         m_Mode: 1
         m_Arguments:
@@ -45284,8 +45247,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1867115081}
   - component: {fileID: 1867115080}
-  - component: {fileID: 1867115082}
   - component: {fileID: 1867115083}
+  - component: {fileID: 1867115082}
   m_Layer: 0
   m_Name: Level1Controller
   m_TagString: Untagged
@@ -45334,7 +45297,7 @@ MonoBehaviour:
   player: {fileID: 1158049245}
   bossHandler: {fileID: 1955609212}
   bossDoor: {fileID: 184710379}
-  sceneController: {fileID: 1867115082}
+  sceneController: {fileID: 0}
   audioManager: {fileID: 454469064}
 --- !u!4 &1867115081
 Transform:
@@ -45357,11 +45320,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1867115079}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 062dcd0390a9f8a4083f429578e1903f, type: 3}
+  m_Script: {fileID: 11500000, guid: 135c92c4760e4e74d95a88245612cd9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLoading: 0
-  progress: 0
+  PausePanel: {fileID: 1914554481}
+  OptionsPanel: {fileID: 2039565443}
+  inputManager: {fileID: 1867115083}
 --- !u!114 &1867115083
 MonoBehaviour:
   m_ObjectHideFlags: 0
