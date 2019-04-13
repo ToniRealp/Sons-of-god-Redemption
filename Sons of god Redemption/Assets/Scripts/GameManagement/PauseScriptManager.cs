@@ -5,16 +5,18 @@ using UnityEngine;
 public class PauseScriptManager : MonoBehaviour {
 
     public GameObject PausePanel;
+    public GameObject OptionsPanel;
     public InputManager inputManager;
 
 	// Use this for initialization
 	void Start () {
         PausePanel.SetActive(false);
+        OptionsPanel.SetActive(false);
 	}
 
     private void Update()
     {
-        if (inputManager.escape)
+        if (inputManager.escape && !OptionsPanel.activeSelf)
         {
             activatePauseMenu();
         }

@@ -347,6 +347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PausePanel: {fileID: 1914554481}
+  OptionsPanel: {fileID: 95029996}
   inputManager: {fileID: 23377586}
 --- !u!114 &23377584
 MonoBehaviour:
@@ -3893,7 +3894,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1914554481}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:

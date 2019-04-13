@@ -472,6 +472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PausePanel: {fileID: 1914554481}
+  OptionsPanel: {fileID: 2039565443}
   inputManager: {fileID: 23377586}
 --- !u!114 &23377584
 MonoBehaviour:

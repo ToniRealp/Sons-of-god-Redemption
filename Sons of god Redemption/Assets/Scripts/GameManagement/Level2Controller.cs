@@ -74,14 +74,13 @@ public class Level2Controller : LevelController {
                 break;
 
             default:
-                roomsExplored = 0;
-                actualSpawn = spawns[0];
                 break;
         }
 
         //SpawnBoss
         if (trigger[8])
         {
+            actualSpawn = spawns[5];
             if (!bossSpawn)
             {
                 Instantiate(bossHandler, bossSpawnPos.position, bossSpawnPos.rotation);
