@@ -7,8 +7,7 @@ public class TutorialController : MonoBehaviour {
     public float firstEnemySpawnTime = 5;
 
     public GameObject wasd, lightAt, strongAt, elements, dash, goodJob;
-    public GameObject enemy;
-    public GameObject boss;
+    public GameObject enemy, uselessEnemy;
     private InputManager inputManager;
     public int enemyCounter;
 
@@ -49,65 +48,71 @@ public class TutorialController : MonoBehaviour {
         }
 
 
+        if (inputManager.xAxis!=0 || inputManager.yAxis != 0)
+        {
+
+        }
+
+
         //Spawn Light At Enemy
-        if ((firstEnemySpawnTime-=Time.deltaTime)<=0 && spawnLightAtEnemy)
-        {
-            Debug.Log("LightEnemy");
-            DoSpawnEnemy();
-            spawnLightAtEnemy = false;
-            spawnDashEnemy = true;
-            wasd.SetActive(false);
-            lightAt.SetActive(true);
-        }
+ //       if ((firstEnemySpawnTime-=Time.deltaTime)<=0 && spawnLightAtEnemy)
+ //       {
+ //           Debug.Log("LightEnemy");
+ //           DoSpawnEnemy();
+ //           spawnLightAtEnemy = false;
+ //           spawnDashEnemy = true;
+ //           wasd.SetActive(false);
+ //           lightAt.SetActive(true);
+ //       }
 
-        //Spawn Dash Enemy
-        else if (enemyCounter == 0 && spawnDashEnemy)
-        {
-            Debug.Log("DashEnemy");
-            DoSpawnEnemy();
-            spawnDashEnemy = false;
-            spawnStrongAtEnemies = true;
-            lightAt.SetActive(false);
-            dash.SetActive(true);
-        }
+ //       //Spawn Dash Enemy
+ //       else if (enemyCounter == 0 && spawnDashEnemy)
+ //       {
+ //           Debug.Log("DashEnemy");
+ //           DoSpawnEnemy();
+ //           spawnDashEnemy = false;
+ //           spawnStrongAtEnemies = true;
+ //           lightAt.SetActive(false);
+ //           dash.SetActive(true);
+ //       }
 
-        //Spawn Strong At Enemies
-        else if (enemyCounter == 0 && spawnStrongAtEnemies)
-        {
-            Debug.Log("StrongEnemy");
-            DoSpawnEnemy();
-            DoSpawnEnemy();
-            spawnStrongAtEnemies = false;
-            spawnElementEnemies = true;
-            dash.SetActive(false);
-            strongAt.SetActive(true);
-        }
+ //       //Spawn Strong At Enemies
+ //       else if (enemyCounter == 0 && spawnStrongAtEnemies)
+ //       {
+ //           Debug.Log("StrongEnemy");
+ //           DoSpawnEnemy();
+ //           DoSpawnEnemy();
+ //           spawnStrongAtEnemies = false;
+ //           spawnElementEnemies = true;
+ //           dash.SetActive(false);
+ //           strongAt.SetActive(true);
+ //       }
 
-        //Spawn Element Enemies
-        else if (enemyCounter == 0 && spawnElementEnemies)
-        {
-            Debug.Log("ElementEnemy");
-            DoSpawnEnemy();
-            DoSpawnEnemy();
-            spawnElementEnemies = false;
-            openDoor = true;
-            strongAt.SetActive(false);
-            elements.SetActive(true);
-        }
+ //       //Spawn Element Enemies
+ //       else if (enemyCounter == 0 && spawnElementEnemies)
+ //       {
+ //           Debug.Log("ElementEnemy");
+ //           DoSpawnEnemy();
+ //           DoSpawnEnemy();
+ //           spawnElementEnemies = false;
+ //           openDoor = true;
+ //           strongAt.SetActive(false);
+ //           elements.SetActive(true);
+ //       }
 
-        //Open Door
-        else if (enemyCounter == 0 && openDoor)
-        {
-            Debug.Log("OpenDoor");
-            gameObject.GetComponent<BoxCollider>().isTrigger = true;
-            openDoor = false;
-            elements.SetActive(false);
-            goodJob.SetActive(true);
-        }
+ //       //Open Door
+ //       else if (enemyCounter == 0 && openDoor)
+ //       {
+ //           Debug.Log("OpenDoor");
+ //           gameObject.GetComponent<BoxCollider>().isTrigger = true;
+ //           openDoor = false;
+ //           elements.SetActive(false);
+ //           goodJob.SetActive(true);
+ //       }
 
 
-        enemyCounter = 0;
-	}
+ //       enemyCounter = 0;
+    }
 
 
     void DoSpawnEnemy()

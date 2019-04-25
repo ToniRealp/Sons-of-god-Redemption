@@ -152,7 +152,8 @@ MonoBehaviour:
   dash: {fileID: 250605766}
   goodJob: {fileID: 1370280587}
   enemy: {fileID: 1193037644560804, guid: 29ed807f3bbc8d34e8c966b9a9b60890, type: 2}
-  boss: {fileID: 1008205161994760, guid: 85929e598004db14d9c17b1da9207d1c, type: 2}
+  uselessEnemy: {fileID: 1193037644560804, guid: 89e0fe506bdf7ac48905d99ff630a64d,
+    type: 2}
   enemyCounter: 0
   spawnLightAtEnemy: 0
   spawnDashEnemy: 0
@@ -755,7 +756,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000061035156, y: -176.59988}
+  m_AnchoredPosition: {x: 0, y: -60}
   m_SizeDelta: {x: 566.1, y: 70.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &250605768
@@ -938,8 +939,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000061035156, y: -176.5999}
-  m_SizeDelta: {x: 865.5, y: 70.7}
+  m_AnchoredPosition: {x: 0, y: -60}
+  m_SizeDelta: {x: 509.4, y: 92.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &312415066
 MonoBehaviour:
@@ -1858,6 +1859,7 @@ GameObject:
   - component: {fileID: 563686349}
   - component: {fileID: 563686351}
   - component: {fileID: 563686350}
+  - component: {fileID: 563686352}
   m_Layer: 5
   m_Name: WASD
   m_TagString: Untagged
@@ -1873,7 +1875,7 @@ RectTransform:
   m_GameObject: {fileID: 563686348}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children:
   - {fileID: 124888591}
   m_Father: {fileID: 1686117892}
@@ -1881,7 +1883,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -176.6}
+  m_AnchoredPosition: {x: 0, y: -60}
   m_SizeDelta: {x: 641, y: 70.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &563686350
@@ -1918,6 +1920,23 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 563686348}
   m_CullTransparentMesh: 0
+--- !u!114 &563686352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 563686348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf576231b73b814485c69eee2bf287f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxScale: 1.1
+  startReducingTime: 2
+  normalReducingTime: 0.1
+  movingSpeed: 2
+  increaseValue: 0.005
+  finalPosition: {x: -130, y: -205, z: 0}
 --- !u!4 &582745330 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4369942543755952, guid: 37a5f398f956e0b40a583d21bd606223,
@@ -2074,7 +2093,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Usa 1/2/3/4 o Pad(XBOX) para cambiar el elemento de la espada
+  m_Text: "Usa 1/2/3/4 o Pad(XBOX) para \ncambiar el elemento de la espada"
 --- !u!222 &594609852
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3583,7 +3602,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000057399826, y: -176.59996}
+  m_AnchoredPosition: {x: 0, y: -60}
   m_SizeDelta: {x: 641, y: 70.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1350670556
@@ -3723,7 +3742,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000061035156, y: -176.59984}
+  m_AnchoredPosition: {x: 0, y: -60}
   m_SizeDelta: {x: 803.4, y: 70.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1370280589
@@ -4696,7 +4715,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000061035156, y: -176.59995}
+  m_AnchoredPosition: {x: 0, y: -60}
   m_SizeDelta: {x: 641, y: 70.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1728980540
