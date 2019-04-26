@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TutorialTextScript : MonoBehaviour {
 
-    public float maxScale = 1.1f, startReducingTime = 2f, normalReducingTime = 0.1f, movingSpeed = 1f, increaseValue = 0.005f;
+    public float maxScale = 1.1f, startReducingTime = 2f, normalReducingTime = 0.1f, movingSpeed = 2f, increaseValue = 0.005f;
     public Vector3 finalPosition = new Vector3(-130, -205, 0);
 
     private float startTime;
@@ -77,6 +77,7 @@ public class TutorialTextScript : MonoBehaviour {
 
     public void ScaleText()
     {
+        state = 0;
         ScaleTextP(normalReducingTime);
     }
 
