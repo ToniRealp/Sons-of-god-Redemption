@@ -146,6 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rememberTextTime: 10
   waitTime: 1
+  player: {fileID: 1605407873}
   wasd: {fileID: 563686348}
   lightAt: {fileID: 1350670554}
   strongAt: {fileID: 1728980538}
@@ -155,6 +156,7 @@ MonoBehaviour:
   fireUtility: {fileID: 2120913622}
   darkElement: {fileID: 216211375}
   darkUtility: {fileID: 78700675}
+  heal: {fileID: 885296225}
   dash: {fileID: 250605766}
   goodJob: {fileID: 1370280587}
   enemy: {fileID: 1193037644560804, guid: 29ed807f3bbc8d34e8c966b9a9b60890, type: 2}
@@ -167,6 +169,10 @@ MonoBehaviour:
   Element: 0
   openDoor: 0
   wait: 0
+  condition: 0
+  state: 0
+  startTime: 0
+  startWait: 0
 --- !u!4 &34006434
 Transform:
   m_ObjectHideFlags: 0
@@ -5159,6 +5165,11 @@ RectTransform:
   m_AnchoredPosition: {x: 6.599613, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 1}
+--- !u!1 &1605407873 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1532023036423736, guid: ddd6aa0c312240c4f960b9d9751a654a,
+    type: 2}
+  m_PrefabInternal: {fileID: 436272911}
 --- !u!1001 &1620766457
 Prefab:
   m_ObjectHideFlags: 0
