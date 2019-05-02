@@ -791,7 +791,7 @@ public class PlayerController : MonoBehaviour {
                 }
             }
         }
-        if (!dead)
+        if (!dead && !damaged)
         {
             if (other.tag == "EnemyWeapon")
             {
@@ -803,7 +803,7 @@ public class PlayerController : MonoBehaviour {
             }
             if (other.tag == "Arrow")
             {
-                health -= 15;
+                health -= 10;
                 healthBar.value = health;
                 damaged = true;
             }
