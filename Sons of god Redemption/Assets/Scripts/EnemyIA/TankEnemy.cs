@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class TankEnemy : Enemy {
     enum Attacks { Charge, Basic };
+    enum Basics { Basic1, Basic2};
     Attacks attacks;
+    Basics basics;
     bool collided, roar, swipe, rushOnCooldown;
     public float baseAttackDuration, baseAttackCooldown, rushCooldown, rushDistance;
     public float x, accelerationTime;
     public GameObject weapon2;
+    public bool transition;
 
 
     new void Start()
@@ -110,14 +113,15 @@ public class TankEnemy : Enemy {
                     {
                         state = State.ATTAKING;
                         attacks = Attacks.Basic;
+                        basics = Basics.Basic1;
                         animator.SetTrigger("Attack1");
                     }
-                    else if(DistanceToDestination(destination)<= rushDistance && !rushOnCooldown && !attackOnCooldown)
-                    {
-                        state = State.ATTAKING;
-                        attacks = Attacks.Charge;
-                        animator.SetTrigger("Roar");
-                    }
+                    //else if(DistanceToDestination(destination)<= rushDistance && !rushOnCooldown && !attackOnCooldown)
+                    //{
+                    //    state = State.ATTAKING;
+                    //    attacks = Attacks.Charge;
+                    //    animator.SetTrigger("Roar");
+                    //}
                 }
                 else
                 {
@@ -131,99 +135,48 @@ public class TankEnemy : Enemy {
                 switch (attacks)
                 {
                     case Attacks.Basic:
-
                         ChangeSpeed(0);
-                        destination = playerPosition;
-                        if(baseAttackCooldown > baseAttackDuration * 0.90)
-                            LookToDestination();
-
-                        baseAttackCooldown -= Time.deltaTime;
-
-                        if (baseAttackCooldown <baseAttackDuration * 0.90)
-                             weapon2.tag = "EnemyWeapon";
-
-                        if (baseAttackCooldown< baseAttackDuration * 0.76)
-                            weapon2.tag = "Untagged";
-
-                        if (baseAttackCooldown < baseAttackDuration * 0.45)
-                            weapon.tag = "EnemyWeapon";
-
-                        if (baseAttackCooldown < baseAttackDuration * 0.30)
-                            weapon.tag = "Untagged";
-
-                        if (baseAttackCooldown < 0)
+                        switch (basics)
                         {
-                            attackOnCooldown = true;
-                            if (playerDetected)
-                            {
-                                state = State.CHASING;
-                            }
-                            else
-                            {
-                                state = State.SEARCHING;
-                            }
-                            baseAttackCooldown = baseAttackDuration;
+                            case Basics.Basic1:
+                                if (transition)
+                                {
+                                    if (DistanceToDestination(playerPosition) < attackDistance)
+                                    {
+                                        animator.SetTrigger("Attack2");
+                                        basics = Basics.Basic2;
+                                        LookToPlayer();
+                                    }
+                                    else
+                                    {
+                                        //attackOnCooldown = true;
+                                        state = State.CHASING;
+                                        animator.SetTrigger("AttackEnd");
+                                        //Debug.Log("exitii");
+                                    }
+                                    transition = false;
+                                }
+                                break;
+                            case Basics.Basic2:
+                                if (transition)
+                                {
+                                    state = State.CHASING;
+                                    transition = false;
+                                    animator.SetTrigger("AttackEnd");
+                                   
+                                    //attackOnCooldown = true;
+                                }
+                                break;
                         }
-
                         break;
 
                     case Attacks.Charge:
-                        if (!roar)
-                        {
-                            ChangeSpeed(0);
-                            destination = playerPosition;
-                            LookToDestination();
-                            animTimes["Roar"].cooldown -= Time.deltaTime;
-                            if (animTimes["Roar"].cooldown <= 0)
-                            {
-                                roar = true;
-                                animTimes["Roar"].cooldown = animTimes["Roar"].duration;
-                                collided = false;
-                            }
-                        }
-                        else
-                        {
-                            ChangeSpeed(movementSpeed * 15f);
-                            NavAgent.acceleration = 1000;
-                            MoveToDestination();
-                            accelerationTime += Time.deltaTime;
-                            if (collided || NavAgent.velocity.magnitude < 0.5 && accelerationTime > 0.4)
-                            {
-                                ChangeSpeed(0);
-                                animTimes["Swipe"].duration -= Time.deltaTime;
-                                if (!swipe)
-                                {
-                                    animator.SetTrigger("Swipe");
-                                    swipe = true;
-                                    weapon2.tag = "EnemyWeapon";
-                                }
-
-                                if (animTimes["Swipe"].duration < animTimes["Swipe"].cooldown * 0.7f)
-                                    weapon2.tag = "Untagged";
-
-                                if (animTimes["Swipe"].duration < 0)
-                                {
-                                    
-                                    roar = false;
-                                    collided = false;
-                                    swipe = false;
-                                    rushOnCooldown = true;
-                                    animTimes["Swipe"].duration = animTimes["Swipe"].cooldown;
-                                    accelerationTime = 0;
-                                    if (playerDetected)
-                                    {
-                                        state = State.CHASING;
-                                    }
-                                    else
-                                        state = State.SEARCHING;
-                                }
-                            }
-                        }
+                        
                         break;
                 }
                 break;
             case State.DAMAGED:
-                weapon.tag = weapon2.tag = "Untagged";
+                DeactivateWeapon();
                 baseAttackCooldown = baseAttackDuration;
                 animTimes["Reaction Hit"].cooldown -= Time.deltaTime;
                 animTimes["Roar"].cooldown = animTimes["Roar"].duration;
@@ -276,5 +229,24 @@ public class TankEnemy : Enemy {
                 damaged = true;
             }
         } 
+    }
+    public void SetTransition()
+    {
+        transition = true;
+    }
+
+    public void ActivateWeapon1()
+    {
+        weapon.tag = "EnemyWeapon";
+    }
+
+    public void ActivateWeapon2()
+    {
+        weapon2.tag = "EnemyWeapon";
+    }
+
+    public void DeactivateWeapon()
+    {
+        weapon.tag = weapon2.tag = "Untagged";
     }
 }

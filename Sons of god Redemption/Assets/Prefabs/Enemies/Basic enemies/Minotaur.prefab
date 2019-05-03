@@ -1328,7 +1328,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1345666069583242}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.4385347, y: -1.937491e-17, z: 0.87256825}
+  m_LocalPosition: {x: 0.16695058, y: 0.26, z: -2.6683576}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4128696469392626}
@@ -1665,6 +1665,7 @@ MonoBehaviour:
   healthTextGO: {fileID: 0}
   weapon: {fileID: 1856251769198108}
   font: {fileID: 12800000, guid: cc8fb7e3b2fd1794db8c212bc31a24f7, type: 3}
+  audioManager: {fileID: 0}
   state: 0
   blood: {fileID: 1540188549263062, guid: 9241f871267c8a6478b40eebaffd61f6, type: 2}
   bloodPosition: {fileID: 4520827401729348}
@@ -1677,6 +1678,7 @@ MonoBehaviour:
   x: 0
   accelerationTime: 0
   weapon2: {fileID: 1621043943676630}
+  transition: 0
 --- !u!136 &136328969234253382
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1790,7 +1792,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 2.9
+  m_StoppingDistance: 2.4
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
