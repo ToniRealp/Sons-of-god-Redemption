@@ -481,7 +481,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 3b85738abfe176b48a2292bb043e7f7b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 082338f7a1e4f4c49908c1d934a0ee7d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -630,7 +630,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Press Start
+  m_Text: Press Start or Click
 --- !u!222 &1693424544
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -751,7 +751,7 @@ Transform:
   m_GameObject: {fileID: 2019852838}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 441, y: -212, z: 17.99999}
-  m_LocalScale: {x: 72.22999, y: 68.560005, z: 1.0000135}
+  m_LocalScale: {x: 100, y: 95, z: 1.0000135}
   m_Children: []
   m_Father: {fileID: 1505819185}
   m_RootOrder: 1
