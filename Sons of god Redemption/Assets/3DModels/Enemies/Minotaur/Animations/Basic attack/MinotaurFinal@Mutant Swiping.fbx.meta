@@ -165,7 +165,35 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.4654088
+        functionName: ActivateWeapon1
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5763889
         functionName: DeactivateWeapon
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0
+        functionName: ActivateLookPlayer
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.17824075
+        functionName: DeactivateLookPlayer
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.8333334
+        functionName: ActivateLookPlayer
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

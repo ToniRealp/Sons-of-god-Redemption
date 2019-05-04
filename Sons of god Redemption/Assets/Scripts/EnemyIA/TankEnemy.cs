@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class TankEnemy : Enemy {
     enum Attacks { Charge, Basic };
-    enum Basics { Basic1, Basic2};
+    enum Basics { Basic1, Basic2 };
+    enum Charge { Roar, Run, Hit };
     Attacks attacks;
     Basics basics;
-    bool collided, roar, swipe, rushOnCooldown;
+    Charge charge;
+    bool collided, roar, swipe, rushOnCooldown, lookPlayer, damagedFlag;
     public float baseAttackDuration, baseAttackCooldown, rushCooldown, rushDistance;
-    public float x, accelerationTime;
+    public float x, accelerationTime, baseAcceleration, d;
     public GameObject weapon2;
     public bool transition;
 
@@ -17,7 +19,7 @@ public class TankEnemy : Enemy {
     new void Start()
     {
         base.Start();
-        collided = roar = swipe = rushOnCooldown = false;
+        collided = roar = swipe = rushOnCooldown = lookPlayer = damagedFlag = false;
         baseAttackDuration = baseAttackCooldown = animTimes["Attack1"].duration + animTimes["Attack2"].duration;
         rushDistance = attackDistance * 8;
         
@@ -30,7 +32,8 @@ public class TankEnemy : Enemy {
 
         UpdateHealthText();
         UseFullDetectionSystem();
-       
+
+        d = NavAgent.remainingDistance;
 
         if (attackOnCooldown)
         {
@@ -116,12 +119,13 @@ public class TankEnemy : Enemy {
                         basics = Basics.Basic1;
                         animator.SetTrigger("Attack1");
                     }
-                    //else if(DistanceToDestination(destination)<= rushDistance && !rushOnCooldown && !attackOnCooldown)
-                    //{
-                    //    state = State.ATTAKING;
-                    //    attacks = Attacks.Charge;
-                    //    animator.SetTrigger("Roar");
-                    //}
+                    else if (DistanceToDestination(destination) <= rushDistance && !rushOnCooldown && !attackOnCooldown)
+                    {
+                        state = State.ATTAKING;
+                        attacks = Attacks.Charge;
+                        charge = Charge.Roar;
+                        animator.SetTrigger("Roar");
+                    }
                 }
                 else
                 {
@@ -131,6 +135,8 @@ public class TankEnemy : Enemy {
                 break;
 
             case State.ATTAKING:
+
+                if(lookPlayer) LookToPlayer();
                 // Save player last known position
                 switch (attacks)
                 {
@@ -145,7 +151,6 @@ public class TankEnemy : Enemy {
                                     {
                                         animator.SetTrigger("Attack2");
                                         basics = Basics.Basic2;
-                                        LookToPlayer();
                                     }
                                     else
                                     {
@@ -171,22 +176,63 @@ public class TankEnemy : Enemy {
                         break;
 
                     case Attacks.Charge:
+                        switch (charge)
+                        {
+                            case Charge.Roar:
+                                ChangeSpeed(0);
+                                destination = playerPosition;
+                                if (transition)
+                                {
+                                    transition = false;
+                                    animator.SetTrigger("Charge");
+                                    charge = Charge.Run;
+                                }
+                                break;
+                            case Charge.Run:
+                                ChangeSpeed(movementSpeed*15);
+                                NavAgent.acceleration = 500;
+                                MoveToDestination();
+                                if(collided||NavAgent.remainingDistance<=2f)
+                                {
+                                    collided = false;
+                                    animator.SetTrigger("Swipe");
+                                    charge = Charge.Hit;
+                                    NavAgent.acceleration = baseAcceleration;
+                                }
+                                break;
+                            case Charge.Hit:
+                                ChangeSpeed(0);
+                                if (transition)
+                                {
+                                    state = State.CHASING;
+                                    transition = false;
+                                    animator.SetTrigger("AttackEnd");
+                                }
+                                break;
+                        }
                         
                         break;
                 }
                 break;
             case State.DAMAGED:
-                DeactivateWeapon();
-                baseAttackCooldown = baseAttackDuration;
-                animTimes["Reaction Hit"].cooldown -= Time.deltaTime;
-                animTimes["Roar"].cooldown = animTimes["Roar"].duration;
-                animTimes["Swipe"].duration = animTimes["Swipe"].cooldown;
-                collided = false;
-                if (animTimes["Reaction Hit"].cooldown <= 0)
+                if (!damagedFlag)
                 {
-                    animTimes["Reaction Hit"].cooldown = animTimes["Reaction Hit"].duration;
-                    damaged = false;
-                    
+                    DeactivateWeapon();
+                    animator.ResetTrigger("Roar");
+                    animator.ResetTrigger("Swipe");
+                    animator.ResetTrigger("Attack1");
+                    animator.ResetTrigger("Attack2");
+                    animator.ResetTrigger("Charge");
+                    animator.ResetTrigger("AttackEnd");
+                    collided = transition = false;
+                    damagedFlag = true;
+                }
+             
+            
+                if (transition)
+                {
+                    damaged = transition = damagedFlag = false;
+                    animator.SetTrigger("AttackEnd");
                     if (playerDetected)
                     {
                         state = State.CHASING;
@@ -248,5 +294,15 @@ public class TankEnemy : Enemy {
     public void DeactivateWeapon()
     {
         weapon.tag = weapon2.tag = "Untagged";
+    }
+
+    public void ActivateLookPlayer()
+    {
+        lookPlayer = true;
+    }
+
+    public void DeactivateLookPlayer()
+    {
+        lookPlayer = false;
     }
 }
