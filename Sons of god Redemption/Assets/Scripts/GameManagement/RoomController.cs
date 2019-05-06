@@ -56,11 +56,20 @@ public class RoomController : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
+            foreach(var enemy in instEnemies) enemy.GetComponent<Enemy>().playerDetected = true;
+            
             if (!isEmpty)
             {
                 foreach (GameObject door in roomDoors)
                     door.SetActive(true);
             } 
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            foreach (var enemy in instEnemies) enemy.GetComponent<Enemy>().playerDetected = false;
         }
     }
 }

@@ -38,6 +38,7 @@ public abstract class Enemy : MonoBehaviour {
     protected GameObject canvas, textPos;
     public GameObject healthTextGO, weapon;
     public Font font;
+    private GameObject player;
 
     public AudioManager audioManager;
 
@@ -91,6 +92,8 @@ public abstract class Enemy : MonoBehaviour {
         GetAnimations();
         SetSearchingRange();
         SetRandomDestination();
+
+        player = GameObject.Find("Leliel");
     }
 
     protected void OnTriggerEnter(Collider other)
@@ -161,96 +164,13 @@ public abstract class Enemy : MonoBehaviour {
         return Vector3.Distance(gameObject.transform.position, _destination);
     }
 
-    protected void UpdateRaycasts()
-    {
-        // Raycast direction update
-        ray[0] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.forward);
-        for (int i = 1; i < 37; i++)
-        {
-            ray[i] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 5 * i)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y + 5 * i))));
-            ray[i + 36] = new Ray(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), new Vector3(Mathf.Sin(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 5 * i)), 0, Mathf.Cos(Mathf.Deg2Rad * (transform.rotation.eulerAngles.y - 5 * i))));
-        }
-    }
-
-    protected void DebugRaycasts()
-    {
-        // Debug Raycasting 
-        // View Raycasts
-        for (int i = 0; i < 5; i++)
-        {
-            Debug.DrawRay(ray[i].GetPoint(0), ray[i].direction * viewDistance, Color.red);
-        }
-        for (int i = 37; i < 41; i++)
-        {
-            Debug.DrawRay(ray[i].GetPoint(0), ray[i].direction * viewDistance, Color.red);
-        }
-        // Hear Raycasts
-        for (int i = 5; i < 37; i++)
-        {
-            Debug.DrawRay(ray[i].GetPoint(0), ray[i].direction * hearDistance, Color.cyan);
-        }
-        for (int i = 41; i < 73; i++)
-        {
-            Debug.DrawRay(ray[i].GetPoint(0), ray[i].direction * hearDistance, Color.cyan);
-        }
-    }
-
     protected void DetectPlayer()
     {
-        // Raycasting Logic
-        // View Raycasts
-        playerDetected = false;
-        for (int i = 0; i < 5; i++)
-        {
-            if (Physics.Raycast(ray[i], out hit[i], viewDistance))
-            {
-                if (hit[i].collider.gameObject.tag == "Player")
-                {
-                    playerDetected = true;
-                    playerPosition = hit[i].collider.gameObject.transform.position;
-                }
-            }
-        }
-        for (int i = 37; i < 41; i++)
-        {
-            if (Physics.Raycast(ray[i], out hit[i], viewDistance))
-            {
-                if (hit[i].collider.gameObject.tag == "Player")
-                {
-                    playerDetected = true;
-                    playerPosition = hit[i].collider.gameObject.transform.position;
-                }
-            }
-        }
-        // Hear Raycasts
-        for (int i = 5; i < 37; i++)
-        {
-            if (Physics.Raycast(ray[i], out hit[i], hearDistance))
-            {
-                if (hit[i].collider.gameObject.tag == "Player")
-                {
-                    playerDetected = true;
-                    playerPosition = hit[i].collider.gameObject.transform.position;
-                }
-            }
-        }
-        for (int i = 41; i < 73; i++)
-        {
-            if (Physics.Raycast(ray[i], out hit[i], hearDistance))
-            {
-                if (hit[i].collider.gameObject.tag == "Player")
-                {
-                    playerDetected = true;
-                    playerPosition = hit[i].collider.gameObject.transform.position;
-                }
-            }
-        }
+        playerPosition = player.transform.position;
     }
 
     protected void UseFullDetectionSystem()
     {
-        UpdateRaycasts();
-        DebugRaycasts();
         DetectPlayer();
     }
 
