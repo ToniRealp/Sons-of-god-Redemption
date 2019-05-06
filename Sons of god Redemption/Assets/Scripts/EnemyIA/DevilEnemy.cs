@@ -21,7 +21,13 @@ public class DevilEnemy : Enemy
     private void Update()
     {
         if (health <= 0)
+        {
             Die();
+            if (!audioManager.isPlaying("DevilDie"))
+                audioManager.Play("DevilDie");
+
+        }
+         
 
         UpdateHealthText();
         UseFullDetectionSystem();
@@ -95,6 +101,8 @@ public class DevilEnemy : Enemy
                     // If in attack conditions, go to attack
                     if (DistanceToDestination(destination) <= attackDistance && !attackOnCooldown)
                     {
+                        if (!audioManager.isPlaying("DevilAttack"))
+                            audioManager.Play("DevilAttack");
                         state = State.ATTAKING;
                         attacks = Attacks.BASIC;
                         if (attackSide)
@@ -176,6 +184,7 @@ public class DevilEnemy : Enemy
                             Instantiate(baby, spawnPos.position, spawnPos.rotation);
                             spawned = true;
                             audioManager.Play("DevilSpawn");
+                            audioManager.Play("DevilPuke");
                         }
                         if (animTimes["Spawn"].cooldown <= 0)
                         {

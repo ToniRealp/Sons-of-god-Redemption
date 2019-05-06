@@ -28,7 +28,11 @@ public class TankEnemy : Enemy {
     private void Update()
     {
         if (health <= 0)
+        {
+            if (!audioManager.isPlaying("MinoDeath"))
+                audioManager.Play("MinoDeath");
             Die();
+        }
 
         UpdateHealthText();
         UseFullDetectionSystem();
@@ -65,9 +69,12 @@ public class TankEnemy : Enemy {
                 {
                     animator.SetBool("IsIdle", false);
                     animator.SetBool("IsRunning", true);
+                    if (!audioManager.isPlaying("MinoWalk"))
+                        audioManager.Play("MinoWalk");
                 }
                 else
                 {
+                    audioManager.Stop("MinoWalk");
                     animator.SetBool("IsRunning", false);
                     animator.SetBool("IsIdle", true);
                 }
@@ -102,9 +109,12 @@ public class TankEnemy : Enemy {
                 {
                     animator.SetBool("IsIdle", false);
                     animator.SetBool("IsRunning", true);
+                    if (!audioManager.isPlaying("MinoWalk"))
+                        audioManager.Play("MinoWalk");
                 }
                 else
                 {
+                    audioManager.Stop("MinoWalk");
                     animator.SetBool("IsRunning", false);
                     animator.SetBool("IsIdle", true);
                 }
@@ -114,6 +124,7 @@ public class TankEnemy : Enemy {
                     // If in attack conditions, go to attack
                     if (DistanceToDestination(destination) <= attackDistance && !attackOnCooldown)
                     {
+                        audioManager.Stop("MinoWalk");
                         state = State.ATTAKING;
                         attacks = Attacks.Basic;
                         basics = Basics.Basic1;
@@ -121,10 +132,13 @@ public class TankEnemy : Enemy {
                     }
                     else if (DistanceToDestination(destination) <= rushDistance && !rushOnCooldown && !attackOnCooldown)
                     {
+                        audioManager.Stop("MinoWalk");
                         state = State.ATTAKING;
                         attacks = Attacks.Charge;
                         charge = Charge.Roar;
                         animator.SetTrigger("Roar");
+                        if (!audioManager.isPlaying("MinoRoar"))
+                            audioManager.Play("MinoRoar");
                     }
                 }
                 else
@@ -186,6 +200,9 @@ public class TankEnemy : Enemy {
                                     transition = false;
                                     animator.SetTrigger("Charge");
                                     charge = Charge.Run;
+                                    audioManager.Stop("MinoRoar");
+                                    if (!audioManager.isPlaying("MinoGallop"))
+                                        audioManager.Play("MinoGallop");
                                 }
                                 break;
                             case Charge.Run:
@@ -198,6 +215,9 @@ public class TankEnemy : Enemy {
                                     animator.SetTrigger("Swipe");
                                     charge = Charge.Hit;
                                     NavAgent.acceleration = baseAcceleration;
+                                    audioManager.Stop("MinoGallop");
+                                    if (!audioManager.isPlaying("MinoPunch"))
+                                        audioManager.Play("MinoPunch");
                                 }
                                 break;
                             case Charge.Hit:
@@ -207,6 +227,7 @@ public class TankEnemy : Enemy {
                                     state = State.CHASING;
                                     transition = false;
                                     animator.SetTrigger("AttackEnd");
+                                    audioManager.Stop("MinoPunch");
                                 }
                                 break;
                         }
