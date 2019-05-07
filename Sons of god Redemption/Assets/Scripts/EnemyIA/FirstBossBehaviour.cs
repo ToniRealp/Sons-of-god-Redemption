@@ -8,7 +8,7 @@ public class FirstBossBehaviour : MonoBehaviour
 
     public GameObject fireParticles, explosionParticles, meteor;
     public Animator animator;
-    public float attackDistance = 5f, explosionRange = 10, movingSpeed = 0.05f, rotationSpeed = 0.05f, meteorInterval = 0.3f, meteorRange = 5;
+    public float attackDistance = 5f, explosionRange = 5, movingSpeed = 0.05f, rotationSpeed = 0.05f, meteorInterval = 0.3f, meteorRange = 5;
     public int meteorNum = 5, actualAttack, actualAttack2, patron;
     public Vector3[] meteorPosition;
 

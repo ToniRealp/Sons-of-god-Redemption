@@ -39,9 +39,9 @@ public class PlayerController : MonoBehaviour {
     public Vector3 direction;
     public int walkVelocity, runVelocity, dashDistance;    
     public float dashCooldownTime, dashDuration, deadDuration, onHitAnimDelay, damage, lightCooldown, darkCooldown, healCooldown, actualHealCooldown, damagedCooldown, actualDamagedCooldown;
-    private float dashCooldownCounter, actualDashTime, actualDeadTime, animLength, animDuration, onHitDelay, actualLightCooldown, actualDarkCooldown;
+    private float dashCooldownCounter, actualDashTime, actualDeadTime, animLength, animDuration, onHitDelay, actualLightCooldown, actualDarkCooldown, FBTime, FBCDTime = 1;
     public bool interact, fireHit, explosionHit, meteorHit, spawnMe, healOnCD, finalDashHit, onCinematic;
-    private bool dashed, attacked, transition, hit, isLightHit, lightOnCD, darkOnCD,  dead, darkHit, attackTransition;
+    private bool dashed, attacked, transition, hit, isLightHit, lightOnCD, darkOnCD,  dead, darkHit, attackTransition, FBCD;
     const float velChange = 0.5f;
 
     public static bool damaged;
@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour {
         canvas = GameObject.Find("Canvas");
         states = States.Idle;
         attacks = Attacks.NotAtt;
-        onCinematic = finalDashHit = dead = lightOnCD = darkOnCD = healOnCD = darkHit = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = attackTransition = false;
+        FBCD = onCinematic = finalDashHit = dead = lightOnCD = darkOnCD = healOnCD = darkHit = isLightHit = dashed = attacked = transition = hit = fireHit = damaged = attackTransition = false;
         spawnMe = true;
         dashCooldownCounter = dashCooldownTime;
         actualDashTime = dashDuration;
@@ -113,6 +113,12 @@ public class PlayerController : MonoBehaviour {
         {
             GetInput();
             movementSpeed = stats.movementSpeed;
+        }
+
+        //Control cooldown meele hit first boss
+        if (FBCD && Time.time - FBTime > FBCDTime)
+        {
+            FBCD = false;
         }
 
         if (actualHealCooldown >= 0 && actualHealCooldown != healCooldown)
@@ -807,8 +813,10 @@ public class PlayerController : MonoBehaviour {
                 healthBar.value = health;
                 damaged = true;
             }
-            if (other.tag == "FirstBossWeapon")
+            if (other.tag == "FirstBossWeapon" && !FBCD)
             {
+                FBCD = true;
+                FBTime = Time.time;
                 health -= (int)other.GetComponentInParent<FirstBossBehaviour>().damage;
                 healthBar.value = health;
                 damaged = true;

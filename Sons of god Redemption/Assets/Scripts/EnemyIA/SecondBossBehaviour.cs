@@ -7,8 +7,8 @@ public class SecondBossBehaviour : MonoBehaviour
 {
 
     public Animator animator;
-    public float attackDistance = 4f, explosionRange = 10, movingSpeed = 0.02f, rotationSpeed = 0.05f, circlesRange = 5;
-    public int circlesNum = 5, actualAttack, actualAttack2, patron;
+    public float attackDistance = 4f, explosionRange = 5, movingSpeed = 0.02f, rotationSpeed = 0.05f, circlesRange = 5;
+    public int circlesNum = 4, actualAttack, actualAttack2, patron;
     public Vector3[] circlePosition;
 
 
@@ -137,27 +137,27 @@ public class SecondBossBehaviour : MonoBehaviour
                                     case 0:
                                         Explosion();
                                         actualAttack++;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 2.5f;
                                         break;
                                     case 1:
                                         Circles();
                                         actualAttack++;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 2.5f;
                                         break;
                                     case 2:
                                         Kame();
                                         actualAttack++;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 2.5f;
                                         break;
                                     case 3:
                                         Kame();
                                         actualAttack++;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 2.5f;
                                         break;
                                     case 4:
                                         Circles();
                                         actualAttack=0;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 2.5f;
                                         break;
                                     default:
                                         break;
@@ -169,22 +169,22 @@ public class SecondBossBehaviour : MonoBehaviour
                                     case 0:
                                         Kame();
                                         actualAttack++;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 2.5f;
                                         break;
                                     case 1:
                                         Circles();
                                         actualAttack++;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 2.5f;
                                         break;
                                     case 2:
                                         Explosion();
                                         actualAttack++;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 2.5f;
                                         break;
                                     case 3:
                                         Kame();
                                         actualAttack=0;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 2.5f;
                                         break;
                                     default:
                                         break;
@@ -196,17 +196,17 @@ public class SecondBossBehaviour : MonoBehaviour
                                     case 0:
                                         Kame();
                                         actualAttack++;
-                                        actualAttackInterval = 0;
+                                        actualAttackInterval = 2;
                                         break;
                                     case 1:
                                         Kame();
                                         actualAttack++;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 0;
                                         break;
                                     case 2:
                                         Circles();
                                         actualAttack++;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 2;
                                         break;
                                     case 3:
                                         Explosion();
@@ -216,12 +216,12 @@ public class SecondBossBehaviour : MonoBehaviour
                                     case 4:
                                         Kame();
                                         actualAttack++;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 2;
                                         break;
                                     case 5:
                                         Circles();
                                         actualAttack=0;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 2;
                                         break;
                                     default:
                                         break;
@@ -233,17 +233,17 @@ public class SecondBossBehaviour : MonoBehaviour
                                     case 0:
                                         Explosion();
                                         actualAttack++;
-                                        actualAttackInterval = 0;
+                                        actualAttackInterval = 1;
                                         break;
                                     case 1:
                                         Kame();
                                         actualAttack++;
-                                        actualAttackInterval = 0;
+                                        actualAttackInterval = 1;
                                         break;
                                     case 2:
                                         Circles();
                                         actualAttack++;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 2;
                                         break;
                                     case 3:
                                         Kame();
@@ -282,17 +282,17 @@ public class SecondBossBehaviour : MonoBehaviour
                                     case 0:
                                         Kame();
                                         actualAttack2++;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 2.5f;
                                         break;
                                     case 1:
                                         Explosion();
                                         actualAttack2++;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 2.5f;
                                         break;
                                     case 2:
                                         Circles();
                                         actualAttack2 = 0;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 2.5f;
                                         break;
                                     default:
                                         break;
@@ -304,17 +304,17 @@ public class SecondBossBehaviour : MonoBehaviour
                                     case 0:
                                         Kame();
                                         actualAttack2++;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 2.5f;
                                         break;
                                     case 1:
                                         Kame();
                                         actualAttack2++;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 2.5f;
                                         break;
                                     case 2:
                                         Explosion();
                                         actualAttack2 = 0;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 2.5f;
                                         break;
                                     default:
                                         break;
@@ -326,17 +326,17 @@ public class SecondBossBehaviour : MonoBehaviour
                                     case 0:
                                         Explosion();
                                         actualAttack2++;
-                                        actualAttackInterval = 0;
+                                        actualAttackInterval = 2;
                                         break;
                                     case 1:
                                         Kame();
                                         actualAttack2++;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 0;
                                         break;
                                     case 2:
                                         Circles();
                                         actualAttack2 = 0;
-                                        actualAttackInterval = 1;
+                                        actualAttackInterval = 2;
                                         break;
                                     default:
                                         break;
@@ -348,22 +348,22 @@ public class SecondBossBehaviour : MonoBehaviour
                                     case 0:
                                         Explosion();
                                         actualAttack2++;
-                                        actualAttackInterval = 0;
+                                        actualAttackInterval = 2;
                                         break;
                                     case 1:
                                         Kame();
                                         actualAttack2++;
-                                        actualAttackInterval = 0;
+                                        actualAttackInterval = 1;
                                         break;
                                     case 2:
                                         Circles();
                                         actualAttack2++;
-                                        actualAttackInterval = 0;
+                                        actualAttackInterval = 2;
                                         break;
                                     case 3:
                                         Kame();
                                         actualAttack2 = 0;
-                                        actualAttackInterval = 0;
+                                        actualAttackInterval = 1;
                                         break;
                                     default:
                                         break;

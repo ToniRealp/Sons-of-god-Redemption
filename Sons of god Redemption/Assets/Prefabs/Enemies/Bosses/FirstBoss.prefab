@@ -2417,7 +2417,7 @@ MonoBehaviour:
   meteor: {fileID: 1414881985881858, guid: b9b86af16bda5664b9d2132b676de4bf, type: 2}
   animator: {fileID: 95251432714128602}
   attackDistance: 4
-  explosionRange: 10
+  explosionRange: 7
   movingSpeed: 0.02
   rotationSpeed: 0.05
   meteorInterval: 0.3
