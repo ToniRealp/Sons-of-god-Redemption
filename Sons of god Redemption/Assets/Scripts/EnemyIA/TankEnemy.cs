@@ -195,6 +195,7 @@ public class TankEnemy : Enemy {
                             case Charge.Roar:
                                 ChangeSpeed(0);
                                 destination = playerPosition;
+                                collided = false;
                                 if (transition)
                                 {
                                     transition = false;
@@ -276,6 +277,12 @@ public class TankEnemy : Enemy {
         {
             collided = true;
             
+        }
+        ///TODO: Detect collision in child gameobject
+        if(state == State.ATTAKING && attacks == Attacks.Basic)
+        {
+            if (!audioManager.isPlaying("MinoPunch"))
+                audioManager.Play("MinoPunch");
         }
     }
     new private void OnTriggerEnter(Collider other)

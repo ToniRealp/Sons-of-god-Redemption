@@ -322,8 +322,8 @@ GameObject:
   - component: {fileID: 4617484574444036}
   - component: {fileID: 95066852332523390}
   - component: {fileID: 195027803647140006}
-  - component: {fileID: 114710465636406790}
   - component: {fileID: 136170436719829856}
+  - component: {fileID: 114369005691186044}
   m_Layer: 9
   m_Name: Baby
   m_TagString: Enemy
@@ -818,7 +818,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1386956449640616}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.77554667, y: -5.7710856e-17, z: 2.599066}
+  m_LocalPosition: {x: 4.3265433, y: 0.316525, z: 1.5889848}
   m_LocalScale: {x: 1.75, y: 1.75, z: 1.75}
   m_Children:
   - {fileID: 4552319487285226}
@@ -1158,7 +1158,7 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114710465636406790
+--- !u!114 &114369005691186044
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1166,7 +1166,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1386956449640616}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbcbf331d079ebf4d8b7de46402ddce8, type: 3}
+  m_Script: {fileID: 11500000, guid: 04f94f4e39fe00a49b43a395ae38ba0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 79c41c50a8b15c444be25ee0096511a1, type: 2}
@@ -1185,6 +1185,7 @@ MonoBehaviour:
   healthTextGO: {fileID: 0}
   weapon: {fileID: 1129495871336886}
   font: {fileID: 12800000, guid: cc8fb7e3b2fd1794db8c212bc31a24f7, type: 3}
+  audioManager: {fileID: 0}
   state: 0
   blood: {fileID: 1540188549263062, guid: 9241f871267c8a6478b40eebaffd61f6, type: 2}
   bloodPosition: {fileID: 4585169822058298}

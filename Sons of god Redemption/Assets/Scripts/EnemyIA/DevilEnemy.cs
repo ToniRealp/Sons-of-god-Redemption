@@ -78,6 +78,8 @@ public class DevilEnemy : Enemy
                 else
                 {
                     state = State.CHASING;
+                    if (!audioManager.isPlaying("DevilMain"))
+                        audioManager.Play("DevilMain");
                 }
 
                 // Go to random destination
@@ -93,8 +95,7 @@ public class DevilEnemy : Enemy
                 LookToDestination();
                 MoveToDestination();
 
-                if (!audioManager.isPlaying("DevilMain"))
-                    audioManager.Play("DevilMain");
+             
 
                 if (playerDetected)
                 {
