@@ -10,12 +10,13 @@ public class RangedEnemy : Enemy {
     public float bulletSpeed;
     private float optimalPos, optimalPosOffset;
     public float timeToRun, runCooldown;
-    private bool shoot;
+    private bool shoot, damagedSound;
 
     new private void Start()
     {
         base.Start();
         shoot = true;
+        damagedSound = false;
         optimalPosOffset = 2f;
         optimalPos = attackDistance - optimalPosOffset;
         runCooldown = timeToRun = 4;
@@ -118,6 +119,7 @@ public class RangedEnemy : Enemy {
                     {
                         state = State.ATTAKING;
                         animator.SetTrigger("Shoot");
+                        audioManager.Play("SkeletonShoot");
                     }
                 }
                 else
@@ -161,6 +163,11 @@ public class RangedEnemy : Enemy {
                 break;
 
             case State.DAMAGED:
+                if (!damagedSound)
+                {
+                    damagedSound = true;
+                    audioManager.Play("SkeletonHit");
+                }
                 // Cancel Attack animation if getting hit
                 animator.SetBool("Shoot", false);
                 animTimes["Shoot"].cooldown = animTimes["Shoot"].duration;
@@ -174,7 +181,7 @@ public class RangedEnemy : Enemy {
                 if (animTimes["Reaction Hit"].cooldown <= 0)
                 {
                     animTimes["Reaction Hit"].cooldown = animTimes["Reaction Hit"].duration;
-                    damaged = false;
+                    damaged = damagedSound = false;
                     if (playerDetected)
                     {
                         state = State.CHASING;

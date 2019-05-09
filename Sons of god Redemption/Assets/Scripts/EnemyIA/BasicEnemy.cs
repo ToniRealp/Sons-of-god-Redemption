@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class BasicEnemy : Enemy {
 
+    bool damagedSound;
+
     new void Start () {
         base.Start();
-
+        damagedSound = false;
 	}
 
     private void Update()
@@ -129,6 +131,11 @@ public class BasicEnemy : Enemy {
                 break;
 
             case State.DAMAGED:
+                if (!damagedSound)
+                {
+                    damagedSound = true;
+                    audioManager.Play("SkeletonHit");
+                }
                 // Cancel Attack animation if getting hit
                 animator.SetBool("Attack", false);
                 weapon.tag = "Untagged";
