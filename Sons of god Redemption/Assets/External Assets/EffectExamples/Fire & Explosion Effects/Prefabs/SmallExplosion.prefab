@@ -56,6 +56,8 @@ GameObject:
   - component: {fileID: 198656289721292014}
   - component: {fileID: 199514137936353666}
   - component: {fileID: 114760880975723834}
+  - component: {fileID: 114383120180030356}
+  - component: {fileID: 114990891607364566}
   m_Layer: 0
   m_Name: SmallExplosion
   m_TagString: Untagged
@@ -135,6 +137,24 @@ Transform:
   m_Father: {fileID: 4361801158873524}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &114383120180030356
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1828176872806910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd56148e8ce9b674c8f7195aa72efd5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Explosion
+    clip: {fileID: 8300000, guid: 14438145de4600e42aa9303d2cb27148, type: 3}
+    volume: 0.481
+    loop: 0
+    source: {fileID: 0}
+  masterMixer: {fileID: 24300002, guid: 60bfbd53358596e48a5f62aa8d3fe33b, type: 2}
 --- !u!114 &114760880975723834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -146,6 +166,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d5bb27c51ee3f4dbf15b87acf50941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dieTime: 2
+--- !u!114 &114990891607364566
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1828176872806910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b340ce270cde6a3479869604690708bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioManager: {fileID: 0}
 --- !u!198 &198207014375249716
 ParticleSystem:
   m_ObjectHideFlags: 1

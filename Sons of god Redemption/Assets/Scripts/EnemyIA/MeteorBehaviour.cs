@@ -5,7 +5,13 @@ using UnityEngine;
 public class MeteorBehaviour : MonoBehaviour {
 
     public GameObject explosion;
-    public GameObject decal;
+    public AudioManager audioManager;
+
+    private void Start()
+    {
+        audioManager = GetComponent<AudioManager>();
+        audioManager.Play("MeteorFall");
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -14,18 +20,9 @@ public class MeteorBehaviour : MonoBehaviour {
             collision.gameObject.GetComponent<PlayerController>().bossDmg = GameObject.Find("FirstBoss").GetComponent<FirstBossBehaviour>().rainDmg;
             collision.gameObject.GetComponent<PlayerController>().meteorHit = true;
         }
-        //else if(collision.gameObject.tag=="Floor")
-        //{
-        //    Vector3 position = transform.position;
-        //    position.y = 0;
-        //    Instantiate(explosion, transform.position, transform.rotation);
-        //    Quaternion rotation = new Quaternion
-        //    {
-        //        eulerAngles = new Vector3(0, 0, 0)
-        //    };
-        //    Instantiate(decal, transform.position, rotation);
-        //}
-        
+        Instantiate(explosion, transform.position, transform.rotation);
+
+
         Destroy(this.gameObject);
     }
 
