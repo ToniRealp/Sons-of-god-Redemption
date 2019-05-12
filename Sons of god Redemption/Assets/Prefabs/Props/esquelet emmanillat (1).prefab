@@ -696,6 +696,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4819211072646822}
   - component: {fileID: 95915649313056640}
+  - component: {fileID: 65844013514735468}
   m_Layer: 0
   m_Name: esquelet emmanillat (1)
   m_TagString: Untagged
@@ -1812,9 +1813,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1661067275693212}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.896957, y: -11.95, z: 50.02355}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -120.08, y: -14.93, z: 50.627247}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 4271408296885460}
   - {fileID: 4775564547585878}
@@ -2029,6 +2030,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1768935935559500}
   m_Mesh: {fileID: 4300004, guid: fed1b633695761f4b9d7c0a8cf18cf3b, type: 3}
+--- !u!65 &65844013514735468
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1661067275693212}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.9846787, y: 6.569765, z: 3.9099395}
+  m_Center: {x: 0.9165025, y: 2.7848828, z: -0.009555817}
 --- !u!95 &95915649313056640
 Animator:
   serializedVersion: 3
