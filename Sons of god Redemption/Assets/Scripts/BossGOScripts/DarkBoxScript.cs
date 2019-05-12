@@ -18,9 +18,9 @@ public class DarkBoxScript : MonoBehaviour {
     {
         if (other.tag=="Player")
         {
-            other.gameObject.GetComponent<PlayerController>().bossDmg = GameObject.Find("FinalBoss").GetComponent<FinalBossBehaviour>().darkDmg;
+            other.gameObject.GetComponent<PlayerController>().bossDmg = GameObject.Find("GoDFinal(Clone)").GetComponent<FinalBossBehaviour>().darkDmg;
             other.gameObject.GetComponent<PlayerController>().explosionHit = true;
-            GameObject.Find("FinalBoss").GetComponent<FinalBossBehaviour>().Heal();
+            GameObject.Find("GoDFinal(Clone)").GetComponent<FinalBossBehaviour>().Heal();
         }
     }
 
