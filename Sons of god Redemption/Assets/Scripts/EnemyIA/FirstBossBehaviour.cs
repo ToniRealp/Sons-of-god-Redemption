@@ -33,6 +33,8 @@ public class FirstBossBehaviour : MonoBehaviour
     public Transform bloodPosition;
     public GameObject dieParticles;
 
+    public AudioManager audioManager;
+
     // Use this for initialization
     void Start()
     {
@@ -65,6 +67,8 @@ public class FirstBossBehaviour : MonoBehaviour
         actualAttack2 = actualAttack = meteorCounter = 0;
         meteorPosition = new Vector3[meteorNum];
         explosionChecked = false;
+
+        audioManager = GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -570,6 +574,37 @@ public class FirstBossBehaviour : MonoBehaviour
         explosionChecked = false;
         state = State.CHARGE;
     }
+
+    void SwipeSound()
+    {
+        audioManager.Play("SwipeSound");
+    }
+
+    void ExplosionTremble()
+    {
+        audioManager.Play("ExplosionTremble");
+    }
+
+    void ExplosionShout()
+    {
+        audioManager.Play("ExplosionShout");
+    }
+
+    void ExplosionImpact()
+    {
+        audioManager.Play("ExplosionImpact");
+    }
+
+    void RoarFire()
+    {
+        audioManager.Play("RoarFire");
+    }
+
+    void RainInvoke()
+    {
+        audioManager.Play("RainInvoke");
+    }
+
 
     float AnimationLength(string animName, Animator animator)
     {

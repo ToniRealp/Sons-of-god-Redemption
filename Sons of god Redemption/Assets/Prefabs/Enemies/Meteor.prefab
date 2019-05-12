@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 135260172532688646}
   - component: {fileID: 114341713842325730}
   - component: {fileID: 54796969740906838}
+  - component: {fileID: 114686177426917538}
   m_Layer: 0
   m_Name: Meteor
   m_TagString: Untagged
@@ -175,7 +176,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3, type: 2}
-  decal: {fileID: 1907196383211726, guid: e8de66527504f8c4e8b7939c0f96ca63, type: 2}
+  audioManager: {fileID: 0}
+--- !u!114 &114686177426917538
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1414881985881858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd56148e8ce9b674c8f7195aa72efd5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: MeteorFall
+    clip: {fileID: 8300000, guid: f54d8d1b6c5797242a6549d040b49a93, type: 3}
+    volume: 0.512
+    loop: 0
+    source: {fileID: 0}
+  masterMixer: {fileID: 24300002, guid: 60bfbd53358596e48a5f62aa8d3fe33b, type: 2}
 --- !u!135 &135260172532688646
 SphereCollider:
   m_ObjectHideFlags: 1
