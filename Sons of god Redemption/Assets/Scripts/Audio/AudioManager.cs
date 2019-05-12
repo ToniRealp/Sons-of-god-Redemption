@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour {
             s.source.spatialBlend = 1;
             //s.source.rolloffMode = AudioRolloffMode.Logarithmic;
             s.source.minDistance = 1;
+            s.source.rolloffMode = s.rolloffMode;
         }
 	}
 	

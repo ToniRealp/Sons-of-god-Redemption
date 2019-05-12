@@ -311,6 +311,7 @@ public class PlayerController : MonoBehaviour {
                             animator.SetTrigger("lightAttack1");
                             animLength = animDuration = AnimationLength("light attack", animator);
                             attacked = true;
+                            audioManager.Play("lightHit");
                         }
                         if (inputs[(int)ButtonInputs.LightAttack] && animLength > animDuration * 0.3)
                         {
@@ -347,6 +348,7 @@ public class PlayerController : MonoBehaviour {
                             animLength = animDuration = AnimationLength("light attack 2", animator);
                             attacked = true;
                             weapon.tag = "LightAttack2";
+                            audioManager.Play("mediumHit");
                         }
                         if (inputs[(int)ButtonInputs.LightAttack])
                         {
@@ -357,7 +359,6 @@ public class PlayerController : MonoBehaviour {
                             if (transition)
                             {
                                 attacks = Attacks.LightAttack3;
-
                             }
                             else
                             {
@@ -378,6 +379,7 @@ public class PlayerController : MonoBehaviour {
                             animLength = animDuration = AnimationLength("light attack 3", animator);
                             attacked = true;
                             weapon.tag = "LightAttack3";
+                            //audioManager.Play("strongHit");
                         }
                         if (animLength < animDuration * 0.7)
                         {
@@ -417,7 +419,8 @@ public class PlayerController : MonoBehaviour {
                         {
                             animator.SetTrigger("strongAttack1");
                             animLength = animDuration = AnimationLength("strong attack", animator);
-                            attacked = true;                           
+                            attacked = true;
+                            audioManager.Play("mediumHit");
                         }
                         if (inputs[(int)ButtonInputs.StrongAttack])
                         {
@@ -454,6 +457,7 @@ public class PlayerController : MonoBehaviour {
                             attacked = true;
                             //weapon.tag = "Weapon";
                             weapon.tag = "StrongAttack2";
+                            audioManager.Play("strongHit");
                         }
                         if (animLength < animDuration * 0.5)
                         {
@@ -766,6 +770,11 @@ public class PlayerController : MonoBehaviour {
             animator.SetBool("isRunning", false);
             return (States.Walking);
         }
+    }
+
+    void playHit()
+    {
+        audioManager.Play("strongHit");
     }
 
     private void OnTriggerEnter(Collider other)

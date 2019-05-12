@@ -2255,28 +2255,39 @@ MonoBehaviour:
   sounds:
   - name: MainTheme
     clip: {fileID: 8300000, guid: 0589cbf4324ff384993182282818c007, type: 3}
-    volume: 0.699
+    volume: 0.5
     loop: 1
-    source: {fileID: 0}
-  - name: Hit
-    clip: {fileID: 8300000, guid: 9d54cd11b601e1b428925b1897cd4042, type: 3}
-    volume: 0.2
-    loop: 0
-    source: {fileID: 0}
-  - name: Swing
-    clip: {fileID: 8300000, guid: 4ab2086b82ae0344d9e47731a83f9743, type: 3}
-    volume: 0.2
-    loop: 0
+    rolloffMode: 0
     source: {fileID: 0}
   - name: LelielRun
     clip: {fileID: 8300000, guid: bd308239296f3114eab1eeac8f18812e, type: 3}
     volume: 0.25
     loop: 1
+    rolloffMode: 0
     source: {fileID: 0}
   - name: LelielHit
     clip: {fileID: 8300000, guid: 7425425262f775f4989ab4816c0f640d, type: 3}
     volume: 0.3
     loop: 0
+    rolloffMode: 0
+    source: {fileID: 0}
+  - name: lightHit
+    clip: {fileID: 8300000, guid: 3d3ce00b9b203864e93d1a5257e9511d, type: 3}
+    volume: 0.5
+    loop: 0
+    rolloffMode: 0
+    source: {fileID: 0}
+  - name: mediumHit
+    clip: {fileID: 8300000, guid: 76e559d4fdd9a624ca70667f611a80b9, type: 3}
+    volume: 0.3
+    loop: 0
+    rolloffMode: 0
+    source: {fileID: 0}
+  - name: strongHit
+    clip: {fileID: 8300000, guid: 45f98678972fa5946bdc8d8d88e67c8a, type: 3}
+    volume: 0.3
+    loop: 0
+    rolloffMode: 0
     source: {fileID: 0}
   masterMixer: {fileID: 24300002, guid: 60bfbd53358596e48a5f62aa8d3fe33b, type: 2}
 --- !u!114 &114062393654652366

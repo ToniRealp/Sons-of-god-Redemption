@@ -13,6 +13,8 @@ public class Sound {
 
     public bool loop;
 
+    public AudioRolloffMode rolloffMode;
+
     [HideInInspector]
     public AudioSource source;
 
