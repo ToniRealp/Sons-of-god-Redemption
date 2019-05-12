@@ -210,7 +210,7 @@ public class TankEnemy : Enemy {
                                 ChangeSpeed(movementSpeed*15);
                                 NavAgent.acceleration = 500;
                                 MoveToDestination();
-                                if(collided||NavAgent.remainingDistance<=2f)
+                                if(collided||NavAgent.remainingDistance<=2.6f)
                                 {
                                     collided = false;
                                     animator.SetTrigger("Swipe");

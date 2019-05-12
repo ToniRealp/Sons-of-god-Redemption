@@ -90,6 +90,7 @@ public class PlayerController : MonoBehaviour {
         flameCone.SetActive(false);
         actualDamagedCooldown = damagedCooldown = AnimationLength("Reaction Hit", animator);
         audioManager = GetComponent<AudioManager>();
+        audioManager.Play("MainTheme");
     }
 	
 	void Update () {

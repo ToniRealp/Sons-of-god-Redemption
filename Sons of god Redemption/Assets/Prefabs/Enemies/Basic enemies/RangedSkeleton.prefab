@@ -2300,114 +2300,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: MainTheme
-    clip: {fileID: 8300000, guid: 0589cbf4324ff384993182282818c007, type: 3}
-    volume: 1
-    loop: 1
-    source: {fileID: 0}
-  - name: Hit
-    clip: {fileID: 8300000, guid: 9d54cd11b601e1b428925b1897cd4042, type: 3}
-    volume: 0
-    loop: 0
-    source: {fileID: 0}
-  - name: Swing
-    clip: {fileID: 8300000, guid: 4ab2086b82ae0344d9e47731a83f9743, type: 3}
-    volume: 0
-    loop: 0
-    source: {fileID: 0}
-  - name: DevilMain
-    clip: {fileID: 8300000, guid: e55fddcf3a7e2e2448becf733e28e565, type: 3}
-    volume: 0.498
-    loop: 0
-    source: {fileID: 0}
-  - name: DevilSpawn
-    clip: {fileID: 8300000, guid: 1660d88931f92b147bc901188c7115b2, type: 3}
-    volume: 0.665
-    loop: 0
-    source: {fileID: 0}
-  - name: DevilAttack
-    clip: {fileID: 8300000, guid: 811d016383e98d14f9cf77f22cfaf16d, type: 3}
-    volume: 0.665
-    loop: 0
-    source: {fileID: 0}
-  - name: DevilPuke
-    clip: {fileID: 8300000, guid: 5f142c72c6d663d41b861bafda176017, type: 3}
-    volume: 0.665
-    loop: 0
-    source: {fileID: 0}
-  - name: DevilDie
-    clip: {fileID: 8300000, guid: 89528ad387e29ab47ae76c4717ebbfaf, type: 3}
-    volume: 0.665
-    loop: 0
-    source: {fileID: 0}
-  - name: MinoWalk
-    clip: {fileID: 8300000, guid: 951dcd7c0ead24346b7a3d1d8d4d7f6d, type: 3}
-    volume: 0.665
-    loop: 0
-    source: {fileID: 0}
-  - name: MinoDeath
-    clip: {fileID: 8300000, guid: 629cc227917350848bd9dbc204b9f98f, type: 3}
-    volume: 0.665
-    loop: 0
-    source: {fileID: 0}
-  - name: MinoRoar
-    clip: {fileID: 8300000, guid: 148f56ad3f8d47f429a7ca4ba58603e7, type: 3}
-    volume: 0.665
-    loop: 0
-    source: {fileID: 0}
-  - name: MinoGallop
-    clip: {fileID: 8300000, guid: c9535c79fb21ed248af80412979ab27d, type: 3}
-    volume: 0.665
-    loop: 0
-    source: {fileID: 0}
-  - name: MinoPunch
-    clip: {fileID: 8300000, guid: 083d51b02375d534ebc8c3e96243b4ed, type: 3}
-    volume: 0.665
-    loop: 0
-    source: {fileID: 0}
-  - name: BabyAttack
-    clip: {fileID: 8300000, guid: 2c419e83c3808c74da725395349b52fe, type: 3}
-    volume: 0.237
-    loop: 0
-    source: {fileID: 0}
-  - name: BabyDamaged
-    clip: {fileID: 8300000, guid: 4de0cfc29d95a994497ec8591f21fd27, type: 3}
-    volume: 0.239
-    loop: 0
-    source: {fileID: 0}
-  - name: BabyIdle
-    clip: {fileID: 8300000, guid: 8aa5f24a428070848a775ca997957bed, type: 3}
-    volume: 0.233
-    loop: 0
-    source: {fileID: 0}
-  - name: BabyChasing
-    clip: {fileID: 8300000, guid: 3e0295535b459c1469e1ab918772b4c9, type: 3}
-    volume: 0.232
-    loop: 0
-    source: {fileID: 0}
-  - name: BabyDeath
-    clip: {fileID: 8300000, guid: 478c5e4671f721a48979a12f6455a3ab, type: 3}
-    volume: 0.221
-    loop: 0
-    source: {fileID: 0}
   - name: SkeletonShoot
     clip: {fileID: 8300000, guid: 14b9252edbad2154999bbf4d669f0a57, type: 3}
-    volume: 0.221
+    volume: 0.2
     loop: 0
     source: {fileID: 0}
   - name: SkeletonHit
     clip: {fileID: 8300000, guid: 46dc620c300a9df4da50879a970507e8, type: 3}
-    volume: 0.221
-    loop: 0
-    source: {fileID: 0}
-  - name: LelielRun
-    clip: {fileID: 8300000, guid: bd308239296f3114eab1eeac8f18812e, type: 3}
-    volume: 0.221
-    loop: 1
-    source: {fileID: 0}
-  - name: LelielHit
-    clip: {fileID: 8300000, guid: 7425425262f775f4989ab4816c0f640d, type: 3}
-    volume: 0.221
+    volume: 0.2
     loop: 0
     source: {fileID: 0}
   masterMixer: {fileID: 24300002, guid: 60bfbd53358596e48a5f62aa8d3fe33b, type: 2}

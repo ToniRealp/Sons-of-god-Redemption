@@ -554,6 +554,7 @@ GameObject:
   - component: {fileID: 114062393654652366}
   - component: {fileID: 114834375013309354}
   - component: {fileID: 114014016804777488}
+  - component: {fileID: 81585574906660924}
   m_Layer: 0
   m_Name: LelielAlfa
   m_TagString: Player
@@ -1763,7 +1764,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1532023036423736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.08, y: 1.03932796e-17, z: 0.4}
+  m_LocalPosition: {x: 19, y: 23.64, z: -0.61}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4012368197550088}
@@ -2215,6 +2216,13 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8.363799, y: 89.89993, z: 12.168216}
   m_Center: {x: -0.04422466, y: 68.04228, z: -1.9148176}
+--- !u!81 &81585574906660924
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1532023036423736}
+  m_Enabled: 1
 --- !u!95 &95380528601405696
 Animator:
   serializedVersion: 3
@@ -2247,107 +2255,22 @@ MonoBehaviour:
   sounds:
   - name: MainTheme
     clip: {fileID: 8300000, guid: 0589cbf4324ff384993182282818c007, type: 3}
-    volume: 1
+    volume: 0.405
     loop: 1
     source: {fileID: 0}
   - name: Hit
     clip: {fileID: 8300000, guid: 9d54cd11b601e1b428925b1897cd4042, type: 3}
-    volume: 0
+    volume: 0.118
     loop: 0
     source: {fileID: 0}
   - name: Swing
     clip: {fileID: 8300000, guid: 4ab2086b82ae0344d9e47731a83f9743, type: 3}
-    volume: 0
-    loop: 0
-    source: {fileID: 0}
-  - name: DevilMain
-    clip: {fileID: 8300000, guid: e55fddcf3a7e2e2448becf733e28e565, type: 3}
-    volume: 0.498
-    loop: 0
-    source: {fileID: 0}
-  - name: DevilSpawn
-    clip: {fileID: 8300000, guid: 1660d88931f92b147bc901188c7115b2, type: 3}
-    volume: 0.665
-    loop: 0
-    source: {fileID: 0}
-  - name: DevilAttack
-    clip: {fileID: 8300000, guid: 811d016383e98d14f9cf77f22cfaf16d, type: 3}
-    volume: 0.665
-    loop: 0
-    source: {fileID: 0}
-  - name: DevilPuke
-    clip: {fileID: 8300000, guid: 5f142c72c6d663d41b861bafda176017, type: 3}
-    volume: 0.665
-    loop: 0
-    source: {fileID: 0}
-  - name: DevilDie
-    clip: {fileID: 8300000, guid: 89528ad387e29ab47ae76c4717ebbfaf, type: 3}
-    volume: 0.665
-    loop: 0
-    source: {fileID: 0}
-  - name: MinoWalk
-    clip: {fileID: 8300000, guid: 951dcd7c0ead24346b7a3d1d8d4d7f6d, type: 3}
-    volume: 0.665
-    loop: 0
-    source: {fileID: 0}
-  - name: MinoDeath
-    clip: {fileID: 8300000, guid: 629cc227917350848bd9dbc204b9f98f, type: 3}
-    volume: 0.665
-    loop: 0
-    source: {fileID: 0}
-  - name: MinoRoar
-    clip: {fileID: 8300000, guid: 148f56ad3f8d47f429a7ca4ba58603e7, type: 3}
-    volume: 0.665
-    loop: 0
-    source: {fileID: 0}
-  - name: MinoGallop
-    clip: {fileID: 8300000, guid: c9535c79fb21ed248af80412979ab27d, type: 3}
-    volume: 0.665
-    loop: 0
-    source: {fileID: 0}
-  - name: MinoPunch
-    clip: {fileID: 8300000, guid: 083d51b02375d534ebc8c3e96243b4ed, type: 3}
-    volume: 0.665
-    loop: 0
-    source: {fileID: 0}
-  - name: BabyAttack
-    clip: {fileID: 8300000, guid: 2c419e83c3808c74da725395349b52fe, type: 3}
-    volume: 0.237
-    loop: 0
-    source: {fileID: 0}
-  - name: BabyDamaged
-    clip: {fileID: 8300000, guid: 4de0cfc29d95a994497ec8591f21fd27, type: 3}
-    volume: 0.239
-    loop: 0
-    source: {fileID: 0}
-  - name: BabyIdle
-    clip: {fileID: 8300000, guid: 8aa5f24a428070848a775ca997957bed, type: 3}
-    volume: 0.233
-    loop: 0
-    source: {fileID: 0}
-  - name: BabyChasing
-    clip: {fileID: 8300000, guid: 3e0295535b459c1469e1ab918772b4c9, type: 3}
-    volume: 0.232
-    loop: 0
-    source: {fileID: 0}
-  - name: BabyDeath
-    clip: {fileID: 8300000, guid: 478c5e4671f721a48979a12f6455a3ab, type: 3}
-    volume: 0.221
-    loop: 0
-    source: {fileID: 0}
-  - name: SkeletonShoot
-    clip: {fileID: 8300000, guid: 14b9252edbad2154999bbf4d669f0a57, type: 3}
-    volume: 0.221
-    loop: 0
-    source: {fileID: 0}
-  - name: SkeletonHit
-    clip: {fileID: 8300000, guid: 46dc620c300a9df4da50879a970507e8, type: 3}
-    volume: 0.221
+    volume: 0.106
     loop: 0
     source: {fileID: 0}
   - name: LelielRun
     clip: {fileID: 8300000, guid: bd308239296f3114eab1eeac8f18812e, type: 3}
-    volume: 0.64
+    volume: 0.109
     loop: 1
     source: {fileID: 0}
   - name: LelielHit
@@ -2454,7 +2377,7 @@ CapsuleCollider:
   m_Radius: 0.40033096
   m_Height: 1.8591349
   m_Direction: 1
-  m_Center: {x: 0.004554212, y: 0.9279568, z: 0.099999964}
+  m_Center: {x: 0.004554212, y: 0.9295675, z: 0.099999964}
 --- !u!137 &137713698252223656
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
