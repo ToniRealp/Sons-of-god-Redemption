@@ -553,7 +553,7 @@ GameObject:
   - component: {fileID: 136100351918248454}
   - component: {fileID: 114062393654652366}
   - component: {fileID: 114834375013309354}
-  - component: {fileID: 82907643946492508}
+  - component: {fileID: 114014016804777488}
   m_Layer: 0
   m_Name: LelielAlfa
   m_TagString: Player
@@ -1763,7 +1763,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1532023036423736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.22, y: -2, z: 25.69}
+  m_LocalPosition: {x: 0.08, y: 1.03932796e-17, z: 0.4}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4012368197550088}
@@ -2215,101 +2215,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8.363799, y: 89.89993, z: 12.168216}
   m_Center: {x: -0.04422466, y: 68.04228, z: -1.9148176}
---- !u!82 &82907643946492508
-AudioSource:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1532023036423736}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!95 &95380528601405696
 Animator:
   serializedVersion: 3
@@ -2328,6 +2233,129 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114014016804777488
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1532023036423736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd56148e8ce9b674c8f7195aa72efd5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: MainTheme
+    clip: {fileID: 8300000, guid: 0589cbf4324ff384993182282818c007, type: 3}
+    volume: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Hit
+    clip: {fileID: 8300000, guid: 9d54cd11b601e1b428925b1897cd4042, type: 3}
+    volume: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Swing
+    clip: {fileID: 8300000, guid: 4ab2086b82ae0344d9e47731a83f9743, type: 3}
+    volume: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: DevilMain
+    clip: {fileID: 8300000, guid: e55fddcf3a7e2e2448becf733e28e565, type: 3}
+    volume: 0.498
+    loop: 0
+    source: {fileID: 0}
+  - name: DevilSpawn
+    clip: {fileID: 8300000, guid: 1660d88931f92b147bc901188c7115b2, type: 3}
+    volume: 0.665
+    loop: 0
+    source: {fileID: 0}
+  - name: DevilAttack
+    clip: {fileID: 8300000, guid: 811d016383e98d14f9cf77f22cfaf16d, type: 3}
+    volume: 0.665
+    loop: 0
+    source: {fileID: 0}
+  - name: DevilPuke
+    clip: {fileID: 8300000, guid: 5f142c72c6d663d41b861bafda176017, type: 3}
+    volume: 0.665
+    loop: 0
+    source: {fileID: 0}
+  - name: DevilDie
+    clip: {fileID: 8300000, guid: 89528ad387e29ab47ae76c4717ebbfaf, type: 3}
+    volume: 0.665
+    loop: 0
+    source: {fileID: 0}
+  - name: MinoWalk
+    clip: {fileID: 8300000, guid: 951dcd7c0ead24346b7a3d1d8d4d7f6d, type: 3}
+    volume: 0.665
+    loop: 0
+    source: {fileID: 0}
+  - name: MinoDeath
+    clip: {fileID: 8300000, guid: 629cc227917350848bd9dbc204b9f98f, type: 3}
+    volume: 0.665
+    loop: 0
+    source: {fileID: 0}
+  - name: MinoRoar
+    clip: {fileID: 8300000, guid: 148f56ad3f8d47f429a7ca4ba58603e7, type: 3}
+    volume: 0.665
+    loop: 0
+    source: {fileID: 0}
+  - name: MinoGallop
+    clip: {fileID: 8300000, guid: c9535c79fb21ed248af80412979ab27d, type: 3}
+    volume: 0.665
+    loop: 0
+    source: {fileID: 0}
+  - name: MinoPunch
+    clip: {fileID: 8300000, guid: 083d51b02375d534ebc8c3e96243b4ed, type: 3}
+    volume: 0.665
+    loop: 0
+    source: {fileID: 0}
+  - name: BabyAttack
+    clip: {fileID: 8300000, guid: 2c419e83c3808c74da725395349b52fe, type: 3}
+    volume: 0.237
+    loop: 0
+    source: {fileID: 0}
+  - name: BabyDamaged
+    clip: {fileID: 8300000, guid: 4de0cfc29d95a994497ec8591f21fd27, type: 3}
+    volume: 0.239
+    loop: 0
+    source: {fileID: 0}
+  - name: BabyIdle
+    clip: {fileID: 8300000, guid: 8aa5f24a428070848a775ca997957bed, type: 3}
+    volume: 0.233
+    loop: 0
+    source: {fileID: 0}
+  - name: BabyChasing
+    clip: {fileID: 8300000, guid: 3e0295535b459c1469e1ab918772b4c9, type: 3}
+    volume: 0.232
+    loop: 0
+    source: {fileID: 0}
+  - name: BabyDeath
+    clip: {fileID: 8300000, guid: 478c5e4671f721a48979a12f6455a3ab, type: 3}
+    volume: 0.221
+    loop: 0
+    source: {fileID: 0}
+  - name: SkeletonShoot
+    clip: {fileID: 8300000, guid: 14b9252edbad2154999bbf4d669f0a57, type: 3}
+    volume: 0.221
+    loop: 0
+    source: {fileID: 0}
+  - name: SkeletonHit
+    clip: {fileID: 8300000, guid: 46dc620c300a9df4da50879a970507e8, type: 3}
+    volume: 0.221
+    loop: 0
+    source: {fileID: 0}
+  - name: LelielRun
+    clip: {fileID: 8300000, guid: bd308239296f3114eab1eeac8f18812e, type: 3}
+    volume: 0.64
+    loop: 1
+    source: {fileID: 0}
+  - name: LelielHit
+    clip: {fileID: 8300000, guid: 7425425262f775f4989ab4816c0f640d, type: 3}
+    volume: 0.221
+    loop: 0
+    source: {fileID: 0}
+  masterMixer: {fileID: 24300002, guid: 60bfbd53358596e48a5f62aa8d3fe33b, type: 2}
 --- !u!114 &114062393654652366
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2347,6 +2375,7 @@ MonoBehaviour:
   lightDmg: 60
   darkLifeSteal: 5
   healthBar: {fileID: 0}
+  potionBar: {fileID: 0}
   fireUI: {fileID: 0}
   lightUI: {fileID: 0}
   darkUI: {fileID: 0}
@@ -2362,6 +2391,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   bossDmg: 0
+  audioManager: {fileID: 0}
   levelController: {fileID: 0}
   direction: {x: 0, y: 0, z: 0}
   walkVelocity: 3
@@ -2424,7 +2454,7 @@ CapsuleCollider:
   m_Radius: 0.40033096
   m_Height: 1.8591349
   m_Direction: 1
-  m_Center: {x: 0.004554212, y: 0.8795675, z: 0.099999964}
+  m_Center: {x: 0.004554212, y: 0.9279568, z: 0.099999964}
 --- !u!137 &137713698252223656
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

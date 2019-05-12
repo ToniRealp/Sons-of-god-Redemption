@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] GameObject weapon;
     [SerializeField] GameObject[] elements = new GameObject[(int)Elements.MAX];
     public float bossDmg;
+    public AudioManager audioManager;
 
     //Inputs
     bool[] inputs = new bool[(int)ButtonInputs.MAX];
@@ -88,6 +89,7 @@ public class PlayerController : MonoBehaviour {
         elements[(int)Elements.Dark].SetActive(false);
         flameCone.SetActive(false);
         actualDamagedCooldown = damagedCooldown = AnimationLength("Reaction Hit", animator);
+        audioManager = GetComponent<AudioManager>();
     }
 	
 	void Update () {
@@ -184,6 +186,8 @@ public class PlayerController : MonoBehaviour {
             states = States.Dead;
         }
 
+        if (states != States.Running && audioManager.isPlaying("LelielRun"))
+            audioManager.Stop("LelielRun");
 
         //Player state machine
         switch (states) {
@@ -253,6 +257,9 @@ public class PlayerController : MonoBehaviour {
                 //If input==0 return to idle
                 //if attack input switch to attack state
                 //if dash input switch to dash state
+                if (!audioManager.isPlaying("LelielRun"))
+                    audioManager.Play("LelielRun");
+
                 Rotation();                       
                 transform.Translate(transform.forward * runVelocity * Time.deltaTime, Space.World);
 
@@ -799,6 +806,8 @@ public class PlayerController : MonoBehaviour {
         }
         if (!dead && !damaged)
         {
+            
+
             if (other.tag == "EnemyWeapon")
             {
                 health -= (int)other.GetComponentInParent<Enemy>().baseAttack;
@@ -806,12 +815,18 @@ public class PlayerController : MonoBehaviour {
                 damaged = true;
                 states = States.Damaged;
                 animator.SetTrigger("Hit");
+
+                if (!audioManager.isPlaying("LelielHit"))
+                    audioManager.Play("LelielHit");
             }
             if (other.tag == "Arrow")
             {
                 health -= 10;
                 healthBar.value = health;
                 damaged = true;
+
+                if (!audioManager.isPlaying("LelielHit"))
+                    audioManager.Play("LelielHit");
             }
             if (other.tag == "FirstBossWeapon" && !FBCD)
             {
@@ -822,6 +837,9 @@ public class PlayerController : MonoBehaviour {
                 damaged = true;
                 states = States.Damaged;
                 animator.SetTrigger("Hit");
+
+                if (!audioManager.isPlaying("LelielHit"))
+                    audioManager.Play("LelielHit");
             }
             if (other.tag == "FinalBossWeapon" && !finalDashHit)
             {
@@ -831,6 +849,9 @@ public class PlayerController : MonoBehaviour {
                 damaged = true;
                 states = States.Damaged;
                 animator.SetTrigger("Hit");
+
+                if (!audioManager.isPlaying("LelielHit"))
+                    audioManager.Play("LelielHit");
             }
         }
         

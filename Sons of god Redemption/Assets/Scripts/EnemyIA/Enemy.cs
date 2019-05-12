@@ -85,7 +85,7 @@ public abstract class Enemy : MonoBehaviour {
         actualDamagedCooldown = 0;
         damagedCooldown = 3f;
         attackCooldown = attackSpeed;
-        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        audioManager = this.GetComponent<AudioManager>();
         //Animator
         animator = GetComponent<Animator>();
         animTimes = new Dictionary<string, AnimInfo>();

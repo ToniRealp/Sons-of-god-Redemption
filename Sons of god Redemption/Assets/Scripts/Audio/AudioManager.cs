@@ -15,6 +15,8 @@ public class AudioManager : MonoBehaviour {
             s.source.volume = s.volume;
             s.source.loop = s.loop;
             s.source.GetComponent<AudioSource>().outputAudioMixerGroup = masterMixer;
+            s.source.spatialize = true;
+            s.source.spatialBlend = 1;
         }
 	}
 	
@@ -63,8 +65,4 @@ public class AudioManager : MonoBehaviour {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         return s.source.isPlaying;
     }
-	// Update is called once per frame
-	void Start () {
-        //Play("MainTheme");
-	}
 }
