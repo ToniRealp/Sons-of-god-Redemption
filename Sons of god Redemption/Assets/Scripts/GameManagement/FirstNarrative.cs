@@ -2,57 +2,65 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class FirstNarrative : MonoBehaviour {
 
     public InputManager inputManager;
     public SceneController sceneController;
-    public Image[] image = new Image[7];
+    public Image[] image = new Image[3];
+    public TextMeshProUGUI[] text = new TextMeshProUGUI[5];
 
-    public float startTime, textInScreenTime = 4.0f;
-    private int imageNum;
-    private bool textShown;
-    private Color c;
+
+    public float startTime, textInScreenTime = 6.0f;
+    private int imageNum, textNum;
+    private bool textShown, imageShown, nextImage, transition;
+    private Color c, t;
 
     // Use this for initialization
     void Start()
     {
-        textShown = false;
-        imageNum = 0;
-        for (int i = 0; i < 7; i++)
+        transition = nextImage = imageShown = textShown = false;
+        imageNum = textNum = 0;
+        for (int i = 0; i < 3; i++)
         {
             c = image[i].color;
             c.a = 0;
             image[i].color = c;
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            t = text[i].color;
+            t.a = 0;
+            text[i].color = t;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (inputManager.escape) { imageNum = 7; }
-        if (imageNum < 7)
+        if (imageNum < 3)
         {
             c = image[imageNum].color;
-            if (image[imageNum].color.a<1 && !textShown)
+            if (image[imageNum].color.a < 1 && !imageShown)
             {
                 c.a += 0.01f;
-                if (inputManager.attackButton || inputManager.dashButton ||  inputManager.interact || inputManager.strongAttackButton) { c.a = 1; }
                 image[imageNum].color = c;
                 startTime = Time.time;
             }
-            else {
-                textShown = true;
+            else
+            {
+                imageShown = true;
             }
-            if (textShown && (Time.time - startTime >= textInScreenTime ||  inputManager.attackButton || inputManager.dashButton || inputManager.interact || inputManager.strongAttackButton))
+            if (imageShown && nextImage)
             {
                 c.a -= 0.01f;
-                if (inputManager.attackButton || inputManager.dashButton || inputManager.interact || inputManager.strongAttackButton) { c.a = 0; }
                 image[imageNum].color = c;
                 if (image[imageNum].color.a <= 0)
                 {
                     imageNum++;
-                    textShown = false;
+                    imageShown = false;
+                    nextImage = false;
                 }
             }
         }
@@ -60,6 +68,71 @@ public class FirstNarrative : MonoBehaviour {
         {
             sceneController.changeScene("TutorialScene");
         }
+
+        if (textNum < 5)
+        {
+            c = text[textNum].color;
+            if (text[textNum].color.a < 1 && !textShown)
+            {
+                c.a += 0.01f;
+                text[textNum].color = c;
+                startTime = Time.time;
+            }
+            else
+            {
+                textShown = true;
+            }
+            if (textShown && Time.time - startTime >= textInScreenTime)
+            {
+                if ((textNum >= 2) && !nextImage)
+                {
+                    nextImage = true;
+                }
+                c.a -= 0.01f;
+                text[textNum].color = c;
+                if (text[textNum].color.a <= 0)
+                {
+                    textNum++;
+                    textShown = false;
+                }
+            }
+        }
+
+
+
+
+
+
+        //if (inputManager.escape) { imageNum = 7; }
+        //if (imageNum < 7)
+        //{
+        //    c = image[imageNum].color;
+        //    if (image[imageNum].color.a<1 && !textShown)
+        //    {
+        //        c.a += 0.01f;
+        //        if (inputManager.attackButton || inputManager.dashButton ||  inputManager.interact || inputManager.strongAttackButton) { c.a = 1; }
+        //        image[imageNum].color = c;
+        //        startTime = Time.time;
+        //    }
+        //    else {
+        //        textShown = true;
+        //    }
+        //    if (textShown && (Time.time - startTime >= textInScreenTime ||  inputManager.attackButton || inputManager.dashButton || inputManager.interact || inputManager.strongAttackButton))
+        //    {
+        //        c.a -= 0.01f;
+        //        if (inputManager.attackButton || inputManager.dashButton || inputManager.interact || inputManager.strongAttackButton) { c.a = 0; }
+        //        image[imageNum].color = c;
+        //        if (image[imageNum].color.a <= 0)
+        //        {
+        //            imageNum++;
+        //            textShown = false;
+        //        }
+        //    }
+        //}
+        //else
+        //{
+        //    sceneController.changeScene("TutorialScene");
+        //}
 
     }
 }

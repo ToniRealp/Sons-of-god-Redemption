@@ -62,7 +62,7 @@ public class TutorialController : MonoBehaviour {
                 startTime = Time.time;
                 wasd.GetComponent<TutorialTextScript>().ScaleText();
             }
-            if (inputManager.xAxis != 0 || inputManager.yAxis != 0)
+            if ((inputManager.xAxis != 0 || inputManager.yAxis != 0) && !wait)
             {
                 wasd.SetActive(false);
                 lightAt.SetActive(true);
