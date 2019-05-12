@@ -2208,12 +2208,12 @@ MonoBehaviour:
   sounds:
   - name: SkeletonShoot
     clip: {fileID: 8300000, guid: 14b9252edbad2154999bbf4d669f0a57, type: 3}
-    volume: 0.2
+    volume: 0.3
     loop: 0
     source: {fileID: 0}
   - name: SkeletonHit
     clip: {fileID: 8300000, guid: 46dc620c300a9df4da50879a970507e8, type: 3}
-    volume: 0.2
+    volume: 0.3
     loop: 0
     source: {fileID: 0}
   masterMixer: {fileID: 24300002, guid: 60bfbd53358596e48a5f62aa8d3fe33b, type: 2}

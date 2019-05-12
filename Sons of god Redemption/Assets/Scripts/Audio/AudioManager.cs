@@ -17,8 +17,8 @@ public class AudioManager : MonoBehaviour {
             s.source.GetComponent<AudioSource>().outputAudioMixerGroup = masterMixer;
             s.source.spatialize = true;
             s.source.spatialBlend = 1;
-            s.source.rolloffMode = AudioRolloffMode.Logarithmic;
-            s.source.minDistance = 2;
+            //s.source.rolloffMode = AudioRolloffMode.Logarithmic;
+            s.source.minDistance = 1;
         }
 	}
 	
@@ -39,7 +39,10 @@ public class AudioManager : MonoBehaviour {
         {
             Debug.LogWarning("Sound:" + name + "notFound");
         }
+        float volume = s.source.volume;
+        s.source.volume = 0;
         s.source.Stop();
+        s.source.volume = volume;
     }
 
     public void SetVolume(string name, float vol)

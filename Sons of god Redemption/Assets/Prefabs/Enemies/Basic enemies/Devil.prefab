@@ -984,27 +984,27 @@ MonoBehaviour:
   sounds:
   - name: DevilMain
     clip: {fileID: 8300000, guid: e55fddcf3a7e2e2448becf733e28e565, type: 3}
-    volume: 0.2
+    volume: 0.3
     loop: 0
     source: {fileID: 0}
   - name: DevilSpawn
     clip: {fileID: 8300000, guid: 1660d88931f92b147bc901188c7115b2, type: 3}
-    volume: 0.2
+    volume: 0.3
     loop: 0
     source: {fileID: 0}
   - name: DevilAttack
     clip: {fileID: 8300000, guid: 811d016383e98d14f9cf77f22cfaf16d, type: 3}
-    volume: 0.2
+    volume: 0.3
     loop: 0
     source: {fileID: 0}
   - name: DevilPuke
     clip: {fileID: 8300000, guid: 5f142c72c6d663d41b861bafda176017, type: 3}
-    volume: 0.2
+    volume: 0.3
     loop: 0
     source: {fileID: 0}
   - name: DevilDie
     clip: {fileID: 8300000, guid: 89528ad387e29ab47ae76c4717ebbfaf, type: 3}
-    volume: 0.2
+    volume: 0.3
     loop: 0
     source: {fileID: 0}
   masterMixer: {fileID: 24300002, guid: 60bfbd53358596e48a5f62aa8d3fe33b, type: 2}

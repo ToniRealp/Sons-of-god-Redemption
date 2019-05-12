@@ -13,9 +13,9 @@ public class BabyEnemy : Enemy {
     {
         if (health <= 0)
         {
-            Die();
             if (!audioManager.isPlaying("BabyDeath"))
                 audioManager.Play("BabyDeath");
+            Die();
         }
 
         UpdateHealthText();
@@ -144,11 +144,7 @@ public class BabyEnemy : Enemy {
                 break;
 
             case State.DAMAGED:
-                if (!audioManager.isPlaying("BabyDamaged") && !damagedAudio)
-                {
-                    damagedAudio = true;
-                    audioManager.Play("BabyDamaged");
-                }
+               
                 audioManager.Stop("BabyIdle");
                 audioManager.Stop("BabyAttack");
                 audioManager.Stop("BabyChasing");

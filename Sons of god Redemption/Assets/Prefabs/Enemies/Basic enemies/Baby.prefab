@@ -1173,27 +1173,27 @@ MonoBehaviour:
   sounds:
   - name: BabyAttack
     clip: {fileID: 8300000, guid: 2c419e83c3808c74da725395349b52fe, type: 3}
-    volume: 0.2
+    volume: 0.3
     loop: 0
     source: {fileID: 0}
   - name: BabyDamaged
     clip: {fileID: 8300000, guid: 4de0cfc29d95a994497ec8591f21fd27, type: 3}
-    volume: 0.1
+    volume: 0.2
     loop: 0
     source: {fileID: 0}
   - name: BabyIdle
     clip: {fileID: 8300000, guid: 8aa5f24a428070848a775ca997957bed, type: 3}
-    volume: 0.2
+    volume: 0.3
     loop: 0
     source: {fileID: 0}
   - name: BabyChasing
     clip: {fileID: 8300000, guid: 3e0295535b459c1469e1ab918772b4c9, type: 3}
-    volume: 0.2
+    volume: 0.3
     loop: 0
     source: {fileID: 0}
   - name: BabyDeath
     clip: {fileID: 8300000, guid: 478c5e4671f721a48979a12f6455a3ab, type: 3}
-    volume: 0.2
+    volume: 0.3
     loop: 0
     source: {fileID: 0}
   masterMixer: {fileID: 24300002, guid: 60bfbd53358596e48a5f62aa8d3fe33b, type: 2}

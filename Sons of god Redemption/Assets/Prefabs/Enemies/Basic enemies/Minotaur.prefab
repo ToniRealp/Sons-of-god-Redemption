@@ -1653,27 +1653,27 @@ MonoBehaviour:
   sounds:
   - name: MinoWalk
     clip: {fileID: 8300000, guid: 951dcd7c0ead24346b7a3d1d8d4d7f6d, type: 3}
-    volume: 0.2
+    volume: 0.3
     loop: 0
     source: {fileID: 0}
   - name: MinoDeath
     clip: {fileID: 8300000, guid: 629cc227917350848bd9dbc204b9f98f, type: 3}
-    volume: 0.2
+    volume: 0.3
     loop: 0
     source: {fileID: 0}
   - name: MinoRoar
     clip: {fileID: 8300000, guid: 148f56ad3f8d47f429a7ca4ba58603e7, type: 3}
-    volume: 0.2
+    volume: 0.5
     loop: 0
     source: {fileID: 0}
   - name: MinoGallop
     clip: {fileID: 8300000, guid: c9535c79fb21ed248af80412979ab27d, type: 3}
-    volume: 0.2
+    volume: 0.3
     loop: 0
     source: {fileID: 0}
   - name: MinoPunch
     clip: {fileID: 8300000, guid: 083d51b02375d534ebc8c3e96243b4ed, type: 3}
-    volume: 0.2
+    volume: 0.3
     loop: 0
     source: {fileID: 0}
   masterMixer: {fileID: 24300002, guid: 60bfbd53358596e48a5f62aa8d3fe33b, type: 2}

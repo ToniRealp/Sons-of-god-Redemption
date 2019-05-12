@@ -2302,7 +2302,7 @@ MonoBehaviour:
   sounds:
   - name: SkeletonShoot
     clip: {fileID: 8300000, guid: 14b9252edbad2154999bbf4d669f0a57, type: 3}
-    volume: 0.2
+    volume: 0.5
     loop: 0
     source: {fileID: 0}
   - name: SkeletonHit
