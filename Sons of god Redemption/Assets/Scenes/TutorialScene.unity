@@ -544,7 +544,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Usa 4 o Pad(XBOX) para curarte
+  m_Text: Use 4 or Pad(XBOX) to heal
 --- !u!222 &82019321
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -619,7 +619,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Usa WASD o Joystick Izquierdo para moverte
+  m_Text: Use WASD or Left Joystick to move
 --- !u!222 &124888593
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2032,7 +2032,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Usa 3 o Pad(XBOX) para cambiar \nal elemento de oscuridad"
+  m_Text: 'Use 3 or Pad(XBOX) to change
+
+    to the darkness element'
 --- !u!222 &483672019
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2112,8 +2114,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 144.85693, y: 4.4188886, z: -25.06}
+  m_LocalRotation: {x: 0.40818623, y: 0.0140653625, z: -0.00628995, w: 0.9127687}
+  m_LocalPosition: {x: 144.61, y: 22.35, z: -47.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1172499468}
@@ -2409,7 +2411,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Usa 1 o Pad(XBOX) para cambiar \nal elemento de luz"
+  m_Text: "Use 1 or Pad(XBOX) to change \nto the light element"
 --- !u!222 &594609852
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2484,9 +2486,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Este elemento permite
+  m_Text: 'This element allows you
 
-    absorber vida al enemigo'
+    to steal life from enemies'
 --- !u!222 &604678312
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2616,7 +2618,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Usa J o X(XBOX) para hacer un ataque b\xE1sico"
+  m_Text: Use J or X(XBOX) to perform a light attack
 --- !u!222 &643519895
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2813,7 +2815,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\xA1Bien hecho! \xA1Adelante, \navanza en busca de la redenci\xF3n!"
+  m_Text: "Good job! Come on, \ngo and fight for your redemption!"
 --- !u!222 &733642949
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3468,7 +3470,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Usa 2 o Pad(XBOX) para cambiar \nal elemento de fuego"
+  m_Text: 'Use 2 or Pad(XBOX) to change
+
+    to the fire element'
 --- !u!222 &1140660343
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3543,9 +3547,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Este elemento es efectivo
+  m_Text: 'This element is effective
 
-    contra enemigos aislados'
+    against isolated enemies'
 --- !u!222 &1152505677
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4538,7 +4542,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Usa Espacio o A(XBOX) para esquivar
+  m_Text: Use Space or A(XBOX) to evade
 --- !u!222 &1437504688
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4816,7 +4820,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Usa K o Y(XBOX) para hacer un ataque fuerte
+  m_Text: Use K or Y(XBOX) to perform a strong attack
 --- !u!222 &1494770408
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6089,7 +6093,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Este elemento permite\nhacer m\xE1s da\xF1o en \xE1rea"
+  m_Text: 'This element is effective
+
+    against multiple enemies'
 --- !u!222 &2111684889
 CanvasRenderer:
   m_ObjectHideFlags: 0
