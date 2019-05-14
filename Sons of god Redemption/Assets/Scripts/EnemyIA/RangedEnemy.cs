@@ -51,8 +51,6 @@ public class RangedEnemy : Enemy {
         if (actualDamagedCooldown > 0f)
             actualDamagedCooldown -= Time.deltaTime;
 
-        if (runCooldown > 0)
-            runCooldown -= Time.deltaTime;
 
         damaged = false;
 
@@ -95,6 +93,10 @@ public class RangedEnemy : Enemy {
 
             case State.CHASING:
                 // Full speed
+                if (runCooldown > 0)
+                    runCooldown -= Time.deltaTime;
+
+
                 ChangeSpeed(movementSpeed);
                 if (runCooldown <= 0)
                 {
@@ -163,6 +165,7 @@ public class RangedEnemy : Enemy {
                 break;
 
             case State.DAMAGED:
+
                 if (!damagedSound)
                 {
                     damagedSound = true;
@@ -174,7 +177,7 @@ public class RangedEnemy : Enemy {
                 // No movement
                 ChangeSpeed(0);
                 // But rotation
-                LookToDestination();
+                LookToPlayer();
 
                 // When damage animation finishes change state
                 animTimes["Reaction Hit"].cooldown -= Time.deltaTime;
@@ -210,44 +213,48 @@ public class RangedEnemy : Enemy {
 
     void OptimalDestination(bool isCloser)
     {
-        float angle = Vector3.SignedAngle(Vector3.forward,transform.position - playerPosition,Vector3.up); //Random.Range(0, 360)
-        float distance;
-   
-        if (isCloser)
-            distance = optimalPos + Random.Range(0, optimalPosOffset);
-        else
-            distance = optimalPos - Random.Range(0, optimalPosOffset);
 
-        bool angleFound = false;
-        float angleOffset=0;
-        do
-        {
-            Vector3 position = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (angle)), 0, Mathf.Cos(Mathf.Deg2Rad * (angle))) * distance;
-            destination = playerPosition + position;
-            NavMeshHit hit;
-            if (NavMesh.Raycast(gameObject.transform.position, destination, out hit, NavMesh.AllAreas))
-            {
-                if (!angleFound)
-                {
-                    if (Mathf.Abs(((new Vector3(Mathf.Sin(Mathf.Deg2Rad * (angle + 30)), 0, Mathf.Cos(Mathf.Deg2Rad * angle + 30)) * distance) - playerPosition).magnitude) >
-                   Mathf.Abs(((new Vector3(Mathf.Sin(Mathf.Deg2Rad * (angle - 30)), 0, Mathf.Cos(Mathf.Deg2Rad * angle - 30)) * distance) - playerPosition).magnitude))
-                    {
-                        angleOffset = +30;
-                    }
-                    else
-                    {
-                        angleOffset = -30;
-                    }
-                    angleFound = true;
-                }
-                angle += angleOffset;
-            }
-            else
-            {
-                angleFound = false;
-                break;
-            }
-               
-        } while (true);
+        SetRandomDestination();
+
+
+        //float angle = Vector3.SignedAngle(Vector3.forward,transform.position - playerPosition,Vector3.up); //Random.Range(0, 360)
+        //float distance;
+
+        //if (isCloser)
+        //    distance = optimalPos + Random.Range(0, optimalPosOffset);
+        //else
+        //    distance = optimalPos - Random.Range(0, optimalPosOffset);
+
+        //bool angleFound = false;
+        //float angleOffset=0;
+        //do
+        //{
+        //    Vector3 position = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (angle)), 0, Mathf.Cos(Mathf.Deg2Rad * (angle))) * distance;
+        //    destination = playerPosition + position;
+        //    NavMeshHit hit;
+        //    if (NavMesh.Raycast(gameObject.transform.position, destination, out hit, NavAgent.areaMask))
+        //    {
+        //        if (!angleFound)
+        //        {
+        //            if (Mathf.Abs(((new Vector3(Mathf.Sin(Mathf.Deg2Rad * (angle + 30)), 0, Mathf.Cos(Mathf.Deg2Rad * angle + 30)) * distance) - playerPosition).magnitude) >
+        //           Mathf.Abs(((new Vector3(Mathf.Sin(Mathf.Deg2Rad * (angle - 30)), 0, Mathf.Cos(Mathf.Deg2Rad * angle - 30)) * distance) - playerPosition).magnitude))
+        //            {
+        //                angleOffset = +30;
+        //            }
+        //            else
+        //            {
+        //                angleOffset = -30;
+        //            }
+        //            angleFound = true;
+        //        }
+        //        angle += angleOffset;
+        //    }
+        //    else
+        //    {
+        //        angleFound = false;
+        //        break;
+        //    }
+
+        //} while (true);
     }
 }

@@ -146,12 +146,12 @@ public abstract class Enemy : MonoBehaviour {
 
     protected void LookToDestination()
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(destination.x - transform.position.x, destination.y - transform.position.y, destination.z - transform.position.z)), rotationSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(destination.x - transform.position.x, transform.position.y, destination.z - transform.position.z)), rotationSpeed);
     }
 
     protected void LookToPlayer()
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(playerPosition.x - transform.position.x, playerPosition.y - transform.position.y, playerPosition.z - transform.position.z)), rotationSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(playerPosition.x - transform.position.x, transform.position.y, playerPosition.z - transform.position.z)), rotationSpeed);
     }
 
     protected bool IsMoving()
