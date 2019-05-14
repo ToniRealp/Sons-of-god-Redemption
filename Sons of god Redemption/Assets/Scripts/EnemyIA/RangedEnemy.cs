@@ -100,11 +100,11 @@ public class RangedEnemy : Enemy {
                 {
                     runCooldown = timeToRun;
                     // Go to player Position
-                    if (DistanceToDestination(playerPosition) - optimalPos > optimalPosOffset)
+                    if (DistanceToDestination(playerPosition) - optimalPos >= optimalPosOffset)
                     {
                         OptimalDestination(false);
                     }
-                    else if (DistanceToDestination(playerPosition) - optimalPos < -optimalPosOffset)
+                    else if (DistanceToDestination(playerPosition) - optimalPos < optimalPosOffset)
                     {
                         OptimalDestination(true);
                     }
