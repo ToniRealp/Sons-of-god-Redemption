@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 135260172532688646}
   - component: {fileID: 114341713842325730}
   - component: {fileID: 54796969740906838}
+  - component: {fileID: 114514514503864306}
   - component: {fileID: 114686177426917538}
   m_Layer: 0
   m_Name: Meteor
@@ -177,6 +178,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3, type: 2}
   audioManager: {fileID: 0}
+--- !u!114 &114514514503864306
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1414881985881858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9107da4516fe168479523438820a07a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fracturedMesh: {fileID: 1689326273203982, guid: 97e1d619674d99543bc18bbb8af5d8a4,
+    type: 2}
 --- !u!114 &114686177426917538
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -193,6 +207,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: f54d8d1b6c5797242a6549d040b49a93, type: 3}
     volume: 0.512
     loop: 0
+    rolloffMode: 0
     source: {fileID: 0}
   masterMixer: {fileID: 24300002, guid: 60bfbd53358596e48a5f62aa8d3fe33b, type: 2}
 --- !u!135 &135260172532688646

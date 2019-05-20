@@ -3198,26 +3198,31 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 9dcf3f7c49077b34083fdade1abb7a2d, type: 3}
     volume: 1
     loop: 1
+    rolloffMode: 0
     source: {fileID: 0}
   - name: Hit
     clip: {fileID: 8300000, guid: 9d54cd11b601e1b428925b1897cd4042, type: 3}
     volume: 0
     loop: 0
+    rolloffMode: 0
     source: {fileID: 0}
   - name: Swing
     clip: {fileID: 8300000, guid: 4ab2086b82ae0344d9e47731a83f9743, type: 3}
     volume: 0
     loop: 0
+    rolloffMode: 0
     source: {fileID: 0}
   - name: DevilMain
     clip: {fileID: 8300000, guid: e55fddcf3a7e2e2448becf733e28e565, type: 3}
     volume: 0.498
     loop: 0
+    rolloffMode: 0
     source: {fileID: 0}
   - name: DevilSpawn
     clip: {fileID: 8300000, guid: 1660d88931f92b147bc901188c7115b2, type: 3}
     volume: 0.665
     loop: 0
+    rolloffMode: 0
     source: {fileID: 0}
   masterMixer: {fileID: 24300002, guid: 60bfbd53358596e48a5f62aa8d3fe33b, type: 2}
 --- !u!4 &1063453246

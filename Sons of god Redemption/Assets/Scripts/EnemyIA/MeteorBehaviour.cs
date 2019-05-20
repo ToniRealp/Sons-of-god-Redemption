@@ -23,7 +23,7 @@ public class MeteorBehaviour : MonoBehaviour {
         Instantiate(explosion, transform.position, transform.rotation);
 
 
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
     }
 
 }
