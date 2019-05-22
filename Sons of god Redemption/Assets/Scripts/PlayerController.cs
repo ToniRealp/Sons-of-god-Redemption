@@ -51,6 +51,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] States states, nextState;
     [SerializeField] Attacks attacks;
 
+    public GameObject trail;
+
     void Start () {
 
         //initialize player stats
@@ -91,6 +93,7 @@ public class PlayerController : MonoBehaviour {
         actualDamagedCooldown = damagedCooldown = AnimationLength("Reaction Hit", animator);
         audioManager = GetComponent<AudioManager>();
         audioManager.Play("MainTheme");
+        trail.SetActive(false);
     }
 	
 	void Update () {
@@ -321,6 +324,11 @@ public class PlayerController : MonoBehaviour {
                         {
                             //weapon.tag = "Weapon";
                             weapon.tag = "LightAttack1";
+                            trail.SetActive(true);
+                        }
+                        else
+                        {
+                            trail.SetActive(false);
                         }
                         if (attackTransition)
                         {
@@ -334,6 +342,7 @@ public class PlayerController : MonoBehaviour {
                                 states = CheckState();
                               
                                 weapon.tag = "Untagged";
+                                trail.SetActive(false);
                             }
                             attackTransition = attacked = transition = false;
                         }
@@ -349,6 +358,7 @@ public class PlayerController : MonoBehaviour {
                             attacked = true;
                             weapon.tag = "LightAttack2";
                             audioManager.Play("mediumHit");
+                            trail.SetActive(true);
                         }
                         if (inputs[(int)ButtonInputs.LightAttack])
                         {
@@ -366,6 +376,7 @@ public class PlayerController : MonoBehaviour {
                                 states = CheckState();
 
                                 weapon.tag = "Untagged";
+                                trail.SetActive(false);
                             }
                             attackTransition = attacked = transition = false;
                         }                                            
@@ -380,6 +391,7 @@ public class PlayerController : MonoBehaviour {
                             attacked = true;
                             weapon.tag = "LightAttack3";
                             //audioManager.Play("strongHit");
+                            trail.SetActive(true);
                         }
                         if (animLength < animDuration * 0.7)
                         {
@@ -400,6 +412,7 @@ public class PlayerController : MonoBehaviour {
                         if (animLength < animDuration * 0.3)
                         {
                             weapon.tag = "Untagged";
+                            trail.SetActive(false);
                         }
                         if (attackTransition)
                         {
@@ -409,6 +422,7 @@ public class PlayerController : MonoBehaviour {
                             isLightHit = false;
                             darkHit = false;
                             attackTransition = attacked = transition = false;
+                            trail.SetActive(false);
                         }
 
                         break;
@@ -429,7 +443,12 @@ public class PlayerController : MonoBehaviour {
                         if (animLength < animDuration * 0.8)
                         {
                             weapon.tag = "StrongAttack1";
+                            trail.SetActive(true);
                             //weapon.tag = "Weapon";                          
+                        }
+                        else
+                        {
+                            trail.SetActive(false);
                         }
                         if (attackTransition)
                         {
@@ -442,6 +461,7 @@ public class PlayerController : MonoBehaviour {
                                 attacks = Attacks.NotAtt;
                                 states = CheckState();
                                 weapon.tag = "Untagged";
+                                trail.SetActive(false);
                             }
                             attackTransition = attacked = transition = false;
                         }
@@ -458,6 +478,7 @@ public class PlayerController : MonoBehaviour {
                             //weapon.tag = "Weapon";
                             weapon.tag = "StrongAttack2";
                             audioManager.Play("strongHit");
+                            trail.SetActive(true);
                         }
                         if (animLength < animDuration * 0.5)
                         {
@@ -483,6 +504,7 @@ public class PlayerController : MonoBehaviour {
                             darkHit = false;
                             flameCone.SetActive(false);
                             attackTransition = attacked = transition = false;
+                            trail.SetActive(false);
                         } 
 
                         break;
