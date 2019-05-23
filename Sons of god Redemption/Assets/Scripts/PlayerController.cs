@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour {
 
     public GameObject trail;
 
+    public ParticleSystem fireHitParticles, lightHitParticles, darkHitParticles, darkParticles;
+
     void Start () {
 
         //initialize player stats
@@ -812,7 +814,15 @@ public class PlayerController : MonoBehaviour {
                     health += 15;
                     healthBar.value = health;
                     darkHit = false;
+                    darkParticles.Play();
                 }
+
+                lightHitParticles.Play();
+
+                if (elements[(int)Elements.Fire].activeSelf)  fireHitParticles.Play();
+
+                if (elements[(int)Elements.Dark].activeSelf) darkHitParticles.Play();
+              
             }
             if (isLightHit && !lightOnCD)
             {
@@ -838,7 +848,6 @@ public class PlayerController : MonoBehaviour {
         }
         if (!dead && !damaged)
         {
-            
 
             if (other.tag == "EnemyWeapon")
             {
@@ -886,6 +895,5 @@ public class PlayerController : MonoBehaviour {
                     audioManager.Play("LelielHit");
             }
         }
-        
     }
 }

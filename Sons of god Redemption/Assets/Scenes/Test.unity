@@ -1685,6 +1685,82 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 982860092}
   m_CullTransparentMesh: 0
+--- !u!1001 &1048958324
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4702231629237626, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 7.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 4702231629237626, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4702231629237626, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4702231629237626, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4702231629237626, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4702231629237626, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4702231629237626, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4702231629237626, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062393654652366, guid: ddd6aa0c312240c4f960b9d9751a654a,
+        type: 2}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 1709837559}
+    - target: {fileID: 114062393654652366, guid: ddd6aa0c312240c4f960b9d9751a654a,
+        type: 2}
+      propertyPath: potionBar
+      value: 
+      objectReference: {fileID: 1614275315}
+    - target: {fileID: 114062393654652366, guid: ddd6aa0c312240c4f960b9d9751a654a,
+        type: 2}
+      propertyPath: fireUI
+      value: 
+      objectReference: {fileID: 1470421823}
+    - target: {fileID: 114062393654652366, guid: ddd6aa0c312240c4f960b9d9751a654a,
+        type: 2}
+      propertyPath: lightUI
+      value: 
+      objectReference: {fileID: 555655712}
+    - target: {fileID: 114062393654652366, guid: ddd6aa0c312240c4f960b9d9751a654a,
+        type: 2}
+      propertyPath: darkUI
+      value: 
+      objectReference: {fileID: 469550092}
+    - target: {fileID: 114062393654652366, guid: ddd6aa0c312240c4f960b9d9751a654a,
+        type: 2}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1171234405}
+    - target: {fileID: 1532023036423736, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
+      propertyPath: m_Name
+      value: Leliel
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1164536193
 GameObject:
   m_ObjectHideFlags: 0
@@ -2339,82 +2415,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5382e3fbd00a8e64a81c42b76276af2a, type: 2}
-  m_IsPrefabAsset: 0
---- !u!1001 &1619678367
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4702231629237626, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 7.22
-      objectReference: {fileID: 0}
-    - target: {fileID: 4702231629237626, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4702231629237626, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4702231629237626, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4702231629237626, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4702231629237626, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4702231629237626, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4702231629237626, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 114062393654652366, guid: ddd6aa0c312240c4f960b9d9751a654a,
-        type: 2}
-      propertyPath: healthBar
-      value: 
-      objectReference: {fileID: 1709837559}
-    - target: {fileID: 114062393654652366, guid: ddd6aa0c312240c4f960b9d9751a654a,
-        type: 2}
-      propertyPath: potionBar
-      value: 
-      objectReference: {fileID: 1614275315}
-    - target: {fileID: 114062393654652366, guid: ddd6aa0c312240c4f960b9d9751a654a,
-        type: 2}
-      propertyPath: fireUI
-      value: 
-      objectReference: {fileID: 1470421823}
-    - target: {fileID: 114062393654652366, guid: ddd6aa0c312240c4f960b9d9751a654a,
-        type: 2}
-      propertyPath: lightUI
-      value: 
-      objectReference: {fileID: 555655712}
-    - target: {fileID: 114062393654652366, guid: ddd6aa0c312240c4f960b9d9751a654a,
-        type: 2}
-      propertyPath: darkUI
-      value: 
-      objectReference: {fileID: 469550092}
-    - target: {fileID: 114062393654652366, guid: ddd6aa0c312240c4f960b9d9751a654a,
-        type: 2}
-      propertyPath: canvas
-      value: 
-      objectReference: {fileID: 1171234405}
-    - target: {fileID: 1532023036423736, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
-      propertyPath: m_Name
-      value: Leliel
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1709837557
 GameObject:
