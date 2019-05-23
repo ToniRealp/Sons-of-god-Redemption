@@ -111,7 +111,7 @@ public class Level1Controller : LevelController {
         {
             if (!bossSpawn)
             {
-                bossHandler.GetComponent<FirstBossBehaviour>().movingSpeed=0.005f;
+                bossHandler.GetComponent<FirstBossBehaviour>().movingSpeed=0.02f;
                 bossHandler.GetComponent<FirstBossBehaviour>().StandUp();
                 //audioManager.Play("BossTheme");
 
