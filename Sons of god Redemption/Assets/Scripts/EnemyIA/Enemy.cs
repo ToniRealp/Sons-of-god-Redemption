@@ -42,7 +42,7 @@ public abstract class Enemy : MonoBehaviour {
 
     public AudioManager audioManager;
 
-    protected enum State { SEARCHING, CHASING, ATTAKING, DAMAGED };
+    protected enum State { SEARCHING, CHASING, ATTAKING, DAMAGED, DEATH };
     [SerializeField] protected State state;
 
     protected string lastTag;

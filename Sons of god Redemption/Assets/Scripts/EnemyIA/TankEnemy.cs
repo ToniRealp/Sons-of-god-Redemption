@@ -29,12 +29,14 @@ public class TankEnemy : Enemy {
     {
         if (health <= 0)
         {
+           
+            state = State.DEATH;
             if (!audioManager.isPlaying("MinoDeath"))
                 audioManager.Play("MinoDeath");
-            Die();
         }
+        else
+            UpdateHealthText();
 
-        UpdateHealthText();
         UseFullDetectionSystem();
 
         d = NavAgent.remainingDistance;
@@ -237,8 +239,14 @@ public class TankEnemy : Enemy {
                 }
                 break;
             case State.DAMAGED:
+                if (health <= 0)
+                {
+                    state = State.DEATH;
+                    break;
+                }
                 if (!damagedFlag)
                 {
+                    animator.SetTrigger("Damaged");
                     DeactivateWeapon();
                     animator.ResetTrigger("Roar");
                     animator.ResetTrigger("Swipe");
@@ -264,6 +272,27 @@ public class TankEnemy : Enemy {
                         state = State.SEARCHING;
                     }
                 }
+                break;
+
+            case State.DEATH:
+                ChangeSpeed(0);
+                if (!damagedFlag)
+                {
+                    DeactivateWeapon();
+                    animator.ResetTrigger("Roar");
+                    animator.ResetTrigger("Swipe");
+                    animator.ResetTrigger("Attack1");
+                    animator.ResetTrigger("Attack2");
+                    animator.ResetTrigger("Charge");
+                    animator.ResetTrigger("AttackEnd");
+                    animator.ResetTrigger("Damaged");
+                    collided = transition = false;
+                    damagedFlag = true;
+                    animator.SetTrigger("death");
+                    Destroy(healthTextGO);
+                }
+
+     
                 break;
 
             default:
@@ -297,7 +326,7 @@ public class TankEnemy : Enemy {
             }
             if (other.tag == "StrongAttack2" && !damaged )
             {
-                animator.SetTrigger("Damaged");
+                
                 state = State.DAMAGED;
                 animTimes["Reaction Hit"].cooldown = animTimes["Reaction Hit"].duration;
                 damaged = true;
@@ -333,4 +362,11 @@ public class TankEnemy : Enemy {
     {
         lookPlayer = false;
     }
+
+    public void Death()
+    {
+    
+        Destroy(this.gameObject);
+    }
+
 }
