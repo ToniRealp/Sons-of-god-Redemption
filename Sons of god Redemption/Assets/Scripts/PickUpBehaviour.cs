@@ -10,14 +10,18 @@ public class PickUpBehaviour : MonoBehaviour {
     public Animator animator;
 
     private GameObject player;
+    public InputManager inputManager;
 
     protected TextMeshProUGUI pickText;
     protected GameObject canvas, textPos;
     public GameObject pickTextGO;
+    public GameObject upgradeText;
     public TMP_FontAsset font;
 
     // Use this for initialization
     void Start () {
+
+        inputManager = GetComponent<InputManager>();
         picked = flag = false;
 
         //Health Text
@@ -42,6 +46,8 @@ public class PickUpBehaviour : MonoBehaviour {
             GameObject.Find("Leliel").GetComponent<PlayerController>().healthBar.value = GameObject.Find("Leliel").GetComponent<PlayerController>().health;
             flag = true;
             pickTextGO.SetActive(false);
+            GameObject aux = Instantiate(upgradeText,canvas.transform);
+            aux.GetComponent<RectTransform>().localPosition = pickTextGO.GetComponent<RectTransform>().localPosition;
         }
         //Show pick text
         pickTextGO.GetComponent<Transform>().position = Camera.main.WorldToScreenPoint(textPos.transform.position);
@@ -59,13 +65,10 @@ public class PickUpBehaviour : MonoBehaviour {
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (inputManager.interact)
         {
-            if (other.gameObject.GetComponent<PlayerController>().interact)
-            {
-                picked = true;
-                animator.SetTrigger("open");
-            }
+            picked = true;
+            animator.SetTrigger("open");
         }
     }
     private void OnTriggerExit(Collider other)
@@ -79,6 +82,7 @@ public class PickUpBehaviour : MonoBehaviour {
 
     public void DestroyPickUp()
     {
+        Destroy(pickTextGO);
         Destroy(this.gameObject);
     }
 
