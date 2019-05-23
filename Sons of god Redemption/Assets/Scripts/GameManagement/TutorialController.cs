@@ -18,6 +18,7 @@ public class TutorialController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        Cursor.visible = false;
         state = 0;
         startTime = Time.time;
         inputManager = GetComponent<InputManager>();

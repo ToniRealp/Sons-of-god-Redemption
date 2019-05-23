@@ -19,6 +19,7 @@ public class Level3Controller : LevelController {
     // Use this for initialization
     void Start()
     {
+        Cursor.visible = false;
         actualSpawn = spawns[0];
         volumeSet = bossSpawn = false;
 

@@ -26,12 +26,14 @@ public class PauseScriptManager : MonoBehaviour {
     {
         Time.timeScale = 0f;
         PausePanel.SetActive(true);
+        Cursor.visible = true;
     }
 
     public void exitPauseMenu()
     {
         Time.timeScale = 1.0f;
         PausePanel.SetActive(false);
+        Cursor.visible = false;
     }
 
 }
