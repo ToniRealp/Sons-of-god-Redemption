@@ -34,6 +34,11 @@ public class CameraShake : MonoBehaviour
             ShakeElapsedTime = ShakeDuration;
             PlayerController.damaged = false; 
         }
+        if (PlayerController.bigHit)
+        {
+            ShakeElapsedTime = ShakeDuration;
+            PlayerController.bigHit = false;
+        }
 
         // If the Cinemachine componet is not set, avoid update
         if (VirtualCamera != null && virtualCameraNoise != null)
