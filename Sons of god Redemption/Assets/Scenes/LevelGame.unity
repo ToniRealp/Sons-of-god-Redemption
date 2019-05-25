@@ -4137,8 +4137,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10.653141, y: 1, z: 10.977829}
-  m_Center: {x: 0.9602146, y: 0, z: 1.9994736}
+  m_Size: {x: 10.4022255, y: 1.9493752, z: 10.977829}
+  m_Center: {x: 0.83475685, y: 0.47468758, z: 1.9994736}
 --- !u!114 &146100662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8957,8 +8957,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 12.892804, y: 1, z: 10.921391}
-  m_Center: {x: -0.056968212, y: 0, z: 2.1620846}
+  m_Size: {x: 12.692308, y: 2.051672, z: 9.95986}
+  m_Center: {x: -0.15721607, y: 0.525836, z: 2.1957216}
 --- !u!1 &380193272
 GameObject:
   m_ObjectHideFlags: 3
@@ -13614,8 +13614,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.6619425, y: 3.0221777, z: 6.701765}
-  m_Center: {x: 0.064236164, y: 1.0110888, z: 0.04693699}
+  m_Size: {x: 6.6619425, y: 3.0221777, z: 5.952486}
+  m_Center: {x: 0.064236164, y: 1.0110888, z: 0.11879063}
 --- !u!1 &525019556
 GameObject:
   m_ObjectHideFlags: 0
@@ -18109,8 +18109,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 719524424}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.4502236, y: -0, z: -0, w: 0.89291584}
+  m_LocalPosition: {x: 0.08, y: 20.10059, z: -14.464936}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 649203138}
@@ -27589,8 +27589,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 13.062614, y: 1, z: 11.28632}
-  m_Center: {x: -0.23854627, y: 0, z: 2.162423}
+  m_Size: {x: 13.062614, y: 2.3360195, z: 10.938485}
+  m_Center: {x: -0.23854625, y: 0.66800976, z: 2.3363402}
 --- !u!114 &1122125051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32229,8 +32229,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 13.673367, y: 1, z: 11.308441}
-  m_Center: {x: -0.2404269, y: 0, z: 1.9406091}
+  m_Size: {x: 13.673367, y: 2.754837, z: 10.408529}
+  m_Center: {x: -0.2404269, y: 0.8774185, z: 1.4906533}
 --- !u!114 &1298859005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33066,8 +33066,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 13.144445, y: 1, z: 11.05732}
-  m_Center: {x: 0.015530586, y: 0, z: 2.0424538}
+  m_Size: {x: 13.144445, y: 3.0135283, z: 10.471008}
+  m_Center: {x: 0.015530586, y: 1.0067642, z: 2.3356094}
 --- !u!114 &1323094333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39761,8 +39761,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 13.544292, y: 1, z: 11.080727}
-  m_Center: {x: -0.08325764, y: 0, z: 2.0472345}
+  m_Size: {x: 13.544292, y: 2.4123163, z: 10.619671}
+  m_Center: {x: -0.08325764, y: 0.70615816, z: 2.2777622}
 --- !u!114 &1608022231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40163,8 +40163,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 13.868616, y: 1, z: 11.444809}
-  m_Center: {x: -0.13223839, y: 0, z: 2.2234268}
+  m_Size: {x: 13.868616, y: 2.5773277, z: 10.750343}
+  m_Center: {x: -0.13223839, y: 0.78866386, z: 2.5706596}
 --- !u!114 &1625596227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43274,8 +43274,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 13.008467, y: 2.7032785, z: 10.881054}
-  m_Center: {x: 0.12663078, y: 0.8516393, z: 2.1262302}
+  m_Size: {x: 13.008467, y: 2.7032785, z: 10.641323}
+  m_Center: {x: 0.12663078, y: 0.8516393, z: 2.2460957}
 --- !u!114 &1772145155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44248,8 +44248,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 13.410529, y: 2.5394106, z: 11.253867}
-  m_Center: {x: 0.02850151, y: 0.7697053, z: 1.8487988}
+  m_Size: {x: 13.410529, y: 2.5394106, z: 10.786832}
+  m_Center: {x: 0.02850151, y: 0.7697053, z: 1.6152811}
 --- !u!114 &1807060304
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public class DoorScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         upPosition = transform.position;
-        downPosition =  upPosition - new Vector3(0, 5f, 0);
+        downPosition =  upPosition - new Vector3(0, 5.1f, 0);
         transform.position = downPosition;
         up = down = false;
 	}
