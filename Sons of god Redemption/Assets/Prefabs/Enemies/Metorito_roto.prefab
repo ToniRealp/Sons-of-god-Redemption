@@ -179,6 +179,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4219264229145396}
+  - component: {fileID: 114868312070227796}
   m_Layer: 0
   m_Name: Metorito_roto
   m_TagString: Untagged
@@ -1100,6 +1101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d91c7ebfa222747a6ca97262fcca84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0
+  radius: 0
 --- !u!114 &114297662593761520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1111,6 +1115,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d91c7ebfa222747a6ca97262fcca84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0
+  radius: 0
 --- !u!114 &114356293131280408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1122,6 +1129,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d91c7ebfa222747a6ca97262fcca84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0
+  radius: 0
 --- !u!114 &114399055316770442
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1133,6 +1143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d91c7ebfa222747a6ca97262fcca84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0
+  radius: 0
 --- !u!114 &114640220565629720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1144,6 +1157,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d91c7ebfa222747a6ca97262fcca84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0
+  radius: 0
 --- !u!114 &114731158041145524
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1155,6 +1171,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d91c7ebfa222747a6ca97262fcca84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0
+  radius: 0
 --- !u!114 &114759149120639316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1166,6 +1185,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d91c7ebfa222747a6ca97262fcca84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0
+  radius: 0
+--- !u!114 &114868312070227796
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1689326273203982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1d91c7ebfa222747a6ca97262fcca84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 400
+  maxForce: 600
+  radius: 10
 --- !u!114 &114950855728244364
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1177,6 +1213,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d91c7ebfa222747a6ca97262fcca84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0
+  radius: 0
 --- !u!114 &114963193115297248
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1188,6 +1227,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d91c7ebfa222747a6ca97262fcca84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0
+  radius: 0
 --- !u!114 &114990644861592594
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1199,3 +1241,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d91c7ebfa222747a6ca97262fcca84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0
+  radius: 0

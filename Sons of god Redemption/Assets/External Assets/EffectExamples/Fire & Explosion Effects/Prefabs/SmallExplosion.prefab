@@ -151,8 +151,9 @@ MonoBehaviour:
   sounds:
   - name: Explosion
     clip: {fileID: 8300000, guid: 14438145de4600e42aa9303d2cb27148, type: 3}
-    volume: 0.481
+    volume: 0.6
     loop: 0
+    rolloffMode: 0
     source: {fileID: 0}
   masterMixer: {fileID: 24300002, guid: 60bfbd53358596e48a5f62aa8d3fe33b, type: 2}
 --- !u!114 &114760880975723834
@@ -179,6 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioManager: {fileID: 0}
+  soundName: Explosion
 --- !u!198 &198207014375249716
 ParticleSystem:
   m_ObjectHideFlags: 1
