@@ -41,6 +41,7 @@ public class DoorScript : MonoBehaviour {
             else
 	        {
                 down = false;
+                gameObject.SetActive(false);
             }
         }
     }

@@ -14,9 +14,9 @@ public class RoomController : MonoBehaviour {
 
         isEmpty = false;
         instEnemies = new List<GameObject>();
-        //foreach (GameObject door in roomDoors)
-        //    door.SetActive(false);
-	}
+        foreach (GameObject door in roomDoors)
+            door.SetActive(false);
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -49,7 +49,10 @@ public class RoomController : MonoBehaviour {
     public void OpenDoors()
     {
         foreach (GameObject door in roomDoors)
+        {
             door.GetComponent<DoorScript>().GoDown();
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -61,7 +64,10 @@ public class RoomController : MonoBehaviour {
             if (!isEmpty)
             {
                 foreach (GameObject door in roomDoors)
+                {
+                    door.SetActive(true);
                     door.GetComponent<DoorScript>().GoUp();
+                }
             } 
         }
     }
