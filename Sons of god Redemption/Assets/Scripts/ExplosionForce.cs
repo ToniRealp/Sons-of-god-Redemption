@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class ExplosionForce : MonoBehaviour {
 
+    public float minForce, maxForce, radius;
     // Use this for initialization
-    bool flag = false;
-	void Update () {
-        if (!flag)
+    private void Start()
+    {
+        Explode();
+    }
+
+    public void Explode()
+    {
+        foreach(Transform t in transform)
         {
-            GetComponent<Rigidbody>().AddExplosionForce(3000.0f, transform.position, 5.0f);
-            flag = true;
+            Rigidbody rb = t.GetComponent<Rigidbody>();
+
+            if (rb != null) rb.AddExplosionForce(Random.Range(minForce,maxForce), transform.position, radius);
         }
-  
-	}
+        
+    }
 
 }

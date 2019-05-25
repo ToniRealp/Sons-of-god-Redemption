@@ -190,6 +190,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4983290465213724}
+  - component: {fileID: 114843698051435378}
+  - component: {fileID: 114867433506764828}
+  - component: {fileID: 114729605017099788}
   m_Layer: 0
   m_Name: barrilete_fractured
   m_TagString: Untagged
@@ -1079,3 +1082,49 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300014, guid: 2e7764f9909a77648af43178c8e52e82, type: 3}
+--- !u!114 &114729605017099788
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1945009783253464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b340ce270cde6a3479869604690708bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioManager: {fileID: 0}
+  soundName: crateSmash
+--- !u!114 &114843698051435378
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1945009783253464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1d91c7ebfa222747a6ca97262fcca84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 100
+  maxForce: 150
+  radius: 1
+--- !u!114 &114867433506764828
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1945009783253464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd56148e8ce9b674c8f7195aa72efd5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: crateSmash
+    clip: {fileID: 8300000, guid: fccd1705bff305342a02adf38ba0c906, type: 3}
+    volume: 0.5
+    loop: 0
+    rolloffMode: 0
+    source: {fileID: 0}
+  masterMixer: {fileID: 0}
