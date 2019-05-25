@@ -9,17 +9,18 @@ public class TankEnemy : Enemy {
     Attacks attacks;
     Basics basics;
     Charge charge;
-    bool collided, roar, swipe, rushOnCooldown, lookPlayer, damagedFlag;
+    bool collided, roar, swipe, rushOnCooldown, lookPlayer, damagedFlag, deathFlag;
     public float baseAttackDuration, baseAttackCooldown, rushCooldown, rushDistance;
     public float x, accelerationTime, baseAcceleration, d;
     public GameObject weapon2;
     public bool transition;
+    private float alpha = 1;
 
 
     new void Start()
     {
         base.Start();
-        collided = roar = swipe = rushOnCooldown = lookPlayer = damagedFlag = false;
+        collided = roar = swipe = rushOnCooldown = lookPlayer = damagedFlag = deathFlag = false;
         baseAttackDuration = baseAttackCooldown = animTimes["Attack1"].duration + animTimes["Attack2"].duration;
         rushDistance = attackDistance * 8;
         
@@ -241,7 +242,9 @@ public class TankEnemy : Enemy {
             case State.DAMAGED:
                 if (health <= 0)
                 {
+                    animator.SetTrigger("death");
                     state = State.DEATH;
+                    animator.SetBool("isDead", true);
                     break;
                 }
                 if (!damagedFlag)
@@ -276,8 +279,10 @@ public class TankEnemy : Enemy {
 
             case State.DEATH:
                 ChangeSpeed(0);
-                if (!damagedFlag)
+     
+                if (!deathFlag)
                 {
+                    
                     DeactivateWeapon();
                     animator.ResetTrigger("Roar");
                     animator.ResetTrigger("Swipe");
@@ -287,18 +292,20 @@ public class TankEnemy : Enemy {
                     animator.ResetTrigger("AttackEnd");
                     animator.ResetTrigger("Damaged");
                     collided = transition = false;
-                    damagedFlag = true;
+                    deathFlag = true;
                     animator.SetTrigger("death");
                     Destroy(healthTextGO);
                 }
 
-     
+                FadeOut();
+
                 break;
 
             default:
                 break;
         }
     }
+   
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -365,8 +372,8 @@ public class TankEnemy : Enemy {
 
     public void Death()
     {
-    
-        Destroy(this.gameObject);
+        finishedDeathAnimation=true;
+        SetMaterialTransparent();
     }
 
 }

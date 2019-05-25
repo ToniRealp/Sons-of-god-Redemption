@@ -28,8 +28,8 @@ public abstract class Enemy : MonoBehaviour {
     public NavMeshAgent NavAgent;
     public Vector3 destination, playerPosition, initialPosition;
     protected float xMin, xMax, zMin, zMax;
-    public bool playerDetected, damaged, attackOnCooldown, reactsToDamage;
-    protected float damagedCooldown, actualDamagedCooldown, moveCooldown, timeToMove=5f;
+    public bool playerDetected, damaged, attackOnCooldown, reactsToDamage, finishedDeathAnimation;
+    protected float damagedCooldown, actualDamagedCooldown, moveCooldown, timeToMove=5f, alpha;
     public float attackCooldown;
     public RaycastHit[] hit;
     public Ray[] ray;
@@ -77,7 +77,7 @@ public abstract class Enemy : MonoBehaviour {
         healthText.alignment = TextAnchor.MiddleCenter;
         textPos = this.gameObject.transform.Find("HealthTextPos").gameObject;
         //Other
-        playerDetected = false;
+        playerDetected = finishedDeathAnimation = false;
         initialPosition = transform.position;
         NavAgent = GetComponent<NavMeshAgent>();
         damaged = false;
@@ -92,7 +92,7 @@ public abstract class Enemy : MonoBehaviour {
         GetAnimations();
         SetSearchingRange();
         SetRandomDestination();
-
+        alpha = 1;
         player = GameObject.Find("Leliel");
     }
 
@@ -206,6 +206,44 @@ public abstract class Enemy : MonoBehaviour {
                 return (clips[i].length);
         }
         return -1f;
+    }
+
+    protected void SetMaterialTransparent()
+    {
+        foreach (Material m in GetComponentInChildren<Renderer>().materials)
+        {
+            m.SetFloat("_Mode", 2);
+            m.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            m.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            m.SetInt("_ZWrite", 0);
+            m.DisableKeyword("_ALPHATEST_ON");
+            m.EnableKeyword("_ALPHABLEND_ON");
+            m.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            m.renderQueue = 3000;
+        }
+    }
+
+    protected void FadeOut()
+    {
+        if (finishedDeathAnimation)
+        {
+            if (alpha >= 0)
+            {
+                alpha -= Time.fixedDeltaTime / 4;
+                Debug.Log(alpha);
+            }
+            else
+            {
+                alpha = 0;
+                Destroy(this.gameObject);
+            }
+
+
+            foreach (Material m in GetComponentInChildren<Renderer>().materials)
+            {
+                m.color = new Color(m.color.r, m.color.g, m.color.b, alpha);
+            }
+        }
     }
 
     protected float CurrentAnimLength()
