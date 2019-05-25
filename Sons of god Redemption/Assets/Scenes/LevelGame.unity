@@ -7013,6 +7013,10 @@ Prefab:
       propertyPath: cam2
       value: 
       objectReference: {fileID: 968353509}
+    - target: {fileID: 1191430840734476, guid: 199a0370dc8e72f439547f9c026f57f7, type: 2}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 199a0370dc8e72f439547f9c026f57f7, type: 2}
   m_IsPrefabAsset: 0
@@ -9903,7 +9907,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh7690
+  m_Name: pb_Mesh54132
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2

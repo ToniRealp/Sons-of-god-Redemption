@@ -18,6 +18,7 @@ TagManager:
   - Arrow
   - FinalBossWeapon
   - Floor
+  - Barrilete
   layers:
   - Default
   - TransparentFX

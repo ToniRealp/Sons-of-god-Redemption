@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 64332101675911370}
   m_Layer: 0
   m_Name: Cylinder001_Part_8
-  m_TagString: Untagged
+  m_TagString: Barrilete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 64304514775009838}
   m_Layer: 0
   m_Name: Cylinder001_Part_9
-  m_TagString: Untagged
+  m_TagString: Barrilete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 64463787750497660}
   m_Layer: 0
   m_Name: Cylinder001_Part_10
-  m_TagString: Untagged
+  m_TagString: Barrilete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,7 +82,7 @@ GameObject:
   - component: {fileID: 64873709294920600}
   m_Layer: 0
   m_Name: Cylinder001_Part_7
-  m_TagString: Untagged
+  m_TagString: Barrilete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 64060818981050134}
   m_Layer: 0
   m_Name: Cylinder001_Part_6
-  m_TagString: Untagged
+  m_TagString: Barrilete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 64762734732957772}
   m_Layer: 0
   m_Name: Cylinder001_Part_2
-  m_TagString: Untagged
+  m_TagString: Barrilete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 64154963800728572}
   m_Layer: 0
   m_Name: Cylinder001_Part_1
-  m_TagString: Untagged
+  m_TagString: Barrilete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 64773816976080398}
   m_Layer: 0
   m_Name: Cylinder001_Part_4
-  m_TagString: Untagged
+  m_TagString: Barrilete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 64307551171805318}
   m_Layer: 0
   m_Name: Cylinder001_Part_5
-  m_TagString: Untagged
+  m_TagString: Barrilete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 114729605017099788}
   m_Layer: 0
   m_Name: barrilete_fractured
-  m_TagString: Untagged
+  m_TagString: Barrilete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 64812795070674166}
   m_Layer: 0
   m_Name: Cylinder001_Part_3
-  m_TagString: Untagged
+  m_TagString: Barrilete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1106,9 +1106,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d91c7ebfa222747a6ca97262fcca84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minForce: 100
-  maxForce: 150
-  radius: 1
+  minForce: 15
+  maxForce: 20
+  radius: 10
 --- !u!114 &114867433506764828
 MonoBehaviour:
   m_ObjectHideFlags: 1
