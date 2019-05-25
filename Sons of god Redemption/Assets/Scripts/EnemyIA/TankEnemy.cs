@@ -29,7 +29,7 @@ public class TankEnemy : Enemy {
     {
         if (health <= 0)
         {
-           
+            animator.SetBool("isDead", true);
             state = State.DEATH;
             if (!audioManager.isPlaying("MinoDeath"))
                 audioManager.Play("MinoDeath");

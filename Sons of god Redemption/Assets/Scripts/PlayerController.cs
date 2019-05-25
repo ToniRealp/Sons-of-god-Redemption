@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour {
     private bool dashed, attacked, transition, hit, isLightHit, lightOnCD, darkOnCD,  dead, darkHit, attackTransition, FBCD;
     const float velChange = 0.5f;
 
-    public static bool damaged;
+    public static bool damaged, bigHit;
 
     //State machine
     [SerializeField] States states, nextState;
@@ -845,6 +845,9 @@ public class PlayerController : MonoBehaviour {
                     other.GetComponentInParent<Enemy>().health -= lightDmg;
                 }
             }
+            if (weapon.tag == "StrongAttack2" || weapon.tag == "LightAttack3") bigHit = true;
+
+
         }
         if (!dead && !damaged)
         {

@@ -19,7 +19,7 @@ public class Level1Controller : LevelController {
 
 	// Use this for initialization
 	void Start () {
-
+        Cursor.visible = false;
         LoadGame();
 
         volumeSet = bossSpawn = false;

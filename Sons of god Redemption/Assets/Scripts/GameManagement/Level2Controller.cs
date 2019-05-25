@@ -17,6 +17,7 @@ public class Level2Controller : LevelController {
     // Use this for initialization
     void Start()
     {
+        Cursor.visible = false;
         LoadGame();
         volumeSet = bossSpawn = false;
         trigger = new bool[9];
