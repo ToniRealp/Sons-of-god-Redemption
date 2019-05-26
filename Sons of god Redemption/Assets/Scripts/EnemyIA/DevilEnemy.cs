@@ -10,12 +10,14 @@ public class DevilEnemy : Enemy
     enum Attacks { BASIC, SPAWNING };
     Attacks attacks;
     bool spawned, attackSide;
+    List<GameObject> instantiatedBabys;
 
     new void Start()
     {
         base.Start();
         babySpawnCdr = actualBabySpawn = 5;
         spawned = attackSide = false;
+        instantiatedBabys = new List<GameObject>();
     }
 
     private void Update()
@@ -27,8 +29,15 @@ public class DevilEnemy : Enemy
                 audioManager.Play("DevilDie");
 
         }
-         
 
+        if (instantiatedBabys.Count != 0)
+        {
+            foreach (var go in instantiatedBabys)
+            {
+                if (go.GetComponent<BabyEnemy>().playerDetected != true) go.GetComponent<BabyEnemy>().playerDetected = true;
+            }
+        }
+        
         UpdateHealthText();
         UseFullDetectionSystem();
         actualBabySpawn -= Time.deltaTime;
@@ -182,10 +191,10 @@ public class DevilEnemy : Enemy
                         animTimes["Spawn"].cooldown -= Time.deltaTime;
                         if (animTimes["Spawn"].cooldown < animTimes["Spawn"].duration/2 && !spawned)
                         {
-                            Instantiate(baby, spawnPos.position, spawnPos.rotation);
+                            instantiatedBabys.Add (Instantiate(baby, spawnPos.position, spawnPos.rotation));
                             spawned = true;
                             audioManager.Play("DevilSpawn");
-                            audioManager.Play("DevilPuke");
+                            audioManager.Play("DevilPuke");                           
                         }
                         if (animTimes["Spawn"].cooldown <= 0)
                         {
