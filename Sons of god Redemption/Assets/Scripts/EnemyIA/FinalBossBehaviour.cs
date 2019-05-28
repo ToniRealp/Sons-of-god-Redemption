@@ -501,8 +501,6 @@ public class FinalBossBehaviour : MonoBehaviour {
                 if (actualDeadTime <= 0)
                 {
                     GameObject.Find("Level3Controller").GetComponent<Level3Controller>().BossDead();
-                    Instantiate(dieParticles, bloodPosition.position, bloodPosition.rotation);
-                    Destroy(this.gameObject);
                 }
                 break;
 

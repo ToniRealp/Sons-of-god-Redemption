@@ -1,31 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Level3Controller : LevelController {
 
     public GameObject player;
     public GameObject bossHandler;
+    public GameObject winPanel;
+    public Image image;
     public Transform bossSpawnPos;
     public SceneController sceneController;
     public AudioManager audioManager;
  
     InputManager inputManager;
 
-   
+    private Color c;
 
-    private bool bossSpawn, volumeSet;
+    private bool bossSpawn, volumeSet, bossDead;
 
     // Use this for initialization
     void Start()
     {
         Cursor.visible = false;
         actualSpawn = spawns[0];
-        volumeSet = bossSpawn = false;
+        bossDead = volumeSet = bossSpawn = false;
 
         trigger = new bool[1];
         trigger[0] = false;
         inputManager = gameObject.GetComponent<InputManager>();
+
+        //Fade
+        c = image.color;
+        c.a = 0;
+        image.color = c;
+        winPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -51,6 +60,18 @@ public class Level3Controller : LevelController {
             }
         }
 
+        if (bossDead)
+        {
+            if (c.a < 1)
+            {
+                c.a += 0.01f;
+                image.color = c;
+            }
+            else
+            {
+                sceneController.changeScene("FinalCinematic");
+            }
+        }
         //float volume = 0;
         //float volume2 = 1;
         //if (bossSpawn && !volumeSet)
@@ -71,7 +92,8 @@ public class Level3Controller : LevelController {
 
     public void BossDead()
     {
-        sceneController.changeScene("FinalCinematic");
+        bossDead = true;
+        winPanel.SetActive(true);
     }
 
     override public void OpenAllDoors()
