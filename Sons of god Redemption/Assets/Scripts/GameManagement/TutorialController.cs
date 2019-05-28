@@ -46,10 +46,6 @@ public class TutorialController : MonoBehaviour {
 
         //GetInput();
 
-        if(inputManager.escape)
-        {
-            GetComponent<SceneController>().changeScene("MainMenu");
-        }
 
         // Number of enemies Controller
         foreach (var item in GameObject.FindGameObjectsWithTag("Enemy"))
