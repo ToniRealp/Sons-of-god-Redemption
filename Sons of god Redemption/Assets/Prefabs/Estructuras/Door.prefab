@@ -113,7 +113,7 @@ MonoBehaviour:
   sounds:
   - name: doorRumble
     clip: {fileID: 8300000, guid: 7d876fd27fbf82e46923cb5c3f0b62cc, type: 3}
-    volume: 0.4
+    volume: 0.2
     loop: 0
     rolloffMode: 1
     source: {fileID: 0}
