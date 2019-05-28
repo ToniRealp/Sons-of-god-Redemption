@@ -14,13 +14,13 @@ public class FirstBossBehaviour : MonoBehaviour
 
 
     private GameObject player;
-    public float standingAnimationTime, actualStandingTime;
-    private float chargeAnimationTime, explosionAnimationTime, roarAnimationTime, swipeAnimationTime, rainAnimationTime, initMeteorTime;
-    private float actualAttackInterval, actualChargeTime, actualExplosionTime, actualRoarTime, actualSwipeTime, actualRainTime;
+    public float standingAnimationTime, actualStandingTime, actualDeadTime;
+    private float chargeAnimationTime, explosionAnimationTime, roarAnimationTime, swipeAnimationTime, rainAnimationTime, initMeteorTime, deadAnimationTime;
+    private float actualAttackInterval, actualChargeTime, actualExplosionTime, actualRoarTime, actualSwipeTime, actualRainTime; 
     private int meteorCounter;
-    private bool explosionChecked, patron1switched, patron2switched, patron3switched;
+    private bool explosionChecked, patron1switched, patron2switched, patron3switched, dead;
 
-    enum State { STANDING, IDLE, WALKING, SWIPEATTACK, CHARGE, EXPLOSION, ROAR, RAIN, DAMAGED };
+    enum State { STANDING, IDLE, WALKING, SWIPEATTACK, CHARGE, EXPLOSION, ROAR, RAIN, DEATH };
     [SerializeField] State state = State.IDLE;
 
     public float playerDistance, maxHealth = 1800, health, damage, swipeDmg = 15, explosionDmg = 55, roarDmg = 25, rainDmg=15;
@@ -48,6 +48,7 @@ public class FirstBossBehaviour : MonoBehaviour
         actualRoarTime = roarAnimationTime = AnimationLength("Mutant Roaring", animator);
         actualSwipeTime = swipeAnimationTime = AnimationLength("Stable Sword Inward Slash", animator);
         actualRainTime = rainAnimationTime = AnimationLength("Wide Arm Spell Casting", animator);
+        actualDeadTime = deadAnimationTime = AnimationLength("Mutant Dying", animator);
         fireParticles.SetActive(false);
         explosionParticles.SetActive(false);
         lastTag = "value";
@@ -66,7 +67,7 @@ public class FirstBossBehaviour : MonoBehaviour
         patron1switched = patron2switched = patron3switched = false;
         actualAttack2 = actualAttack = meteorCounter = 0;
         meteorPosition = new Vector3[meteorNum];
-        explosionChecked = false;
+        dead = explosionChecked = false;
 
         audioManager = GetComponent<AudioManager>();
     }
@@ -77,17 +78,30 @@ public class FirstBossBehaviour : MonoBehaviour
 
         playerDistance = Vector3.Distance(transform.position, player.transform.position);
 
-        if (health <= 0)
+        if (health <= 0 && !dead)
         {
             GameObject.Find("Level1Controller").GetComponent<Level1Controller>().BossDead();
-            Instantiate(dieParticles, bloodPosition.position, bloodPosition.rotation);
-            Destroy(this.gameObject);
             Destroy(healthTextGO);
+            animator.SetTrigger("Dead");
+            state = State.DEATH;
+            actualRainTime = rainAnimationTime;
+            actualRoarTime = roarAnimationTime;
+            actualExplosionTime = explosionAnimationTime;
+            actualSwipeTime = swipeAnimationTime;
+            actualChargeTime = chargeAnimationTime;
+            fireParticles.SetActive(false);
+            explosionParticles.SetActive(false);
+            weapon.tag = "Untagged";
+            dead = true;
+        }
+        if(!dead)
+        {
+            // Health text update
+            healthTextGO.GetComponent<Transform>().position = Camera.main.WorldToScreenPoint(textPos.transform.position);
+            healthText.text = health.ToString();
         }
 
-        // Health text update
-        healthTextGO.GetComponent<Transform>().position = Camera.main.WorldToScreenPoint(textPos.transform.position);
-        healthText.text = health.ToString();
+
 
         if (health<maxHealth * 0.75 && !patron1switched)
         {
@@ -508,7 +522,14 @@ public class FirstBossBehaviour : MonoBehaviour
                     state = State.IDLE;
                 }
                 break;
-            case State.DAMAGED:
+            case State.DEATH:
+                movingSpeed = 0;
+                actualDeadTime -= Time.deltaTime;
+                if (actualDeadTime <= 0)
+                {
+                    Instantiate(dieParticles, bloodPosition.position, bloodPosition.rotation);
+                    Destroy(this.gameObject);
+                }
                 break;
             default:
                 break;
