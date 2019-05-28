@@ -77,7 +77,7 @@ public class SecondBossBehaviour : MonoBehaviour
 
         if (health <= 0 && !dead)
         {
-            //GameObject.Find("Level2Controller").GetComponent<Level2Controller>().BossDead();
+            GameObject.Find("Level2Controller").GetComponent<Level2Controller>().BossDead();
             Destroy(healthTextGO);
             animator.SetTrigger("Dead");
             state = State.DEATH;
