@@ -27780,7 +27780,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &816740295
 Prefab:
@@ -28642,8 +28642,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 668484750}
   m_HandleRect: {fileID: 1069674920}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: -60
+  m_MaxValue: -15
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -30485,90 +30485,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4644771553686316, guid: 4204b6efb60f0064c8bb08b47d211846,
     type: 2}
   m_PrefabInternal: {fileID: 470122753}
---- !u!1 &923844761
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 923844763}
-  - component: {fileID: 923844762}
-  m_Layer: 0
-  m_Name: AudioManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &923844762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 923844761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd56148e8ce9b674c8f7195aa72efd5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sounds:
-  - name: MainTheme
-    clip: {fileID: 8300000, guid: 0589cbf4324ff384993182282818c007, type: 3}
-    volume: 1
-    loop: 1
-    rolloffMode: 0
-    source: {fileID: 0}
-  - name: Hit
-    clip: {fileID: 8300000, guid: 9d54cd11b601e1b428925b1897cd4042, type: 3}
-    volume: 0
-    loop: 0
-    rolloffMode: 0
-    source: {fileID: 0}
-  - name: Swing
-    clip: {fileID: 8300000, guid: 4ab2086b82ae0344d9e47731a83f9743, type: 3}
-    volume: 0
-    loop: 0
-    rolloffMode: 0
-    source: {fileID: 0}
-  - name: DevilMain
-    clip: {fileID: 8300000, guid: e55fddcf3a7e2e2448becf733e28e565, type: 3}
-    volume: 0.498
-    loop: 0
-    rolloffMode: 0
-    source: {fileID: 0}
-  - name: DevilSpawn
-    clip: {fileID: 8300000, guid: 1660d88931f92b147bc901188c7115b2, type: 3}
-    volume: 0.665
-    loop: 0
-    rolloffMode: 0
-    source: {fileID: 0}
-  - name: BossTheme
-    clip: {fileID: 8300000, guid: 0589cbf4324ff384993182282818c007, type: 3}
-    volume: 0
-    loop: 1
-    rolloffMode: 0
-    source: {fileID: 0}
-  - name: GodTheme
-    clip: {fileID: 8300000, guid: 36ca28cc7ebdaf34c8704c7ad3ecec42, type: 3}
-    volume: 0
-    loop: 1
-    rolloffMode: 0
-    source: {fileID: 0}
-  masterMixer: {fileID: 24300002, guid: 60bfbd53358596e48a5f62aa8d3fe33b, type: 2}
---- !u!4 &923844763
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 923844761}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.34163284, y: -15.620317, z: -37.36663}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &926438752
 Prefab:
   m_ObjectHideFlags: 0
@@ -62280,7 +62196,7 @@ MonoBehaviour:
   bossDoor: {fileID: 1898111735}
   bossSpawnPos: {fileID: 2064259698}
   sceneController: {fileID: 0}
-  audioManager: {fileID: 923844762}
+  audioManager: {fileID: 0}
 --- !u!4 &1867115081
 Transform:
   m_ObjectHideFlags: 0

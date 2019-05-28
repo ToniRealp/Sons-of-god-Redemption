@@ -2636,8 +2636,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0.40818623, y: 0.0140653625, z: -0.00628995, w: 0.9127687}
-  m_LocalPosition: {x: 144.61, y: 22.35, z: -47.98}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 144.85693, y: 4.4188886, z: -25.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1172499468}
@@ -4371,8 +4371,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 958093858}
   m_HandleRect: {fileID: 1224548878}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: -60
+  m_MaxValue: -15
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -4425,78 +4425,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1063453244
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1063453246}
-  - component: {fileID: 1063453245}
-  m_Layer: 0
-  m_Name: AudioManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1063453245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1063453244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd56148e8ce9b674c8f7195aa72efd5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sounds:
-  - name: MainTheme
-    clip: {fileID: 8300000, guid: 9dcf3f7c49077b34083fdade1abb7a2d, type: 3}
-    volume: 1
-    loop: 1
-    rolloffMode: 0
-    source: {fileID: 0}
-  - name: Hit
-    clip: {fileID: 8300000, guid: 9d54cd11b601e1b428925b1897cd4042, type: 3}
-    volume: 0
-    loop: 0
-    rolloffMode: 0
-    source: {fileID: 0}
-  - name: Swing
-    clip: {fileID: 8300000, guid: 4ab2086b82ae0344d9e47731a83f9743, type: 3}
-    volume: 0
-    loop: 0
-    rolloffMode: 0
-    source: {fileID: 0}
-  - name: DevilMain
-    clip: {fileID: 8300000, guid: e55fddcf3a7e2e2448becf733e28e565, type: 3}
-    volume: 0.498
-    loop: 0
-    rolloffMode: 0
-    source: {fileID: 0}
-  - name: DevilSpawn
-    clip: {fileID: 8300000, guid: 1660d88931f92b147bc901188c7115b2, type: 3}
-    volume: 0.665
-    loop: 0
-    rolloffMode: 0
-    source: {fileID: 0}
-  masterMixer: {fileID: 24300002, guid: 60bfbd53358596e48a5f62aa8d3fe33b, type: 2}
---- !u!4 &1063453246
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1063453244}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.34163284, y: -15.620317, z: -37.36663}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1079993425
 Prefab:
   m_ObjectHideFlags: 0

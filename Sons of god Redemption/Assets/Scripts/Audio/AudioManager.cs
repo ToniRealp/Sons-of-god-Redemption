@@ -14,7 +14,7 @@ public class AudioManager : MonoBehaviour {
             s.source.clip = s.clip;
             s.source.volume = s.volume;
             s.source.loop = s.loop;
-            s.source.GetComponent<AudioSource>().outputAudioMixerGroup = masterMixer;
+            s.source.outputAudioMixerGroup = masterMixer;
             s.source.spatialize = true;
             s.source.spatialBlend = 1;
             //s.source.rolloffMode = AudioRolloffMode.Logarithmic;
