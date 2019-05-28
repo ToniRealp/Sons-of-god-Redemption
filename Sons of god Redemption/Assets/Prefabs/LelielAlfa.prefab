@@ -1888,7 +1888,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1532023036423736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.08, y: 1.03932796e-17, z: 0.4}
+  m_LocalPosition: {x: 19, y: 23.64, z: -0.61}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4012368197550088}
@@ -2441,6 +2441,18 @@ MonoBehaviour:
   - name: strongHit
     clip: {fileID: 8300000, guid: 45f98678972fa5946bdc8d8d88e67c8a, type: 3}
     volume: 0.3
+    loop: 0
+    rolloffMode: 0
+    source: {fileID: 0}
+  - name: fire
+    clip: {fileID: 8300000, guid: 2ee2f9db64e806d46b7da449ac175a2c, type: 3}
+    volume: 0.3
+    loop: 0
+    rolloffMode: 0
+    source: {fileID: 0}
+  - name: electric
+    clip: {fileID: 8300000, guid: 4a553025378af0744bdb9a9750c44876, type: 3}
+    volume: 0.5
     loop: 0
     rolloffMode: 0
     source: {fileID: 0}
