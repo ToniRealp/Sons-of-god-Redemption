@@ -149,6 +149,12 @@ public class PlayerController : MonoBehaviour {
             darkUI.SetActive(false);
             //health = stats.health;
             //healthBar.value = health;
+            if (!audioManager.isPlaying("fire"))
+            {
+                audioManager.Play("fire");
+                audioManager.Stop("electric");
+            }
+               
         }
         if (inputs[(int)ButtonInputs.padLeft])
         {
@@ -158,6 +164,11 @@ public class PlayerController : MonoBehaviour {
             fireUI.SetActive(false);
             lightUI.SetActive(true);
             darkUI.SetActive(false);
+            if (!audioManager.isPlaying("electric"))
+            {
+                audioManager.Stop("fire");
+                audioManager.Play("electric");
+            }
         }
         if (inputs[(int)ButtonInputs.padDown])
         {
@@ -167,6 +178,11 @@ public class PlayerController : MonoBehaviour {
             fireUI.SetActive(false);
             lightUI.SetActive(false);
             darkUI.SetActive(true);
+            if (!audioManager.isPlaying("fire"))
+            {
+                audioManager.Play("fire");
+                audioManager.Stop("electric");
+            }
         }
         if (inputs[(int)ButtonInputs.padUp])
         {
