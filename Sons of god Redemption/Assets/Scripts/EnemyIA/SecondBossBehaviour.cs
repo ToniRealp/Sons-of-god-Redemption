@@ -13,12 +13,12 @@ public class SecondBossBehaviour : MonoBehaviour
 
 
     private GameObject player;
-    private float cinematicAnimationTime, circleAnimationTime, kameAnimationTime, explosionAnimationTime, initcirclesTime;
-    private float actualCinematicTime, actualAttackInterval,  actualCircleTime, actualKameTime, actualExplosionTime;
+    private float cinematicAnimationTime, circleAnimationTime, kameAnimationTime, explosionAnimationTime, initcirclesTime, deadAnimationTime;
+    private float actualCinematicTime, actualAttackInterval,  actualCircleTime, actualKameTime, actualExplosionTime, actualDeadTime;
     private int circlesCounter;
-    private bool explosionChecked, patron1switched, patron2switched, patron3switched;
+    private bool explosionChecked, patron1switched, patron2switched, patron3switched, dead;
 
-    enum State { CINEMATIC, IDLE, WALKING, CIRCLES, KAME, EXPLOSION };
+    enum State { CINEMATIC, IDLE, WALKING, CIRCLES, KAME, EXPLOSION, DEATH };
     [SerializeField] State state = State.CINEMATIC;
 
     public float playerDistance, maxHealth = 2300, health, damage, circleDmg = 1, kameDmg = 25, explosionDmg = 45;
@@ -42,6 +42,7 @@ public class SecondBossBehaviour : MonoBehaviour
         actualCircleTime = circleAnimationTime = AnimationLength("Circles", animator);
         actualKameTime = kameAnimationTime = AnimationLength("Kame", animator);
         actualExplosionTime = explosionAnimationTime = AnimationLength("Explosion", animator);
+        actualDeadTime = deadAnimationTime = AnimationLength("Death", animator);
         darkKame.SetActive(false);
         darkExplosion.SetActive(false);
         lastTag = "value";
@@ -61,7 +62,7 @@ public class SecondBossBehaviour : MonoBehaviour
         patron1switched = patron2switched = patron3switched = false;
         actualAttack2 = actualAttack = circlesCounter = 0;
         circlePosition = new Vector3[circlesNum];
-        explosionChecked = false;
+        dead = explosionChecked = false;
 
         //Cinematic
         player.GetComponent<PlayerController>().onCinematic = true;
@@ -74,18 +75,26 @@ public class SecondBossBehaviour : MonoBehaviour
 
         playerDistance = Vector3.Distance(transform.position, player.transform.position);
 
-        if (health <= 0)
+        if (health <= 0 && !dead)
         {
-            GameObject.Find("LevelController").GetComponent<Level2Controller>().BossDead();
-            Instantiate(dieParticles, bloodPosition.position, bloodPosition.rotation);
-            Destroy(this.gameObject);
+            //GameObject.Find("Level2Controller").GetComponent<Level2Controller>().BossDead();
             Destroy(healthTextGO);
+            animator.SetTrigger("Dead");
+            state = State.DEATH;
+            actualCircleTime = circleAnimationTime;
+            actualKameTime = kameAnimationTime;
+            actualExplosionTime = explosionAnimationTime;
+            darkKame.SetActive(false);
+            darkExplosion.SetActive(false);
+            dead = true;
+        }
+        if (!dead)
+        {
+            // Health text update
+            healthTextGO.GetComponent<Transform>().position = Camera.main.WorldToScreenPoint(textPos.transform.position);
+            healthText.text = health.ToString();
         }
 
-     
-        // Health text update
-        healthTextGO.GetComponent<Transform>().position = Camera.main.WorldToScreenPoint(textPos.transform.position);
-        healthText.text = health.ToString();
 
         if (health < maxHealth * 0.75 && !patron1switched)
         {
@@ -431,6 +440,15 @@ public class SecondBossBehaviour : MonoBehaviour
                 }
 
 
+                break;
+            case State.DEATH:
+                movingSpeed = 0;
+                actualDeadTime -= Time.deltaTime;
+                if (actualDeadTime <= 0)
+                {
+                    Instantiate(dieParticles, bloodPosition.position, bloodPosition.rotation);
+                    Destroy(this.gameObject);
+                }
                 break;
             default:
                 break;
