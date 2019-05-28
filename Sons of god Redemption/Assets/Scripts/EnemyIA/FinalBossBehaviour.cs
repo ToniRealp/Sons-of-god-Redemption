@@ -13,12 +13,12 @@ public class FinalBossBehaviour : MonoBehaviour {
 
 
     private GameObject player;
-    private float cinematicAnimationTime, godModeTime, godDelayTime, darkAnimationTime, dizzyAnimationTime, dashAnimationTime, fireAnimationTime, initMeteorTime, godModeHealth;
-    private float actualCinematicTime, actualAttackInterval, actualGodModeTime, actualGodDelayTime, actualDarkTime, actualDizzyTime, actualDashTime, actualFireTime;
+    private float cinematicAnimationTime, godModeTime, godDelayTime, darkAnimationTime, dizzyAnimationTime, dashAnimationTime, fireAnimationTime, initMeteorTime, godModeHealth, deadAnimationTime;
+    private float actualCinematicTime, actualAttackInterval, actualGodModeTime, actualGodDelayTime, actualDarkTime, actualDizzyTime, actualDashTime, actualFireTime, actualDeadTime;
     private int meteorCounter;
-    private bool explosionChecked, patron1switched, patron2switched, patron3switched, godMode;
+    private bool explosionChecked, patron1switched, patron2switched, patron3switched, godMode, dead;
 
-    enum State { CINEMATIC, IDLE, WALKING, DASH, FIRE, DARK, DIZZY };
+    enum State { CINEMATIC, IDLE, WALKING, DASH, FIRE, DARK, DIZZY, DEATH };
     [SerializeField] State state = State.CINEMATIC;
 
     public float playerDistance, maxHealth = 3000, health, damage, dashDmg = 15, fireDmg = 55, darkDmg = 25;
@@ -42,6 +42,7 @@ public class FinalBossBehaviour : MonoBehaviour {
         actualDarkTime = darkAnimationTime = AnimationLength("Standing 2", animator);
         actualDashTime = dashAnimationTime = AnimationLength("Kick", animator);
         actualFireTime = fireAnimationTime = AnimationLength("Standing 1", animator);
+        actualDeadTime = deadAnimationTime = AnimationLength("Death", animator);
         godDelayTime = actualGodDelayTime = Random.Range(godModeMinDelay, godModeMaxDelay);
         darkBox.SetActive(false);
         glow.SetActive(false);
@@ -62,7 +63,7 @@ public class FinalBossBehaviour : MonoBehaviour {
         patron1switched = patron2switched = patron3switched = false;
         actualAttack2 = actualAttack = meteorCounter = 0;
         meteorRotation = new Quaternion[meteorNum];
-        godMode = explosionChecked = false;
+        dead = godMode = explosionChecked = false;
 
         //Cinematic
         player.GetComponent<PlayerController>().onCinematic = true;
@@ -75,12 +76,27 @@ public class FinalBossBehaviour : MonoBehaviour {
 
         playerDistance = Vector3.Distance(transform.position, player.transform.position);
 
-        if (health <= 0)
+        if (health <= 0 && !dead)
         {
-            GameObject.Find("Level3Controller").GetComponent<Level3Controller>().BossDead();
-            Instantiate(dieParticles, bloodPosition.position, bloodPosition.rotation);
-            Destroy(this.gameObject);
             Destroy(healthTextGO);
+            animator.SetTrigger("Dead");
+            state = State.DEATH;
+            actualDizzyTime = dizzyAnimationTime;
+            actualDarkTime = darkAnimationTime;
+            actualDashTime = dashAnimationTime;
+            actualFireTime = fireAnimationTime;
+            darkBox.SetActive(false);
+            glow.SetActive(false);
+            dashTrigger.SetActive(false);
+            godDelayTime = actualGodDelayTime = Random.Range(godModeMinDelay, godModeMaxDelay);
+            godMode = false;
+            dead = true;
+        }
+        if (!dead)
+        {
+            // Health text update
+            healthTextGO.GetComponent<Transform>().position = Camera.main.WorldToScreenPoint(textPos.transform.position);
+            healthText.text = health.ToString();
         }
 
         //GodMode
@@ -88,7 +104,7 @@ public class FinalBossBehaviour : MonoBehaviour {
         {
             health = godModeHealth;
             actualGodModeTime -= Time.deltaTime;
-            if (actualGodModeTime <= 0)
+            if (actualGodModeTime <= 0 && !dead)
             {
                 actualAttackInterval = 3;
                 darkBox.SetActive(false);
@@ -113,10 +129,6 @@ public class FinalBossBehaviour : MonoBehaviour {
                 godModeHealth = health;
             }
         }
-
-        // Health text update
-        healthTextGO.GetComponent<Transform>().position = Camera.main.WorldToScreenPoint(textPos.transform.position);
-        healthText.text = health.ToString();
 
         if (health < maxHealth * 0.75 && !patron1switched)
         {
@@ -483,6 +495,15 @@ public class FinalBossBehaviour : MonoBehaviour {
                     state = State.IDLE;
                 }
                 break;
+            case State.DEATH:
+                movingSpeed = 0;
+                actualDeadTime -= Time.deltaTime;
+                if (actualDeadTime <= 0)
+                {
+                    GameObject.Find("Level3Controller").GetComponent<Level3Controller>().BossDead();
+                }
+                break;
+
             default:
                 break;
         }
