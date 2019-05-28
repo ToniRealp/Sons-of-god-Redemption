@@ -75,6 +75,7 @@ public class FirstNarrative : MonoBehaviour {
             if (text[textNum].color.a < 1 && !textShown)
             {
                 c.a += 0.01f;
+                if (inputManager.attackButton || inputManager.dashButton || inputManager.interact || inputManager.strongAttackButton) { c.a = 1; }
                 text[textNum].color = c;
                 startTime = Time.time;
             }
@@ -82,13 +83,14 @@ public class FirstNarrative : MonoBehaviour {
             {
                 textShown = true;
             }
-            if (textShown && Time.time - startTime >= textInScreenTime)
+            if (textShown && Time.time - startTime >= textInScreenTime || inputManager.attackButton || inputManager.dashButton || inputManager.interact || inputManager.strongAttackButton)
             {
                 if ((textNum >= 2) && !nextImage)
                 {
                     nextImage = true;
                 }
                 c.a -= 0.01f;
+                if (inputManager.attackButton || inputManager.dashButton || inputManager.interact || inputManager.strongAttackButton) { c.a = 0; }
                 text[textNum].color = c;
                 if (text[textNum].color.a <= 0)
                 {
