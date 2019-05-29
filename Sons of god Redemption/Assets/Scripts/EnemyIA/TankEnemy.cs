@@ -14,7 +14,6 @@ public class TankEnemy : Enemy {
     public float x, accelerationTime, baseAcceleration, d;
     public GameObject weapon2;
     public bool transition;
-    private float alpha = 1;
 
 
     new void Start()
