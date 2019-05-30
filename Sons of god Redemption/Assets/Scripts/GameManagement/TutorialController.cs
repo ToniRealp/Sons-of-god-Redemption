@@ -231,15 +231,14 @@ public class TutorialController : MonoBehaviour {
             {
                 fireUtility.SetActive(false);
                 darkElement.SetActive(true);
-                player.GetComponent<PlayerController>().health = 10;
-                player.GetComponent<PlayerController>().healthBar.value = player.GetComponent<PlayerController>().health;
                 startWait = Time.time;
                 condition = true;
                 wait = true;
             }
             if (wait && Time.time - startWait > waitTime)
             {
-
+                player.GetComponent<PlayerController>().health = 10;
+                player.GetComponent<PlayerController>().healthBar.value = player.GetComponent<PlayerController>().health;
                 startTime = Time.time;
                 state++;
                 condition = false;
