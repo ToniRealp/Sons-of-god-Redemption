@@ -1908,8 +1908,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: until one day, Leliel, the angel of moon, had his wings cut and got exiled
-    for a crime only he knew he did not commit.
+  m_text: until one day, Leliel, the angel of the moon, had his wings cut and got
+    exiled for a crime only he knew he did not commit.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c26164c977ba69a40a70b18395337402, type: 2}
   m_sharedMaterial: {fileID: 21840176601156674, guid: c26164c977ba69a40a70b18395337402,
@@ -1978,10 +1978,10 @@ MonoBehaviour:
   m_margin: {x: -418.3925, y: -138.71738, z: -446.81302, w: 0}
   m_textInfo:
     textComponent: {fileID: 0}
-    characterCount: 118
+    characterCount: 122
     spriteCount: 0
-    spaceCount: 24
-    wordCount: 25
+    spaceCount: 25
+    wordCount: 26
     linkCount: 0
     lineCount: 2
     pageCount: 1

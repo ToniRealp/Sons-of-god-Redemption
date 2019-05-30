@@ -555,8 +555,8 @@ MonoBehaviour:
   inputManager: {fileID: 1461120702}
   sceneController: {fileID: 1461120703}
   image:
-  - {fileID: 1509023286}
   - {fileID: 980981688}
+  - {fileID: 1509023286}
   - {fileID: 2051800825}
   - {fileID: 79194137}
   startTime: 0
