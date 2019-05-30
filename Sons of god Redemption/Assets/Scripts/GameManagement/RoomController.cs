@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RoomController : MonoBehaviour {
 
-    public bool isEmpty;
+    public bool isEmpty, doorFlag;
     public List<GameObject> enemies;
     private List<GameObject> instEnemies;
     public List<GameObject> roomDoors;
@@ -12,7 +12,7 @@ public class RoomController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        isEmpty = false;
+        isEmpty = doorFlag = false;
         instEnemies = new List<GameObject>();
         foreach (GameObject door in roomDoors)
             door.SetActive(false);
@@ -50,6 +50,7 @@ public class RoomController : MonoBehaviour {
     {
         foreach (GameObject door in roomDoors)
         {
+            doorFlag = true;
             door.GetComponent<DoorScript>().GoDown();
         }
 
@@ -68,6 +69,17 @@ public class RoomController : MonoBehaviour {
                 foreach (GameObject door in roomDoors)
                     door.GetComponent<DoorScript>().GoUp();
             } 
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            if (!isEmpty && !doorFlag)
+            {
+                foreach (GameObject door in roomDoors)
+                    door.GetComponent<DoorScript>().GoUp();
+            }
         }
     }
     private void OnTriggerExit(Collider other)
