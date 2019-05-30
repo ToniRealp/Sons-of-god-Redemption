@@ -7005,6 +7005,21 @@ Prefab:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 114382952021748732, guid: 199a0370dc8e72f439547f9c026f57f7,
+        type: 2}
+      propertyPath: sounds.Array.data[3].volume
+      value: 0.899
+      objectReference: {fileID: 0}
+    - target: {fileID: 114382952021748732, guid: 199a0370dc8e72f439547f9c026f57f7,
+        type: 2}
+      propertyPath: sounds.Array.data[4].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114382952021748732, guid: 199a0370dc8e72f439547f9c026f57f7,
+        type: 2}
+      propertyPath: sounds.Array.data[5].volume
+      value: 0.646
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 199a0370dc8e72f439547f9c026f57f7, type: 2}
   m_IsPrefabAsset: 0
@@ -25209,13 +25224,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1020076737}
-  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: -1.582, z: -2.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 998131282}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1001 &1023470157
 Prefab:
   m_ObjectHideFlags: 0
@@ -47818,6 +47833,16 @@ Prefab:
       propertyPath: levelController
       value: 
       objectReference: {fileID: 1867115080}
+    - target: {fileID: 114014016804777488, guid: ddd6aa0c312240c4f960b9d9751a654a,
+        type: 2}
+      propertyPath: sounds.Array.data[0].volume
+      value: 0.255
+      objectReference: {fileID: 0}
+    - target: {fileID: 114014016804777488, guid: ddd6aa0c312240c4f960b9d9751a654a,
+        type: 2}
+      propertyPath: sounds.Array.data[1].volume
+      value: 0.179
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddd6aa0c312240c4f960b9d9751a654a, type: 2}
   m_IsPrefabAsset: 0

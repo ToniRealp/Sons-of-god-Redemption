@@ -1127,4 +1127,4 @@ MonoBehaviour:
     loop: 0
     rolloffMode: 0
     source: {fileID: 0}
-  masterMixer: {fileID: 0}
+  masterMixer: {fileID: 24300002, guid: 60bfbd53358596e48a5f62aa8d3fe33b, type: 2}
