@@ -80,7 +80,6 @@ public class FirstNarrative : MonoBehaviour {
             if (text[textNum].color.a < 1 && !textShown)
             {
                 c.a += 0.01f;
-                //if (inputManager.attackButton || inputManager.dashButton || inputManager.interact || inputManager.strongAttackButton) { c.a = 1; }
                 text[textNum].color = c;
                 startTime = Time.time;
             }
@@ -88,14 +87,13 @@ public class FirstNarrative : MonoBehaviour {
             {
                 textShown = true;
             }
-            if (textShown && Time.time - startTime >= textInScreenTime)/* || inputManager.attackButton || inputManager.dashButton || inputManager.interact || inputManager.strongAttackButton)*/
+            if (textShown && Time.time - startTime >= textInScreenTime)
             {
                 if ((textNum >= 2) && !nextImage)
                 {
                     nextImage = true;
                 }
                 c.a -= 0.01f;
-                //if (inputManager.attackButton || inputManager.dashButton || inputManager.interact || inputManager.strongAttackButton) { c.a = 0; }
                 text[textNum].color = c;
                 if (text[textNum].color.a <= 0)
                 {
@@ -104,42 +102,6 @@ public class FirstNarrative : MonoBehaviour {
                 }
             }
         }
-
-
-
-
-
-
-        //if (inputManager.escape) { imageNum = 7; }
-        //if (imageNum < 7)
-        //{
-        //    c = image[imageNum].color;
-        //    if (image[imageNum].color.a<1 && !textShown)
-        //    {
-        //        c.a += 0.01f;
-        //        if (inputManager.attackButton || inputManager.dashButton ||  inputManager.interact || inputManager.strongAttackButton) { c.a = 1; }
-        //        image[imageNum].color = c;
-        //        startTime = Time.time;
-        //    }
-        //    else {
-        //        textShown = true;
-        //    }
-        //    if (textShown && (Time.time - startTime >= textInScreenTime ||  inputManager.attackButton || inputManager.dashButton || inputManager.interact || inputManager.strongAttackButton))
-        //    {
-        //        c.a -= 0.01f;
-        //        if (inputManager.attackButton || inputManager.dashButton || inputManager.interact || inputManager.strongAttackButton) { c.a = 0; }
-        //        image[imageNum].color = c;
-        //        if (image[imageNum].color.a <= 0)
-        //        {
-        //            imageNum++;
-        //            textShown = false;
-        //        }
-        //    }
-        //}
-        //else
-        //{
-        //    sceneController.changeScene("TutorialScene");
-        //}
 
     }
 }
