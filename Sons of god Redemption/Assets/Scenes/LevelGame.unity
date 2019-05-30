@@ -4033,6 +4033,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 0
+  doorFlag: 0
   enemies:
   - {fileID: 1193037644560804, guid: 29ed807f3bbc8d34e8c966b9a9b60890, type: 2}
   - {fileID: 1525900080903410, guid: acace2ddb07164343898a950994e701a, type: 2}
@@ -7307,6 +7308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 0
+  doorFlag: 0
   enemies:
   - {fileID: 1105469288949138, guid: 5445728c0bc8a2f498dc555da1651d04, type: 2}
   roomDoors: []
@@ -8848,6 +8850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 0
+  doorFlag: 0
   enemies:
   - {fileID: 1525900080903410, guid: acace2ddb07164343898a950994e701a, type: 2}
   - {fileID: 1193037644560804, guid: 29ed807f3bbc8d34e8c966b9a9b60890, type: 2}
@@ -13125,6 +13128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 0
+  doorFlag: 0
   enemies:
   - {fileID: 1105469288949138, guid: 5445728c0bc8a2f498dc555da1651d04, type: 2}
   roomDoors: []
@@ -13585,6 +13589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 0
+  doorFlag: 0
   enemies:
   - {fileID: 1386956449640616, guid: 5382e3fbd00a8e64a81c42b76276af2a, type: 2}
   - {fileID: 1386956449640616, guid: 5382e3fbd00a8e64a81c42b76276af2a, type: 2}
@@ -18247,6 +18252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 0
+  doorFlag: 0
   enemies:
   - {fileID: 1105469288949138, guid: 5445728c0bc8a2f498dc555da1651d04, type: 2}
   roomDoors: []
@@ -24805,6 +24811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 0
+  doorFlag: 0
   enemies:
   - {fileID: 1105469288949138, guid: 5445728c0bc8a2f498dc555da1651d04, type: 2}
   roomDoors: []
@@ -27344,6 +27351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 0
+  doorFlag: 0
   enemies:
   - {fileID: 1784729080236866, guid: 177ec43cad6a2fe4eb4a81bb23e93d5e, type: 2}
   - {fileID: 1386956449640616, guid: 5382e3fbd00a8e64a81c42b76276af2a, type: 2}
@@ -31984,6 +31992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 0
+  doorFlag: 0
   enemies:
   - {fileID: 1525900080903410, guid: acace2ddb07164343898a950994e701a, type: 2}
   - {fileID: 1345666069583242, guid: adc5e42097a898249aebf88ea4a8432d, type: 2}
@@ -32884,6 +32893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 0
+  doorFlag: 0
   enemies:
   - {fileID: 1386956449640616, guid: 5382e3fbd00a8e64a81c42b76276af2a, type: 2}
   - {fileID: 1386956449640616, guid: 5382e3fbd00a8e64a81c42b76276af2a, type: 2}
@@ -38395,6 +38405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 0
+  doorFlag: 0
   enemies:
   - {fileID: 1105469288949138, guid: 5445728c0bc8a2f498dc555da1651d04, type: 2}
   roomDoors: []
@@ -39464,6 +39475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 0
+  doorFlag: 0
   enemies:
   - {fileID: 1345666069583242, guid: adc5e42097a898249aebf88ea4a8432d, type: 2}
   - {fileID: 1345666069583242, guid: adc5e42097a898249aebf88ea4a8432d, type: 2}
@@ -39617,7 +39629,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4596054251046266, guid: ca0d668d2631e8b4fbf2eef5337b07dd, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.29
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 4596054251046266, guid: ca0d668d2631e8b4fbf2eef5337b07dd, type: 2}
       propertyPath: m_LocalPosition.z
@@ -39917,6 +39929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 0
+  doorFlag: 0
   enemies:
   - {fileID: 1386956449640616, guid: 5382e3fbd00a8e64a81c42b76276af2a, type: 2}
   - {fileID: 1784729080236866, guid: 177ec43cad6a2fe4eb4a81bb23e93d5e, type: 2}
@@ -43027,6 +43040,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 0
+  doorFlag: 0
   enemies:
   - {fileID: 1386956449640616, guid: 5382e3fbd00a8e64a81c42b76276af2a, type: 2}
   - {fileID: 1193037644560804, guid: 29ed807f3bbc8d34e8c966b9a9b60890, type: 2}
@@ -44034,6 +44048,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 0
+  doorFlag: 0
   enemies:
   - {fileID: 1525900080903410, guid: acace2ddb07164343898a950994e701a, type: 2}
   - {fileID: 1525900080903410, guid: acace2ddb07164343898a950994e701a, type: 2}
