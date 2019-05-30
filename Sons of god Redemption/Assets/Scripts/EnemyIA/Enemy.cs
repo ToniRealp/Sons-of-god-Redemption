@@ -130,7 +130,7 @@ public abstract class Enemy : MonoBehaviour {
     protected void SetRandomDestination()
     {
         destination.x = Random.Range(xMin, xMax);
-        destination.y = 1;
+        destination.y = transform.position.y;
         destination.z = Random.Range(zMin, zMax);
     }
 
@@ -151,7 +151,7 @@ public abstract class Enemy : MonoBehaviour {
 
     protected void LookToPlayer()
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(playerPosition.x - transform.position.x, transform.position.y, playerPosition.z - transform.position.z)), rotationSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(playerPosition.x - transform.position.x, playerPosition.y - transform.position.y, playerPosition.z - transform.position.z)), rotationSpeed);
     }
 
     protected bool IsMoving()
@@ -230,7 +230,7 @@ public abstract class Enemy : MonoBehaviour {
             if (alpha >= 0)
             {
                 alpha -= Time.fixedDeltaTime / 4;
-                Debug.Log(alpha);
+                //Debug.Log(alpha);
             }
             else
             {
