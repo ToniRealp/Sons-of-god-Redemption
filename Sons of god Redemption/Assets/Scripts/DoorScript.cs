@@ -25,23 +25,19 @@ public class DoorScript : MonoBehaviour {
 	void Update () {
         if (up)
         {
-            if (!audioManager.isPlaying("doorRumble"))
-                audioManager.Play("doorRumble");
-
             if (Vector3.Distance(transform.position, upPosition) >= speed*Time.deltaTime)
             {
                 transform.position = Vector3.MoveTowards(transform.position, upPosition, speed * Time.deltaTime);
             }
             else
             {
+
                 up = false;
             }
         }
         else if (down)
         {
-            if (!audioManager.isPlaying("doorRumble"))
-                audioManager.Play("doorRumble");
-
+            PlaySound();
             if (Vector3.Distance(transform.position, downPosition) >= speed*Time.deltaTime)
             {
                 transform.position = Vector3.MoveTowards(transform.position, downPosition, speed * Time.deltaTime);
@@ -58,6 +54,12 @@ public class DoorScript : MonoBehaviour {
     {
         up = true;
         down = false;
+    }
+
+    public void PlaySound()
+    {
+        if (!audioManager.isPlaying("doorRumble"))
+            audioManager.Play("doorRumble");
     }
 
     public void GoDown()

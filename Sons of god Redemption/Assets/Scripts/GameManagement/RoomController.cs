@@ -67,7 +67,11 @@ public class RoomController : MonoBehaviour {
                 foreach (GameObject door in roomDoors)
                     door.SetActive(true); 
                 foreach (GameObject door in roomDoors)
+                {
                     door.GetComponent<DoorScript>().GoUp();
+                    door.GetComponent<DoorScript>().PlaySound();
+                }
+
             } 
         }
     }
