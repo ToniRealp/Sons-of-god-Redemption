@@ -34,7 +34,10 @@ public class DevilEnemy : Enemy
         {
             foreach (var go in instantiatedBabys)
             {
-                if (go.GetComponent<BabyEnemy>().playerDetected != true) go.GetComponent<BabyEnemy>().playerDetected = true;
+                if (go != null)
+                {
+                    if (go.GetComponent<BabyEnemy>().playerDetected != true) go.GetComponent<BabyEnemy>().playerDetected = true;
+                }
             }
         }
         

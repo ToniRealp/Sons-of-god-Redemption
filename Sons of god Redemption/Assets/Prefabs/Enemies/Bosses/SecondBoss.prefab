@@ -2211,7 +2211,7 @@ MonoBehaviour:
   animator: {fileID: 95786306338856006}
   attackDistance: 4
   explosionRange: 5
-  movingSpeed: 0
+  movingSpeed: 0.01
   rotationSpeed: 0.05
   circlesRange: 5
   circlesNum: 4
