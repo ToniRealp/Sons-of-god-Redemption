@@ -31,6 +31,10 @@ public class Level2Controller : LevelController {
     // Update is called once per frame
     void Update()
     {
+        if (inputManager.addBoss)
+        {
+            player.transform.position = spawns[5].transform.position;
+        }
 
         if (player.GetComponent<PlayerController>().spawnMe == true)
         {
