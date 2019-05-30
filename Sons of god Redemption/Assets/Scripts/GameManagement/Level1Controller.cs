@@ -113,6 +113,8 @@ public class Level1Controller : LevelController {
             {
                 bossHandler.GetComponent<FirstBossBehaviour>().movingSpeed=0.02f;
                 bossHandler.GetComponent<FirstBossBehaviour>().StandUp();
+                bossDoor.GetComponent<DoorScript>().GoUp();
+
                 //audioManager.Play("BossTheme");
 
                 bossSpawn = true;
@@ -139,7 +141,7 @@ public class Level1Controller : LevelController {
 
     public void BossDead()
     {
-        bossDoor.SetActive(false);
+        bossDoor.GetComponent<DoorScript>().GoDown();
     }
 
     override public void OpenAllDoors()

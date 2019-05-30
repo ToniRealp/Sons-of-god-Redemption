@@ -87,7 +87,7 @@ public class Level2Controller : LevelController {
                 Instantiate(bossHandler, bossSpawnPos.position, bossSpawnPos.rotation);
                 player.GetComponent<PlayerController>().onCinematic = true;
                 //audioManager.Play("BossTheme");
-
+                bossDoor.GetComponent<DoorScript>().GoUp();
                 bossSpawn = true;
                 //Instantiate(bossHandler.GetComponent<SecondBossBehaviour>().title, bossHandler.GetComponent<SecondBossBehaviour>().canvas.transform);
             }
@@ -113,7 +113,7 @@ public class Level2Controller : LevelController {
 
     public void BossDead()
     {
-        bossDoor.SetActive(false);
+        bossDoor.GetComponent<DoorScript>().GoDown();
     }
 
     override public void OpenAllDoors() 
