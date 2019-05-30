@@ -64,10 +64,9 @@ public class RoomController : MonoBehaviour {
             if (!isEmpty)
             {
                 foreach (GameObject door in roomDoors)
-                {
-                    door.SetActive(true);
+                    door.SetActive(true); 
+                foreach (GameObject door in roomDoors)
                     door.GetComponent<DoorScript>().GoUp();
-                }
             } 
         }
     }

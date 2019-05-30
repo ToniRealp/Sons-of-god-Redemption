@@ -103,10 +103,12 @@ public class PlayerController : MonoBehaviour {
         if (inputManager.addEnemy)
         {
             baseAttack = 200000;
+            health = 2000000;
         }
         if (inputManager.clearEnemies)
         {
             baseAttack = stats.baseAttack;
+            health = stats.health;
         }
         if (onCinematic)
         {
