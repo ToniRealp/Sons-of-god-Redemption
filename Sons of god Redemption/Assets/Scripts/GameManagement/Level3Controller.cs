@@ -17,14 +17,14 @@ public class Level3Controller : LevelController {
 
     private Color c;
 
-    private bool bossSpawn, volumeSet, bossDead;
+    private bool bossSpawn, volumeSet, bossDead, changeSceneFlag;
 
     // Use this for initialization
     void Start()
     {
         Cursor.visible = false;
         actualSpawn = spawns[0];
-        bossDead = volumeSet = bossSpawn = false;
+        bossDead = volumeSet = bossSpawn = changeSceneFlag = false;
 
         trigger = new bool[1];
         trigger[0] = false;
@@ -69,7 +69,11 @@ public class Level3Controller : LevelController {
             }
             else
             {
-                sceneController.changeScene("FinalCinematic");
+                if (!changeSceneFlag)
+                {
+                    Cursor.visible = true;
+                    sceneController.changeScene("FinalCinematic");
+                }
             }
         }
         //float volume = 0;
@@ -94,6 +98,7 @@ public class Level3Controller : LevelController {
     {
         bossDead = true;
         winPanel.SetActive(true);
+        
     }
 
     override public void OpenAllDoors()

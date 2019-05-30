@@ -37,7 +37,7 @@ public class DoorScript : MonoBehaviour {
                 up = false;
             }
         }
-        if (down)
+        else if (down)
         {
             if (!audioManager.isPlaying("doorRumble"))
                 audioManager.Play("doorRumble");

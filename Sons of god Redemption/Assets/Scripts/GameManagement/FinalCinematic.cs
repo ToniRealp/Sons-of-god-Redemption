@@ -12,13 +12,13 @@ public class FinalCinematic : MonoBehaviour {
 
     public float startTime, textInScreenTime = 4.0f;
     private int imageNum;
-    private bool textShown;
+    private bool textShown, changeSceneFlag;
     private Color c;
 
     // Use this for initialization
     void Start()
     {
-        textShown = false;
+        textShown = changeSceneFlag = false;
         c = image.color;
         c.a = 0;
         image.color = c;
@@ -45,9 +45,10 @@ public class FinalCinematic : MonoBehaviour {
             c.a -= 0.01f;
             if (inputManager.attackButton || inputManager.dashButton || inputManager.interact || inputManager.strongAttackButton) { c.a = 0; }
             image.color = c;
-            if (image.color.a <= 0)
+            if (image.color.a <= 0 && !changeSceneFlag)
             {
                 sceneController.changeScene("MainMenu");
+                changeSceneFlag = true;
             }
         }
 

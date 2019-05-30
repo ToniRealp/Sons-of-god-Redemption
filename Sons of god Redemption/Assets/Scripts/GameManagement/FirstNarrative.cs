@@ -14,13 +14,13 @@ public class FirstNarrative : MonoBehaviour {
 
     public float startTime, textInScreenTime = 6.0f;
     private int imageNum, textNum;
-    private bool textShown, imageShown, nextImage, transition;
+    private bool textShown, imageShown, nextImage, transition, changeSceneFlag;
     private Color c, t;
 
     // Use this for initialization
     void Start()
     {
-        transition = nextImage = imageShown = textShown = false;
+        transition = nextImage = imageShown = textShown = changeSceneFlag = false;
         imageNum = textNum = 0;
         for (int i = 0; i < 3; i++)
         {
@@ -66,7 +66,11 @@ public class FirstNarrative : MonoBehaviour {
         }
         else
         {
-            sceneController.changeScene("TutorialScene");
+            if (!changeSceneFlag)
+            {
+                sceneController.changeScene("TutorialScene");
+                changeSceneFlag = true;
+            }
         }
 
         if (textNum < 5)

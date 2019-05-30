@@ -7,9 +7,10 @@ public class PauseScriptManager : MonoBehaviour {
     public GameObject PausePanel;
     public GameObject OptionsPanel;
     public InputManager inputManager;
+    GameObject youDied;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         PausePanel.SetActive(false);
         OptionsPanel.SetActive(false);
 	}
@@ -18,6 +19,10 @@ public class PauseScriptManager : MonoBehaviour {
     {
         if (inputManager.escape && !OptionsPanel.activeSelf)
         {
+            youDied = GameObject.Find("YouDied(Clone)");
+            if (youDied != null)
+                youDied.SetActive(false);
+
             activatePauseMenu();
         }
     }
@@ -34,6 +39,8 @@ public class PauseScriptManager : MonoBehaviour {
         Time.timeScale = 1.0f;
         PausePanel.SetActive(false);
         Cursor.visible = false;
+        if (youDied != null)
+            youDied.SetActive(true);
     }
 
 }
