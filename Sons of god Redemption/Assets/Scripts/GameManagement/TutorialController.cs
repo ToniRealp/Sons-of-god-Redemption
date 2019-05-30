@@ -213,7 +213,8 @@ public class TutorialController : MonoBehaviour {
             }
             if (wait && Time.time - startWait > waitTime)
             {
-                DoSpawnUselessEnemy();
+                Instantiate(uselessEnemy, enemy.transform.position + new Vector3(-1, 0, 0), enemy.transform.rotation);
+                Instantiate(uselessEnemy,enemy.transform.position + new Vector3(1,0,0),enemy.transform.rotation);
                 startTime = Time.time;
                 state++;
                 wait = false;
@@ -230,12 +231,15 @@ public class TutorialController : MonoBehaviour {
             {
                 fireUtility.SetActive(false);
                 darkElement.SetActive(true);
+                player.GetComponent<PlayerController>().health = 10;
+                player.GetComponent<PlayerController>().healthBar.value = player.GetComponent<PlayerController>().health;
                 startWait = Time.time;
                 condition = true;
                 wait = true;
             }
             if (wait && Time.time - startWait > waitTime)
             {
+
                 startTime = Time.time;
                 state++;
                 condition = false;
